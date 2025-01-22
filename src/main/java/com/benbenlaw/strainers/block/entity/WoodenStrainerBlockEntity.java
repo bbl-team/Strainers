@@ -3,6 +3,7 @@ package com.benbenlaw.strainers.block.entity;
 import com.benbenlaw.core.block.entity.handler.IInventoryHandlingBlockEntity;
 import com.benbenlaw.core.block.entity.handler.InputOutputItemHandler;
 import com.benbenlaw.core.recipe.NoInventoryRecipe;
+import com.benbenlaw.opolisutilities.recipe.SpeedUpgradesRecipe;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.recipe.MeshUpgradesRecipe;
 import com.benbenlaw.strainers.recipe.OutputUpgradesRecipe;
@@ -43,6 +44,8 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -265,7 +268,9 @@ public class WoodenStrainerBlockEntity extends BlockEntity implements MenuProvid
             if (itemHandler.getStackInSlot(SPEED_UPGRADE).isEmpty()) {
                 maxProgress = 220;
             } else {
-            //    getMaxProgressFromUpgrade();
+                if (ModList.get().isLoaded("opolisutilities")) {
+                    getMaxProgressFromUpgrade();
+                }
                 sync();
             }
 
@@ -310,9 +315,10 @@ public class WoodenStrainerBlockEntity extends BlockEntity implements MenuProvid
     }
 
 
-    /*
+    @Deprecated(forRemoval = true, since = "1.22 minecraft")
     public void getMaxProgressFromUpgrade() {
-        for (RecipeHolder<SpeedUpgradesRecipe> match : level.getRecipeManager().getRecipesFor(SpeedUpgradesRecipe.Type.INSTANCE, NoInventoryRecipe.INSTANCE, level)) {
+        assert level != null;
+        for (RecipeHolder<SpeedUpgradesRecipe> match : level.getRecipeManager().getRecipesFor(SpeedUpgradesRecipe.Type.INSTANCE, com.benbenlaw.opolisutilities.recipe.NoInventoryRecipe.INSTANCE, level)) {
             NonNullList<Ingredient> input = match.value().getIngredients();
             for (Ingredient ingredient : input) {
                 if (ingredient.test(itemHandler.getStackInSlot(SPEED_UPGRADE))) {
@@ -323,7 +329,7 @@ public class WoodenStrainerBlockEntity extends BlockEntity implements MenuProvid
         }
     }
 
-     */
+
 
     public void getMeshDamageChanceUpgrade() {
         assert level != null;

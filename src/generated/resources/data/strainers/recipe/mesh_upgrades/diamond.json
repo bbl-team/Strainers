@@ -1,7 +1,0 @@
-{
-  "type": "strainers:mesh_upgrade",
-  "input": {
-    "item": "minecraft:diamond"
-  },
-  "meshDamageChance": 0.9
-}

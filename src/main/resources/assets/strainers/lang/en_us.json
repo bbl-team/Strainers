@@ -21,12 +21,24 @@
   "item.strainers.redstone_mesh": "Redstone Mesh",
   "item.strainers.tin_mesh": "Tin Mesh",
   "item.strainers.bronze_mesh": "Bronze Mesh",
+  "item.strainers.heavy_mesh": "Heavy Mesh",
+  "item.strainers.end_mesh": "End Mesh",
+  "item.strainers.obsidian_mesh": "Obsidian Mesh",
+  "item.strainers.prismarine_mesh": "Prismarine Mesh",
   "item.strainers.eroding_water_bucket": "Eroding Water Bucket",
   "item.strainers.purifying_water_bucket": "Purifying Water Bucket",
   "item.strainers.stone_pebble": "Stone Pebble",
   "item.strainers.deepslate_pebble": "Deepslate Pebble",
   "item.strainers.purifying_salt_mulch": "Purifying Salt Mulch",
   "item.strainers.eroding_salt_mulch": "Eroding Salt Mulch",
+
+  "item.strainers.mesh_upgrade_1": "Mesh Upgrade 1",
+  "item.strainers.mesh_upgrade_2": "Mesh Upgrade 2",
+  "item.strainers.mesh_upgrade_3": "Mesh Upgrade 3",
+
+  "item.strainers.output_upgrade_1": "Output Upgrade 1",
+  "item.strainers.output_upgrade_2": "Output Upgrade 2",
+  "item.strainers.output_upgrade_3": "Output Upgrade 3",
 
   "item.strainers.debris_ore_piece": "Debris Ore Piece",
   "item.strainers.iron_ore_piece": "Iron Ore Piece",
@@ -63,7 +75,7 @@
   "tooltips.strainers.sturdy_input_upgrade.shift": "§aInput items have a 40% chance to not be consumed.",
   "tooltips.strainers.reinforced_input_upgrade.shift": "§aInput items have a 60% chance to not be consumed.",
   "tooltips.strainers.everlasting_input_upgrade.shift": "§aInput items have a 80% chance to not be consumed.",
-  
+
   "tooltips.strainers.improved_mesh_upgrade.shift": "§aMeshes have a 20% chance to not be damaged when used.",
   "tooltips.strainers.sturdy_mesh_upgrade.shift": "§aMeshes have a 40% chance to not be damaged when used.",
   "tooltips.strainers.reinforced_mesh_upgrade.shift": "§aMeshes have a 60% chance to not be damaged when used.",

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "strainers",
+  "key": {
+    "M": {
+      "tag": "c:storage_blocks/iron"
+    },
+    "U": {
+      "item": "bblcore:upgrade_base"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MUM",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "strainers:output_upgrade_1"
+  }
+}

@@ -91,7 +91,7 @@ public class WoodenStrainerScreen extends AbstractContainerScreen<WoodenStrainer
                 guiGraphics.renderTooltip(this.font, Component.translatable("block.gui.output_upgrade"), mouseX, mouseY);
             }
             double outputChance = this.menu.blockEntity.outputChanceIncrease;
-            guiGraphics.renderTooltip(this.font,  Component.literal(outputChance + " added to recipe output chance"), this.leftPos,
+            guiGraphics.renderTooltip(this.font,  Component.literal(outputChance * 100 + "% added to output chance"), this.leftPos,
                     this.topPos);
         }
     }

@@ -1,11 +1,10 @@
 {
-  "parent": "minecraft:recipes/root",
   "criteria": {
     "has_item": {
       "conditions": {
         "items": [
           {
-            "items": "opolisutilities:leafy_string"
+            "items": "strainers:mesh_upgrade_1"
           }
         ]
       },
@@ -13,7 +12,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:leafy_mesh"
+        "recipe": "strainers:mesh_upgrades/mesh_upgrade_1"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +25,8 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:leafy_mesh"
+      "strainers:mesh_upgrades/mesh_upgrade_1"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

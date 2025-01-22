@@ -1,11 +1,14 @@
 package com.benbenlaw.strainers.datagen;
 
+import com.benbenlaw.opolisutilities.fluid.FluidDeferredRegister;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
+import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -22,12 +25,13 @@ public class StrainersBlockStatesProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.MULCH);
         blockWithItem(ModBlocks.ORE_MULCH);
 
+        //Currently using empty pngs with both the fluid name and the fluid name _still version (fix for 1.22)
         fluidBlocks("purifying_water", StrainersFluids.PURIFYING_WATER.getBlock());
         fluidBlocks("eroding_water", StrainersFluids.ERODING_WATER.getBlock());
 
-
-
     }
+
+
 
 
     private void blockWithItem(DeferredBlock<Block> blockRegistryObject) {

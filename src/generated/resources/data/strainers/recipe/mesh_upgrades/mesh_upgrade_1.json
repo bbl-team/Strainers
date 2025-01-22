@@ -1,0 +1,7 @@
+{
+  "type": "strainers:mesh_upgrade",
+  "input": {
+    "item": "strainers:mesh_upgrade_1"
+  },
+  "meshDamageChance": 0.75
+}

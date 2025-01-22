@@ -1,4 +1,4 @@
-// 1.21	2024-08-16T12:18:26.4346238	strainers Item Models
+// 1.21.1	2025-01-22T10:15:23.7678676	strainers Item Models
 b69f56bc8b44d8fe3ac25db64f6a9042c78b9bf6 assets/strainers/models/item/aluminum_ore_piece.json
 074ae95612a1a6e0a183fd795072a53bf287ff9a assets/strainers/models/item/amethyst_mesh.json
 f1d1064e00f6b576b43e9fc1f2e7c15cf8e0cb1d assets/strainers/models/item/bamboo_mesh.json
@@ -28,10 +28,16 @@ cd9f0679864e17deac112d881f8f31914556d9e5 assets/strainers/models/item/heavy_mesh
 e9ac1746547e723968b75f5ead15be4f406482e4 assets/strainers/models/item/lapis_ore_piece.json
 21dc8bd7b1646a696b228e30fde3c17b79b55d53 assets/strainers/models/item/lead_ore_piece.json
 fe442c3b0134c557b6e6dce659fd40329f28d9a6 assets/strainers/models/item/leafy_mesh.json
+3648367732a722d01c7e40a4e9fb3bd044b242ab assets/strainers/models/item/mesh_upgrade_1.json
+87ddda2286c2dcc8406723f00e428a3cdf9e1a59 assets/strainers/models/item/mesh_upgrade_2.json
+4701601fbe2c17358248764a7185a7153cacfd91 assets/strainers/models/item/mesh_upgrade_3.json
 59ec7a3092f65ceca316cb755417aee35cdc2732 assets/strainers/models/item/netherite_mesh.json
 19b2b38fae3b02b97b06ff7375c8ce9d06dce9b1 assets/strainers/models/item/nickel_ore_piece.json
 382c95184dce0719adc9a1f924c7d18d92c26e37 assets/strainers/models/item/obsidian_mesh.json
 a1ccb3c85c54aad2f09b6f1ea6f90c72418c2f6b assets/strainers/models/item/osmium_ore_piece.json
+8831d31035ff274d7072fe8e269dac163d086502 assets/strainers/models/item/output_upgrade_1.json
+5baff444774fb78e26bed228ce2c49cee9f5e9a7 assets/strainers/models/item/output_upgrade_2.json
+477f4a8e9c88226f9e2dfee651c2527bdc059064 assets/strainers/models/item/output_upgrade_3.json
 d1f5f2b28ac4824424ba191072e95285442bdaf3 assets/strainers/models/item/platinum_ore_piece.json
 78c64ac47da0e237f003234d83661c275fea8300 assets/strainers/models/item/prismarine_mesh.json
 20ef51a061b634756502d6573cad7af6ea67ed89 assets/strainers/models/item/purifying_salt_mulch.json

@@ -73,6 +73,10 @@ dependencies {
     compileOnly "curse.maven:in-world-recipes-1123257:5830771"
     runtimeOnly "curse.maven:in-world-recipes-1123257:5830771"
 
+    //Opolis Utilities
+    compileOnly "curse.maven:opolis-utilities-649644:6106709"
+    runtimeOnly "curse.maven:opolis-utilities-649644:6106709"
+
     //JEI
     compileOnly "curse.maven:jei-238222:5606861"
     runtimeOnly "curse.maven:jei-238222:5606861"

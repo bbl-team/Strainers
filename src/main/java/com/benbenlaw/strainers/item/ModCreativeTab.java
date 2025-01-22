@@ -22,6 +22,13 @@ public class ModCreativeTab {
             .title(Component.translatable("itemGroup.strainers"))
             .displayItems((parameters, output) -> {
 
+                output.accept(ModItems.MESH_UPGRADE_1.get());
+                output.accept(ModItems.MESH_UPGRADE_2.get());
+                output.accept(ModItems.MESH_UPGRADE_3.get());
+                output.accept(ModItems.OUTPUT_UPGRADE_1.get());
+                output.accept(ModItems.OUTPUT_UPGRADE_2.get());
+                output.accept(ModItems.OUTPUT_UPGRADE_3.get());
+
                 output.accept(ModBlocks.WOODEN_STRAINER.get());
                 output.accept(ModBlocks.STRAINER_TANK.get());
 
@@ -33,7 +40,6 @@ public class ModCreativeTab {
                 output.accept(ModItems.BAMBOO_MESH);
                 output.accept(ModItems.STRING_MESH);
                 output.accept(ModItems.LEAFY_MESH);
-
                 output.accept(ModItems.BLAZE_MESH);
                 output.accept(ModItems.BREEZE_MESH);
                 output.accept(ModItems.BRONZE_MESH);
@@ -50,6 +56,10 @@ public class ModCreativeTab {
                 output.accept(ModItems.AMETHYST_MESH);
                 output.accept(ModItems.QUARTZ_MESH);
                 output.accept(ModItems.NETHERITE_MESH);
+                output.accept(ModItems.HEAVY_MESH);
+                output.accept(ModItems.END_MESH);
+                output.accept(ModItems.OBSIDIAN_MESH);
+                output.accept(ModItems.PRISMARINE_MESH);
 
                 output.accept(ModItems.ALUMINUM_ORE_PIECE);
                 output.accept(ModItems.COPPER_ORE_PIECE);

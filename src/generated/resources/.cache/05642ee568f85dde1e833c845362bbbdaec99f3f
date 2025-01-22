@@ -1,5 +1,4 @@
-// 1.21	2024-08-16T12:18:26.4336223	strainers Item Tags
-c548373d25e53bf52aa4e7110d5cd5dcebaa7cd9 data/opolisutilities/tags/item/banned_in_block_placer.json
+// 1.21.1	2025-01-22T10:03:42.9491672	strainers Item Tags
 87a1e0d6e86b0396cd73184f2ba84c2f27cbae82 data/strainers/tags/item/meshes.json
 d9d5e7d42aec77a62b65490c398ca7864165e95e data/strainers/tags/item/tier_1_meshes.json
 09ff2493bb9e1e92603c24c99193a1a808c3d5a6 data/strainers/tags/item/tier_2_meshes.json

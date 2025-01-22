@@ -3,20 +3,20 @@
   "category": "misc",
   "group": "strainers",
   "key": {
-    "L": {
-      "item": "opolisutilities:leafy_string"
+    "M": {
+      "tag": "strainers:tier_6_meshes"
     },
-    "S": {
-      "tag": "c:rods/wooden"
+    "U": {
+      "item": "strainers:mesh_upgrade_2"
     }
   },
   "pattern": [
-    "SLS",
-    "LLL",
-    "SLS"
+    " M ",
+    "MUM",
+    " M "
   ],
   "result": {
     "count": 1,
-    "id": "strainers:leafy_mesh"
+    "id": "strainers:mesh_upgrade_3"
   }
 }

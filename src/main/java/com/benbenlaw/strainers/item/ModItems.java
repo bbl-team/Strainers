@@ -111,6 +111,20 @@ public class ModItems {
     public static final DeferredItem<Item> DEBRIS_ORE_PIECE = ITEMS.register("debris_ore_piece", () -> new Item(new Item.Properties()));
 
 
+    //Strainer Upgrades
+    public static final DeferredItem<Item> MESH_UPGRADE_1 = ITEMS.register("mesh_upgrade_1",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> MESH_UPGRADE_2 = ITEMS.register("mesh_upgrade_2",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> MESH_UPGRADE_3 = ITEMS.register("mesh_upgrade_3",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> OUTPUT_UPGRADE_1 = ITEMS.register("output_upgrade_1",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> OUTPUT_UPGRADE_2 = ITEMS.register("output_upgrade_2",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> OUTPUT_UPGRADE_3 = ITEMS.register("output_upgrade_3",
+            () -> new Item(new Item.Properties()));
+
 
 
 

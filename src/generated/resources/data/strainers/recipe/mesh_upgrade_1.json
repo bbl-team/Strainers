@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "strainers",
+  "key": {
+    "M": {
+      "tag": "strainers:tier_2_meshes"
+    },
+    "U": {
+      "item": "bblcore:upgrade_base"
+    }
+  },
+  "pattern": [
+    " M ",
+    "MUM",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "strainers:mesh_upgrade_1"
+  }
+}

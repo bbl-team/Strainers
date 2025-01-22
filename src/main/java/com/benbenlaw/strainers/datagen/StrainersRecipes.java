@@ -1,5 +1,6 @@
 package com.benbenlaw.strainers.datagen;
 
+import com.benbenlaw.core.item.CoreItems;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.datagen.recipes.MeshUpgradesRecipeBuilder;
@@ -40,7 +41,91 @@ public class StrainersRecipes extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
 
-        // Tags Checks //
+        //Mesh Upgrade 1
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_1)
+                .pattern(" M ")
+                .pattern("MUM")
+                .pattern(" M ")
+                .define('M', ModTags.Items.TIER_2_MESHES)
+                .define('U', CoreItems.UPGRADE_BASE)
+                .group("strainers")
+                .unlockedBy("has_item", has(ModTags.Items.TIER_2_MESHES))
+                .save(consumer);
+
+        MeshUpgradesRecipeBuilder.MeshUpgradesRecipeBuilder(Ingredient.of(ModItems.MESH_UPGRADE_1), 0.75)
+                .unlockedBy("has_item", hasItems(ModItems.MESH_UPGRADE_1)).save(consumer);
+
+        //Mesh Upgrade 2
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_2)
+                .pattern(" M ")
+                .pattern("MUM")
+                .pattern(" M ")
+                .define('M', ModTags.Items.TIER_4_MESHES)
+                .define('U', ModItems.MESH_UPGRADE_1)
+                .group("strainers")
+                .unlockedBy("has_item", has(ModTags.Items.TIER_4_MESHES))
+                .save(consumer);
+
+        MeshUpgradesRecipeBuilder.MeshUpgradesRecipeBuilder(Ingredient.of(ModItems.MESH_UPGRADE_2), 0.5)
+                .unlockedBy("has_item", hasItems(ModItems.MESH_UPGRADE_2)).save(consumer);
+
+        //Mesh Upgrade 3
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_3)
+                .pattern(" M ")
+                .pattern("MUM")
+                .pattern(" M ")
+                .define('M', ModTags.Items.TIER_6_MESHES)
+                .define('U', ModItems.MESH_UPGRADE_2)
+                .group("strainers")
+                .unlockedBy("has_item", has(ModTags.Items.TIER_6_MESHES))
+                .save(consumer);
+
+        MeshUpgradesRecipeBuilder.MeshUpgradesRecipeBuilder(Ingredient.of(ModItems.MESH_UPGRADE_3), 0.25)
+                .unlockedBy("has_item", hasItems(ModItems.MESH_UPGRADE_3)).save(consumer);
+
+        //Output Upgrade 1
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_1)
+                .pattern(" M ")
+                .pattern("MUM")
+                .pattern(" M ")
+                .define('M', Tags.Items.STORAGE_BLOCKS_IRON)
+                .define('U', CoreItems.UPGRADE_BASE)
+                .group("strainers")
+                .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_IRON))
+                .save(consumer);
+
+        OutputUpgradesRecipeBuilder.OutputUpgradesRecipeBuilder(Ingredient.of(ModItems.OUTPUT_UPGRADE_1), 0.2)
+                .unlockedBy("has_item", hasItems(ModItems.OUTPUT_UPGRADE_1)).save(consumer);
+
+        //Output Upgrade 2
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_2)
+                .pattern(" M ")
+                .pattern("MUM")
+                .pattern(" M ")
+                .define('M', Tags.Items.STORAGE_BLOCKS_DIAMOND)
+                .define('U', ModItems.OUTPUT_UPGRADE_1)
+                .group("strainers")
+                .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_DIAMOND))
+                .save(consumer);
+
+        OutputUpgradesRecipeBuilder.OutputUpgradesRecipeBuilder(Ingredient.of(ModItems.OUTPUT_UPGRADE_2), 0.4)
+                .unlockedBy("has_item", hasItems(ModItems.OUTPUT_UPGRADE_2)).save(consumer);
+
+        //Output Upgrade 3
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_3)
+                .pattern(" M ")
+                .pattern("MUM")
+                .pattern(" M ")
+                .define('M', Tags.Items.STORAGE_BLOCKS_NETHERITE)
+                .define('U', ModItems.OUTPUT_UPGRADE_2)
+                .group("strainers")
+                .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_NETHERITE))
+                .save(consumer);
+
+        OutputUpgradesRecipeBuilder.OutputUpgradesRecipeBuilder(Ingredient.of(ModItems.OUTPUT_UPGRADE_3), 0.6)
+                .unlockedBy("has_item", hasItems(ModItems.OUTPUT_UPGRADE_3)).save(consumer);
+
+        // Tags Checks, this is part of ore move to core version for 1.22, thanks ben //
 
         TagKey<Item> aluminumIngotTag = ItemTags.create(
                 Objects.requireNonNull(ResourceLocation.tryParse(String.valueOf(ResourceLocation.fromNamespaceAndPath("c", "ingots/aluminum")))));
@@ -127,6 +212,72 @@ public class StrainersRecipes extends RecipeProvider {
         //        .group("strainers")
         //        .unlockedBy("has_item", has(com.benbenlaw.opolisutilities.item.ModItems.LEAFY_STRING))
         //        .save(consumer);
+
+        //Bamboo Mesh
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.BAMBOO_MESH)
+                .pattern("SBS")
+                .pattern("BBB")
+                .pattern("SBS")
+                .define('B', Items.BAMBOO)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .group("strainers")
+                .unlockedBy("has_item", hasItems(Items.BAMBOO))
+                .save(consumer);
+
+        //Netherite Mesh
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.NETHERITE_MESH)
+                .pattern("SBS")
+                .pattern("BBB")
+                .pattern("SBS")
+                .define('B', Items.NETHERITE_INGOT)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .group("strainers")
+                .unlockedBy("has_item", hasItems(Items.NETHERITE_INGOT))
+                .save(consumer);
+
+        //Obsidian Mesh
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OBSIDIAN_MESH)
+                .pattern("SBS")
+                .pattern("BBB")
+                .pattern("SBS")
+                .define('B', Blocks.OBSIDIAN)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .group("strainers")
+                .unlockedBy("has_item", hasItems(Blocks.OBSIDIAN))
+                .save(consumer);
+
+        //Prismarine Mesh
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.PRISMARINE_MESH)
+                .pattern("SBS")
+                .pattern("BBB")
+                .pattern("SBS")
+                .define('B', Tags.Items.GEMS_PRISMARINE)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .group("strainers")
+                .unlockedBy("has_item", has(Tags.Items.GEMS_PRISMARINE))
+                .save(consumer);
+
+        //End Mesh
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.END_MESH)
+                .pattern("SBS")
+                .pattern("BBB")
+                .pattern("SBS")
+                .define('B', Tags.Items.END_STONES)
+                .define('S', Items.END_ROD)
+                .group("strainers")
+                .unlockedBy("has_item", has(Tags.Items.END_STONES))
+                .save(consumer);
+
+        //Heavy Mesh
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.HEAVY_MESH)
+                .pattern("SBS")
+                .pattern("BBB")
+                .pattern("SBS")
+                .define('B', Items.HEAVY_CORE)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .group("strainers")
+                .unlockedBy("has_item", has(Items.HEAVY_CORE))
+                .save(consumer);
 
         //Wooden Mesh
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WOODEN_MESH)
@@ -364,9 +515,6 @@ public class StrainersRecipes extends RecipeProvider {
 
         // ********** Mesh Upgrades ********** //
 
-        MeshUpgradesRecipeBuilder.MeshUpgradesRecipeBuilder(Ingredient.of(Items.DIAMOND), 0.9)
-                .unlockedBy("has_item", hasItems(Items.DIAMOND))
-                .save(consumer);
 
 
         // ********** Output Upgrades ********** //
