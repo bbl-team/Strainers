@@ -1,10 +1,6 @@
 Changelog BBL Strainers
 
-
-Join the discord here for mod and modpack updates and support https://discord.gg/benbenlaw
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
-
-ADD ALL MESHES TO JEI
 
 3.0.0
 Removed Opolis Utilities as a dependency
@@ -18,6 +14,7 @@ Added missing meshes to JEI including missing recipes
 Added Mesh Upgrades (1-3), follow the same recipe system the cloches uses but slots are still specific to one type of upgrade
 Added Output Upgrades (1-3), follow the same recipe system the cloches uses but slots are still specific to one type of upgrade
 Output upgrades now show there effect better in the strainer screen
+Updated changelog to show the changelog file in the github repository
 
 2.8.4
 Fixed issue when mesh breaking in the strainer would cause a fakeplayer to be added every time
