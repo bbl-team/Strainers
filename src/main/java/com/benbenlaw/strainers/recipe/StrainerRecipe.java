@@ -1,6 +1,5 @@
 package com.benbenlaw.strainers.recipe;
 
-import com.benbenlaw.strainers.block.entity.StrainerTankBlockEntity;
 import com.benbenlaw.strainers.block.entity.WoodenStrainerBlockEntity;
 import com.benbenlaw.strainers.util.ModTags;
 import com.mojang.serialization.Codec;

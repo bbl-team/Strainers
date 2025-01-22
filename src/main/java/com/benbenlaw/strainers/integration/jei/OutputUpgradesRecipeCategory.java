@@ -1,19 +1,10 @@
 package com.benbenlaw.strainers.integration.jei;
 
-import com.benbenlaw.opolisutilities.OpolisUtilities;
-import com.benbenlaw.opolisutilities.integration.jei.JEIOpolisUtilitiesPlugin;
-import com.benbenlaw.opolisutilities.integration.jei.OpolisIRecipeSlotTooltipCallback;
 import com.benbenlaw.strainers.Strainers;
-import com.benbenlaw.strainers.block.ModBlocks;
-import com.benbenlaw.strainers.item.ModItems;
-import com.benbenlaw.strainers.recipe.MeshUpgradesRecipe;
 import com.benbenlaw.strainers.recipe.OutputUpgradesRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
-import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -27,14 +18,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class OutputUpgradesRecipeCategory implements IRecipeCategory<OutputUpgradesRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "output_upgrade");

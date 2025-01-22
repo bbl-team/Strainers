@@ -1,9 +1,8 @@
 package com.benbenlaw.strainers.block.entity;
 
-import com.benbenlaw.opolisutilities.block.entity.custom.handler.InputOutputItemHandler;
-import com.benbenlaw.opolisutilities.recipe.NoInventoryRecipe;
-import com.benbenlaw.opolisutilities.recipe.SpeedUpgradesRecipe;
-import com.benbenlaw.opolisutilities.util.inventory.IInventoryHandlingBlockEntity;
+import com.benbenlaw.core.block.entity.handler.IInventoryHandlingBlockEntity;
+import com.benbenlaw.core.block.entity.handler.InputOutputItemHandler;
+import com.benbenlaw.core.recipe.NoInventoryRecipe;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.recipe.MeshUpgradesRecipe;
 import com.benbenlaw.strainers.recipe.OutputUpgradesRecipe;
@@ -49,12 +48,10 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jline.utils.Log;
 
-import java.io.Console;
-import java.util.*;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 public class WoodenStrainerBlockEntity extends BlockEntity implements MenuProvider, IInventoryHandlingBlockEntity {
 
@@ -268,7 +265,7 @@ public class WoodenStrainerBlockEntity extends BlockEntity implements MenuProvid
             if (itemHandler.getStackInSlot(SPEED_UPGRADE).isEmpty()) {
                 maxProgress = 220;
             } else {
-                getMaxProgressFromUpgrade();
+            //    getMaxProgressFromUpgrade();
                 sync();
             }
 
@@ -313,6 +310,7 @@ public class WoodenStrainerBlockEntity extends BlockEntity implements MenuProvid
     }
 
 
+    /*
     public void getMaxProgressFromUpgrade() {
         for (RecipeHolder<SpeedUpgradesRecipe> match : level.getRecipeManager().getRecipesFor(SpeedUpgradesRecipe.Type.INSTANCE, NoInventoryRecipe.INSTANCE, level)) {
             NonNullList<Ingredient> input = match.value().getIngredients();
@@ -324,6 +322,8 @@ public class WoodenStrainerBlockEntity extends BlockEntity implements MenuProvid
             }
         }
     }
+
+     */
 
     public void getMeshDamageChanceUpgrade() {
         assert level != null;

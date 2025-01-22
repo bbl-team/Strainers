@@ -5,7 +5,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.142'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
     id 'net.darkhax.curseforgegradle' version '1.1.24'
     id "com.modrinth.minotaur" version "2.+"
 }
@@ -65,9 +65,9 @@ dependencies {
 
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    //Opolis Utilities
-    compileOnly "curse.maven:opolis-utilities-649644:5802735"
-    runtimeOnly "curse.maven:opolis-utilities-649644:5802735"
+    //BBL Core
+    compileOnly "curse.maven:bbl-core-1135181:6093056"
+    runtimeOnly "curse.maven:bbl-core-1135181:6093056"
 
     //In World Recipes
     compileOnly "curse.maven:in-world-recipes-1123257:5830771"

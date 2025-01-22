@@ -9,12 +9,14 @@ import com.benbenlaw.strainers.item.ModItems;
 import com.benbenlaw.strainers.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -115,16 +117,16 @@ public class StrainersRecipes extends RecipeProvider {
                 .unlockedBy("has_item", has(ModItems.STONE_PEBBLE))
                 .save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "dirt_from_mulch"));
 
-        //Leafy Mesh
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LEAFY_MESH)
-                .pattern("SLS")
-                .pattern("LLL")
-                .pattern("SLS")
-                .define('L', com.benbenlaw.opolisutilities.item.ModItems.LEAFY_STRING)
-                .define('S', Tags.Items.RODS_WOODEN)
-                .group("strainers")
-                .unlockedBy("has_item", has(com.benbenlaw.opolisutilities.item.ModItems.LEAFY_STRING))
-                .save(consumer);
+        ////Leafy Mesh
+        //ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.LEAFY_MESH)
+        //        .pattern("SLS")
+        //        .pattern("LLL")
+        //        .pattern("SLS")
+        //        .define('L', com.benbenlaw.opolisutilities.item.ModItems.LEAFY_STRING)
+        //        .define('S', Tags.Items.RODS_WOODEN)
+        //        .group("strainers")
+        //        .unlockedBy("has_item", has(com.benbenlaw.opolisutilities.item.ModItems.LEAFY_STRING))
+        //        .save(consumer);
 
         //Wooden Mesh
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WOODEN_MESH)
@@ -788,9 +790,9 @@ public class StrainersRecipes extends RecipeProvider {
                 .unlockedBy("has_item", has(ModBlocks.WOODEN_STRAINER))
                 .save(consumer.withConditions(new NotCondition(new TagEmptyCondition(platinumNuggetTag))), "strainers:strainer/pieces_to_resources/platinum");
 
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ModItems.COAL_ORE_PIECE), "strainers:purifying_water", SizedIngredient.of(com.benbenlaw.opolisutilities.item.ModItems.MINI_COAL,1), 1, 1)
-                .unlockedBy("has_item", has(ModBlocks.WOODEN_STRAINER))
-                .save(consumer, "strainers:strainer/pieces_to_resources/coal");
+        //StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ModItems.COAL_ORE_PIECE), "strainers:purifying_water", SizedIngredient.of(com.benbenlaw.opolisutilities.item.ModItems.MINI_COAL,1), 1, 1)
+        //        .unlockedBy("has_item", has(ModBlocks.WOODEN_STRAINER))
+        //        .save(consumer, "strainers:strainer/pieces_to_resources/coal");
 
         StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ModItems.IRON_ORE_PIECE), "strainers:purifying_water", SizedIngredient.of(ironNuggetTag,1), 1, 1)
                 .unlockedBy("has_item", has(ModBlocks.WOODEN_STRAINER))

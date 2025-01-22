@@ -1,13 +1,10 @@
 package com.benbenlaw.strainers.item;
 
 import com.benbenlaw.strainers.Strainers;
-import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.custom.ErodingSaltMulchItem;
 import com.benbenlaw.strainers.item.custom.MeshItem;
 import com.benbenlaw.strainers.item.custom.PurifyingSaltMulchItem;
-import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;

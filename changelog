@@ -5,7 +5,10 @@ Join the discord here for mod and modpack updates and support https://discord.gg
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
 
 3.0.0
-
+Removed Opolis Utilities as a dependency
+Added BBL Core as a dependency
+Moved all previous Opolis Utilities class to BBL Core
+Fluids now use BBL Core fluid registry
 
 2.8.4
 Fixed issue when mesh breaking in the strainer would cause a fakeplayer to be added every time

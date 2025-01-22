@@ -1,6 +1,5 @@
 package com.benbenlaw.strainers.datagen.recipes;
 
-import com.benbenlaw.opolisutilities.recipe.DryingTableRecipe;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
 import net.minecraft.advancements.Advancement;

@@ -3,18 +3,12 @@ package com.benbenlaw.strainers.datagen;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
-import com.benbenlaw.strainers.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredItem;
 
 public class StrainersBlockStatesProvider extends BlockStateProvider {
 

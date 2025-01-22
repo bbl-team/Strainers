@@ -1,6 +1,5 @@
 package com.benbenlaw.strainers.block.custom;
 
-import com.benbenlaw.opolisutilities.screen.custom.EnderScramblerMenu;
 import com.benbenlaw.strainers.block.entity.ModBlockEntities;
 import com.benbenlaw.strainers.block.entity.WoodenStrainerBlockEntity;
 import com.benbenlaw.strainers.screen.custom.WoodenStrainerMenu;

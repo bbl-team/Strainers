@@ -1,17 +1,10 @@
 package com.benbenlaw.strainers.datagen;
 
-import com.benbenlaw.opolisutilities.OpolisUtilities;
-import com.benbenlaw.opolisutilities.util.ModTags;
 import com.benbenlaw.strainers.Strainers;
-import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -28,11 +21,6 @@ public class StrainersItemTags extends ItemTagsProvider {
 
         //Enchantments
 
-        //Banned In Block Placer
-        tag(ModTags.Items.BANNED_IN_BLOCK_PLACER)
-                .add(ModBlocks.WOODEN_STRAINER.asItem())
-                .add(ModBlocks.STRAINER_TANK.asItem())
-                ;
 
         //Mesh Tags
         tag(com.benbenlaw.strainers.util.ModTags.Items.TIER_1_MESHES)

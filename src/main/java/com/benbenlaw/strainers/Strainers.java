@@ -1,5 +1,6 @@
 package com.benbenlaw.strainers;
 
+import com.benbenlaw.core.util.ColorHandler;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.block.entity.ModBlockEntities;
 import com.benbenlaw.strainers.config.StrainersConfigFile;
@@ -10,6 +11,8 @@ import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.recipe.ModRecipes;
 import com.benbenlaw.strainers.screen.ModMenuTypes;
 import com.benbenlaw.strainers.screen.custom.WoodenStrainerScreen;
+import com.benbenlaw.strainers.util.StrainersColorHandler;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
@@ -17,6 +20,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -46,6 +50,10 @@ public class Strainers {
 
 
         StrainersFluids.FLUIDS.register(modEventBus);
+
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            modEventBus.register(new StrainersColorHandler());
+        }
 
         modEventBus.addListener(this::commonSetup);
 

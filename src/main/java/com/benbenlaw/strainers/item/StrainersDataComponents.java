@@ -1,25 +1,20 @@
 package com.benbenlaw.strainers.item;
 
-import com.benbenlaw.opolisutilities.OpolisUtilities;
 import com.benbenlaw.strainers.Strainers;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.Decoder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Supplier;
-
 public class StrainersDataComponents {
 
-    public static final DeferredRegister<DataComponentType<?>> COMPONENTS = DeferredRegister.createDataComponents(Strainers.MOD_ID);
+    public static final DeferredRegister<DataComponentType<?>> COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE,  Strainers.MOD_ID);
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<SimpleFluidContent>> FLUID_TYPE =
             COMPONENTS.register("fluid_type", () ->

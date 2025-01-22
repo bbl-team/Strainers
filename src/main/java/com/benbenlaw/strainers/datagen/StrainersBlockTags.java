@@ -1,7 +1,5 @@
 package com.benbenlaw.strainers.datagen;
 
-import com.benbenlaw.opolisutilities.OpolisUtilities;
-import com.benbenlaw.opolisutilities.util.ModTags;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
@@ -29,12 +27,6 @@ public class StrainersBlockTags extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.STRAINER_TANK.get())
         ;
-
-        //Banned In Block Placer
-        tag(ModTags.Blocks.BANNED_IN_BLOCK_PLACER)
-                .add(ModBlocks.WOODEN_STRAINER.get())
-                .add(ModBlocks.STRAINER_TANK.get())
-       ;
 
     }
 

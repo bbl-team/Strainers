@@ -1,24 +1,5 @@
 package com.benbenlaw.strainers.event;
 
-import com.benbenlaw.strainers.Strainers;
-import com.benbenlaw.strainers.block.ModBlocks;
-import com.benbenlaw.strainers.block.custom.StrainerTankBlock;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-
 //@EventBusSubscriber(modid = Strainers.MOD_ID)
 public class ModEvents {
 

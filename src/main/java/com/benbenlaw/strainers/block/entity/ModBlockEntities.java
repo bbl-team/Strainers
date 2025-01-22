@@ -1,6 +1,5 @@
 package com.benbenlaw.strainers.block.entity;
 
-import com.benbenlaw.opolisutilities.block.entity.custom.BlockBreakerBlockEntity;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;

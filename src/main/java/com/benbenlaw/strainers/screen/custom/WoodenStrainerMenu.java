@@ -1,12 +1,13 @@
 package com.benbenlaw.strainers.screen.custom;
 
-import com.benbenlaw.opolisutilities.item.ModItems;
-import com.benbenlaw.opolisutilities.screen.slot.utils.*;
-import com.benbenlaw.opolisutilities.screen.utils.ModSlotTextures;
+import com.benbenlaw.core.screen.util.slot.CoreSlot;
+import com.benbenlaw.core.screen.util.slot.ResultSlot;
+import com.benbenlaw.core.screen.util.CoreSlotTextures;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.block.entity.WoodenStrainerBlockEntity;
 import com.benbenlaw.strainers.screen.ModMenuTypes;
 import com.benbenlaw.strainers.util.ModTags;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
-import com.mojang.datafixers.util.Pair;
 
 
 public class WoodenStrainerMenu extends AbstractContainerMenu {
@@ -46,54 +46,54 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
 
         assert blockEntity != null;
 
-        this.addSlot(new BlacklistTagInputSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.INPUT_SLOT, 8, 35, ModTags.Items.MESHES, 64)); //Upgrade
-        this.addSlot(new WhitelistTagInputSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_SLOT, 8, 17, ModTags.Items.MESHES, 1)); //Mesh
+        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.INPUT_SLOT, 8, 35)); //Upgrade
+        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_SLOT, 8, 17)); //Mesh
 
         this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.SPEED_UPGRADE, 17, 55) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, ModSlotTextures.SPEED_UPGRADE);
+                return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
             }
         });
 
         this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_UPGRADE, 35, 55) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, ModSlotTextures.SPEED_UPGRADE);
+                return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
             }
         });
         this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.OUTPUT_UPGRADE, 53, 55) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, ModSlotTextures.SPEED_UPGRADE);
+                return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
             }
         });
 
         //Outputs
 
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 5, 80, 9));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 6, 98, 9));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 7, 116, 9));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 8, 134, 9));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 9, 152, 9));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 5, 80, 9, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 6, 98, 9, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 7, 116, 9, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 8, 134, 9, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 9, 152, 9, 64));
 
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 10,80,  27));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 11,98,  27));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 12,116, 27));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 13,134, 27));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 14,152, 27));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 10,80,  27, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 11,98,  27, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 12,116, 27, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 13,134, 27, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 14,152, 27, 64));
 
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 15, 80, 45));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 16, 98, 45));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 17, 116, 45));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 18, 134, 45));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 19, 152, 45));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 15, 80, 45, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 16, 98, 45, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 17, 116, 45, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 18, 134, 45, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 19, 152, 45, 64));
 
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 20, 80, 63));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 21, 98, 63));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 22, 116, 63));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 23, 134, 63));
-        this.addSlot(new ModResultSlot(blockEntity.getItemStackHandler(), 24, 152, 63));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 20, 80, 63, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 21, 98, 63, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 22, 116, 63, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 23, 134, 63, 64));
+        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 24, 152, 63, 64));
 
         addDataSlots(data);
     }
@@ -157,9 +157,9 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(@NotNull Player player) {
 
-        if (player.getItemInHand(player.getUsedItemHand()).is(ModItems.PORTABLE_GUI))
-            return true;
-
+    //    if (player.getItemInHand(player.getUsedItemHand()).is(ModItems.PORTABLE_GUI))
+    //        return true;
+//
         return stillValid(ContainerLevelAccess.create(player.level(), blockPos),
                 player, ModBlocks.WOODEN_STRAINER.get());
     }

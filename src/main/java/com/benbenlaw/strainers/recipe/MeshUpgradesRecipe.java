@@ -1,6 +1,6 @@
 package com.benbenlaw.strainers.recipe;
 
-import com.benbenlaw.opolisutilities.recipe.NoInventoryRecipe;
+import com.benbenlaw.core.recipe.NoInventoryRecipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

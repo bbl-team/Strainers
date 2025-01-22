@@ -1,6 +1,5 @@
 package com.benbenlaw.strainers.integration.jei;
 
-import com.benbenlaw.opolisutilities.integration.jei.SpeedUpgradesRecipeCategory;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.recipe.MeshUpgradesRecipe;
@@ -42,7 +41,7 @@ public class JEIStrainersPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), StrainerRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), MeshUpgradesRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), OutputUpgradesRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), SpeedUpgradesRecipeCategory.RECIPE_TYPE);
+    //    registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), SpeedUpgradesRecipeCategory.RECIPE_TYPE);
     }
 
     @Override
@@ -66,11 +65,14 @@ public class JEIStrainersPlugin implements IModPlugin {
         registration.addRecipes(StrainerRecipeCategory.RECIPE_TYPE,
                 recipeManager.getAllRecipesFor(ModRecipes.STRAINER_TYPE.get()).stream().map(RecipeHolder::value).toList());
 
+
         registration.addRecipes(MeshUpgradesRecipeCategory.RECIPE_TYPE,
                 recipeManager.getAllRecipesFor(ModRecipes.MESH_UPGRADE_TYPE.get()).stream().map(RecipeHolder::value).toList());
 
         registration.addRecipes(OutputUpgradesRecipeCategory.RECIPE_TYPE,
                 recipeManager.getAllRecipesFor(ModRecipes.OUTPUT_UPGRADE_TYPE.get()).stream().map(RecipeHolder::value).toList());
+
+
 
 
 

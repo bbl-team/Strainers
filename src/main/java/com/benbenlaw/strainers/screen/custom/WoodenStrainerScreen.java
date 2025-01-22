@@ -1,6 +1,6 @@
 package com.benbenlaw.strainers.screen.custom;
 
-import com.benbenlaw.opolisutilities.util.MouseUtil;
+import com.benbenlaw.core.util.MouseUtil;
 import com.benbenlaw.strainers.Strainers;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;

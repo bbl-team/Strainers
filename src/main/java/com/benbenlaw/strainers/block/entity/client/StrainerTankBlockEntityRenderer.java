@@ -1,6 +1,6 @@
 package com.benbenlaw.strainers.block.entity.client;
 
-import com.benbenlaw.opolisutilities.util.RenderUtil;
+import com.benbenlaw.core.util.RenderUtil;
 import com.benbenlaw.strainers.block.entity.StrainerTankBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -14,13 +14,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
-
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import org.jetbrains.annotations.NotNull;
-import org.joml.Matrix3f;
-import org.joml.Matrix4f;
 
 public class StrainerTankBlockEntityRenderer implements BlockEntityRenderer<StrainerTankBlockEntity> {
 
