@@ -66,8 +66,8 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     //BBL Core
-    compileOnly "curse.maven:bbl-core-1135181:6093056"
-    runtimeOnly "curse.maven:bbl-core-1135181:6093056"
+    compileOnly "curse.maven:bbl-core-1135181:6486837"
+    runtimeOnly "curse.maven:bbl-core-1135181:6486837"
 
     //In World Recipes
     compileOnly "curse.maven:in-world-recipes-1123257:5830771"
@@ -83,8 +83,8 @@ dependencies {
 
     //EMI
 
-    compileOnly "curse.maven:emi-580555:5619579"
-    runtimeOnly "curse.maven:emi-580555:5619579"
+    //compileOnly "curse.maven:emi-580555:5619579"
+    //runtimeOnly "curse.maven:emi-580555:5619579"
 
     //Ender IO
 

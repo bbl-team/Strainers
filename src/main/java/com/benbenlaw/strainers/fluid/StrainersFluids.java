@@ -16,7 +16,6 @@ public class StrainersFluids {
     public static final FluidRegistryObject<FluidDeferredRegister.CoreFluidTypes, BaseFlowingFluid.Source,
                 BaseFlowingFluid.Flowing, LiquidBlock, BucketItem> ERODING_WATER;
 
-
     public static final FluidRegistryObject<FluidDeferredRegister.CoreFluidTypes, BaseFlowingFluid.Source,
             BaseFlowingFluid.Flowing, LiquidBlock, BucketItem> PURIFYING_WATER;
 

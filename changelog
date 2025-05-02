@@ -16,6 +16,9 @@ Added Output Upgrades (1-3), follow the same recipe system the cloches uses but 
 Output upgrades now show there effect better in the strainer screen
 Updated changelog to show the changelog file in the github repository
 
+2.8.5
+Updated to bbl core 1.2.29
+
 2.8.4
 Fixed issue when mesh breaking in the strainer would cause a fakeplayer to be added every time
 
