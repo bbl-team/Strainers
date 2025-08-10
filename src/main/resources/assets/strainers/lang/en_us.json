@@ -70,6 +70,10 @@
   "block.strainers.ore_mulch": "Ore Mulch",
   "block.strainers.strainer_tank": "Strainer Tank",
 
+  "block.strainers.gui.input_slot": "Input Slot",
+  "block.strainers.gui.mesh_slot": "Mesh Slot",
+  "block.strainers.gui.upgrade_slot": "Upgrade Slot",
+
   "tooltips.strainers.upgrade": "Press §eSHIFT§r for more information!",
   "tooltips.strainers.improved_input_upgrade.shift": "§aInput items have a 20% chance to not be consumed.",
   "tooltips.strainers.sturdy_input_upgrade.shift": "§aInput items have a 40% chance to not be consumed.",
@@ -122,6 +126,7 @@
   "block.gui.mesh_upgrade": "Mesh Upgrade",
   "block.gui.input_item": "Input Item",
   "block.gui.mesh": "Mesh Item",
+  "block.strainer.jei.chance": "Chance: ",
 
 
   "itemGroup.strainers": "BBL Strainers"

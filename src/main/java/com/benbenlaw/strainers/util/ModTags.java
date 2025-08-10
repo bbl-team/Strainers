@@ -34,10 +34,13 @@ public class ModTags {
         public static final TagKey<Item> TIER_4_MESHES = tag("tier_4_meshes");
         public static final TagKey<Item> TIER_5_MESHES = tag("tier_5_meshes");
         public static final TagKey<Item> TIER_6_MESHES = tag("tier_6_meshes");
+        public static final TagKey<Item> TIER_7_MESHES = tag("tier_7_meshes");
+        public static final TagKey<Item> TIER_8_MESHES = tag("tier_8_meshes");
+        public static final TagKey<Item> TIER_9_MESHES = tag("tier_9_meshes");
+        public static final TagKey<Item> TIER_10_MESHES = tag("tier_10_meshes");
 
         public static final TagKey<Item> MESHES = tag("meshes");
 
-        public static final TagKey<Item> REMOVE_ITEM_NO_DAMAGE_IN_STRAINER = tag("remove_item_no_damage_in_strainer");
 
 
         private static TagKey<Item> tag(String name) {

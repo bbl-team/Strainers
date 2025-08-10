@@ -78,8 +78,8 @@ dependencies {
     runtimeOnly "curse.maven:opolis-utilities-649644:6106709"
 
     //JEI
-    compileOnly "curse.maven:jei-238222:5606861"
-    runtimeOnly "curse.maven:jei-238222:5606861"
+    compileOnly "curse.maven:jei-238222:5846880"
+    runtimeOnly "curse.maven:jei-238222:5846880"
 
     //EMI
 

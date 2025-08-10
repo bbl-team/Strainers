@@ -1,6 +1,5 @@
 package com.benbenlaw.strainers;
 
-import com.benbenlaw.core.util.ColorHandler;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.block.entity.ModBlockEntities;
 import com.benbenlaw.strainers.config.StrainersConfigFile;
@@ -11,6 +10,7 @@ import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.recipe.ModRecipes;
 import com.benbenlaw.strainers.screen.ModMenuTypes;
 import com.benbenlaw.strainers.screen.custom.WoodenStrainerScreen;
+import com.benbenlaw.strainers.util.StrainersIngredientDurations;
 import com.benbenlaw.strainers.util.StrainersColorHandler;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -57,7 +57,9 @@ public class Strainers {
 
         modEventBus.addListener(this::commonSetup);
 
-        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, StrainersConfigFile.SPEC, "strainers.toml");
+        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.STARTUP, StrainersConfigFile.SPEC, "bbl/strainers/startup.toml");
+
+        StrainersIngredientDurations.loadItemDurationsFromConfig(StrainersConfigFile.blockDurations.get());
 
     }
 
@@ -67,7 +69,6 @@ public class Strainers {
 
     public void commonSetup(RegisterPayloadHandlersEvent event) {
 
-    //    ModMessages.registerNetworking(event);
     }
 
 

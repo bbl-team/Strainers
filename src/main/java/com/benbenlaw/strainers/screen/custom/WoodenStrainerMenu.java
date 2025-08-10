@@ -28,7 +28,7 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
     protected BlockPos blockPos;
 
     public WoodenStrainerMenu(int containerID, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(25));
+        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(20));
     }
 
     public WoodenStrainerMenu(int containerID, Inventory inventory, BlockPos blockPos, ContainerData data) {
@@ -39,30 +39,30 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
         this.blockEntity = (WoodenStrainerBlockEntity) this.level.getBlockEntity(blockPos);
         this.data = data;
 
-        checkContainerSize(inventory, 25);
+        checkContainerSize(inventory, 20);
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
 
 
         assert blockEntity != null;
 
-        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.INPUT_SLOT, 8, 35)); //Upgrade
-        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_SLOT, 8, 17)); //Mesh
+        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.INPUT_SLOT, 8, 17)); //Upgrade
+        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_SLOT, 8, 35)); //Mesh
 
-        this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.SPEED_UPGRADE, 17, 55) {
+        this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.UPGRADE_SLOT_1, 16, 53) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
             }
         });
 
-        this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_UPGRADE, 35, 55) {
+        this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.UPGRADE_SLOT_2, 34, 53) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
             }
         });
-        this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.OUTPUT_UPGRADE, 53, 55) {
+        this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.UPGRADE_SLOT_3, 52, 53) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
@@ -71,30 +71,21 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
 
         //Outputs
 
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 5, 80, 9, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 6, 98, 9, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 7, 116, 9, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 8, 134, 9, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 9, 152, 9, 64));
+        int OUTPUT_SLOT = 5;
+        int xStart = 80;
+        int yStart = 17;
+        int xOffset = 18;
+        int yOffset = 18;
+        int rows = 3;
+        int columns = 5;
 
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 10,80,  27, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 11,98,  27, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 12,116, 27, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 13,134, 27, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 14,152, 27, 64));
-
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 15, 80, 45, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 16, 98, 45, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 17, 116, 45, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 18, 134, 45, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 19, 152, 45, 64));
-
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 20, 80, 63, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 21, 98, 63, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 22, 116, 63, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 23, 134, 63, 64));
-        this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), 24, 152, 63, 64));
-
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                int xPos = xStart + (col * xOffset);
+                int yPos = yStart + (row * yOffset);
+                this.addSlot(new ResultSlot(blockEntity.getItemStackHandler(), OUTPUT_SLOT++, xPos, yPos, 64));
+            }
+        }
         addDataSlots(data);
     }
 
@@ -106,7 +97,7 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
 
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 20; // This is the height in pixels of your arrow
+        int progressArrowSize = 24; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -119,7 +110,7 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
-    private static final int TE_INVENTORY_SLOT_COUNT = 25;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 20;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -167,14 +158,14 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 }

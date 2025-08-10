@@ -1,14 +1,18 @@
 package com.benbenlaw.strainers.datagen;
 
 import com.benbenlaw.core.item.CoreItems;
+import com.benbenlaw.core.recipe.ChanceResult;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.datagen.recipes.MeshUpgradesRecipeBuilder;
 import com.benbenlaw.strainers.datagen.recipes.OutputUpgradesRecipeBuilder;
 import com.benbenlaw.strainers.datagen.recipes.StrainerRecipeBuilder;
+import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.ModItems;
+import com.benbenlaw.strainers.recipe.StrainerRecipe;
 import com.benbenlaw.strainers.util.ModTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -18,18 +22,21 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-import static com.benbenlaw.strainers.datagen.ModdedTags.*;
+import static com.benbenlaw.strainers.datagen.recipes.ResultLists.LEAVES_RESULTS;
 import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
 
 public class StrainersRecipes extends RecipeProvider {
@@ -527,59 +534,56 @@ public class StrainersRecipes extends RecipeProvider {
 
         // Leaves //
 
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.OAK_SAPLING, 1), 1, 0.1)
+        StrainerRecipeBuilder.strainerRecipe(Blocks.WATER.defaultBlockState(),
+                        Ingredient.of(ItemTags.LEAVES),
+                        1, 3, 0.2, LEAVES_RESULTS)
                 .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.SPRUCE_SAPLING,1), 1, 0.1)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.BIRCH_SAPLING,1), 1, 0.1)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.JUNGLE_SAPLING,1), 1, 0.1)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.ACACIA_SAPLING,1), 1, 0.1)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.DARK_OAK_SAPLING,1), 1, 0.1)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.CHERRY_SAPLING,1), 1, 0.1)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.MANGROVE_PROPAGULE,1), 1, 0.1)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(ItemTags.LEAVES), "minecraft:air", SizedIngredient.of(Items.BAMBOO,1), 1, 0.05)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/water_and_leaves"));
 
+        /*
         // MUD (WATER) //
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(Blocks.MUD), "minecraft:water", SizedIngredient.of(Items.CLAY_BALL,1), 2, 0.70)
+        StrainerRecipeBuilder.strainerRecipe(Blocks.WATER.defaultBlockState(),
+                        Ingredient.of(Blocks.MUD),
+                        Ingredient.of(ModTags.Items.TIER_1_MESHES), 100, 0.1,
+                        NonNullList.of(new ChanceResult(new ItemStack(Items.CLAY_BALL), 0.7f)))
                 .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/water_and_mud"));
 
         // MYCELIUM  (LAVA) //
-
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(Blocks.GRASS_BLOCK), "minecraft:lava", SizedIngredient.of(Blocks.CRIMSON_NYLIUM,1), 4, 0.25)
+        StrainerRecipeBuilder.strainerRecipe(Blocks.LAVA.defaultBlockState(),
+                        Ingredient.of(Blocks.GRASS_BLOCK),
+                        Ingredient.of(ModTags.Items.TIER_4_MESHES), 100, 0.1,
+                        NonNullList.of(
+                                new ChanceResult(new ItemStack(Items.CRIMSON_NYLIUM), 0.25f),
+                                new ChanceResult(new ItemStack(Items.WARPED_NYLIUM), 0.7f)))
                 .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(Blocks.GRASS_BLOCK), "minecraft:lava", SizedIngredient.of(Blocks.WARPED_NYLIUM,1), 4, 0.25)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/lava_and_grass_block"));
 
         // MYCELIUM  (EROD) //
-
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(Blocks.GRASS_BLOCK), "strainers:eroding_water", SizedIngredient.of(Blocks.BROWN_MUSHROOM,1), 3, 0.20)
+        StrainerRecipeBuilder.strainerRecipe(StrainersFluids.ERODING_WATER.getBlock().defaultBlockState(),
+                        Ingredient.of(Blocks.GRASS_BLOCK),
+                        Ingredient.of(ModTags.Items.TIER_3_MESHES), 100, 0.1,
+                        NonNullList.of(
+                                new ChanceResult(new ItemStack(Items.BROWN_MUSHROOM), 0.2f),
+                                new ChanceResult(new ItemStack(Items.RED_MUSHROOM), 0.2f)))
                 .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
-        StrainerRecipeBuilder.strainerRecipe(Ingredient.of(Blocks.GRASS_BLOCK), "strainers:eroding_water", SizedIngredient.of(Blocks.RED_MUSHROOM,1), 3, 0.20)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer);
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/eroding_water_and_grass_block"));
 
         // GRASS BLOCK (EROD) //
+
+         */
+
+        /*
+
+        StrainerRecipeBuilder.strainerRecipe(StrainersFluids.ERODING_WATER.getBlock().defaultBlockState(),
+                        Ingredient.of(Blocks.GRASS_BLOCK),
+                        Ingredient.of(ModTags.Items.TIER_1_MESHES), 100,
+                        NonNullList.of(
+                                new ChanceResult(new ItemStack(Items.MYCELIUM), 0.8f)))
+                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/eroding_water_and_grass_block"));
+
+
 
         StrainerRecipeBuilder.strainerRecipe(Ingredient.of(Blocks.GRASS_BLOCK), "strainers:eroding_water", SizedIngredient.of(Blocks.MYCELIUM,1), 1, 0.8)
                 .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
@@ -982,6 +986,8 @@ public class StrainersRecipes extends RecipeProvider {
                 .unlockedBy("has_item", has(ModBlocks.WOODEN_STRAINER))
                 .save(consumer, "strainers:strainer/pieces_to_resources/debris");
 
+
+         */
 
 
 

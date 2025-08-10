@@ -1,5 +1,6 @@
 package com.benbenlaw.strainers.datagen.recipes;
 
+import com.benbenlaw.core.recipe.ChanceResult;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
 import net.minecraft.advancements.Advancement;
@@ -7,14 +8,19 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,24 +29,27 @@ import java.util.Map;
 
 public class StrainerRecipeBuilder implements RecipeBuilder {
 
+
     protected String group;
+    protected BlockState aboveBlock;
     protected Ingredient input;
-    protected String aboveBlock;
-    protected SizedIngredient output;
     protected int minMeshTier;
-    protected double chance;
+    protected int maxMeshTier;
+    protected double chancePerTier;
+    protected NonNullList<ChanceResult> results;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public StrainerRecipeBuilder(Ingredient input, String aboveBlock, SizedIngredient output, int minMeshTier, double chance) {
-        this.input = input;
+    public StrainerRecipeBuilder(BlockState aboveBlock, Ingredient input, int minMeshTier, int maxMeshTier, double chancePerTier, NonNullList<ChanceResult> results) {
         this.aboveBlock = aboveBlock;
-        this.output = output;
+        this.input = input;
         this.minMeshTier = minMeshTier;
-        this.chance = chance;
+        this.maxMeshTier = maxMeshTier;
+        this.chancePerTier = chancePerTier;
+        this.results = results;
     }
 
-    public static StrainerRecipeBuilder strainerRecipe(Ingredient input, String aboveBlock, SizedIngredient output, int minMeshTier, double chance) {
-        return new StrainerRecipeBuilder(input, aboveBlock, output, minMeshTier, chance);
+    public static StrainerRecipeBuilder strainerRecipe(BlockState aboveBlock, Ingredient input, int minMeshTier, int maxMeshTier, double chancePerTier, NonNullList<ChanceResult> results) {
+        return new StrainerRecipeBuilder(aboveBlock, input, minMeshTier, maxMeshTier, chancePerTier, results);
     }
 
     @Override
@@ -57,19 +66,13 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
 
     @Override
     public @NotNull Item getResult() {
-        return ItemStack.EMPTY.getItem();
+        return results.getFirst().stack().getItem();
     }
 
     public void save(@NotNull RecipeOutput recipeOutput) {
 
-        if (this.input.isEmpty() || this.input.hasNoItems() || this.input.getItems()[0].is(Blocks.BARRIER.asItem())) {
-            this.save(recipeOutput, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/" +
-                    BuiltInRegistries.ITEM.getKey(this.output.getItems()[0].getItem()).getPath() + "_from_a_tag"));
-        } else {
-            this.save(recipeOutput, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/" +
-                    BuiltInRegistries.ITEM.getKey(this.output.getItems()[0].getItem()).getPath() + "_from_" +
-                    BuiltInRegistries.ITEM.getKey(this.input.getItems()[0].getItem()).getPath()));
-        }
+
+        this.save(recipeOutput, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/"));
     }
 
     @Override
@@ -79,7 +82,7 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
                 .rewards(AdvancementRewards.Builder.recipe(id))
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        StrainerRecipe strainerRecipe = new StrainerRecipe(this.input, this.aboveBlock, this.output, this.minMeshTier, this.chance);
+        StrainerRecipe strainerRecipe = new StrainerRecipe(aboveBlock, input, minMeshTier, maxMeshTier, chancePerTier, results);
         recipeOutput.accept(id, strainerRecipe, builder.build(id.withPrefix("recipe/strainer/")));
     }
 

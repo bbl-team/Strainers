@@ -8,6 +8,7 @@ import com.benbenlaw.strainers.recipe.OutputUpgradesRecipe;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -18,11 +19,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JeiPlugin
 public class JEIStrainersPlugin implements IModPlugin {
+    public static IDrawableStatic slotDrawable;
 
-    public static RecipeType<StrainerRecipe> STRAINER =
-            new RecipeType<>(StrainerRecipeCategory.UID, StrainerRecipe.class);
+    public static RecipeType<StrainerJEIRecipe> STRAINER =
+            new RecipeType<>(StrainerRecipeCategory.UID, StrainerJEIRecipe.class);
 
     public static RecipeType<MeshUpgradesRecipe> MESH_UPGRADES =
             new RecipeType<>(MeshUpgradesRecipeCategory.UID, MeshUpgradesRecipe.class);
@@ -56,26 +61,35 @@ public class JEIStrainersPlugin implements IModPlugin {
         registration.addRecipeCategories(new
                 OutputUpgradesRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
 
+        slotDrawable = registration.getJeiHelpers().getGuiHelper().getSlotDrawable();
+
     }
+
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         assert Minecraft.getInstance().level != null;
-        final var recipeManager = Minecraft.getInstance().level.getRecipeManager();
+        var recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
-        registration.addRecipes(StrainerRecipeCategory.RECIPE_TYPE,
-                recipeManager.getAllRecipesFor(ModRecipes.STRAINER_TYPE.get()).stream().map(RecipeHolder::value).toList());
+        // Get all StrainerRecipes from the manager
+        List<StrainerRecipe> allStrainerRecipes = recipeManager.getAllRecipesFor(StrainerRecipe.Type.INSTANCE)
+                .stream()
+                .map(RecipeHolder::value)
+                .toList();
 
+        List<StrainerJEIRecipe> jeiRecipes = new ArrayList<>();
+
+        for (StrainerRecipe recipe : allStrainerRecipes) {
+            for (int tier = recipe.minMeshTier(); tier <= recipe.maxMeshTier(); tier++) {
+                jeiRecipes.add(new StrainerJEIRecipe(recipe, tier));
+            }
+        }
+
+        registration.addRecipes(StrainerRecipeCategory.RECIPE_TYPE, jeiRecipes);
 
         registration.addRecipes(MeshUpgradesRecipeCategory.RECIPE_TYPE,
                 recipeManager.getAllRecipesFor(ModRecipes.MESH_UPGRADE_TYPE.get()).stream().map(RecipeHolder::value).toList());
 
         registration.addRecipes(OutputUpgradesRecipeCategory.RECIPE_TYPE,
                 recipeManager.getAllRecipesFor(ModRecipes.OUTPUT_UPGRADE_TYPE.get()).stream().map(RecipeHolder::value).toList());
-
-
-
-
-
-
     }
 }

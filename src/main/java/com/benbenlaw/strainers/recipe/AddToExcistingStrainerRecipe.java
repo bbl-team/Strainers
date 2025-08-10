@@ -2,74 +2,37 @@ package com.benbenlaw.strainers.recipe;
 
 import com.benbenlaw.core.recipe.ChanceResult;
 import com.benbenlaw.strainers.block.entity.WoodenStrainerBlockEntity;
-import com.benbenlaw.strainers.util.ModTags;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-public record StrainerRecipe(
-        BlockState aboveBlock,
-        Ingredient input,
-        int minMeshTier,
-        int maxMeshTier,
-        double chancePerTier,
+   /*
+public record AddToExcistingStrainerRecipe(
+        ResourceLocation recipeID,
         NonNullList<ChanceResult> results) implements Recipe<RecipeInput> {
+
+
 
     @Override
     public boolean matches(@NotNull RecipeInput container, @NotNull Level level) {
-        if (level.isClientSide()) {
-            return false;
-        }
 
-        if(input.test(container.getItem(WoodenStrainerBlockEntity.INPUT_SLOT))) {
-            ItemStack meshItem = container.getItem(WoodenStrainerBlockEntity.MESH_SLOT);
-            for (int tier = minMeshTier; tier <= maxMeshTier; tier++) {
-                TagKey<Item> meshTag = getTierTag(tier);
-                if (meshItem.is(meshTag)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
-    private TagKey<Item> getTierTag(int tier) {
-        return switch (tier) {
-            case 1 -> ModTags.Items.TIER_1_MESHES;
-            case 2 -> ModTags.Items.TIER_2_MESHES;
-            case 3 -> ModTags.Items.TIER_3_MESHES;
-            case 4 -> ModTags.Items.TIER_4_MESHES;
-            case 5 -> ModTags.Items.TIER_5_MESHES;
-            case 6 -> ModTags.Items.TIER_6_MESHES;
-            case 7 -> ModTags.Items.TIER_7_MESHES;
-            case 8 -> ModTags.Items.TIER_8_MESHES;
-            case 9 -> ModTags.Items.TIER_9_MESHES;
-            case 10 -> ModTags.Items.TIER_10_MESHES;
-            default -> throw new IllegalArgumentException("Invalid mesh tier: " + tier);
-        };
+        return true;
     }
 
     @Override
@@ -126,63 +89,63 @@ public record StrainerRecipe(
         return true;
     }
 
-    public static class Type implements RecipeType<StrainerRecipe> {
+    public static class Type implements RecipeType<AddToExcistingStrainerRecipe> {
         private Type() { }
         public static final Type INSTANCE = new Type();}
 
-    public static class Serializer implements RecipeSerializer<StrainerRecipe> {
+    public static class Serializer implements RecipeSerializer<AddToExcistingStrainerRecipe> {
         public static final Serializer INSTANCE = new Serializer();
 
-        public static final MapCodec<StrainerRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
+        public static final MapCodec<AddToExcistingStrainerRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) ->
                 instance.group(
-                        BlockState.CODEC.fieldOf("above_block").forGetter(StrainerRecipe::aboveBlock),
-                        Ingredient.CODEC.fieldOf("input").forGetter(StrainerRecipe::input),
-                        Codec.INT.fieldOf("min_mesh_tier").forGetter(StrainerRecipe::minMeshTier),
-                        Codec.INT.fieldOf("max_mesh_tier").forGetter(StrainerRecipe::maxMeshTier),
-                        Codec.DOUBLE.fieldOf("chance_per_tier").forGetter(StrainerRecipe::chancePerTier),
+                        BlockState.CODEC.fieldOf("above_block").forGetter(AddToExcistingStrainerRecipe::aboveBlock),
+                        Ingredient.CODEC.fieldOf("input").forGetter(AddToExcistingStrainerRecipe::input),
+                        Ingredient.CODEC.fieldOf("mesh").forGetter(AddToExcistingStrainerRecipe::mesh),
+                        Codec.INT.fieldOf("duration").forGetter(AddToExcistingStrainerRecipe::duration),
                         Codec.list(ChanceResult.CODEC).fieldOf("results").flatXmap(chanceResults -> {
                             NonNullList<ChanceResult> nonNullList = NonNullList.create();
                             nonNullList.addAll(chanceResults);
                             return DataResult.success(nonNullList);
-                        }, DataResult::success).forGetter(StrainerRecipe::getRollResults)
-                ).apply(instance, StrainerRecipe::new)
+                        }, DataResult::success).forGetter(AddToExcistingStrainerRecipe::getRollResults)
+                ).apply(instance, AddToExcistingStrainerRecipe::new)
         );
 
-        private final StreamCodec<RegistryFriendlyByteBuf, StrainerRecipe> STREAM_CODEC = StreamCodec.of(
-                StrainerRecipe.Serializer::write, StrainerRecipe.Serializer::read);
+        private final StreamCodec<RegistryFriendlyByteBuf, AddToExcistingStrainerRecipe> STREAM_CODEC = StreamCodec.of(
+                AddToExcistingStrainerRecipe.Serializer::write, AddToExcistingStrainerRecipe.Serializer::read);
 
         @Override
-        public @NotNull MapCodec<StrainerRecipe> codec() {
+        public @NotNull MapCodec<AddToExcistingStrainerRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, StrainerRecipe> streamCodec() {
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, AddToExcistingStrainerRecipe> streamCodec() {
             return STREAM_CODEC;
         }
 
-        private static StrainerRecipe read(RegistryFriendlyByteBuf buffer) {
+        private static AddToExcistingStrainerRecipe read(RegistryFriendlyByteBuf buffer) {
             BlockState aboveBlock = Block.stateById(buffer.readInt());
             Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            int minMeshTier = buffer.readInt();
-            int maxMeshTier = buffer.readInt();
-            double chancePerTier = buffer.readDouble();
+            Ingredient mesh = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            int duration = buffer.readInt();
             int size = buffer.readVarInt();
             NonNullList<ChanceResult> outputs = NonNullList.withSize(size, ChanceResult.EMPTY);
             outputs.replaceAll(ignored -> ChanceResult.read(buffer));
-            return new StrainerRecipe(aboveBlock, input, minMeshTier, maxMeshTier, chancePerTier, outputs);
+            return new AddToExcistingStrainerRecipe(aboveBlock, input, mesh, duration, outputs);
         }
 
-        private static void write(RegistryFriendlyByteBuf buffer, StrainerRecipe recipe) {
+        private static void write(RegistryFriendlyByteBuf buffer, AddToExcistingStrainerRecipe recipe) {
             buffer.writeInt(Block.getId(recipe.aboveBlock));
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.input);
-            buffer.writeInt(recipe.minMeshTier);
-            buffer.writeInt(recipe.maxMeshTier);
-            buffer.writeDouble(recipe.chancePerTier);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.mesh);
+            buffer.writeInt(recipe.duration);
             buffer.writeVarInt(recipe.results.size());
             for (ChanceResult output : recipe.results) {
                 output.write(buffer);
             }
         }
     }
+
 }
+
+    */

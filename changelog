@@ -2,6 +2,23 @@ Changelog BBL Strainers
 
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
 
+4.0.0
+Changed recipe system, now uses chance results meaning less recipe are needed to be created for items
+Remove mesh tier, now uses just ingredients can be tags to use tiers if wanted
+Block above is now BlockState not a string allowing for more complex recipes and more specific blocks to be used
+Duration can now be set in the config file per block above, default is 220 but this can be changed to any number
+Also added config to set specific ingredient durations, this will override the default duration
+Example of the config line;
+    "Block Durations" = ["minecraft:cherry_leaves=1000"]
+    "Block Durations" = ["minecraft:planks=200"]
+
+plans
+- strainer tiers
+- rework upgrades
+- recipes multiple outputs
+- addon recipe to add to default recipes
+
+
 3.0.0
 Removed Opolis Utilities as a dependency
 If Opolis Utilities is installed all speed blocks will continue to work as normal

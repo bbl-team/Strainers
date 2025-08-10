@@ -30,10 +30,6 @@ public class ModRecipes {
     public static final Supplier<RecipeType<OutputUpgradesRecipe>> OUTPUT_UPGRADE_TYPE =
             TYPES.register("output_upgrade", () -> OutputUpgradesRecipe.Type.INSTANCE);
 
-    RecipeSerializer<ShieldDecorationRecipe> PIECE_TO_NUGGET_SERIALIZER = register(
-            "piece_to_nugget", new SimpleCraftingRecipeSerializer<>(ShieldDecorationRecipe::new)
-    );
-
 
 
     public static void register(IEventBus eventBus) {
