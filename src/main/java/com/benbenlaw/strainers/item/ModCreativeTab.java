@@ -78,10 +78,11 @@ public class ModCreativeTab {
                 output.accept(ModItems.OSMIUM_ORE_PIECE);
                 output.accept(ModItems.URANIUM_ORE_PIECE);
                 output.accept(ModItems.DEBRIS_ORE_PIECE);
-
+                output.accept(ModItems.LEAD_ORE_PIECE);
+                output.accept(ModItems.NICKEL_ORE_PIECE);
 
                 output.accept(ModBlocks.MULCH.get());
-                output.accept(ModBlocks.ORE_MULCH.get());
+                //output.accept(ModBlocks.ORE_MULCH.get());
                 output.accept(ModItems.STONE_PEBBLE.get());
                 output.accept(ModItems.PURIFYING_SALT_MULCH.get());
                 output.accept(ModItems.ERODING_SALT_MULCH.get());

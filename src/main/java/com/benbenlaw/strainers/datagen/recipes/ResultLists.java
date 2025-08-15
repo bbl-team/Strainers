@@ -21,5 +21,4 @@ public class ResultLists {
         LEAVES_RESULTS.add(new ChanceResult(new ItemStack(Items.MANGROVE_PROPAGULE), 0.1f));
         LEAVES_RESULTS.add(new ChanceResult(new ItemStack(Items.BAMBOO), 0.1f));
     }
-
 }

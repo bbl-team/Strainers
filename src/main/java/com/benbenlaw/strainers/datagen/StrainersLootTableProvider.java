@@ -22,7 +22,7 @@ public class StrainersLootTableProvider extends VanillaBlockLoot {
     protected void generate() {
 
         this.dropSelf(ModBlocks.WOODEN_STRAINER.get());
-        this.dropSelf(ModBlocks.ORE_MULCH.get());
+        //this.dropSelf(ModBlocks.ORE_MULCH.get());
         this.dropSelf(ModBlocks.MULCH.get());
 
         this.add(ModBlocks.STRAINER_TANK.get(),loot -> LootTable.lootTable()

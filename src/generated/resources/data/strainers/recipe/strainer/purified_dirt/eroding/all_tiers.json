@@ -1,0 +1,23 @@
+{
+  "type": "strainers:strainer",
+  "above_block": {
+    "Name": "strainers:eroding_water",
+    "Properties": {
+      "level": "0"
+    }
+  },
+  "input": {
+    "item": "strainers:purified_dirt"
+  },
+  "mesh": {
+    "tag": "strainers:meshes"
+  },
+  "results": [
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:soul_soil"
+      }
+    }
+  ]
+}

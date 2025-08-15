@@ -1,0 +1,7 @@
+{
+  "values": [
+    "strainers:echo_mesh",
+    "strainers:blaze_mesh",
+    "strainers:breeze_mesh"
+  ]
+}

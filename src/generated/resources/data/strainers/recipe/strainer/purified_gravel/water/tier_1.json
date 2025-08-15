@@ -1,0 +1,16 @@
+{
+  "type": "strainers:strainer",
+  "above_block": {
+    "Name": "minecraft:water",
+    "Properties": {
+      "level": "0"
+    }
+  },
+  "input": {
+    "item": "strainers:purified_gravel"
+  },
+  "mesh": {
+    "tag": "strainers:tier_1_meshes"
+  },
+  "results": []
+}

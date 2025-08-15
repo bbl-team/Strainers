@@ -1,8 +1,7 @@
 {
   "values": [
-    "strainers:gold_mesh",
-    "strainers:quartz_mesh",
-    "strainers:blaze_mesh",
-    "strainers:breeze_mesh"
+    "strainers:copper_mesh",
+    "strainers:tin_mesh",
+    "strainers:iron_mesh"
   ]
 }

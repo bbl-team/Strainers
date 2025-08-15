@@ -43,12 +43,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class StrainerRecipeCategory implements IRecipeCategory<StrainerJEIRecipe> {
+public class StrainerRecipeCategory implements IRecipeCategory<CombinedStrainerJEIRecipe> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer");
     public final static ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "textures/gui/jei_strainer.png");
 
-    public static final RecipeType<StrainerJEIRecipe> RECIPE_TYPE = RecipeType.create(Strainers.MOD_ID, "strainer", StrainerJEIRecipe.class);
+    public static final RecipeType<CombinedStrainerJEIRecipe> RECIPE_TYPE = RecipeType.create(Strainers.MOD_ID, "strainer", CombinedStrainerJEIRecipe.class);
 
 
     private final IDrawable background;
@@ -60,7 +60,7 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerJEIRecipe
     }
 
     @Override
-    public RecipeType<StrainerJEIRecipe> getRecipeType() {
+    public RecipeType<CombinedStrainerJEIRecipe> getRecipeType() {
         return JEIStrainersPlugin.STRAINER;
     }
 
@@ -79,7 +79,7 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerJEIRecipe
         return this.icon;
     }
 
-    public @Nullable ResourceLocation getRegistryName(StrainerJEIRecipe recipe) {
+    public @Nullable ResourceLocation getRegistryName(CombinedStrainerJEIRecipe recipe) {
         assert Minecraft.getInstance().level != null;
         return Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(StrainerRecipe.Type.INSTANCE).stream()
                 .filter(recipeHolder -> recipeHolder.value().equals(recipe))
@@ -90,25 +90,25 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerJEIRecipe
 
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, StrainerJEIRecipe recipe, IFocusGroup focusGroup) {
+    public void setRecipe(IRecipeLayoutBuilder builder, CombinedStrainerJEIRecipe recipe, IFocusGroup focusGroup) {
 
-        Fluid fluidState = recipe.getBaseRecipe().getBlockAbove().getFluidState().getType();
+        Fluid fluidState = recipe.getBlockAbove().getFluidState().getType();
 
         if (fluidState == null) {
             builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).addItemStack(new ItemStack(Blocks.SAND))
                     .setCustomRenderer(VanillaTypes.ITEM_STACK, new IIngredientRenderer<>() {
                         @Override
                         public void render(GuiGraphics guiGraphics, ItemStack stack) {
-                            JEIBlockRenderHelper.renderBlock(guiGraphics, recipe.getBaseRecipe().getBlockAbove(), 1,12 , 0.60f);
+                            JEIBlockRenderHelper.renderBlock(guiGraphics, recipe.getBlockAbove(), 1,12 , 0.60f);
                         }
 
                         @Override
                         public List<Component> getTooltip(ItemStack ingredient, TooltipFlag tooltipFlag) {
                             List<Component> tooltip = new ArrayList<>();
 
-                            tooltip.add(recipe.getBaseRecipe().getBlockAbove().getBlock().getName());
+                            tooltip.add(recipe.getBlockAbove().getBlock().getName());
 
-                            BlockState targetState = recipe.getBaseRecipe().getBlockAbove();
+                            BlockState targetState = recipe.getBlockAbove();
                             BlockState defaultState = targetState.getBlock().defaultBlockState();
 
                             for (Map.Entry<Property<?>, Comparable<?>> entry : targetState.getValues().entrySet()) {
@@ -132,54 +132,31 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerJEIRecipe
         }
 
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 2, 20).addIngredients(recipe.getBaseRecipe().input());
+        builder.addSlot(RecipeIngredientRole.INPUT, 2, 20).addIngredients(recipe.getInput());
+        builder.addSlot(RecipeIngredientRole.CATALYST, 2, 38).addIngredients(recipe.getMesh());
 
-        int meshTier = recipe.getMeshTier();
-        TagKey<Item> meshTag = switch (meshTier) {
-            case 1 -> ModTags.Items.TIER_1_MESHES;
-            case 2 -> ModTags.Items.TIER_2_MESHES;
-            case 3 -> ModTags.Items.TIER_3_MESHES;
-            case 4 -> ModTags.Items.TIER_4_MESHES;
-            case 5 -> ModTags.Items.TIER_5_MESHES;
-            case 6 -> ModTags.Items.TIER_6_MESHES;
-            case 7 -> ModTags.Items.TIER_7_MESHES;
-            case 8 -> ModTags.Items.TIER_8_MESHES;
-            case 9 -> ModTags.Items.TIER_9_MESHES;
-            case 10 -> ModTags.Items.TIER_10_MESHES;
-            default -> throw new IllegalArgumentException("Invalid mesh tier: " + meshTier);
-        };
-
-        builder.addSlot(RecipeIngredientRole.CATALYST, 2, 38).addIngredients(Ingredient.of(meshTag));
-
-        int tier = recipe.getMeshTier();
-        int minTier = recipe.getBaseRecipe().minMeshTier();
-        double chancePerTier = recipe.getBaseRecipe().chancePerTier();
-
-        List<ChanceResult> modifiedOutputs = new ArrayList<>(recipe.getBaseRecipe().getRollResults());
+        List<ChanceResult> modifiedOutputs = new ArrayList<>(recipe.getRollResults());
         int size = modifiedOutputs.size();
-        int centerX = size > 0 ? 1 : 10;
-        int centerY = size > 5 ? 2 : 11;
-        int xOffset = 0;
-        int yOffset = 0;
-        int index = 0;
 
-        for (int i = 0; i < size; i++) {
-            xOffset = centerX + (i % 5) * 18;
-            yOffset = centerY + ((i / 5) * 18);
-            index = i;
+        int outputsPerRow = 5;
+        int maxRows = 3;
+        int slotSize = 18;
 
-            int finalIndex = index;
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 50 + xOffset, yOffset)
-                    .addItemStack(modifiedOutputs.get(i).stack()).addRichTooltipCallback((slotView, tooltip) -> {
+        int startX = 51;
+        int startY = 2;
+
+        for (int i = 0; i < size && i < outputsPerRow * maxRows; i++) {
+            int xOffset = startX + (i % outputsPerRow) * slotSize;
+            int yOffset = startY + (i / outputsPerRow) * slotSize;
+
+            int finalIndex = i;
+            builder.addSlot(RecipeIngredientRole.OUTPUT, xOffset, yOffset)
+                    .addItemStack(modifiedOutputs.get(i).stack())
+                    .addRichTooltipCallback((slotView, tooltip) -> {
                         ChanceResult output = modifiedOutputs.get(finalIndex);
                         double baseChance = output.chance();
-                        double totalChance = baseChance + (tier - minTier) * chancePerTier;
-                        if (totalChance > 1.0) {
-                            totalChance = 1.0;
-                        }
-
                         tooltip.add(Component.translatable("block.strainer.jei.chance")
-                                .append(String.valueOf((int) (totalChance * 100)))
+                                .append(String.valueOf((int)(baseChance * 100)))
                                 .append("%").withStyle(ChatFormatting.GOLD));
                     });
         }
@@ -187,7 +164,7 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerJEIRecipe
     }
 
     @Override
-    public void draw(StrainerJEIRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(CombinedStrainerJEIRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
 
     }
 

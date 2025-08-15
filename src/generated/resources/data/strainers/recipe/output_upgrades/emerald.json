@@ -1,7 +1,0 @@
-{
-  "type": "strainers:output_upgrade",
-  "input": {
-    "item": "minecraft:emerald"
-  },
-  "outputChanceIncrease": 0.1
-}

@@ -32,9 +32,7 @@ import java.util.stream.Collectors;
 public record StrainerRecipe(
         BlockState aboveBlock,
         Ingredient input,
-        int minMeshTier,
-        int maxMeshTier,
-        double chancePerTier,
+        Ingredient mesh,
         NonNullList<ChanceResult> results) implements Recipe<RecipeInput> {
 
     @Override
@@ -43,33 +41,15 @@ public record StrainerRecipe(
             return false;
         }
 
-        if(input.test(container.getItem(WoodenStrainerBlockEntity.INPUT_SLOT))) {
-            ItemStack meshItem = container.getItem(WoodenStrainerBlockEntity.MESH_SLOT);
-            for (int tier = minMeshTier; tier <= maxMeshTier; tier++) {
-                TagKey<Item> meshTag = getTierTag(tier);
-                if (meshItem.is(meshTag)) {
-                    return true;
-                }
-            }
+        boolean hasInput = input.test(container.getItem(WoodenStrainerBlockEntity.INPUT_SLOT));
+        boolean hasMesh = mesh.test(container.getItem(WoodenStrainerBlockEntity.MESH_SLOT));
+
+        if (container instanceof StrainerRecipeInput strainerRecipeInput) {
+            BlockState aboveBlockState = level.getBlockState(strainerRecipeInput.getPos().above());
+            return  hasMesh && hasInput && aboveBlockState.equals(aboveBlock);
         }
+
         return false;
-    }
-
-
-    private TagKey<Item> getTierTag(int tier) {
-        return switch (tier) {
-            case 1 -> ModTags.Items.TIER_1_MESHES;
-            case 2 -> ModTags.Items.TIER_2_MESHES;
-            case 3 -> ModTags.Items.TIER_3_MESHES;
-            case 4 -> ModTags.Items.TIER_4_MESHES;
-            case 5 -> ModTags.Items.TIER_5_MESHES;
-            case 6 -> ModTags.Items.TIER_6_MESHES;
-            case 7 -> ModTags.Items.TIER_7_MESHES;
-            case 8 -> ModTags.Items.TIER_8_MESHES;
-            case 9 -> ModTags.Items.TIER_9_MESHES;
-            case 10 -> ModTags.Items.TIER_10_MESHES;
-            default -> throw new IllegalArgumentException("Invalid mesh tier: " + tier);
-        };
     }
 
     @Override
@@ -137,9 +117,7 @@ public record StrainerRecipe(
                 instance.group(
                         BlockState.CODEC.fieldOf("above_block").forGetter(StrainerRecipe::aboveBlock),
                         Ingredient.CODEC.fieldOf("input").forGetter(StrainerRecipe::input),
-                        Codec.INT.fieldOf("min_mesh_tier").forGetter(StrainerRecipe::minMeshTier),
-                        Codec.INT.fieldOf("max_mesh_tier").forGetter(StrainerRecipe::maxMeshTier),
-                        Codec.DOUBLE.fieldOf("chance_per_tier").forGetter(StrainerRecipe::chancePerTier),
+                        Ingredient.CODEC.fieldOf("mesh").forGetter(StrainerRecipe::mesh),
                         Codec.list(ChanceResult.CODEC).fieldOf("results").flatXmap(chanceResults -> {
                             NonNullList<ChanceResult> nonNullList = NonNullList.create();
                             nonNullList.addAll(chanceResults);
@@ -164,21 +142,17 @@ public record StrainerRecipe(
         private static StrainerRecipe read(RegistryFriendlyByteBuf buffer) {
             BlockState aboveBlock = Block.stateById(buffer.readInt());
             Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            int minMeshTier = buffer.readInt();
-            int maxMeshTier = buffer.readInt();
-            double chancePerTier = buffer.readDouble();
+            Ingredient mesh = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             int size = buffer.readVarInt();
             NonNullList<ChanceResult> outputs = NonNullList.withSize(size, ChanceResult.EMPTY);
             outputs.replaceAll(ignored -> ChanceResult.read(buffer));
-            return new StrainerRecipe(aboveBlock, input, minMeshTier, maxMeshTier, chancePerTier, outputs);
+            return new StrainerRecipe(aboveBlock, input, mesh, outputs);
         }
 
         private static void write(RegistryFriendlyByteBuf buffer, StrainerRecipe recipe) {
             buffer.writeInt(Block.getId(recipe.aboveBlock));
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.input);
-            buffer.writeInt(recipe.minMeshTier);
-            buffer.writeInt(recipe.maxMeshTier);
-            buffer.writeDouble(recipe.chancePerTier);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.mesh);
             buffer.writeVarInt(recipe.results.size());
             for (ChanceResult output : recipe.results) {
                 output.write(buffer);

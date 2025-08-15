@@ -1,0 +1,16 @@
+{
+  "type": "strainers:strainer",
+  "above_block": {
+    "Name": "minecraft:water",
+    "Properties": {
+      "level": "0"
+    }
+  },
+  "input": {
+    "item": "strainers:purified_soul_sand"
+  },
+  "mesh": {
+    "tag": "strainers:tier_5_meshes"
+  },
+  "results": []
+}

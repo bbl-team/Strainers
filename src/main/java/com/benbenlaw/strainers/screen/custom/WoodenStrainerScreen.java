@@ -39,7 +39,7 @@ public class WoodenStrainerScreen extends AbstractContainerScreen<WoodenStrainer
 
         if (menu.isCrafting()) {
             int l = this.menu.getScaledProgress();
-            guiGraphics.blit(TEXTURE, x + 40, y + 26, 176, 0, menu.getScaledProgress() + 1, 16);
+            guiGraphics.blit(TEXTURE, x + 40, y + 25, 176, 0, menu.getScaledProgress() + 1, 16);
         }
 
 

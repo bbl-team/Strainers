@@ -25,11 +25,11 @@ public class StrainersFluids {
     static {
         ERODING_WATER = FLUIDS.register("eroding_water", (renderProperties) ->
                 renderProperties.texture(ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_still"),
-                        ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_flow")).tint(0xFFCCCCFF));
+                        ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_flow")).tint(0xBFCCCCFF));
 
         PURIFYING_WATER = FLUIDS.register("purifying_water", (renderProperties) ->
                 renderProperties.texture(ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_still"),
-                        ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_flow")).tint(0xFFff13d6));
+                        ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_flow")).tint(0xBFff13d6));
 
 
     }

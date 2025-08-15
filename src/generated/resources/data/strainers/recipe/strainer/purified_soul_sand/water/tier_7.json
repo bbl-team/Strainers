@@ -1,0 +1,24 @@
+{
+  "type": "strainers:strainer",
+  "above_block": {
+    "Name": "minecraft:water",
+    "Properties": {
+      "level": "0"
+    }
+  },
+  "input": {
+    "item": "strainers:purified_soul_sand"
+  },
+  "mesh": {
+    "tag": "strainers:tier_7_meshes"
+  },
+  "results": [
+    {
+      "chance": 0.7,
+      "item": {
+        "count": 1,
+        "id": "minecraft:blaze_powder"
+      }
+    }
+  ]
+}

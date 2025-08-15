@@ -1,8 +1,6 @@
 {
   "values": [
-    "strainers:diamond_mesh",
-    "strainers:emerald_mesh",
-    "strainers:echo_mesh",
-    "strainers:prismarine_mesh"
+    "strainers:redstone_mesh",
+    "strainers:gold_mesh"
   ]
 }

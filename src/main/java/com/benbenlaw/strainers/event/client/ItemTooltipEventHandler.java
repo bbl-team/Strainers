@@ -49,7 +49,16 @@ public class ItemTooltipEventHandler {
                     tier = Component.translatable("tooltips.strainers.tier_5_mesh");
                 } else if (stack.is(ModTags.Items.TIER_6_MESHES)) {
                     tier = Component.translatable("tooltips.strainers.tier_6_mesh");
+                } else if (stack.is(ModTags.Items.TIER_7_MESHES)) {
+                    tier = Component.translatable("tooltips.strainers.tier_7_mesh");
+                } else if (stack.is(ModTags.Items.TIER_8_MESHES)) {
+                    tier = Component.translatable("tooltips.strainers.tier_8_mesh");
+                } else if (stack.is(ModTags.Items.TIER_9_MESHES)) {
+                    tier = Component.translatable("tooltips.strainers.tier_9_mesh");
+                } else if (stack.is(ModTags.Items.TIER_10_MESHES)) {
+                    tier = Component.translatable("tooltips.strainers.tier_10_mesh");
                 }
+
 
                 if (tier != null) {
                     components.add(tier);

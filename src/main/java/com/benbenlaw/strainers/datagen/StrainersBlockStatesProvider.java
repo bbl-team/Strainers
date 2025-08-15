@@ -23,7 +23,7 @@ public class StrainersBlockStatesProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
 
         blockWithItem(ModBlocks.MULCH);
-        blockWithItem(ModBlocks.ORE_MULCH);
+       // blockWithItem(ModBlocks.ORE_MULCH);
 
         //Currently using empty pngs with both the fluid name and the fluid name _still version (fix for 1.22)
         fluidBlocks("purifying_water", StrainersFluids.PURIFYING_WATER.getBlock());

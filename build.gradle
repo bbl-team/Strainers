@@ -159,7 +159,7 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     mainFile.changelog = changelog
     mainFile.addOptional("jei") // JEI
     mainFile.addRequirement("opolis-utilities")
-    mainFile.releaseType = "release"
+    mainFile.releaseType = "alpha"
     mainFile.gameVersions.addAll("1.21", "1.21.1")
 }
 
@@ -168,7 +168,7 @@ tasks.getByName("modrinth").setGroup("modpublishing")
 modrinth {
     token = System.getenv("modrinth_token").toString()
     projectId = "uwQqLJQs"
-    versionType = "release"
+    versionType = "alpha"
     versionName = "strainers-" + "$minecraft_version" + "-" + "$mod_version"
     uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
 

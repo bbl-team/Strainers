@@ -1,8 +1,12 @@
-// 1.21.1	2025-08-08T16:59:13.1895356	strainers Item Tags
-87a1e0d6e86b0396cd73184f2ba84c2f27cbae82 data/strainers/tags/item/meshes.json
-d9d5e7d42aec77a62b65490c398ca7864165e95e data/strainers/tags/item/tier_1_meshes.json
-09ff2493bb9e1e92603c24c99193a1a808c3d5a6 data/strainers/tags/item/tier_2_meshes.json
-a755dc54b2ae36e0f7aaad9560fca9a9d8866fe1 data/strainers/tags/item/tier_3_meshes.json
-38e573c374c48e42cd39428c56625953c1d9d50d data/strainers/tags/item/tier_4_meshes.json
-cf93a9114e7986dc393bc0f873edd05a8e7516e4 data/strainers/tags/item/tier_5_meshes.json
-6633e3a7cc7cef2002ca3b261e7a78173bc7dcef data/strainers/tags/item/tier_6_meshes.json
+// 1.21.1	2025-08-11T18:54:46.5995924	strainers Item Tags
+d38065a62757607565c5a18ae26fed57c6576391 data/strainers/tags/item/meshes.json
+48c1c933d999cead69031ce557a69bfe279f017f data/strainers/tags/item/tier_10_meshes.json
+92fab8ffb665b83d0f72b7ea2b9e06cc041c7ec3 data/strainers/tags/item/tier_1_meshes.json
+373af95c840cd167b585d0ba5cd9cdcb38715145 data/strainers/tags/item/tier_2_meshes.json
+e7ccf862dbdf5da62e7c197b1359fc468eaf908f data/strainers/tags/item/tier_3_meshes.json
+3985b15b2fc5d55161680587104702e8b878ff89 data/strainers/tags/item/tier_4_meshes.json
+a2c1bca0447a34fb94fe50a13093c24d31a9f4b3 data/strainers/tags/item/tier_5_meshes.json
+6ee89b8c3ec5151fdbd3ff4affb86eab79568529 data/strainers/tags/item/tier_6_meshes.json
+61648cae8d210c7216d9f9aa7775faccc760edf0 data/strainers/tags/item/tier_7_meshes.json
+2b089573a744297ac2cb6d0d0d31dcd6a8b5588e data/strainers/tags/item/tier_8_meshes.json
+7f8900b66a169f30d0c5b57544af0088ce65fdde data/strainers/tags/item/tier_9_meshes.json

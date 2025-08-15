@@ -6,6 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 
 public class ModTags {
@@ -51,5 +52,21 @@ public class ModTags {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
         }
 
+    }
+
+    public static Ingredient getMeshIngredient(int tier) {
+        return switch (tier) {
+            case 1 -> Ingredient.of(Items.TIER_1_MESHES);
+            case 2 -> Ingredient.of(Items.TIER_2_MESHES);
+            case 3 -> Ingredient.of(Items.TIER_3_MESHES);
+            case 4 -> Ingredient.of(Items.TIER_4_MESHES);
+            case 5 -> Ingredient.of(Items.TIER_5_MESHES);
+            case 6 -> Ingredient.of(Items.TIER_6_MESHES);
+            case 7 -> Ingredient.of(Items.TIER_7_MESHES);
+            case 8 -> Ingredient.of(Items.TIER_8_MESHES);
+            case 9 -> Ingredient.of(Items.TIER_9_MESHES);
+            case 10 -> Ingredient.of(Items.TIER_10_MESHES);
+            default -> Ingredient.EMPTY;
+        };
     }
 }

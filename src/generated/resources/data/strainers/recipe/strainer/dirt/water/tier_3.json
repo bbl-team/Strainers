@@ -1,0 +1,30 @@
+{
+  "type": "strainers:strainer",
+  "above_block": {
+    "Name": "minecraft:water",
+    "Properties": {
+      "level": "0"
+    }
+  },
+  "input": {
+    "tag": "minecraft:dirt"
+  },
+  "mesh": {
+    "tag": "strainers:tier_3_meshes"
+  },
+  "results": [
+    {
+      "item": {
+        "count": 3,
+        "id": "strainers:stone_pebble"
+      }
+    },
+    {
+      "chance": 0.15,
+      "item": {
+        "count": 1,
+        "id": "strainers:stone_pebble"
+      }
+    }
+  ]
+}

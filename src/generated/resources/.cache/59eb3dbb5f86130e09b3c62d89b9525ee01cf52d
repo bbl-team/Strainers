@@ -1,5 +1,4 @@
-// 1.21.1	2025-01-22T10:03:42.9373337	Loot Tables
+// 1.21.1	2025-08-11T18:11:40.4874402	Loot Tables
 ad2c354c88946f227b89811156b72d95dbb26c25 data/strainers/loot_table/blocks/mulch.json
-662bd7a88342847d92269798ad1a57589c00e337 data/strainers/loot_table/blocks/ore_mulch.json
 33c8269574c642de8cce30b7a119fa2bf3238fae data/strainers/loot_table/blocks/strainer_tank.json
 0765148f868fa17a4ecd0d6f26ec62b24b187a01 data/strainers/loot_table/blocks/wooden_strainer.json

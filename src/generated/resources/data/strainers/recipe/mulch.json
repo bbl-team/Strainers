@@ -4,7 +4,7 @@
   "group": "strainers",
   "key": {
     "L": {
-      "tag": "minecraft:leaves"
+      "tag": "minecraft:dirt"
     },
     "S": {
       "tag": "minecraft:saplings"

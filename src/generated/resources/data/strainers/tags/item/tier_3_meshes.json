@@ -1,8 +1,6 @@
 {
   "values": [
-    "strainers:iron_mesh",
-    "strainers:amethyst_mesh",
-    "strainers:redstone_mesh",
-    "strainers:bronze_mesh"
+    "strainers:bamboo_mesh",
+    "strainers:flint_mesh"
   ]
 }

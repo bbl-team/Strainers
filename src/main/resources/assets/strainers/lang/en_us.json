@@ -114,6 +114,10 @@
   "tooltips.strainers.tier_4_mesh": "Tier 4 Mesh",
   "tooltips.strainers.tier_5_mesh": "Tier 5 Mesh",
   "tooltips.strainers.tier_6_mesh": "Tier 6 Mesh",
+  "tooltips.strainers.tier_7_mesh": "Tier 7 Mesh",
+  "tooltips.strainers.tier_8_mesh": "Tier 8 Mesh",
+  "tooltips.strainers.tier_9_mesh": "Tier 9 Mesh",
+  "tooltips.strainers.tier_10_mesh": "Tier 10 Mesh",
 
   "jei.strainers.purified_water": "Right click on a Block of Mulch with Purifying Salt Mulch to create a source block of Purified Water.",
   "jei.strainers.eroding_water": "Right click on a Block of Mulch with Eroding Salt Mulch to create a source block of Eroding Water.",

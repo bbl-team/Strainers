@@ -1,8 +1,6 @@
 {
   "values": [
-    "strainers:flint_mesh",
-    "strainers:copper_mesh",
-    "strainers:lapis_mesh",
-    "strainers:tin_mesh"
+    "strainers:wooden_mesh",
+    "strainers:bone_mesh"
   ]
 }

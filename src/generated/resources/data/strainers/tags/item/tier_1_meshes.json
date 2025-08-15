@@ -1,9 +1,6 @@
 {
   "values": [
-    "strainers:wooden_mesh",
     "strainers:leafy_mesh",
-    "strainers:bamboo_mesh",
-    "strainers:string_mesh",
-    "strainers:bone_mesh"
+    "strainers:string_mesh"
   ]
 }

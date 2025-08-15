@@ -34,8 +34,19 @@ public class ModBlocks {
     public static final DeferredBlock<Block> MULCH = registerBlock("mulch",
             () -> new MulchBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).strength(0.5f).sound(SoundType.PACKED_MUD)));
 
-    public static final DeferredBlock<Block> ORE_MULCH = registerBlock("ore_mulch",
+    public static final DeferredBlock<Block> PURIFIED_GRAVEL = registerBlock("purified_gravel",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).strength(0.5f).sound(SoundType.PACKED_MUD)));
+
+    public static final DeferredBlock<Block> PURIFIED_SAND = registerBlock("purified_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).strength(0.5f).sound(SoundType.PACKED_MUD)));
+
+    public static final DeferredBlock<Block> PURIFIED_DIRT = registerBlock("purified_dirt",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).strength(0.5f).sound(SoundType.PACKED_MUD)));
+
+    public static final DeferredBlock<Block> PURIFIED_SOUL_SAND = registerBlock("purified_soul_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).strength(0.5f).sound(SoundType.PACKED_MUD)));
+
+
 
 
 

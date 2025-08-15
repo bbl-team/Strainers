@@ -4,6 +4,7 @@ import com.benbenlaw.core.block.entity.SyncableBlockEntity;
 import com.benbenlaw.core.block.entity.handler.IInventoryHandlingBlockEntity;
 import com.benbenlaw.core.block.entity.handler.InputOutputItemHandler;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
+import com.benbenlaw.strainers.recipe.StrainerRecipeInput;
 import com.benbenlaw.strainers.screen.custom.WoodenStrainerMenu;
 import com.benbenlaw.strainers.util.ModTags;
 import com.benbenlaw.strainers.util.StrainersIngredientDurations;
@@ -44,7 +45,6 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
-            resetProgress();
             sync();
         }
 
@@ -238,6 +238,8 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
                     }
 
                 }
+            } else {
+                resetProgress();
             }
         }
     }
@@ -246,6 +248,7 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
         assert level != null;
 
         List<ItemStack> results = recipe.rollResults(level.random);
+        itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
 
         for (ItemStack result : results) {
 
@@ -277,16 +280,7 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
     private void updateCachedRecipe() {
         if (inputsChanged()) {
-            RecipeInput inventory = new RecipeInput() {
-                @Override
-                public @NotNull ItemStack getItem(int index) {
-                    return itemHandler.getStackInSlot(index);
-                }
-                @Override
-                public int size() {
-                    return itemHandler.getSlots();
-                }
-            };
+            RecipeInput inventory = new StrainerRecipeInput(itemHandler, worldPosition);
 
             cachedRecipe = level.getRecipeManager().getRecipeFor(StrainerRecipe.Type.INSTANCE, inventory, level);
 

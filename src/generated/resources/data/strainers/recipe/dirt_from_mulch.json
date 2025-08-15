@@ -6,13 +6,13 @@
     "L": {
       "tag": "minecraft:leaves"
     },
-    "M": {
-      "item": "strainers:mulch"
+    "S": {
+      "tag": "minecraft:saplings"
     }
   },
   "pattern": [
     " L ",
-    "LML",
+    "LSL",
     " L "
   ],
   "result": {
