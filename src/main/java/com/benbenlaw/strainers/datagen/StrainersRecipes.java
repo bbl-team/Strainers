@@ -5,12 +5,10 @@ import com.benbenlaw.core.recipe.ChanceResult;
 import com.benbenlaw.core.tag.CommonTags;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
-import com.benbenlaw.strainers.datagen.recipes.MeshUpgradesRecipeBuilder;
-import com.benbenlaw.strainers.datagen.recipes.OutputUpgradesRecipeBuilder;
 import com.benbenlaw.strainers.datagen.recipes.StrainerRecipeBuilder;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.ModItems;
-import com.benbenlaw.strainers.recipe.StrainerRecipe;
+import com.benbenlaw.strainers.recipe.MeshChanceResult;
 import com.benbenlaw.strainers.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -20,7 +18,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -29,17 +26,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-import static com.benbenlaw.strainers.datagen.recipes.ResultLists.LEAVES_RESULTS;
 import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
 
 public class StrainersRecipes extends RecipeProvider {
@@ -62,9 +54,6 @@ public class StrainersRecipes extends RecipeProvider {
                 .unlockedBy("has_item", has(ModTags.Items.TIER_2_MESHES))
                 .save(consumer);
 
-        MeshUpgradesRecipeBuilder.MeshUpgradesRecipeBuilder(Ingredient.of(ModItems.MESH_UPGRADE_1), 0.75)
-                .unlockedBy("has_item", hasItems(ModItems.MESH_UPGRADE_1)).save(consumer);
-
         //Mesh Upgrade 2
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_2)
                 .pattern(" M ")
@@ -75,9 +64,6 @@ public class StrainersRecipes extends RecipeProvider {
                 .group("strainers")
                 .unlockedBy("has_item", has(ModTags.Items.TIER_4_MESHES))
                 .save(consumer);
-
-        MeshUpgradesRecipeBuilder.MeshUpgradesRecipeBuilder(Ingredient.of(ModItems.MESH_UPGRADE_2), 0.5)
-                .unlockedBy("has_item", hasItems(ModItems.MESH_UPGRADE_2)).save(consumer);
 
         //Mesh Upgrade 3
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_3)
@@ -90,8 +76,6 @@ public class StrainersRecipes extends RecipeProvider {
                 .unlockedBy("has_item", has(ModTags.Items.TIER_6_MESHES))
                 .save(consumer);
 
-        MeshUpgradesRecipeBuilder.MeshUpgradesRecipeBuilder(Ingredient.of(ModItems.MESH_UPGRADE_3), 0.25)
-                .unlockedBy("has_item", hasItems(ModItems.MESH_UPGRADE_3)).save(consumer);
 
         //Output Upgrade 1
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_1)
@@ -104,9 +88,6 @@ public class StrainersRecipes extends RecipeProvider {
                 .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_IRON))
                 .save(consumer);
 
-        OutputUpgradesRecipeBuilder.OutputUpgradesRecipeBuilder(Ingredient.of(ModItems.OUTPUT_UPGRADE_1), 0.2)
-                .unlockedBy("has_item", hasItems(ModItems.OUTPUT_UPGRADE_1)).save(consumer);
-
         //Output Upgrade 2
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_2)
                 .pattern(" M ")
@@ -118,9 +99,6 @@ public class StrainersRecipes extends RecipeProvider {
                 .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_DIAMOND))
                 .save(consumer);
 
-        OutputUpgradesRecipeBuilder.OutputUpgradesRecipeBuilder(Ingredient.of(ModItems.OUTPUT_UPGRADE_2), 0.4)
-                .unlockedBy("has_item", hasItems(ModItems.OUTPUT_UPGRADE_2)).save(consumer);
-
         //Output Upgrade 3
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_3)
                 .pattern(" M ")
@@ -131,10 +109,6 @@ public class StrainersRecipes extends RecipeProvider {
                 .group("strainers")
                 .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_NETHERITE))
                 .save(consumer);
-
-        OutputUpgradesRecipeBuilder.OutputUpgradesRecipeBuilder(Ingredient.of(ModItems.OUTPUT_UPGRADE_3), 0.6)
-                .unlockedBy("has_item", hasItems(ModItems.OUTPUT_UPGRADE_3)).save(consumer);
-
         // ********** Vanilla Recipes ********** //
 
         //Eroding Salt Mulch
@@ -489,214 +463,251 @@ public class StrainersRecipes extends RecipeProvider {
 
         // ********** Strainer Recipes ********** //
 
-        // Dirt -> Resources
-        for (int tier = 1; tier <= 10; tier++) {
-            float chance = 0.05f * tier;
-
-            NonNullList<ChanceResult> results = NonNullList.create();
-
-            results.add(new ChanceResult(new ItemStack(ModItems.STONE_PEBBLE.get(), 3), 1.0f));
-            results.add(new ChanceResult(new ItemStack(ModItems.STONE_PEBBLE.get()), chance));
-
-            StrainerRecipeBuilder.strainerRecipe(
-                            Blocks.WATER.defaultBlockState(),
-                            Ingredient.of(ItemTags.DIRT),
-                            ModTags.getMeshIngredient(tier),
-                            results)
-                    .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(
-                            Strainers.MOD_ID,
-                            "strainer/dirt/water/tier_" + tier));
-        }
-
-        //Gravel -> Sand and Flint
-        for (int tier = 1; tier <= 10; tier++) {
-            float chance = 0.02f * tier;
-
-            NonNullList<ChanceResult> results = NonNullList.create();
-
-            results.add(new ChanceResult(new ItemStack(Items.SAND), 1.0f));
-            results.add(new ChanceResult(new ItemStack(Items.FLINT), chance));
-
-            StrainerRecipeBuilder.strainerRecipe(
-                            StrainersFluids.ERODING_WATER.getBlock().defaultBlockState(),
-                            Ingredient.of(Items.GRAVEL),
-                            ModTags.getMeshIngredient(tier),
-                            results)
-                    .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(
-                            Strainers.MOD_ID,
-                            "strainer/gravel/eroding/tier_" + tier));
-        }
-
-        //Purified Dirt -> Resources
-        for (int tier = 1; tier <= 10; tier++) {
-            NonNullList<ChanceResult> results = NonNullList.create();
-
-            results.add(new ChanceResult(new ItemStack(Items.WHEAT_SEEDS), 0.35f + ((0.05f * tier) - 0.05f)));
-
-            if (tier >= 3) {
-                results.add(new ChanceResult(new ItemStack(Items.BONE_MEAL), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-
-            StrainerRecipeBuilder.strainerRecipe(
-                            Blocks.WATER.defaultBlockState(),
-                            Ingredient.of(ModBlocks.PURIFIED_DIRT),
-                            ModTags.getMeshIngredient(tier),
-                            results)
-                    .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(
-                            Strainers.MOD_ID,
-                            "strainer/purified_dirt/water/tier_" + tier));
-        }
-
-        //Purified Sand -> Resources
-        for (int tier = 1; tier <= 10; tier++) {
-            NonNullList<ChanceResult> results = NonNullList.create();
+        BlockState WATER = Blocks.WATER.defaultBlockState();
+        BlockState LAVA = Blocks.LAVA.defaultBlockState();
+        BlockState ERODING_WATER = StrainersFluids.ERODING_WATER.getBlock().defaultBlockState();
+        BlockState PURIFYING_WATER = StrainersFluids.PURIFYING_WATER.getBlock().defaultBlockState();
 
 
-            if (tier >= 2) {
-                results.add(new ChanceResult(new ItemStack(ModItems.ALUMINUM_ORE_PIECE.get()), 0.4f + ((0.05f * tier) - 0.05f)));
-            }
-
-            if (tier >= 3) {
-                results.add(new ChanceResult(new ItemStack(ModItems.TIN_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-
-            }
-
-            if (tier >= 4) {
-                results.add(new ChanceResult(new ItemStack(ModItems.REDSTONE_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-                results.add(new ChanceResult(new ItemStack(ModItems.SILVER_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-
-            }
-
-            if (tier >= 5) {
-                results.add(new ChanceResult(new ItemStack(ModItems.NICKEL_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-
-            if (tier >= 6) {
-                results.add(new ChanceResult(new ItemStack(Items.AMETHYST_SHARD), 0.2f + ((0.1f * tier) - 0.1f)));
-            }
-            if (tier >= 8) {
-                results.add(new ChanceResult(new ItemStack(ModItems.URANIUM_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-
-                results.add(new ChanceResult(new ItemStack(Items.PRISMARINE_CRYSTALS), 0.6f + ((0.1f * tier) - 0.6f)));
-                results.add(new ChanceResult(new ItemStack(Items.PRISMARINE_SHARD), 0.6f + ((0.1f * tier) - 0.6f)));
-            }
-
-            StrainerRecipeBuilder.strainerRecipe(
-                            Blocks.WATER.defaultBlockState(),
-                            Ingredient.of(ModBlocks.PURIFIED_SAND),
-                            ModTags.getMeshIngredient(tier),
-                            results)
-                    .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(
-                            Strainers.MOD_ID,
-                            "strainer/purified_sand/water/tier_" + tier));
-        }
-
-        //Purified Gravel -> Resources
-        for (int tier = 1; tier <= 10; tier++) {
-            NonNullList<ChanceResult> results = NonNullList.create();
-
-            if (tier >= 2) {
-                results.add(new ChanceResult(new ItemStack(ModItems.COAL_ORE_PIECE.get()), 0.4f + ((0.05f * tier) - 0.05f)));
-            }
-
-            if (tier >= 3) {
-                results.add(new ChanceResult(new ItemStack(ModItems.COPPER_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-                results.add(new ChanceResult(new ItemStack(ModItems.IRON_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-
-            if (tier >= 4) {
-                results.add(new ChanceResult(new ItemStack(ModItems.ZINC_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-                results.add(new ChanceResult(new ItemStack(ModItems.GOLD_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-            if (tier >= 5) {
-                results.add(new ChanceResult(new ItemStack(ModItems.LEAD_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-                results.add(new ChanceResult(new ItemStack(ModItems.LAPIS_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-            if (tier >= 6) {
-                results.add(new ChanceResult(new ItemStack(ModItems.OSMIUM_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-            if (tier >= 7) {
-                results.add(new ChanceResult(new ItemStack(ModItems.PLATINUM_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-            if (tier >= 8) {
-                results.add(new ChanceResult(new ItemStack(ModItems.DIAMOND_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-                results.add(new ChanceResult(new ItemStack(ModItems.EMERALD_ORE_PIECE.get()), 0.35f + ((0.05f * tier) - 0.05f)));
-            }
-
-            StrainerRecipeBuilder.strainerRecipe(
-                            Blocks.WATER.defaultBlockState(),
-                            Ingredient.of(ModBlocks.PURIFIED_GRAVEL),
-                            ModTags.getMeshIngredient(tier),
-                            results)
-                    .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(
-                            Strainers.MOD_ID,
-                            "strainer/purified_gravel/water/tier_" + tier));
-        }
-
-        //Purified Soul Sand -> Resources
-        for (int tier = 5; tier <= 10; tier++) {
-            NonNullList<ChanceResult> results = NonNullList.create();
-
-            if (tier >= 7) {
-                results.add(new ChanceResult(new ItemStack(Items.BLAZE_POWDER), 0.4f + ((0.05f * tier) - 0.05f)));
-            }
-
-            StrainerRecipeBuilder.strainerRecipe(
-                            Blocks.WATER.defaultBlockState(),
-                            Ingredient.of(ModBlocks.PURIFIED_SOUL_SAND),
-                            ModTags.getMeshIngredient(tier),
-                            results)
-                    .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                    .save(consumer, ResourceLocation.fromNamespaceAndPath(
-                            Strainers.MOD_ID,
-                            "strainer/purified_soul_sand/water/tier_" + tier));
-        }
-
-        //Gravel -> Purified Gravel
-        createSimpleStrainerRecipe(consumer, ModBlocks.PURIFIED_GRAVEL.asItem(), StrainersFluids.PURIFYING_WATER.getFluid().defaultFluidState(),
-                Ingredient.of(Items.GRAVEL), "gravel/purifying");
-
-        //Dirt -> Purified Dirt
-        createSimpleStrainerRecipe(consumer, ModBlocks.PURIFIED_DIRT.asItem(), StrainersFluids.PURIFYING_WATER.getFluid().defaultFluidState(),
-                Ingredient.of(Items.DIRT), "dirt/purifying");
-
-        //Sand -> Purified Sand
-        createSimpleStrainerRecipe(consumer, ModBlocks.PURIFIED_SAND.asItem(), StrainersFluids.PURIFYING_WATER.getFluid().defaultFluidState(),
-                Ingredient.of(ItemTags.SAND), "sand/purifying");
+        //Dirt -> Stone Pebble
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.DIRT), createMeshChanceResultList(
+                new ItemStack(ModItems.STONE_PEBBLE.get(), 3),
+                0.8f, 1,5,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/dirt/stone_pebble"));
 
         //Cobblestone -> Gravel
-        createSimpleStrainerRecipe(consumer, Items.GRAVEL, StrainersFluids.ERODING_WATER.getFluid().defaultFluidState(),
-                Ingredient.of(Tags.Items.COBBLESTONES), "cobblestone/eroding");
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Blocks.COBBLESTONE), createMeshChanceResultList(
+                new ItemStack(Items.GRAVEL),
+                0.75f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/cobblestone/gravel"));
 
+        //Gravel -> Sand
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.GRAVEL), createMeshChanceResultList(
+                new ItemStack(Items.SAND),
+                0.75f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/gravel/sand"));
+
+        //Gravel -> Flint
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.GRAVEL), createMeshChanceResultList(
+                new ItemStack(Items.FLINT),
+                0.1f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/gravel/flint"));
+
+        //Purified Dirt -> Wheat Seeds
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.WHEAT_SEEDS),
+                0.35f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/wheat_seeds"));
+
+        //Purified Dirt -> Bone Meal
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.BONE_MEAL),
+                0.2f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/bone_meal"));
+
+        //Purified Dirt -> Clay
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.CLAY_BALL),
+                0.4f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/clay"));
+
+        //Purified Sand -> Aluminum Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(ModItems.ALUMINUM_ORE_PIECE.get()),
+                0.4f, 2,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/aluminum_ore_piece"));
+
+        //Purified Sand -> Tin Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(ModItems.TIN_ORE_PIECE.get()),
+                0.35f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/tin_ore_piece"));
+
+        //Purified Sand -> Redstone Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(ModItems.REDSTONE_ORE_PIECE.get()),
+                0.35f, 4,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/redstone_ore_piece"));
+
+        //Purified Sand -> Silver Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(ModItems.SILVER_ORE_PIECE.get()),
+                0.35f, 4,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/silver_ore_piece"));
+
+        //Purified Sand -> Nickel Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(ModItems.NICKEL_ORE_PIECE.get()),
+                0.3f, 5,10,0.1f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/nickel_ore_piece"));
+
+        //Purified Sand -> Amethyst Shard
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.AMETHYST_SHARD),
+                0.4f, 6,10,0.1f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/amethyst_shard"));
+
+        //Purified Sand -> Uranium Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(ModItems.URANIUM_ORE_PIECE.get()),
+                0.4f, 8,10,0.1f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/uranium_ore_piece"));
+
+        //Purified Sand -> Prismarine Crystals
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.PRISMARINE_CRYSTALS),
+                0.6f, 8,10,0.1f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/prismarine_crystals"));
+
+        //Purified Sand -> Prismarine Shard
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.PRISMARINE_SHARD),
+                0.6f, 8,10,0.1f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/prismarine_shard"));
+
+        //Purified Gravel -> Coal Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.COAL_ORE_PIECE.get()),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/coal_ore_piece"));
+
+        //Purified Gravel -> Copper Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.COPPER_ORE_PIECE.get()),
+                0.35f, 2,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/copper_ore_piece"));
+
+        //Purified Gravel -> Iron Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.IRON_ORE_PIECE.get()),
+                0.35f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/iron_ore_piece"));
+
+        //Purified Gravel -> Zinc Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.ZINC_ORE_PIECE.get()),
+                0.35f, 4,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/zinc_ore_piece"));
+
+        //Purified Gravel -> Gold Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.GOLD_ORE_PIECE.get()),
+                0.35f, 5,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/gold_ore_piece"));
+
+        //Purified Gravel -> Lead Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.LEAD_ORE_PIECE.get()),
+                0.35f, 6,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/lead_ore_piece"));
+
+        //Purified Gravel -> Lapis Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.LAPIS_ORE_PIECE.get()),
+                0.35f, 7,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/lapis_ore_piece"));
+
+        //Purified Gravel -> Osmium Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.OSMIUM_ORE_PIECE.get()),
+                0.35f, 8,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/osmium_ore_piece"));
+
+        //Purified Gravel -> Platinum Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.PLATINUM_ORE_PIECE.get()),
+                0.35f, 9,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/platinum_ore_piece"));
+
+        //Purified Gravel -> Diamond Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.DIAMOND_ORE_PIECE.get()),
+                0.35f, 10,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/diamond_ore_piece"));
+
+        //Purified Gravel -> Emerald Ore Piece
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModItems.EMERALD_ORE_PIECE.get()),
+                0.35f, 10,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_gravel/emerald_ore_piece"));
+
+        //Purified Soul Sand -> Blaze Powder
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SOUL_SAND), createMeshChanceResultList(
+                new ItemStack(Items.BLAZE_POWDER),
+                0.4f, 5,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_soul_sand/blaze_powder"));
+
+        //Gravel -> Purified Gravel
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(Items.GRAVEL), createMeshChanceResultList(
+                new ItemStack(ModBlocks.PURIFIED_GRAVEL.get()),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/gravel/purified_gravel"));
+
+        //Dirt -> Purified Dirt
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(Items.DIRT), createMeshChanceResultList(
+                new ItemStack(ModBlocks.PURIFIED_DIRT.get()),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/dirt/purified_dirt"));
+
+        //Sand -> Purified Sand
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(ItemTags.SAND), createMeshChanceResultList(
+                new ItemStack(ModBlocks.PURIFIED_SAND.get()),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/sand/purified_sand"));
 
         //Purifying Sand -> Soul Sand
-        createSimpleStrainerRecipe(consumer, Items.SOUL_SAND, StrainersFluids.ERODING_WATER.getFluid().defaultFluidState(),
-                Ingredient.of(ModBlocks.PURIFIED_SAND), "purified_sand/eroding");
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.SOUL_SAND),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/soul_sand"));
 
-        //Purifying Dirt -> Soul Soil
-        createSimpleStrainerRecipe(consumer, Items.SOUL_SOIL, StrainersFluids.ERODING_WATER.getFluid().defaultFluidState(),
-                Ingredient.of(ModBlocks.PURIFIED_DIRT), "purified_dirt/eroding" );
+        //Purified Dirt -> Purified Soul Soil
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.SOUL_SOIL),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/soul_soil"));
+
 
 
     }
 
-    public void createSimpleStrainerRecipe(RecipeOutput consumer, Item output, FluidState fluidState, Ingredient input, String id) {
-        NonNullList<ChanceResult> result = NonNullList.create();
-        result.add(new ChanceResult(output.getDefaultInstance(), 1.0f));
-        StrainerRecipeBuilder.strainerRecipe(
-                        fluidState.createLegacyBlock(),
-                        input,
-                        Ingredient.of(ModTags.Items.MESHES),
-                        result)
-                .unlockedBy("has_item", hasItems(ModBlocks.WOODEN_STRAINER))
-                .save(consumer, ResourceLocation.fromNamespaceAndPath(
-                        Strainers.MOD_ID,
-                        "strainer/" + id + "/all_tiers"));
+
+
+    public static NonNullList<MeshChanceResult> createMeshChanceResultList(ItemStack resultItem, float baseChance, int minMeshTier, int maxMeshTier, float chancePerTier) {
+        NonNullList<MeshChanceResult> results = NonNullList.create();
+
+        for (int tier = minMeshTier; tier <= maxMeshTier; tier++) {
+            float chance = Math.round((baseChance + chancePerTier * (tier - 1)) * 100f) / 100f;
+            if (chance >= 1.0f) {
+                chance = 1.0f;
+            }
+            results.add(new MeshChanceResult(new ChanceResult(resultItem, chance),
+                    Ingredient.of(getMeshTag(tier))));
+        }
+
+        return results;
     }
+
+    private static TagKey<Item> getMeshTag(int tier) {
+        return switch (tier) {
+            case 1 -> ModTags.Items.TIER_1_MESHES;
+            case 2 -> ModTags.Items.TIER_2_MESHES;
+            case 3 -> ModTags.Items.TIER_3_MESHES;
+            case 4 -> ModTags.Items.TIER_4_MESHES;
+            case 5 -> ModTags.Items.TIER_5_MESHES;
+            case 6 -> ModTags.Items.TIER_6_MESHES;
+            case 7 -> ModTags.Items.TIER_7_MESHES;
+            case 8 -> ModTags.Items.TIER_8_MESHES;
+            case 9 -> ModTags.Items.TIER_9_MESHES;
+            default -> ModTags.Items.TIER_10_MESHES;
+        };
+    }
+
+
+
+
+
+
+
 
 }

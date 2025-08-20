@@ -32,8 +32,7 @@ import java.util.stream.Collectors;
 public record StrainerRecipe(
         BlockState aboveBlock,
         Ingredient input,
-        Ingredient mesh,
-        NonNullList<ChanceResult> results) implements Recipe<RecipeInput> {
+        NonNullList<MeshChanceResult> results) implements Recipe<RecipeInput> {
 
     @Override
     public boolean matches(@NotNull RecipeInput container, @NotNull Level level) {
@@ -42,11 +41,18 @@ public record StrainerRecipe(
         }
 
         boolean hasInput = input.test(container.getItem(WoodenStrainerBlockEntity.INPUT_SLOT));
-        boolean hasMesh = mesh.test(container.getItem(WoodenStrainerBlockEntity.MESH_SLOT));
+        ItemStack meshStack = container.getItem(WoodenStrainerBlockEntity.MESH_SLOT);
 
         if (container instanceof StrainerRecipeInput strainerRecipeInput) {
+
+            if (meshStack.isEmpty()) {
+                return false;
+            }
+
             BlockState aboveBlockState = level.getBlockState(strainerRecipeInput.getPos().above());
-            return  hasMesh && hasInput && aboveBlockState.equals(aboveBlock);
+            return hasInput && aboveBlockState.equals(aboveBlock) && results.stream().anyMatch(
+                    meshChanceResult -> meshChanceResult.mesh().test(meshStack)
+            );
         }
 
         return false;
@@ -64,31 +70,36 @@ public record StrainerRecipe(
 
     @Override
     public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider provider) {
-        return results.getFirst().stack();
+        return results.getFirst().chanceResult().stack();
     }
 
     public List<ItemStack> getResults() {
         return getRollResults().stream()
-                .map(ChanceResult::stack)
+                .map(results -> results.chanceResult().stack())
                 .collect(Collectors.toList());
     }
 
-    public NonNullList<ChanceResult> getRollResults() {
+    public NonNullList<MeshChanceResult> getRollResults() {
         return this.results;
     }
 
-    public List<ItemStack> rollResults(RandomSource rand) {
-        List<ItemStack> results = new ArrayList<>();
-        List<ChanceResult> rollResults = getRollResults();
-        for (ChanceResult output : rollResults) {
-            ItemStack stack = output.rollOutput(rand);
-            if (!stack.isEmpty())
-                results.add(stack);
+    public List<ItemStack> rollResults(RandomSource rand, ItemStack meshStack) {
+        List<ItemStack> resultsList = new ArrayList<>();
+        for (MeshChanceResult output : this.results) {
+            ItemStack stack = output.rollOutput(rand, meshStack);
+            if (!stack.isEmpty()) {
+                resultsList.add(stack);
+            }
         }
-        return results;
+        return resultsList;
     }
+
     public BlockState getBlockAbove() {
         return aboveBlock;
+    }
+
+    public Ingredient getMesh() {
+        return results.getFirst().mesh();
     }
 
     @Override
@@ -117,12 +128,11 @@ public record StrainerRecipe(
                 instance.group(
                         BlockState.CODEC.fieldOf("above_block").forGetter(StrainerRecipe::aboveBlock),
                         Ingredient.CODEC.fieldOf("input").forGetter(StrainerRecipe::input),
-                        Ingredient.CODEC.fieldOf("mesh").forGetter(StrainerRecipe::mesh),
-                        Codec.list(ChanceResult.CODEC).fieldOf("results").flatXmap(chanceResults -> {
-                            NonNullList<ChanceResult> nonNullList = NonNullList.create();
-                            nonNullList.addAll(chanceResults);
+                        Codec.list(MeshChanceResult.CODEC).fieldOf("results").flatXmap(resultList -> {
+                            NonNullList<MeshChanceResult> nonNullList = NonNullList.create();
+                            nonNullList.addAll(resultList);
                             return DataResult.success(nonNullList);
-                        }, DataResult::success).forGetter(StrainerRecipe::getRollResults)
+                        }, DataResult::success).forGetter(StrainerRecipe::results)
                 ).apply(instance, StrainerRecipe::new)
         );
 
@@ -142,19 +152,17 @@ public record StrainerRecipe(
         private static StrainerRecipe read(RegistryFriendlyByteBuf buffer) {
             BlockState aboveBlock = Block.stateById(buffer.readInt());
             Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient mesh = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             int size = buffer.readVarInt();
-            NonNullList<ChanceResult> outputs = NonNullList.withSize(size, ChanceResult.EMPTY);
-            outputs.replaceAll(ignored -> ChanceResult.read(buffer));
-            return new StrainerRecipe(aboveBlock, input, mesh, outputs);
+            NonNullList<MeshChanceResult> outputs = NonNullList.withSize(size, MeshChanceResult.EMPTY);
+            outputs.replaceAll(ignored -> MeshChanceResult.read(buffer));
+            return new StrainerRecipe(aboveBlock, input, outputs);
         }
 
         private static void write(RegistryFriendlyByteBuf buffer, StrainerRecipe recipe) {
             buffer.writeInt(Block.getId(recipe.aboveBlock));
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.input);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.mesh);
             buffer.writeVarInt(recipe.results.size());
-            for (ChanceResult output : recipe.results) {
+            for (MeshChanceResult output : recipe.results) {
                 output.write(buffer);
             }
         }

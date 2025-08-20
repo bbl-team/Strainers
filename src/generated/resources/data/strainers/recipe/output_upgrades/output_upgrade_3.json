@@ -1,7 +1,0 @@
-{
-  "type": "strainers:output_upgrade",
-  "input": {
-    "item": "strainers:output_upgrade_3"
-  },
-  "outputChanceIncrease": 0.6
-}

@@ -2,6 +2,14 @@ Changelog BBL Strainers
 
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
 
+5.0.0 (ALPHA)
+Reworked the recipe system again, single json per resource generated, eg straining dirt for seeds to get wheat the json contains all the information for tiers
+    as well as the chances using the new MeshChanceOutput system.
+Any recipes that have the same input, mesh inside a MeshChanceOutput and the same aboveBlock will be grouped together in JEI and in the block entity, this allows
+    for a single input to have multiple outputs across multiple tiers and multiple recipe jsons
+Removed all recipe systems used for upgrades
+S
+
 4.0.0
 Strainer recipe structure completely changed
 Block above is now BlockState not a string allowing for more complex recipes and more specific blocks to be used

@@ -3,6 +3,9 @@ package com.benbenlaw.strainers.block.entity;
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
 import com.benbenlaw.core.block.entity.handler.IInventoryHandlingBlockEntity;
 import com.benbenlaw.core.block.entity.handler.InputOutputItemHandler;
+import com.benbenlaw.core.recipe.ChanceResult;
+import com.benbenlaw.strainers.recipe.MeshChanceResult;
+import com.benbenlaw.strainers.recipe.ModRecipes;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
 import com.benbenlaw.strainers.recipe.StrainerRecipeInput;
 import com.benbenlaw.strainers.screen.custom.WoodenStrainerMenu;
@@ -34,9 +37,11 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements MenuProvider, IInventoryHandlingBlockEntity {
 
@@ -76,7 +81,6 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
 
     //UPGRADE VALUES
-    public double meshDamageChance = 1.0;
     public double outputChanceIncrease = 0.0;
     public static final int[] OUTPUT_SLOTS = {5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
 
@@ -181,7 +185,6 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
         compoundTag.put("inventory", this.itemHandler.serializeNBT(provider));
         compoundTag.putInt("strainer.progress", progress);
         compoundTag.putInt("strainer.maxProgress", maxProgress);
-        compoundTag.putDouble("strainer.meshDamageChance", meshDamageChance);
         compoundTag.putDouble("strainer.outputChanceIncrease", outputChanceIncrease);
     }
 
@@ -190,7 +193,6 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
         this.itemHandler.deserializeNBT(provider, compoundTag.getCompound("inventory"));
         progress = compoundTag.getInt("strainer.progress");
         maxProgress = compoundTag.getInt("strainer.maxProgress");
-        meshDamageChance = compoundTag.getDouble("strainer.meshDamageChance");
         outputChanceIncrease = compoundTag.getDouble("strainer.outputChanceIncrease");
         super.loadAdditional(compoundTag, provider);
     }
@@ -207,6 +209,10 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
     public void tick() {
 
+        if (this.fakePlayer == null && level instanceof ServerLevel serverLevel) {
+            this.fakePlayer = createFakePlayer(serverLevel);
+        }
+
         assert level != null;
         if (!level.isClientSide()) {
 
@@ -218,7 +224,15 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
                 StrainerRecipe currentRecipe = match.get().value();
 
                 if (hasCorrectBlockAbove(currentRecipe)) {
-                    List<ItemStack> results = currentRecipe.rollResults(level.random);
+                    List<ChanceResult> resultsToRoll = getAllCombinedResults(
+                            itemHandler.getStackInSlot(INPUT_SLOT),
+                            itemHandler.getStackInSlot(MESH_SLOT)
+                    );
+
+                    List<ItemStack> results = resultsToRoll.stream()
+                            .map(r -> r.rollOutput(level.random))
+                            .filter(r -> !r.isEmpty())
+                            .toList();
 
                     if (!canFitResults(results)) {
                         if (!"block.cloche.error.output_full".equals(errorMessage)) {
@@ -232,11 +246,9 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
                     if (progress >= maxProgress) {
                         resetProgress();
-                        fillOutputSlots(currentRecipe);
+                        fillOutputSlots(results);
                         sync();
-
                     }
-
                 }
             } else {
                 resetProgress();
@@ -244,14 +256,18 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
         }
     }
 
-    public void fillOutputSlots(StrainerRecipe recipe) {
-        assert level != null;
-
-        List<ItemStack> results = recipe.rollResults(level.random);
+    public void fillOutputSlots(List<ItemStack> results) {
         itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
 
-        for (ItemStack result : results) {
+        ItemStack meshItem = this.itemHandler.getStackInSlot(MESH_SLOT);
+        if (meshItem.isDamageableItem()) {
+            meshItem.hurtAndBreak(1, fakePlayer, fakePlayer.getEquipmentSlotForItem(meshItem));
+            if (meshItem.getCount() <= 0) {
+                this.itemHandler.setStackInSlot(MESH_SLOT, ItemStack.EMPTY);
+            }
+        }
 
+        for (ItemStack result : results) {
             for (int outputSlot : OUTPUT_SLOTS) {
                 ItemStack slotStack = itemHandler.getStackInSlot(outputSlot);
                 if (slotStack.isEmpty()) {
@@ -265,14 +281,38 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
                         int toAdd = Math.min(spaceLeft, result.getCount());
                         slotStack.grow(toAdd);
                         result.shrink(toAdd);
-                        if (result.isEmpty()) {
-                            break;
-                        }
+                        if (result.isEmpty()) break;
                     }
                 }
             }
         }
     }
+
+    private List<ChanceResult> getAllCombinedResults(ItemStack inputStack, ItemStack meshStack) {
+        assert level != null;
+        var recipeManager = level.getRecipeManager();
+
+        List<StrainerRecipe> matchingRecipes = recipeManager
+                .getAllRecipesFor(ModRecipes.STRAINER_TYPE.get())
+                .stream()
+                .map(RecipeHolder::value)
+                .filter(recipe -> recipe.input().test(inputStack))
+                .filter(this::hasCorrectBlockAbove)
+                .toList();
+
+        List<ChanceResult> combinedResults = new ArrayList<>();
+        for (StrainerRecipe recipe : matchingRecipes) {
+            for (MeshChanceResult meshChance : recipe.getRollResults()) {
+                if (meshChance == MeshChanceResult.EMPTY) continue;
+                if (!meshChance.mesh().isEmpty() && !meshChance.mesh().test(meshStack)) continue;
+
+                combinedResults.add(meshChance.chanceResult());
+            }
+        }
+
+        return combinedResults;
+    }
+
 
     private boolean hasCorrectBlockAbove(StrainerRecipe recipe) {
         return recipe.getBlockAbove() == getBlockAbove();

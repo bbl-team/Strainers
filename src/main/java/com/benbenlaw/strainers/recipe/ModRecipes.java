@@ -20,17 +20,6 @@ public class ModRecipes {
     public static final Supplier<RecipeType<StrainerRecipe>> STRAINER_TYPE =
             TYPES.register("strainer", () -> StrainerRecipe.Type.INSTANCE);
 
-    public static final Supplier<RecipeSerializer<MeshUpgradesRecipe>> MESH_UPGRADE_SERIALIZER =
-            SERIALIZER.register("mesh_upgrade", () -> MeshUpgradesRecipe.Serializer.INSTANCE);
-    public static final Supplier<RecipeType<MeshUpgradesRecipe>> MESH_UPGRADE_TYPE =
-            TYPES.register("mesh_upgrade", () -> MeshUpgradesRecipe.Type.INSTANCE);
-
-    public static final Supplier<RecipeSerializer<OutputUpgradesRecipe>> OUTPUT_UPGRADE_SERIALIZER =
-            SERIALIZER.register("output_upgrade", () -> OutputUpgradesRecipe.Serializer.INSTANCE);
-    public static final Supplier<RecipeType<OutputUpgradesRecipe>> OUTPUT_UPGRADE_TYPE =
-            TYPES.register("output_upgrade", () -> OutputUpgradesRecipe.Type.INSTANCE);
-
-
 
     public static void register(IEventBus eventBus) {
         SERIALIZER.register(eventBus);

@@ -3,10 +3,7 @@ package com.benbenlaw.strainers.integration.jei;
 import com.benbenlaw.core.recipe.ChanceResult;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
-import com.benbenlaw.strainers.recipe.MeshUpgradesRecipe;
-import com.benbenlaw.strainers.recipe.ModRecipes;
-import com.benbenlaw.strainers.recipe.OutputUpgradesRecipe;
-import com.benbenlaw.strainers.recipe.StrainerRecipe;
+import com.benbenlaw.strainers.recipe.*;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -17,10 +14,12 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,15 +28,8 @@ import java.util.stream.Collectors;
 public class JEIStrainersPlugin implements IModPlugin {
     public static IDrawableStatic slotDrawable;
 
-    public static RecipeType<CombinedStrainerJEIRecipe> STRAINER =
-            new RecipeType<>(StrainerRecipeCategory.UID, CombinedStrainerJEIRecipe.class);
-
-    public static RecipeType<MeshUpgradesRecipe> MESH_UPGRADES =
-            new RecipeType<>(MeshUpgradesRecipeCategory.UID, MeshUpgradesRecipe.class);
-
-    public static RecipeType<OutputUpgradesRecipe> OUTPUT_UPGRADES =
-            new RecipeType<>(OutputUpgradesRecipeCategory.UID, OutputUpgradesRecipe.class);
-
+    public static RecipeType<StrainerRecipeDisplay> STRAINER =
+            new RecipeType<>(StrainerRecipeCategory.UID, StrainerRecipeDisplay.class);
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -47,25 +39,12 @@ public class JEIStrainersPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), StrainerRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), MeshUpgradesRecipeCategory.RECIPE_TYPE);
-        registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), OutputUpgradesRecipeCategory.RECIPE_TYPE);
-    //    registration.addRecipeCatalyst(new ItemStack(ModBlocks.WOODEN_STRAINER.get()), SpeedUpgradesRecipeCategory.RECIPE_TYPE);
     }
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-
-        registration.addRecipeCategories(new
-                StrainerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-
-        registration.addRecipeCategories(new
-                MeshUpgradesRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-
-        registration.addRecipeCategories(new
-                OutputUpgradesRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-
+        registration.addRecipeCategories(new StrainerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         slotDrawable = registration.getJeiHelpers().getGuiHelper().getSlotDrawable();
-
     }
 
     @Override
@@ -73,39 +52,50 @@ public class JEIStrainersPlugin implements IModPlugin {
         assert Minecraft.getInstance().level != null;
         var recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
-        var allStrainerRecipes = recipeManager.getAllRecipesFor(StrainerRecipe.Type.INSTANCE)
-                .stream()
-                .map(RecipeHolder::value)
-                .filter(r -> !r.getRollResults().isEmpty()) // only keep recipes that actually have results
-                .toList();
+        var allRecipes = recipeManager.getAllRecipesFor(ModRecipes.STRAINER_TYPE.get())
+                .stream().map(RecipeHolder::value).toList();
 
-        Map<Key, List<StrainerRecipe>> grouped = allStrainerRecipes.stream()
-                .collect(Collectors.groupingBy(recipe -> new Key(recipe.mesh(), recipe.input(), recipe.getBlockAbove())));
+        List<StrainerRecipeDisplay> displays = mergeStrainerRecipes(allRecipes);
 
-        List<CombinedStrainerJEIRecipe> combinedRecipes = new ArrayList<>();
+        registration.addRecipes(StrainerRecipeCategory.RECIPE_TYPE, displays);
+    }
 
-        for (Map.Entry<Key, List<StrainerRecipe>> entry : grouped.entrySet()) {
-            List<ChanceResult> combinedResults = entry.getValue().stream()
-                    .flatMap(r -> r.getRollResults().stream())
-                    .collect(Collectors.toList());
+    private static List<StrainerRecipeDisplay> mergeStrainerRecipes(List<StrainerRecipe> recipes) {
+        Map<String, StrainerRecipeDisplay> merged = new HashMap<>();
 
-            combinedRecipes.add(new CombinedStrainerJEIRecipe(
-                    entry.getKey().input(),
-                    entry.getKey().mesh(),
-                    entry.getValue().getFirst().getBlockAbove(),
-                    combinedResults
-            ));
+        for (StrainerRecipe recipe : recipes) {
+            for (MeshChanceResult meshChance : recipe.getRollResults()) {
+                if (meshChance == MeshChanceResult.EMPTY) continue;
+
+                // Create a stable key: input + blockAbove + mesh
+                String key = recipe.input().toString() + "|" +
+                        recipe.getBlockAbove().toString() + "|" +
+                        meshChance.mesh().toString();
+
+                merged.compute(key, (k, existing) -> {
+                    if (existing == null) {
+                        return new StrainerRecipeDisplay(
+                                recipe.getBlockAbove(),
+                                recipe.input(),
+                                meshChance.mesh(),
+                                List.of(meshChance.chanceResult())
+                        );
+                    } else {
+                        List<ChanceResult> combined = new ArrayList<>(existing.getChanceResults());
+                        combined.add(meshChance.chanceResult());
+                        return new StrainerRecipeDisplay(
+                                existing.getAboveBlock(),
+                                existing.getInput(),
+                                existing.getMesh(),
+                                combined
+                        );
+                    }
+                });
+            }
         }
 
-        //sort by mesh tier
-        combinedRecipes.sort(CombinedStrainerJEIRecipe::compareTo);
-
-        registration.addRecipes(StrainerRecipeCategory.RECIPE_TYPE, combinedRecipes);
-
-        registration.addRecipes(MeshUpgradesRecipeCategory.RECIPE_TYPE,
-                recipeManager.getAllRecipesFor(ModRecipes.MESH_UPGRADE_TYPE.get()).stream().map(RecipeHolder::value).toList());
-
-        registration.addRecipes(OutputUpgradesRecipeCategory.RECIPE_TYPE,
-                recipeManager.getAllRecipesFor(ModRecipes.OUTPUT_UPGRADE_TYPE.get()).stream().map(RecipeHolder::value).toList());
+        return new ArrayList<>(merged.values());
     }
+
+
 }

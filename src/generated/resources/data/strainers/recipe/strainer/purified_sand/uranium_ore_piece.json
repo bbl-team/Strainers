@@ -1,0 +1,41 @@
+{
+  "type": "strainers:strainer",
+  "above_block": {
+    "Name": "minecraft:water",
+    "Properties": {
+      "level": "0"
+    }
+  },
+  "input": {
+    "item": "strainers:purified_sand"
+  },
+  "results": [
+    {
+      "item": {
+        "count": 1,
+        "id": "strainers:uranium_ore_piece"
+      },
+      "mesh": {
+        "tag": "strainers:tier_8_meshes"
+      }
+    },
+    {
+      "item": {
+        "count": 1,
+        "id": "strainers:uranium_ore_piece"
+      },
+      "mesh": {
+        "tag": "strainers:tier_9_meshes"
+      }
+    },
+    {
+      "item": {
+        "count": 1,
+        "id": "strainers:uranium_ore_piece"
+      },
+      "mesh": {
+        "tag": "strainers:tier_10_meshes"
+      }
+    }
+  ]
+}

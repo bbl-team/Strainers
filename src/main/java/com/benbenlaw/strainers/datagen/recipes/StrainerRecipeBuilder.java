@@ -2,6 +2,7 @@ package com.benbenlaw.strainers.datagen.recipes;
 
 import com.benbenlaw.core.recipe.ChanceResult;
 import com.benbenlaw.strainers.Strainers;
+import com.benbenlaw.strainers.recipe.MeshChanceResult;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -33,19 +34,17 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
     protected String group;
     protected BlockState aboveBlock;
     protected Ingredient input;
-    protected Ingredient mesh;
-    protected NonNullList<ChanceResult> results;
+    protected NonNullList<MeshChanceResult> results;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public StrainerRecipeBuilder(BlockState aboveBlock, Ingredient input, Ingredient mesh, NonNullList<ChanceResult> results) {
+    public StrainerRecipeBuilder(BlockState aboveBlock, Ingredient input, NonNullList<MeshChanceResult> results) {
         this.aboveBlock = aboveBlock;
         this.input = input;
-        this.mesh = mesh;
         this.results = results;
     }
 
-    public static StrainerRecipeBuilder strainerRecipe(BlockState aboveBlock, Ingredient input, Ingredient mesh, NonNullList<ChanceResult> results) {
-        return new StrainerRecipeBuilder(aboveBlock, input, mesh, results);
+    public static StrainerRecipeBuilder strainerRecipe(BlockState aboveBlock, Ingredient input, NonNullList<MeshChanceResult> results) {
+        return new StrainerRecipeBuilder(aboveBlock, input, results);
     }
 
     @Override
@@ -62,7 +61,7 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
 
     @Override
     public @NotNull Item getResult() {
-        return results.getFirst().stack().getItem();
+        return results.getFirst().chanceResult().stack().getItem();
     }
 
     public void save(@NotNull RecipeOutput recipeOutput) {
@@ -76,7 +75,7 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
                 .rewards(AdvancementRewards.Builder.recipe(id))
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(builder::addCriterion);
-        StrainerRecipe strainerRecipe = new StrainerRecipe(aboveBlock, input, mesh, results);
+        StrainerRecipe strainerRecipe = new StrainerRecipe(aboveBlock, input, results);
         recipeOutput.accept(id, strainerRecipe, builder.build(id.withPrefix("recipe/strainer/")));
     }
 }
