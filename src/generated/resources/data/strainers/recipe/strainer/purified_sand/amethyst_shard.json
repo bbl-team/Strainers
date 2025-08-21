@@ -7,11 +7,11 @@
     }
   },
   "input": {
-    "item": "strainers:purified_sand"
+    "item": "strainers:purified_gravel"
   },
   "results": [
     {
-      "chance": 0.9,
+      "chance": 0.3,
       "item": {
         "count": 1,
         "id": "minecraft:amethyst_shard"
@@ -21,6 +21,7 @@
       }
     },
     {
+      "chance": 0.4,
       "item": {
         "count": 1,
         "id": "minecraft:amethyst_shard"
@@ -30,6 +31,7 @@
       }
     },
     {
+      "chance": 0.5,
       "item": {
         "count": 1,
         "id": "minecraft:amethyst_shard"
@@ -39,6 +41,7 @@
       }
     },
     {
+      "chance": 0.6,
       "item": {
         "count": 1,
         "id": "minecraft:amethyst_shard"
@@ -48,6 +51,7 @@
       }
     },
     {
+      "chance": 0.7,
       "item": {
         "count": 1,
         "id": "minecraft:amethyst_shard"

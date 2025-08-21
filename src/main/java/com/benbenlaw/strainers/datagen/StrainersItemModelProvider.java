@@ -45,7 +45,6 @@ public class StrainersItemModelProvider extends ItemModelProvider {
 
         //Meshes
         simpleItem(ModItems.WOODEN_MESH);
-        simpleItem(ModItems.LEAFY_MESH);
         simpleItem(ModItems.BAMBOO_MESH);
         simpleItem(ModItems.STRING_MESH);
         simpleItem(ModItems.BONE_MESH);

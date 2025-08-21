@@ -1,6 +1,6 @@
 {
   "values": [
-    "strainers:bamboo_mesh",
-    "strainers:flint_mesh"
+    "strainers:flint_mesh",
+    "strainers:bone_mesh"
   ]
 }

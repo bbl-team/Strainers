@@ -11,17 +11,7 @@
   },
   "results": [
     {
-      "chance": 0.45,
-      "item": {
-        "count": 1,
-        "id": "strainers:iron_ore_piece"
-      },
-      "mesh": {
-        "tag": "strainers:tier_3_meshes"
-      }
-    },
-    {
-      "chance": 0.5,
+      "chance": 0.35,
       "item": {
         "count": 1,
         "id": "strainers:iron_ore_piece"
@@ -31,7 +21,7 @@
       }
     },
     {
-      "chance": 0.55,
+      "chance": 0.4,
       "item": {
         "count": 1,
         "id": "strainers:iron_ore_piece"
@@ -41,7 +31,7 @@
       }
     },
     {
-      "chance": 0.6,
+      "chance": 0.45,
       "item": {
         "count": 1,
         "id": "strainers:iron_ore_piece"
@@ -51,7 +41,7 @@
       }
     },
     {
-      "chance": 0.65,
+      "chance": 0.5,
       "item": {
         "count": 1,
         "id": "strainers:iron_ore_piece"
@@ -61,7 +51,7 @@
       }
     },
     {
-      "chance": 0.7,
+      "chance": 0.55,
       "item": {
         "count": 1,
         "id": "strainers:iron_ore_piece"
@@ -71,7 +61,7 @@
       }
     },
     {
-      "chance": 0.75,
+      "chance": 0.6,
       "item": {
         "count": 1,
         "id": "strainers:iron_ore_piece"
@@ -81,7 +71,7 @@
       }
     },
     {
-      "chance": 0.8,
+      "chance": 0.65,
       "item": {
         "count": 1,
         "id": "strainers:iron_ore_piece"

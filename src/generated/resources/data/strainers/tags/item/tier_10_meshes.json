@@ -1,8 +1,5 @@
 {
   "values": [
-    "strainers:netherite_mesh",
-    "strainers:obsidian_mesh",
-    "strainers:end_mesh",
-    "strainers:heavy_mesh"
+    "strainers:end_mesh"
   ]
 }

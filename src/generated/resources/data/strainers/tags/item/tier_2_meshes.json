@@ -1,6 +1,6 @@
 {
   "values": [
-    "strainers:wooden_mesh",
-    "strainers:bone_mesh"
+    "strainers:string_mesh",
+    "strainers:bamboo_mesh"
   ]
 }

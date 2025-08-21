@@ -8,6 +8,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.widgets.IScrollGridWidgetFactory;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -42,10 +43,13 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
 
     private final IDrawable background;
     private final IDrawable icon;
+    private final IScrollGridWidgetFactory<?> scrollGridWidgetFactory;
 
     public StrainerRecipeCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 140, 56);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 155, 56);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.WOODEN_STRAINER.get()));
+        this.scrollGridWidgetFactory = helper.createScrollGridFactory(5, 3);
+        this.scrollGridWidgetFactory.setPosition(50, 1);
     }
 
     @Override
@@ -134,6 +138,20 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
         int startX = 51;
         int startY = 2;
 
+        for (var result : recipe.getChanceResults()) {
+            builder.addSlotToWidget(RecipeIngredientRole.OUTPUT, this.scrollGridWidgetFactory)
+                    .addItemStack(result.stack())
+                    .addRichTooltipCallback((slotView, tooltip) -> {
+                        double baseChance = result.chance();
+                        int asPercent = Math.round((float) (baseChance * 100));
+
+                        tooltip.add(Component.translatable("block.strainer.jei.chance")
+                                .append(String.valueOf(asPercent))
+                                .append("%").withStyle(ChatFormatting.GOLD));
+                    });
+        }
+
+        /*
         for (int i = 0; i < size && i < outputsPerRow * maxRows; i++) {
             int xOffset = startX + (i % outputsPerRow) * slotSize;
             int yOffset = startY + (i / outputsPerRow) * slotSize;
@@ -151,6 +169,8 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
                                 .append("%").withStyle(ChatFormatting.GOLD));
                     });
         }
+
+         */
     }
 
     @Override

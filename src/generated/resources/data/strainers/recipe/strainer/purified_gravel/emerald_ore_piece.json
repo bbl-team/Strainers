@@ -11,7 +11,47 @@
   },
   "results": [
     {
-      "chance": 0.8,
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "strainers:emerald_ore_piece"
+      },
+      "mesh": {
+        "tag": "strainers:tier_6_meshes"
+      }
+    },
+    {
+      "chance": 0.15,
+      "item": {
+        "count": 1,
+        "id": "strainers:emerald_ore_piece"
+      },
+      "mesh": {
+        "tag": "strainers:tier_7_meshes"
+      }
+    },
+    {
+      "chance": 0.2,
+      "item": {
+        "count": 1,
+        "id": "strainers:emerald_ore_piece"
+      },
+      "mesh": {
+        "tag": "strainers:tier_8_meshes"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "strainers:emerald_ore_piece"
+      },
+      "mesh": {
+        "tag": "strainers:tier_9_meshes"
+      }
+    },
+    {
+      "chance": 0.3,
       "item": {
         "count": 1,
         "id": "strainers:emerald_ore_piece"

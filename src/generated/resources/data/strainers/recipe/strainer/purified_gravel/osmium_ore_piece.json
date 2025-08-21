@@ -11,7 +11,7 @@
   },
   "results": [
     {
-      "chance": 0.7,
+      "chance": 0.35,
       "item": {
         "count": 1,
         "id": "strainers:osmium_ore_piece"
@@ -21,7 +21,7 @@
       }
     },
     {
-      "chance": 0.75,
+      "chance": 0.4,
       "item": {
         "count": 1,
         "id": "strainers:osmium_ore_piece"
@@ -31,7 +31,7 @@
       }
     },
     {
-      "chance": 0.8,
+      "chance": 0.45,
       "item": {
         "count": 1,
         "id": "strainers:osmium_ore_piece"

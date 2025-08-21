@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -47,6 +48,26 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).strength(0.5f).sound(SoundType.PACKED_MUD)));
 
 
+    //ORE Blocks
+    public static final DeferredBlock<Block> IRON_ORE_BLOCK = registerBlock("iron_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> COPPER_ORE_BLOCK = registerBlock("copper_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> TIN_ORE_BLOCK = registerBlock("tin_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> SILVER_ORE_BLOCK = registerBlock("silver_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> LEAD_ORE_BLOCK = registerBlock("lead_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> NICKEL_ORE_BLOCK = registerBlock("nickel_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> ZINC_ORE_BLOCK = registerBlock("zinc_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> PLATINUM_ORE_BLOCK = registerBlock("platinum_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> OSMIUM_ORE_BLOCK = registerBlock("osmium_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> URANIUM_ORE_BLOCK = registerBlock("uranium_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> ALUMINUM_ORE_BLOCK = registerBlock("aluminum_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> GOLD_ORE_BLOCK = registerBlock("gold_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> DIAMOND_ORE_BLOCK = registerBlock("diamond_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> EMERALD_ORE_BLOCK = registerBlock("emerald_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> LAPIS_ORE_BLOCK = registerBlock("lapis_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> REDSTONE_ORE_BLOCK = registerBlock("redstone_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> COAL_ORE_BLOCK = registerBlock("coal_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> QUARTZ_ORE_BLOCK = registerBlock("quartz_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> DEBRIS_ORE_BLOCK = registerBlock("debris_ore_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAVEL).strength(0.5f).sound(SoundType.STONE)));
 
 
 

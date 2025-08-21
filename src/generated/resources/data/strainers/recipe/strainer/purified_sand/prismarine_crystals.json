@@ -11,6 +11,47 @@
   },
   "results": [
     {
+      "chance": 0.2,
+      "item": {
+        "count": 1,
+        "id": "minecraft:prismarine_crystals"
+      },
+      "mesh": {
+        "tag": "strainers:tier_4_meshes"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "minecraft:prismarine_crystals"
+      },
+      "mesh": {
+        "tag": "strainers:tier_5_meshes"
+      }
+    },
+    {
+      "chance": 0.3,
+      "item": {
+        "count": 1,
+        "id": "minecraft:prismarine_crystals"
+      },
+      "mesh": {
+        "tag": "strainers:tier_6_meshes"
+      }
+    },
+    {
+      "chance": 0.35,
+      "item": {
+        "count": 1,
+        "id": "minecraft:prismarine_crystals"
+      },
+      "mesh": {
+        "tag": "strainers:tier_7_meshes"
+      }
+    },
+    {
+      "chance": 0.4,
       "item": {
         "count": 1,
         "id": "minecraft:prismarine_crystals"
@@ -20,6 +61,7 @@
       }
     },
     {
+      "chance": 0.45,
       "item": {
         "count": 1,
         "id": "minecraft:prismarine_crystals"
@@ -29,6 +71,7 @@
       }
     },
     {
+      "chance": 0.5,
       "item": {
         "count": 1,
         "id": "minecraft:prismarine_crystals"

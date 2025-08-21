@@ -1,6 +1,7 @@
 package com.benbenlaw.strainers.item;
 
 import com.benbenlaw.strainers.Strainers;
+import com.benbenlaw.strainers.config.ResourcesConfig;
 import com.benbenlaw.strainers.item.custom.ErodingSaltMulchItem;
 import com.benbenlaw.strainers.item.custom.MeshItem;
 import com.benbenlaw.strainers.item.custom.PurifyingSaltMulchItem;
@@ -8,6 +9,10 @@ import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS =
@@ -23,75 +28,74 @@ public class ModItems {
             () -> new ErodingSaltMulchItem(new Item.Properties()));
 
     // TIER 1 MESHES
-    public static final DeferredItem<Item> LEAFY_MESH = ITEMS.register("leafy_mesh",
-            () -> new MeshItem(new Item.Properties().durability(60)));
-    public static final DeferredItem<Item> STRING_MESH = ITEMS.register("string_mesh",
-            () -> new MeshItem(new Item.Properties().durability(90)));
-
-    // TIER 2 MESHES
     public static final DeferredItem<Item> WOODEN_MESH = ITEMS.register("wooden_mesh",
             () -> new MeshItem(new Item.Properties().durability(130)));
-    public static final DeferredItem<Item> BONE_MESH = ITEMS.register("bone_mesh",
-            () -> new MeshItem(new Item.Properties().durability(160)));
 
-    // TIER 3 MESHES
+    // TIER 2 MESHES
+    public static final DeferredItem<Item> STRING_MESH = ITEMS.register("string_mesh",
+            () -> new MeshItem(new Item.Properties().durability(90)));
     public static final DeferredItem<Item> BAMBOO_MESH = ITEMS.register("bamboo_mesh",
             () -> new MeshItem(new Item.Properties().durability(210)));
+
+    // TIER 3 MESHES
     public static final DeferredItem<Item> FLINT_MESH = ITEMS.register("flint_mesh",
+            () -> new MeshItem(new Item.Properties().durability(230)));
+    public static final DeferredItem<Item> BONE_MESH = ITEMS.register("bone_mesh",
             () -> new MeshItem(new Item.Properties().durability(230)));
 
     // TIER 4 MESHES
     public static final DeferredItem<Item> COPPER_MESH = ITEMS.register("copper_mesh",
             () -> new MeshItem(new Item.Properties().durability(300)));
-    public static final DeferredItem<Item> IRON_MESH = ITEMS.register("iron_mesh",
-            () -> new MeshItem(new Item.Properties().durability(480)));
     public static final DeferredItem<Item> TIN_MESH = ITEMS.register("tin_mesh",
             () -> new MeshItem(new Item.Properties().durability(320)));
+    public static final DeferredItem<Item> BRONZE_MESH = ITEMS.register("bronze_mesh",
+            () -> new MeshItem(new Item.Properties().durability(660)));
 
     // TIER 5 MESHES
-    public static final DeferredItem<Item> REDSTONE_MESH = ITEMS.register("redstone_mesh",
-            () -> new MeshItem(new Item.Properties().durability(380)));
-    public static final DeferredItem<Item> GOLD_MESH = ITEMS.register("gold_mesh",
-            () -> new MeshItem(new Item.Properties().durability(400)));
-
-    // TIER 6 MESHES
-
+    public static final DeferredItem<Item> IRON_MESH = ITEMS.register("iron_mesh",
+            () -> new MeshItem(new Item.Properties().durability(480)));
     public static final DeferredItem<Item> QUARTZ_MESH = ITEMS.register("quartz_mesh",
             () -> new MeshItem(new Item.Properties().durability(490)));
     public static final DeferredItem<Item> LAPIS_MESH = ITEMS.register("lapis_mesh",
             () -> new MeshItem(new Item.Properties().durability(500)));
+    public static final DeferredItem<Item> PRISMARINE_MESH = ITEMS.register("prismarine_mesh",
+            () -> new MeshItem(new Item.Properties().durability(800)));
+
+    // TIER 6 MESHES
+    public static final DeferredItem<Item> GOLD_MESH = ITEMS.register("gold_mesh",
+            () -> new MeshItem(new Item.Properties().durability(220)));
+    public static final DeferredItem<Item> REDSTONE_MESH = ITEMS.register("redstone_mesh",
+            () -> new MeshItem(new Item.Properties().durability(380)));
+    public static final DeferredItem<Item> ECHO_MESH = ITEMS.register("echo_mesh",
+            () -> new MeshItem(new Item.Properties().durability(780)));
+    public static final DeferredItem<Item> BLAZE_MESH = ITEMS.register("blaze_mesh",
+            () -> new MeshItem(new Item.Properties().durability(900)));
+    public static final DeferredItem<Item> BREEZE_MESH = ITEMS.register("breeze_mesh",
+            () -> new MeshItem(new Item.Properties().durability(900)));
 
     // TIER 7 MESHES
-    public static final DeferredItem<Item> BRONZE_MESH = ITEMS.register("bronze_mesh",
-            () -> new MeshItem(new Item.Properties().durability(600)));
+    public static final DeferredItem<Item> DIAMOND_MESH = ITEMS.register("diamond_mesh",
+            () -> new MeshItem(new Item.Properties().durability(1300)));
+    public static final DeferredItem<Item> EMERALD_MESH = ITEMS.register("emerald_mesh",
+            () -> new MeshItem(new Item.Properties().durability(1600)));
     public static final DeferredItem<Item> AMETHYST_MESH = ITEMS.register("amethyst_mesh",
             () -> new MeshItem(new Item.Properties().durability(620)));
 
     // TIER 8 MESHES
-    public static final DeferredItem<Item> ECHO_MESH = ITEMS.register("echo_mesh",
-            () -> new MeshItem(new Item.Properties().durability(780)));
-    public static final DeferredItem<Item> BLAZE_MESH = ITEMS.register("blaze_mesh",
-            () -> new MeshItem(new Item.Properties().durability(800)));
-    public static final DeferredItem<Item> BREEZE_MESH = ITEMS.register("breeze_mesh",
-            () -> new MeshItem(new Item.Properties().durability(900)));
-
-    // TIER 9 MESHES
-    public static final DeferredItem<Item> DIAMOND_MESH = ITEMS.register("diamond_mesh",
-            () -> new MeshItem(new Item.Properties().durability(1300)));
-    public static final DeferredItem<Item> EMERALD_MESH = ITEMS.register("emerald_mesh",
-            () -> new MeshItem(new Item.Properties().durability(1300)));
-    public static final DeferredItem<Item> PRISMARINE_MESH = ITEMS.register("prismarine_mesh",
-            () -> new MeshItem(new Item.Properties().durability(1500)));
-
-    // TIER 10 MESHES
     public static final DeferredItem<Item> NETHERITE_MESH = ITEMS.register("netherite_mesh",
             () -> new MeshItem(new Item.Properties().durability(1900)));
     public static final DeferredItem<Item> OBSIDIAN_MESH = ITEMS.register("obsidian_mesh",
             () -> new MeshItem(new Item.Properties().durability(2200)));
-    public static final DeferredItem<Item> END_MESH = ITEMS.register("end_mesh",
-            () -> new MeshItem(new Item.Properties().durability(2100)));
+
+    // TIER 9 MESHES
     public static final DeferredItem<Item> HEAVY_MESH = ITEMS.register("heavy_mesh",
             () -> new MeshItem(new Item.Properties().durability(2500)));
+
+
+    // TIER 10 MESHES
+    public static final DeferredItem<Item> END_MESH = ITEMS.register("end_mesh",
+            () -> new MeshItem(new Item.Properties().durability(700)));
+
 
     //ORE PIECES
     public static final DeferredItem<Item> IRON_ORE_PIECE = ITEMS.register("iron_ore_piece", () -> new Item(new Item.Properties()));

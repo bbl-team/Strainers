@@ -19,12 +19,15 @@ import java.util.List;
 public class WoodenStrainerScreen extends AbstractContainerScreen<WoodenStrainerMenu> {
 
     Level level;
+
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "textures/gui/wooden_strainer_gui.png");
 
     public WoodenStrainerScreen(WoodenStrainerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         this.level = pMenu.level;
+        this.imageHeight = imageWidth + 39;
+        this.inventoryLabelY = inventoryLabelY + 39;
     }
 
     @Override
@@ -32,6 +35,9 @@ public class WoodenStrainerScreen extends AbstractContainerScreen<WoodenStrainer
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
+
+
+
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
@@ -39,7 +45,7 @@ public class WoodenStrainerScreen extends AbstractContainerScreen<WoodenStrainer
 
         if (menu.isCrafting()) {
             int l = this.menu.getScaledProgress();
-            guiGraphics.blit(TEXTURE, x + 40, y + 25, 176, 0, menu.getScaledProgress() + 1, 16);
+            guiGraphics.blit(TEXTURE, x + 31, y + 25, 176, 0, menu.getScaledProgress() + 1, 16);
         }
 
 
@@ -63,9 +69,9 @@ public class WoodenStrainerScreen extends AbstractContainerScreen<WoodenStrainer
 
         tooltipAreas.add(new TooltipArea(8, 17, 16, 16, "block.strainers.gui.input_slot"));
         tooltipAreas.add(new TooltipArea(8, 35, 16, 16, "block.strainers.gui.mesh_slot"));
-        tooltipAreas.add(new TooltipArea(16, 53, 16, 16, "block.strainers.gui.upgrade_slot"));
-        tooltipAreas.add(new TooltipArea(34, 53, 16, 16, "block.strainers.gui.upgrade_slot"));
-        tooltipAreas.add(new TooltipArea(52, 53, 16, 16, "block.strainers.gui.upgrade_slot"));
+        tooltipAreas.add(new TooltipArea(8, 53, 16, 16, "block.strainers.gui.upgrade_slot"));
+        tooltipAreas.add(new TooltipArea(8, 71, 16, 16, "block.strainers.gui.upgrade_slot"));
+        tooltipAreas.add(new TooltipArea(8, 89, 16, 16, "block.strainers.gui.upgrade_slot"));
 
 
         for (TooltipArea area : tooltipAreas) {

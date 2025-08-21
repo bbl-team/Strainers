@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements MenuProvider, IInventoryHandlingBlockEntity {
 
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(20) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(38) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -82,7 +82,14 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
     //UPGRADE VALUES
     public double outputChanceIncrease = 0.0;
-    public static final int[] OUTPUT_SLOTS = {5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
+    public static final int[] OUTPUT_SLOTS;
+
+    static {
+        OUTPUT_SLOTS = new int[33];
+        for (int i = 0; i < OUTPUT_SLOTS.length; i++) {
+            OUTPUT_SLOTS[i] = 5 + i;
+        }
+    }
 
     private final IItemHandler strainerItemHandler = new InputOutputItemHandler(
             itemHandler,

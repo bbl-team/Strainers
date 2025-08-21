@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "strainers:block/coal_ore_block"
+    }
+  }
+}

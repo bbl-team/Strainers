@@ -1,4 +1,13 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/aluminum"
+      }
+    }
+  ],
   "type": "strainers:strainer",
   "above_block": {
     "Name": "minecraft:water",
@@ -7,11 +16,11 @@
     }
   },
   "input": {
-    "item": "strainers:purified_sand"
+    "item": "strainers:purified_gravel"
   },
   "results": [
     {
-      "chance": 0.45,
+      "chance": 0.4,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -21,7 +30,7 @@
       }
     },
     {
-      "chance": 0.5,
+      "chance": 0.45,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -31,7 +40,7 @@
       }
     },
     {
-      "chance": 0.55,
+      "chance": 0.5,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -41,7 +50,7 @@
       }
     },
     {
-      "chance": 0.6,
+      "chance": 0.55,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -51,7 +60,7 @@
       }
     },
     {
-      "chance": 0.65,
+      "chance": 0.6,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -61,7 +70,7 @@
       }
     },
     {
-      "chance": 0.7,
+      "chance": 0.65,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -71,7 +80,7 @@
       }
     },
     {
-      "chance": 0.75,
+      "chance": 0.7,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -81,7 +90,7 @@
       }
     },
     {
-      "chance": 0.8,
+      "chance": 0.75,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"
@@ -91,7 +100,7 @@
       }
     },
     {
-      "chance": 0.85,
+      "chance": 0.8,
       "item": {
         "count": 1,
         "id": "strainers:aluminum_ore_piece"

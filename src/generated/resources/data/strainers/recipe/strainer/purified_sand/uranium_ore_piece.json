@@ -7,10 +7,11 @@
     }
   },
   "input": {
-    "item": "strainers:purified_sand"
+    "item": "strainers:purified_gravel"
   },
   "results": [
     {
+      "chance": 0.4,
       "item": {
         "count": 1,
         "id": "strainers:uranium_ore_piece"
@@ -20,6 +21,7 @@
       }
     },
     {
+      "chance": 0.5,
       "item": {
         "count": 1,
         "id": "strainers:uranium_ore_piece"
@@ -29,6 +31,7 @@
       }
     },
     {
+      "chance": 0.6,
       "item": {
         "count": 1,
         "id": "strainers:uranium_ore_piece"

@@ -4,6 +4,7 @@ import com.benbenlaw.opolisutilities.fluid.FluidDeferredRegister;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
+import com.benbenlaw.strainers.item.ModItems;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +24,31 @@ public class StrainersBlockStatesProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
 
         blockWithItem(ModBlocks.MULCH);
+        blockWithItem(ModBlocks.PURIFIED_SOUL_SAND);
+        blockWithItem(ModBlocks.PURIFIED_SAND);
+        blockWithItem(ModBlocks.PURIFIED_GRAVEL);
+        blockWithItem(ModBlocks.PURIFIED_DIRT);
        // blockWithItem(ModBlocks.ORE_MULCH);
+
+        blockWithItem(ModBlocks.IRON_ORE_BLOCK);
+        blockWithItem(ModBlocks.GOLD_ORE_BLOCK);
+        blockWithItem(ModBlocks.COPPER_ORE_BLOCK);
+        blockWithItem(ModBlocks.SILVER_ORE_BLOCK);
+        blockWithItem(ModBlocks.TIN_ORE_BLOCK);
+        blockWithItem(ModBlocks.LAPIS_ORE_BLOCK);
+        blockWithItem(ModBlocks.REDSTONE_ORE_BLOCK);
+        blockWithItem(ModBlocks.DIAMOND_ORE_BLOCK);
+        blockWithItem(ModBlocks.EMERALD_ORE_BLOCK);
+        blockWithItem(ModBlocks.LEAD_ORE_BLOCK);
+        blockWithItem(ModBlocks.QUARTZ_ORE_BLOCK);
+        blockWithItem(ModBlocks.NICKEL_ORE_BLOCK);
+        blockWithItem(ModBlocks.ZINC_ORE_BLOCK);
+        blockWithItem(ModBlocks.PLATINUM_ORE_BLOCK);
+        blockWithItem(ModBlocks.OSMIUM_ORE_BLOCK);
+        blockWithItem(ModBlocks.URANIUM_ORE_BLOCK);
+        blockWithItem(ModBlocks.ALUMINUM_ORE_BLOCK);
+        blockWithItem(ModBlocks.COAL_ORE_BLOCK);
+        blockWithItem(ModBlocks.DEBRIS_ORE_BLOCK);
 
         //Currently using empty pngs with both the fluid name and the fluid name _still version (fix for 1.22)
         fluidBlocks("purifying_water", StrainersFluids.PURIFYING_WATER.getBlock());

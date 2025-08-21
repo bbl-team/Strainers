@@ -1,0 +1,114 @@
+{
+  "type": "strainers:strainer",
+  "above_block": {
+    "Name": "minecraft:water",
+    "Properties": {
+      "level": "0"
+    }
+  },
+  "input": {
+    "item": "minecraft:dirt"
+  },
+  "results": [
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_1_meshes"
+      }
+    },
+    {
+      "chance": 0.17,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_2_meshes"
+      }
+    },
+    {
+      "chance": 0.24,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_3_meshes"
+      }
+    },
+    {
+      "chance": 0.31,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_4_meshes"
+      }
+    },
+    {
+      "chance": 0.38,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_5_meshes"
+      }
+    },
+    {
+      "chance": 0.45,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_6_meshes"
+      }
+    },
+    {
+      "chance": 0.52,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_7_meshes"
+      }
+    },
+    {
+      "chance": 0.59,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_8_meshes"
+      }
+    },
+    {
+      "chance": 0.66,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_9_meshes"
+      }
+    },
+    {
+      "chance": 0.73,
+      "item": {
+        "count": 1,
+        "id": "minecraft:bamboo"
+      },
+      "mesh": {
+        "tag": "strainers:tier_10_meshes"
+      }
+    }
+  ]
+}

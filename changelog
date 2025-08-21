@@ -2,6 +2,17 @@ Changelog BBL Strainers
 
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
 
+5.0.1 (ALPHA)
+Added a lot more recipes
+Added missing purified blocks to JEI and creative menu
+Saplings come from purified dirt
+Added Ore Blocks for all strainer ore pieces , needs ore tags
+Added translations, model, blockstate and texture files for all blocks and items
+Changed mesh tiers again, tier 1 to 8 have most items and blocks for vanilla, tier 9 and 10 can be used in compat for addition mod support eg draconic evolution
+Changed mesh tags as well
+Tweaked recipes for resource based on the new mesh tiers
+Changed Strainer GUI again now a lot bigger for more recipe outputs
+
 5.0.0 (ALPHA)
 Reworked the recipe system again, single json per resource generated, eg straining dirt for seeds to get wheat the json contains all the information for tiers
     as well as the chances using the new MeshChanceOutput system.

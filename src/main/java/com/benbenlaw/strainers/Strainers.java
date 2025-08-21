@@ -2,6 +2,7 @@ package com.benbenlaw.strainers;
 
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.block.entity.ModBlockEntities;
+import com.benbenlaw.strainers.config.ResourcesConfig;
 import com.benbenlaw.strainers.config.StrainersConfigFile;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.ModCreativeTab;
@@ -58,6 +59,7 @@ public class Strainers {
         modEventBus.addListener(this::commonSetup);
 
         ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.STARTUP, StrainersConfigFile.SPEC, "bbl/strainers/startup.toml");
+        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.STARTUP, ResourcesConfig.SPEC, "bbl/strainers/resources.toml");
 
         StrainersIngredientDurations.loadItemDurationsFromConfig(StrainersConfigFile.blockDurations.get());
 
