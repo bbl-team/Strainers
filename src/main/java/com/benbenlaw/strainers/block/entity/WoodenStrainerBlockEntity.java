@@ -220,6 +220,8 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
             this.fakePlayer = createFakePlayer(serverLevel);
         }
 
+        sync();
+
         assert level != null;
         if (!level.isClientSide()) {
 

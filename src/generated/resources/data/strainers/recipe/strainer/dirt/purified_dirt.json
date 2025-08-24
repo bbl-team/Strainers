@@ -7,7 +7,7 @@
     }
   },
   "input": {
-    "item": "minecraft:dirt"
+    "tag": "minecraft:dirt"
   },
   "results": [
     {

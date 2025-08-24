@@ -1,18 +1,12 @@
 package com.benbenlaw.strainers.item;
 
 import com.benbenlaw.strainers.Strainers;
-import com.benbenlaw.strainers.config.ResourcesConfig;
-import com.benbenlaw.strainers.item.custom.ErodingSaltMulchItem;
+import com.benbenlaw.strainers.item.custom.MulchItem;
 import com.benbenlaw.strainers.item.custom.MeshItem;
-import com.benbenlaw.strainers.item.custom.PurifyingSaltMulchItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS =
@@ -21,11 +15,17 @@ public class ModItems {
     public static final DeferredItem<Item> STONE_PEBBLE = ITEMS.register("stone_pebble",
             () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<Item> LEAF_PILE = ITEMS.register("leaf_pile",
+            () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> PURIFYING_SALT_MULCH = ITEMS.register("purifying_salt_mulch",
-            () -> new PurifyingSaltMulchItem(new Item.Properties()));
+            () -> new MulchItem(new Item.Properties(), "tooltips.strainers.purifying_salt_mulch"));
 
     public static final DeferredItem<Item> ERODING_SALT_MULCH = ITEMS.register("eroding_salt_mulch",
-            () -> new ErodingSaltMulchItem(new Item.Properties()));
+            () -> new MulchItem(new Item.Properties(), "tooltips.strainers.eroding_salt_mulch"));
+
+    public static final DeferredItem<Item> BLAZING_SALT_MULCH = ITEMS.register("blazing_salt_mulch",
+            () -> new MulchItem(new Item.Properties(), "tooltips.strainers.blazing_salt_mulch"));
 
     // TIER 1 MESHES
     public static final DeferredItem<Item> WOODEN_MESH = ITEMS.register("wooden_mesh",

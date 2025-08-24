@@ -2,6 +2,26 @@ Changelog BBL Strainers
 
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
 
+5.0.2 (ALPHA)
+Added Pebble from leaves recipe
+Fixed string mesh recipe
+Fixed Cobblestone to Gravel recipe
+Fixed Gravel to Sand recipe
+Fixed rendering of blocks to actually show the block being proces
+Removed Ore Blocks
+Added Tag Output recipe for shaped crafting this means if there is a ore of a ore piece in game the recipes will load and ore pieces will make that ore
+Ore piece recipe now use conditional in there recipe and will only load if that ore is present in the world
+Moved silver or piece to tier 5 to match gold
+Tweaked JEI recipe ordering to show lowest to highest
+Removed JEI Information category not needed now as using In World Recipes
+Converted Separate Mulch items into a single MulchItem class with translation key for information
+Changed Lava recipe to use the new Blazing Salt Mulch item
+Updated to In World Recipes 1.5.6
+Updated In World Strainer Recipes to Block Interaction recipe as is new standard for In World Recipes
+Moved to core tooltips, Max Damage is now a translation key
+Tweaked some recipe dependencies
+Added Soul Sand to Purified Soul Sand
+
 5.0.1 (ALPHA)
 Added a lot more recipes
 Added missing purified blocks to JEI and creative menu

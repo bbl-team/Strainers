@@ -3,25 +3,6 @@
     "strainers:purified_sand",
     "strainers:purified_gravel",
     "strainers:purified_soul_sand",
-    "strainers:purified_dirt",
-    "strainers:iron_ore_block",
-    "strainers:gold_ore_block",
-    "strainers:copper_ore_block",
-    "strainers:silver_ore_block",
-    "strainers:tin_ore_block",
-    "strainers:lapis_ore_block",
-    "strainers:redstone_ore_block",
-    "strainers:diamond_ore_block",
-    "strainers:emerald_ore_block",
-    "strainers:lead_ore_block",
-    "strainers:quartz_ore_block",
-    "strainers:nickel_ore_block",
-    "strainers:zinc_ore_block",
-    "strainers:platinum_ore_block",
-    "strainers:osmium_ore_block",
-    "strainers:uranium_ore_block",
-    "strainers:aluminum_ore_block",
-    "strainers:coal_ore_block",
-    "strainers:debris_ore_block"
+    "strainers:purified_dirt"
   ]
 }

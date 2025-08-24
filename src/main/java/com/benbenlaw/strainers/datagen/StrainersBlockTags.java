@@ -36,26 +36,6 @@ public class StrainersBlockTags extends BlockTagsProvider {
                 .add(ModBlocks.PURIFIED_GRAVEL.get())
                 .add(ModBlocks.PURIFIED_SOUL_SAND.get())
                 .add(ModBlocks.PURIFIED_DIRT.get())
-
-                .add(ModBlocks.IRON_ORE_BLOCK.get())
-                .add(ModBlocks.GOLD_ORE_BLOCK.get())
-                .add(ModBlocks.COPPER_ORE_BLOCK.get())
-                .add(ModBlocks.SILVER_ORE_BLOCK.get())
-                .add(ModBlocks.TIN_ORE_BLOCK.get())
-                .add(ModBlocks.LAPIS_ORE_BLOCK.get())
-                .add(ModBlocks.REDSTONE_ORE_BLOCK.get())
-                .add(ModBlocks.DIAMOND_ORE_BLOCK.get())
-                .add(ModBlocks.EMERALD_ORE_BLOCK.get())
-                .add(ModBlocks.LEAD_ORE_BLOCK.get())
-                .add(ModBlocks.QUARTZ_ORE_BLOCK.get())
-                .add(ModBlocks.NICKEL_ORE_BLOCK.get())
-                .add(ModBlocks.ZINC_ORE_BLOCK.get())
-                .add(ModBlocks.PLATINUM_ORE_BLOCK.get())
-                .add(ModBlocks.OSMIUM_ORE_BLOCK.get())
-                .add(ModBlocks.URANIUM_ORE_BLOCK.get())
-                .add(ModBlocks.ALUMINUM_ORE_BLOCK.get())
-                .add(ModBlocks.COAL_ORE_BLOCK.get())
-                .add(ModBlocks.DEBRIS_ORE_BLOCK.get())
                 ;
 
 

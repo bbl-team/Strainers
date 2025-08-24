@@ -61,43 +61,24 @@ public class ModCreativeTab {
                 output.accept(ModItems.PRISMARINE_MESH);
 
                 output.accept(ModItems.ALUMINUM_ORE_PIECE);
-                output.accept(ModBlocks.ALUMINUM_ORE_BLOCK);
                 output.accept(ModItems.COPPER_ORE_PIECE);
-                output.accept(ModBlocks.COPPER_ORE_BLOCK);
                 output.accept(ModItems.DIAMOND_ORE_PIECE);
-                output.accept(ModBlocks.DIAMOND_ORE_BLOCK);
                 output.accept(ModItems.EMERALD_ORE_PIECE);
-                output.accept(ModBlocks.EMERALD_ORE_BLOCK);
                 output.accept(ModItems.GOLD_ORE_PIECE);
-                output.accept(ModBlocks.GOLD_ORE_BLOCK);
                 output.accept(ModItems.IRON_ORE_PIECE);
-                output.accept(ModBlocks.IRON_ORE_BLOCK);
                 output.accept(ModItems.LAPIS_ORE_PIECE);
-                output.accept(ModBlocks.LAPIS_ORE_BLOCK);
                 output.accept(ModItems.REDSTONE_ORE_PIECE);
-                output.accept(ModBlocks.REDSTONE_ORE_BLOCK);
                 output.accept(ModItems.TIN_ORE_PIECE);
-                output.accept(ModBlocks.TIN_ORE_BLOCK);
                 output.accept(ModItems.COAL_ORE_PIECE);
-                output.accept(ModBlocks.COAL_ORE_BLOCK);
                 output.accept(ModItems.QUARTZ_ORE_PIECE);
-                output.accept(ModBlocks.QUARTZ_ORE_BLOCK);
                 output.accept(ModItems.SILVER_ORE_PIECE);
-                output.accept(ModBlocks.SILVER_ORE_BLOCK);
                 output.accept(ModItems.ZINC_ORE_PIECE);
-                output.accept(ModBlocks.ZINC_ORE_BLOCK);
                 output.accept(ModItems.PLATINUM_ORE_PIECE);
-                output.accept(ModBlocks.PLATINUM_ORE_BLOCK);
                 output.accept(ModItems.OSMIUM_ORE_PIECE);
-                output.accept(ModBlocks.OSMIUM_ORE_BLOCK);
                 output.accept(ModItems.URANIUM_ORE_PIECE);
-                output.accept(ModBlocks.URANIUM_ORE_BLOCK);
                 output.accept(ModItems.DEBRIS_ORE_PIECE);
-                output.accept(ModBlocks.DEBRIS_ORE_BLOCK);
                 output.accept(ModItems.LEAD_ORE_PIECE);
-                output.accept(ModBlocks.LEAD_ORE_BLOCK);
                 output.accept(ModItems.NICKEL_ORE_PIECE);
-                output.accept(ModBlocks.NICKEL_ORE_BLOCK);
 
 
 
@@ -109,6 +90,7 @@ public class ModCreativeTab {
                 output.accept(ModBlocks.PURIFIED_SOUL_SAND.get());
                 output.accept(ModItems.PURIFYING_SALT_MULCH.get());
                 output.accept(ModItems.ERODING_SALT_MULCH.get());
+                output.accept(ModItems.BLAZING_SALT_MULCH.get());
 
 
 

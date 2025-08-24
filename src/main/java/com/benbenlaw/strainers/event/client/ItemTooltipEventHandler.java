@@ -2,6 +2,7 @@ package com.benbenlaw.strainers.event.client;
 
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.util.ModTags;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -21,21 +22,18 @@ public class ItemTooltipEventHandler {
     public static void onItemTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
 
-
-
         if (stack.is(ModTags.Items.MESHES)) {
 
             List<Component> components = event.getToolTip();
 
             if (!Screen.hasShiftDown()) {
-                components.add(Component.translatable("tooltips.strainers.upgrade"));
+                components.add(Component.translatable("tooltips.bblcore.shift").withStyle(ChatFormatting.YELLOW));
             }
 
             if (Screen.hasShiftDown()) {
 
                 int damage = stack.getMaxDamage();
                 MutableComponent tier = null;
-
 
                 if (stack.is(ModTags.Items.TIER_1_MESHES)) {
                     tier = Component.translatable("tooltips.strainers.tier_1_mesh");
@@ -58,12 +56,10 @@ public class ItemTooltipEventHandler {
                 } else if (stack.is(ModTags.Items.TIER_10_MESHES)) {
                     tier = Component.translatable("tooltips.strainers.tier_10_mesh");
                 }
-
-
                 if (tier != null) {
-                    components.add(tier);
+                    components.add(tier.withStyle(ChatFormatting.YELLOW));
                 }
-                components.add(Component.literal("Max Uses: " + damage));
+                components.add(Component.translatable("tooltips.strainers.mesh_damage", damage).withStyle(ChatFormatting.YELLOW));
 
             }
 

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "strainers:stone_pebble"
+            "items": "#minecraft:saplings"
           }
         ]
       },

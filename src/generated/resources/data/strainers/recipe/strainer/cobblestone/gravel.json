@@ -1,7 +1,7 @@
 {
   "type": "strainers:strainer",
   "above_block": {
-    "Name": "minecraft:water",
+    "Name": "strainers:eroding_water",
     "Properties": {
       "level": "0"
     }

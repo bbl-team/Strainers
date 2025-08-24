@@ -27,6 +27,7 @@ public class StrainerMeshEntityRenderer implements BlockEntityRenderer<WoodenStr
     }
     @Override
     public void render(WoodenStrainerBlockEntity entity, float ticks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int light, int overlay) {
+
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
         ItemStack mesh = entity.getItemStackHandler().getStackInSlot(WoodenStrainerBlockEntity.MESH_SLOT);
@@ -92,7 +93,7 @@ public class StrainerMeshEntityRenderer implements BlockEntityRenderer<WoodenStr
                     float adjustedFloat = (float) (totalCompletedValue / 100);
 
                     poseStack.pushPose();
-                    poseStack.translate(0.5, 1 - adjustedFloat, 0.5); // Adjust position to the middle of the block
+                    poseStack.translate(0.5, 1 - adjustedFloat - 0.2, 0.5); // Adjust position to the middle of the block
                     poseStack.scale(3.1f, 3.1f, 3.1f);
 
                     BakedModel insideModel = itemRenderer.getModel(insideItem, null, null, 0);
@@ -146,10 +147,6 @@ public class StrainerMeshEntityRenderer implements BlockEntityRenderer<WoodenStr
                 }
             }
         }
-    }
-
-    public float getProgress(WoodenStrainerBlockEntity entity) {
-        return (float) entity.progress / entity.maxProgress;
     }
 
 

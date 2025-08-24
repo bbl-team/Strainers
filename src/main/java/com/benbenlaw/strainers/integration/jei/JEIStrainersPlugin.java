@@ -18,10 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @JeiPlugin
@@ -56,6 +53,12 @@ public class JEIStrainersPlugin implements IModPlugin {
                 .stream().map(RecipeHolder::value).toList();
 
         List<StrainerRecipeDisplay> displays = mergeStrainerRecipes(allRecipes);
+        displays.sort(Comparator.comparingDouble(d ->
+                d.getChanceResults().stream()
+                        .mapToDouble(ChanceResult::chance)
+                        .min()
+                        .orElse(0.0)
+        ));
 
         registration.addRecipes(StrainerRecipeCategory.RECIPE_TYPE, displays);
     }
