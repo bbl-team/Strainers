@@ -30,7 +30,6 @@ import java.util.Map;
 
 public class StrainerRecipeBuilder implements RecipeBuilder {
 
-
     protected String group;
     protected BlockState aboveBlock;
     protected Ingredient input;
