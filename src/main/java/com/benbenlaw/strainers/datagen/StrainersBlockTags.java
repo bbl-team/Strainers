@@ -27,6 +27,7 @@ public class StrainersBlockTags extends BlockTagsProvider {
         //Pickaxe
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.STRAINER_TANK.get())
+                .add(ModBlocks.PURIFIED_STONE.get())
         ;
 
         //Shovel
@@ -36,6 +37,7 @@ public class StrainersBlockTags extends BlockTagsProvider {
                 .add(ModBlocks.PURIFIED_GRAVEL.get())
                 .add(ModBlocks.PURIFIED_SOUL_SAND.get())
                 .add(ModBlocks.PURIFIED_DIRT.get())
+                .add(ModBlocks.PURIFIED_SOUL_SOIL.get())
                 ;
 
 

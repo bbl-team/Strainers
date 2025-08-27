@@ -28,6 +28,8 @@ public class StrainersBlockStatesProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.PURIFIED_SAND);
         blockWithItem(ModBlocks.PURIFIED_GRAVEL);
         blockWithItem(ModBlocks.PURIFIED_DIRT);
+        blockWithItem(ModBlocks.PURIFIED_SOUL_SOIL);
+        blockWithItem(ModBlocks.PURIFIED_STONE);
        // blockWithItem(ModBlocks.ORE_MULCH);
 
         //Currently using empty pngs with both the fluid name and the fluid name _still version (fix for 1.22)

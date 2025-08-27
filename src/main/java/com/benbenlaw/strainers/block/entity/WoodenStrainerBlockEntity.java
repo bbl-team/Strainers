@@ -30,7 +30,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -341,9 +343,20 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
     }
 
     public BlockState getBlockAbove() {
-        BlockPos blockPos = this.worldPosition.above(1);
+        BlockPos blockPos = this.worldPosition.above();
         assert level != null;
-        return level.getBlockState(blockPos);
+
+        BlockState state = level.getBlockState(blockPos);
+        BlockEntity be = level.getBlockEntity(blockPos);
+
+        if (be instanceof StrainerTankBlockEntity tank) {
+            Fluid fluid = tank.FLUID_TANK.getFluid().getFluid();
+            if (!fluid.getFluidType().isAir()) {
+                return fluid.defaultFluidState().createLegacyBlock();
+            }
+        }
+
+        return state;
     }
 
     private boolean inputsChanged() {

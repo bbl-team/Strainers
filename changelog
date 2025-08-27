@@ -2,6 +2,13 @@ Changelog BBL Strainers
 
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
 
+5.0.3 (ALPHA)
+Mod uploads now set the environment to both server and client
+Strainer tank now works again
+Update Yuki Textures for purified blocks and Blazing Salt Mulch
+Added Purified Soul Soil and Purified Stone
+Added mroe recipes for stone types and nether crops as well as some other stuff from sand
+
 5.0.2 (ALPHA)
 Added Pebble from leaves recipe
 Fixed string mesh recipe

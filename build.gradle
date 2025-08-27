@@ -158,9 +158,10 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
 
     mainFile.changelog = changelog
     mainFile.addOptional("jei") // JEI
-    mainFile.addRequirement("opolis-utilities")
     mainFile.releaseType = "alpha"
     mainFile.gameVersions.addAll("1.21", "1.21.1")
+    mainFile.addEnvironment("server", "client")
+
 }
 
 tasks.getByName("modrinth").setGroup("modpublishing")
@@ -178,7 +179,6 @@ modrinth {
     changelog = project.changelog
     dependencies {
         optional.project "jei"
-        required.project "opolis-utilities"
 
     }
 }

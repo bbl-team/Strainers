@@ -85,9 +85,11 @@ public class ModCreativeTab {
                 output.accept(ModBlocks.MULCH.get());
                 output.accept(ModItems.STONE_PEBBLE.get());
                 output.accept(ModBlocks.PURIFIED_DIRT.get());
+                output.accept(ModBlocks.PURIFIED_STONE.get());
                 output.accept(ModBlocks.PURIFIED_GRAVEL.get());
                 output.accept(ModBlocks.PURIFIED_SAND.get());
                 output.accept(ModBlocks.PURIFIED_SOUL_SAND.get());
+                output.accept(ModBlocks.PURIFIED_SOUL_SOIL.get());
                 output.accept(ModItems.PURIFYING_SALT_MULCH.get());
                 output.accept(ModItems.ERODING_SALT_MULCH.get());
                 output.accept(ModItems.BLAZING_SALT_MULCH.get());

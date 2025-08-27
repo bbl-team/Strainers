@@ -752,6 +752,18 @@ public class StrainersRecipes extends RecipeProvider {
                 0.8f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/sand/purified_sand"));
 
+        //Soul Soil -> Purified Soil Soil
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(Items.SOUL_SOIL), createMeshChanceResultList(
+                new ItemStack(ModBlocks.PURIFIED_SOUL_SOIL.get()),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/soul_soil/purified_soul_soil"));
+
+        //Stone -> Purified Stone
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(Blocks.STONE), createMeshChanceResultList(
+                new ItemStack(ModBlocks.PURIFIED_STONE.get()),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/stone/purified_stone"));
+
         //Soul Sand -> Purified Soul Sand
         StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(ItemTags.SAND), createMeshChanceResultList(
                 new ItemStack(ModBlocks.PURIFIED_SAND.get()),
@@ -782,8 +794,107 @@ public class StrainersRecipes extends RecipeProvider {
                 0.2f, 5,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/sculk/echo_shard"));
 
+        //Purified Soul Soil -> Crimson Fungus
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SOUL_SOIL), createMeshChanceResultList(
+                new ItemStack(Items.CRIMSON_FUNGUS),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/soul_soil/crimson_fungus"));
 
+        //Purified Soul Soil -> Warped Fungus
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SOUL_SOIL), createMeshChanceResultList(
+                new ItemStack(Items.WARPED_FUNGUS),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/soul_soil/warped_fungus"));
 
+        //Purified Soul Soil -> Nehter Wart
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SOUL_SOIL), createMeshChanceResultList(
+                new ItemStack(Items.NETHER_WART),
+                0.2f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/soul_soil/nether_wart"));
+
+        //Purified Stone -> Granite
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(ModBlocks.PURIFIED_STONE), createMeshChanceResultList(
+                new ItemStack(Blocks.GRANITE),
+                0.05f, 4,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_stone/granite"));
+
+        //Purified Stone -> Diorite
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(ModBlocks.PURIFIED_STONE), createMeshChanceResultList(
+                new ItemStack(Blocks.DIORITE),
+                0.05f, 4,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_stone/diorite"));
+
+        //Purified Stone -> Andesite
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(ModBlocks.PURIFIED_STONE), createMeshChanceResultList(
+                new ItemStack(Blocks.ANDESITE),
+                0.05f, 4,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_stone/andesite"));
+
+        //Purified Stone -> Calcite
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(ModBlocks.PURIFIED_STONE), createMeshChanceResultList(
+                new ItemStack(Blocks.CALCITE),
+                0.05f, 5,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_stone/calcite"));
+
+        //Purified Stone -> Dripstone
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(ModBlocks.PURIFIED_STONE), createMeshChanceResultList(
+                new ItemStack(Blocks.DRIPSTONE_BLOCK),
+                0.05f, 6,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_stone/dripstone"));
+
+        //Dripstone -> Pointed Dripstone
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(Blocks.DRIPSTONE_BLOCK), createMeshChanceResultList(
+                new ItemStack(Blocks.POINTED_DRIPSTONE, 2),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/dripstone_block/pointed_dripstone"));
+
+        //Purified Stone -> Deepslate
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(ModBlocks.PURIFIED_STONE), createMeshChanceResultList(
+                new ItemStack(Blocks.DEEPSLATE),
+                0.05f, 7,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_stone/deepslate"));
+
+        //Purified Stone -> Tuff
+        StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(ModBlocks.PURIFIED_STONE), createMeshChanceResultList(
+                new ItemStack(Blocks.TUFF),
+                0.4f, 4,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_stone/tuff"));
+
+        //Purified Sand -> Cactus
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.CACTUS),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/cactus"));
+
+        //Purified Sand -> Sugar Cane
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.SUGAR_CANE),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/sugar_cane"));
+
+        //Purified Sand -> Sea Pickle
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.SEA_PICKLE ),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/sea_pickle"));
+
+        //Purified Sand -> Kelp
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.KELP),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/kelp"));
+
+        //Purified Sand -> Sea Grass
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.SEAGRASS),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/sea_grass"));
+
+        //Purified Sand -> Bamboo
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
+                new ItemStack(Items.BAMBOO),
+                0.4f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/bamboo"));
 
     }
 

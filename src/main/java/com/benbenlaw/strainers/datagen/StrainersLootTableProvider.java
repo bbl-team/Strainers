@@ -29,6 +29,8 @@ public class StrainersLootTableProvider extends VanillaBlockLoot {
         this.dropSelf(ModBlocks.PURIFIED_SAND.get());
         this.dropSelf(ModBlocks.PURIFIED_GRAVEL.get());
         this.dropSelf(ModBlocks.PURIFIED_DIRT.get());
+        this.dropSelf(ModBlocks.PURIFIED_SOUL_SOIL.get());
+        this.dropSelf(ModBlocks.PURIFIED_STONE.get());
 
         this.add(ModBlocks.STRAINER_TANK.get(),loot -> LootTable.lootTable()
                 .withPool(new LootPool.Builder().add(LootItem.lootTableItem(ModBlocks.STRAINER_TANK)

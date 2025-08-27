@@ -1,6 +1,9 @@
 package com.benbenlaw.strainers.recipe;
 
+import com.benbenlaw.core.block.TankBlockEntity;
 import com.benbenlaw.core.recipe.ChanceResult;
+import com.benbenlaw.strainers.block.custom.StrainerTankBlock;
+import com.benbenlaw.strainers.block.entity.StrainerTankBlockEntity;
 import com.benbenlaw.strainers.block.entity.WoodenStrainerBlockEntity;
 import com.benbenlaw.strainers.util.ModTags;
 import com.mojang.serialization.Codec;
@@ -20,8 +23,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,6 +56,16 @@ public record StrainerRecipe(
             }
 
             BlockState aboveBlockState = level.getBlockState(strainerRecipeInput.getPos().above());
+
+            //Check for tank and change block above in theory to the fluid
+            if (level.getBlockState(strainerRecipeInput.getPos().above()).getBlock() instanceof StrainerTankBlock) {
+                BlockEntity entity = level.getBlockEntity(strainerRecipeInput.getPos().above());
+                if (entity instanceof StrainerTankBlockEntity tankEntity) {
+                    Fluid fluid = tankEntity.FLUID_TANK.getFluid().getFluid();
+                    aboveBlockState = fluid.defaultFluidState().createLegacyBlock();
+                }
+            }
+
             return hasInput && aboveBlockState.equals(aboveBlock) && results.stream().anyMatch(
                     meshChanceResult -> meshChanceResult.mesh().test(meshStack)
             );
@@ -57,6 +73,7 @@ public record StrainerRecipe(
 
         return false;
     }
+
 
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {

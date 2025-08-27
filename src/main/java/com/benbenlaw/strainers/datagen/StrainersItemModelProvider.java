@@ -34,6 +34,7 @@ public class StrainersItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.STONE_PEBBLE);
         simpleItem(ModItems.PURIFYING_SALT_MULCH);
         simpleItem(ModItems.ERODING_SALT_MULCH);
+        simpleItem(ModItems.BLAZING_SALT_MULCH);
 
         //Upgrades
         simpleItem(ModItems.MESH_UPGRADE_1);

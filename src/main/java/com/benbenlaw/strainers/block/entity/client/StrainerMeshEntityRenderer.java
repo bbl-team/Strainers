@@ -93,8 +93,8 @@ public class StrainerMeshEntityRenderer implements BlockEntityRenderer<WoodenStr
                     float adjustedFloat = (float) (totalCompletedValue / 100);
 
                     poseStack.pushPose();
-                    poseStack.translate(0.5, 1 - adjustedFloat - 0.2, 0.5); // Adjust position to the middle of the block
-                    poseStack.scale(3.1f, 3.1f, 3.1f);
+                    poseStack.translate(0.5, 1 - adjustedFloat - 0.1, 0.5); // Adjust position to the middle of the block
+                    poseStack.scale(3.3f, 3.3f, 3.3f);
 
                     BakedModel insideModel = itemRenderer.getModel(insideItem, null, null, 0);
                     itemRenderer.render(insideItem, ItemDisplayContext.GROUND, false, poseStack, multiBufferSource, getLightLevel(entity.getLevel(), entity.getBlockPos().above()), overlay, insideModel);
