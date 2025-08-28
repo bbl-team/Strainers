@@ -13,7 +13,7 @@
     {
       "chance": 0.8,
       "item": {
-        "count": 3,
+        "count": 4,
         "id": "strainers:stone_pebble"
       },
       "mesh": {
@@ -23,7 +23,7 @@
     {
       "chance": 0.85,
       "item": {
-        "count": 3,
+        "count": 4,
         "id": "strainers:stone_pebble"
       },
       "mesh": {
@@ -33,7 +33,7 @@
     {
       "chance": 0.9,
       "item": {
-        "count": 3,
+        "count": 4,
         "id": "strainers:stone_pebble"
       },
       "mesh": {
@@ -43,7 +43,7 @@
     {
       "chance": 0.95,
       "item": {
-        "count": 3,
+        "count": 4,
         "id": "strainers:stone_pebble"
       },
       "mesh": {
@@ -52,7 +52,7 @@
     },
     {
       "item": {
-        "count": 3,
+        "count": 4,
         "id": "strainers:stone_pebble"
       },
       "mesh": {

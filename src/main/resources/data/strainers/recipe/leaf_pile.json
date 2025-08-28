@@ -1,16 +1,36 @@
 {
   "type": "inworldrecipes:block_interaction",
   "click_type": "left",
-  "target_block_state": {
-    "Name": "strainers:mulch"
-  },
+  "target_block_state": "#minecraft:leaves",
   "held_item": {
-    "item": "strainers:eroding_salt_mulch"
+    "tag": "minecraft:swords"
   },
   "output_block_state": {
-    "Name": "strainers:eroding_water"
+    "Name": "minecraft:air"
   },
-  "damage_held_item": false,
-  "consume_held_item": true,
-  "pop_items": false
+  "results": [
+    {
+      "item": {
+        "count": 2,
+        "id": "strainers:leaf_pile"
+      }
+    },
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "strainers:leaf_pile"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "strainers:leaf_pile"
+      }
+    }
+  ],
+  "damage_held_item": true,
+  "consume_held_item": false,
+  "pop_items": true
 }

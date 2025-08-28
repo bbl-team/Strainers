@@ -165,13 +165,11 @@ public class StrainersRecipes extends RecipeProvider {
 
         //Dirt
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.DIRT)
-                .pattern(" L ")
-                .pattern("LSL")
-                .pattern(" L ")
-                .define('L', ItemTags.LEAVES)
-                .define('S', ItemTags.SAPLINGS)
+                .pattern("AA")
+                .pattern("AA")
+                .define('A', ModBlocks.MULCH)
                 .group("strainers")
-                .unlockedBy("has_item", has(ItemTags.SAPLINGS))
+                .unlockedBy("has_item", has(ModBlocks.MULCH))
                 .save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "dirt_from_mulch"));
 
         //Bamboo Mesh
@@ -467,11 +465,17 @@ public class StrainersRecipes extends RecipeProvider {
 
         //Dirt -> Stone Pebble
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.DIRT), createMeshChanceResultList(
-                new ItemStack(ModItems.STONE_PEBBLE.get(), 3),
+                new ItemStack(ModItems.STONE_PEBBLE.get(), 4),
                 0.8f, 1,5,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/dirt/stone_pebble"));
 
-        //Dirt -> Stone Pebble
+        //Dirt -> Stone Pebble (RARE)
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.DIRT), createMeshChanceResultList(
+                new ItemStack(ModItems.STONE_PEBBLE.get(), 4),
+                0.2f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/dirt/stone_pebble_rar"));
+
+        //Dirt -> Bamboo
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.DIRT), createMeshChanceResultList(
                 new ItemStack(Items.BAMBOO),
                 0.1f, 1,10,0.07f
@@ -495,11 +499,17 @@ public class StrainersRecipes extends RecipeProvider {
                 0.7f, 1,10,0.1f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/leaves/stick"));
 
-        //Leaves -> Pebble
+        //Leaves -> Leaf Pile
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ItemTags.LEAVES), createMeshChanceResultList(
-                new ItemStack(ModItems.STONE_PEBBLE.get(), 2),
-                0.5f, 1,10,0.05f
-        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/leaves/stone_pebble"));
+                new ItemStack(ModItems.LEAF_PILE.get(), 1),
+                0.5f, 1,10,0.1f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/leaves/leaf_pile"));
+
+        //Leaves -> Leaf Pile (RARE)
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ItemTags.LEAVES), createMeshChanceResultList(
+                new ItemStack(ModItems.LEAF_PILE.get(), 4),
+                0.2f, 1,10,0.1f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/leaves/leaf_pile_rare"));
 
         //Cobblestone -> Gravel
         StrainerRecipeBuilder.strainerRecipe(ERODING_WATER, Ingredient.of(Blocks.COBBLESTONE), createMeshChanceResultList(

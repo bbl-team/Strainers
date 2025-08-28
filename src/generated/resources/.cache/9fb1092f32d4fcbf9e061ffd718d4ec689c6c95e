@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-27T09:46:59.1662012	Recipes
+// 1.21.1	2025-08-28T12:27:37.47554	Recipes
 6495430b293f9e9f376935b3c3538d11333f1e0a data/strainers/advancement/recipes/misc/amethyst_mesh.json
 309e8e21fc3c6ddc5dca61b6190ce16b183c7eb3 data/strainers/advancement/recipes/misc/bamboo_mesh.json
 8925ac158cf532612ea35778f29e95f7c01f1796 data/strainers/advancement/recipes/misc/blaze_mesh.json
@@ -8,7 +8,7 @@ b8a1e0f9b6e145fe378271184e829637590b603e data/strainers/advancement/recipes/misc
 3febd4c8cf2ad8e65f86f3a1c222457577e8ab1c data/strainers/advancement/recipes/misc/bronze_mesh.json
 6b73b4d80de5ded2501e46588e69802dba3d9198 data/strainers/advancement/recipes/misc/copper_mesh.json
 4154707b2f2a38313871a095a0043d506abdaac5 data/strainers/advancement/recipes/misc/diamond_mesh.json
-0dfee4c7e287bb9cb297e5c3837bb091f48f60b0 data/strainers/advancement/recipes/misc/dirt_from_mulch.json
+da7131ed34bcdccdd37debd9ed5ee3d5483bc0f8 data/strainers/advancement/recipes/misc/dirt_from_mulch.json
 8dd386115e8a543406fd3c8120578be8b74c7744 data/strainers/advancement/recipes/misc/echo_mesh.json
 10ee295e05428aa8df60faa931d437f78babc743 data/strainers/advancement/recipes/misc/emerald_mesh.json
 4304476eb8841892c2b26dfbd1f048c6611f5a81 data/strainers/advancement/recipes/misc/end_mesh.json
@@ -43,12 +43,14 @@ a098eecca0601b0c4a7a1f9b1adfa87df7c1b5ce data/strainers/advancement/recipes/misc
 8565f5ff76ab2eb498eeb1d1efd9fded62456d14 data/strainers/advancement/recipe/strainer/strainer/dirt/purified_dirt.json
 dff3eebcfaf05467a2fcb7e7bebb2216192a973a data/strainers/advancement/recipe/strainer/strainer/dirt/stick.json
 58e0e9a9f275137cda7a6a5729782ae6cc8d40ac data/strainers/advancement/recipe/strainer/strainer/dirt/stone_pebble.json
+09ed32d19ae2469cb8e0ffc20618cbc699175900 data/strainers/advancement/recipe/strainer/strainer/dirt/stone_pebble_rar.json
 8ad6e8ee7434f319cfa3554588ac0c54d2f26ba1 data/strainers/advancement/recipe/strainer/strainer/dripstone_block/pointed_dripstone.json
 08bb22229d9f933aca1f47397df69f7e92420249 data/strainers/advancement/recipe/strainer/strainer/gravel/flint.json
 b1a0a575330dc820249d72d338250daa1c32f4a3 data/strainers/advancement/recipe/strainer/strainer/gravel/purified_gravel.json
 72aba351ce2c8276793de987cd81df936b3d5341 data/strainers/advancement/recipe/strainer/strainer/gravel/sand.json
+841f58bb5a3c2e1389577224b81f9904460b6961 data/strainers/advancement/recipe/strainer/strainer/leaves/leaf_pile.json
+18d0ae0bbd74bf9bd22317188caa88ebf16fb39a data/strainers/advancement/recipe/strainer/strainer/leaves/leaf_pile_rare.json
 9285be78c448c4f6a5e8562c2526a1ed2d4ac813 data/strainers/advancement/recipe/strainer/strainer/leaves/stick.json
-c026aa48d83064734261f74d848713d387b71537 data/strainers/advancement/recipe/strainer/strainer/leaves/stone_pebble.json
 91cbfa4c1527c639820b94c2ad38d153eb057002 data/strainers/advancement/recipe/strainer/strainer/leaves/string.json
 5728a2e20ce52c6323c7e2596e425f3cb121fab1 data/strainers/advancement/recipe/strainer/strainer/purified_dirt/acacia_sapling.json
 c06f91b90873d5ea9e1805e5ce90a3bee6675af4 data/strainers/advancement/recipe/strainer/strainer/purified_dirt/birch_sapling.json
@@ -116,7 +118,7 @@ d76c184ab020bcd29fe57337189aaa2c06e878d2 data/strainers/recipe/breeze_mesh.json
 f6ff92bf3cda04d808a5832850819e63a420a85c data/strainers/recipe/bronze_mesh.json
 1bf3dd49588923bc273bf529b14268e450c88ea1 data/strainers/recipe/copper_mesh.json
 686db0447496eb91edab35c2e7a800f0d68f9ce0 data/strainers/recipe/diamond_mesh.json
-5b25d4112b57014d3db6d41eabc814beca45639e data/strainers/recipe/dirt_from_mulch.json
+1bd33bc2ebf2a7b196ca311786b7c986dadb9b7c data/strainers/recipe/dirt_from_mulch.json
 7f5ee118101ac6d13e7d01520d415e89c6895301 data/strainers/recipe/echo_mesh.json
 a3edeefceb7ca73f94b96d6053390793db708d4d data/strainers/recipe/emerald_mesh.json
 02bce51bd8b5f514bed69b443817ae550c9ea03f data/strainers/recipe/end_mesh.json
@@ -145,13 +147,15 @@ df91b9ae4065921a5e783f11389573c2b3e2fcbc data/strainers/recipe/redstone_mesh.jso
 d26a26fc3a912d1b77639a0b8f1f59929f12b220 data/strainers/recipe/strainer/dirt/bamboo.json
 51472dc482e0d07574eb7e184405b1bdb35115a0 data/strainers/recipe/strainer/dirt/purified_dirt.json
 6e50b397a0b2f6d05b91e9ca6287cc6f79a20c44 data/strainers/recipe/strainer/dirt/stick.json
-bb51ea6027ddd309941b18efd0e79253d2f7399d data/strainers/recipe/strainer/dirt/stone_pebble.json
+72bb8fb82e571f5efba23985cab31a13a83fcbb8 data/strainers/recipe/strainer/dirt/stone_pebble.json
+3ecf16543d7bc774b7ed016ac983177a39c26220 data/strainers/recipe/strainer/dirt/stone_pebble_rar.json
 91ad36288e4667ff3b78bab25d3ed708675cf3f3 data/strainers/recipe/strainer/dripstone_block/pointed_dripstone.json
 e0685294a778dd81ede68a459b6937763450578f data/strainers/recipe/strainer/gravel/flint.json
 cba6946fcb104536cdb67ca6b6d4efe58365f5d0 data/strainers/recipe/strainer/gravel/purified_gravel.json
 187849fdbcc5e7d1b59c4dfe92597a3533d24fad data/strainers/recipe/strainer/gravel/sand.json
+b676e5fc995c22e85485df0c6cd5078465fe5602 data/strainers/recipe/strainer/leaves/leaf_pile.json
+c3c3fd507d54ca7d6378803889905200d3d56f71 data/strainers/recipe/strainer/leaves/leaf_pile_rare.json
 025ada647de665b726d42f80a27ac68436239d06 data/strainers/recipe/strainer/leaves/stick.json
-2e328bef5963657cf7a641fe881201404d19c7ac data/strainers/recipe/strainer/leaves/stone_pebble.json
 e06e270a674144b7424f7009a250485a68532ee8 data/strainers/recipe/strainer/leaves/string.json
 223bed56f5a8a5f984b2921f9b5e8a00f6b83a30 data/strainers/recipe/strainer/purified_dirt/acacia_sapling.json
 3b041e2d6c62adb13708ea13892a12aed9f2b621 data/strainers/recipe/strainer/purified_dirt/birch_sapling.json

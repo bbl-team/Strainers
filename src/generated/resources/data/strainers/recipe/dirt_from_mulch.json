@@ -3,17 +3,13 @@
   "category": "misc",
   "group": "strainers",
   "key": {
-    "L": {
-      "tag": "minecraft:leaves"
-    },
-    "S": {
-      "tag": "minecraft:saplings"
+    "A": {
+      "item": "strainers:mulch"
     }
   },
   "pattern": [
-    " L ",
-    "LSL",
-    " L "
+    "AA",
+    "AA"
   ],
   "result": {
     "count": 1,

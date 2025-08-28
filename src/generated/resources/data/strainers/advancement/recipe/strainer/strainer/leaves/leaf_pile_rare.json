@@ -2,7 +2,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:strainer/leaves/stone_pebble"
+        "recipe": "strainers:strainer/leaves/leaf_pile_rare"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -14,7 +14,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:strainer/leaves/stone_pebble"
+      "strainers:strainer/leaves/leaf_pile_rare"
     ]
   },
   "sends_telemetry_event": true

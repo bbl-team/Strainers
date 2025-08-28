@@ -70,8 +70,8 @@ dependencies {
     runtimeOnly "curse.maven:bbl-core-1135181:6486837"
 
     //In World Recipes
-    compileOnly "curse.maven:in-world-recipes-1123257:6918095"
-    runtimeOnly "curse.maven:in-world-recipes-1123257:6918095"
+    compileOnly "curse.maven:in-world-recipes-1123257:6918301"
+    runtimeOnly "curse.maven:in-world-recipes-1123257:6918301"
 
     //Opolis Utilities
     compileOnly "curse.maven:opolis-utilities-649644:6106709"

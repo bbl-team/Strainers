@@ -11,60 +11,60 @@
   },
   "results": [
     {
-      "chance": 0.5,
+      "chance": 0.2,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_1_meshes"
       }
     },
     {
-      "chance": 0.55,
+      "chance": 0.3,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_2_meshes"
       }
     },
     {
-      "chance": 0.6,
+      "chance": 0.4,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_3_meshes"
       }
     },
     {
-      "chance": 0.65,
+      "chance": 0.5,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_4_meshes"
       }
     },
     {
-      "chance": 0.7,
+      "chance": 0.6,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_5_meshes"
       }
     },
     {
-      "chance": 0.75,
+      "chance": 0.7,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_6_meshes"
@@ -73,38 +73,36 @@
     {
       "chance": 0.8,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_7_meshes"
       }
     },
     {
-      "chance": 0.85,
+      "chance": 0.9,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_8_meshes"
       }
     },
     {
-      "chance": 0.9,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_9_meshes"
       }
     },
     {
-      "chance": 0.95,
       "item": {
-        "count": 2,
-        "id": "strainers:stone_pebble"
+        "count": 4,
+        "id": "strainers:leaf_pile"
       },
       "mesh": {
         "tag": "strainers:tier_10_meshes"
