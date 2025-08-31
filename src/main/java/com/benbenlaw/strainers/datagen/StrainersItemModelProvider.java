@@ -37,12 +37,12 @@ public class StrainersItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.BLAZING_SALT_MULCH);
 
         //Upgrades
-        simpleItem(ModItems.MESH_UPGRADE_1);
-        simpleItem(ModItems.MESH_UPGRADE_2);
-        simpleItem(ModItems.MESH_UPGRADE_3);
-        simpleItem(ModItems.OUTPUT_UPGRADE_1);
-        simpleItem(ModItems.OUTPUT_UPGRADE_2);
-        simpleItem(ModItems.OUTPUT_UPGRADE_3);
+        simpleItem(ModItems.SPEED_UPGRADE_1);
+        simpleItem(ModItems.SPEED_UPGRADE_2);
+        simpleItem(ModItems.SPEED_UPGRADE_3);
+        simpleItem(ModItems.CHANCE_UPGRADE_1);
+        simpleItem(ModItems.CHANCE_UPGRADE_2);
+        simpleItem(ModItems.CHANCE_UPGRADE_3);
 
         //Meshes
         simpleItem(ModItems.WOODEN_MESH);

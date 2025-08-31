@@ -4,10 +4,10 @@
   "group": "strainers",
   "key": {
     "M": {
-      "tag": "strainers:tier_2_meshes"
+      "tag": "strainers:tier_8_meshes"
     },
     "U": {
-      "item": "bblcore:upgrade_base"
+      "item": "strainers:chance_upgrade_2"
     }
   },
   "pattern": [
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "strainers:mesh_upgrade_1"
+    "id": "strainers:chance_upgrade_3"
   }
 }

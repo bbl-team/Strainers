@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "strainers:item/mesh_upgrade_3"
+    "layer0": "strainers:item/chance_upgrade_3"
   }
 }

@@ -4,10 +4,10 @@
   "group": "strainers",
   "key": {
     "M": {
-      "tag": "c:storage_blocks/iron"
+      "tag": "c:storage_blocks/diamond"
     },
     "U": {
-      "item": "bblcore:upgrade_base"
+      "item": "strainers:speed_upgrade_1"
     }
   },
   "pattern": [
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "strainers:output_upgrade_1"
+    "id": "strainers:speed_upgrade_2"
   }
 }

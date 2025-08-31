@@ -59,8 +59,6 @@ public class Strainers {
         modEventBus.addListener(this::commonSetup);
 
         ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.STARTUP, StrainersConfigFile.SPEC, "bbl/strainers/startup.toml");
-        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.STARTUP, ResourcesConfig.SPEC, "bbl/strainers/resources.toml");
-
         StrainersIngredientDurations.loadItemDurationsFromConfig(StrainersConfigFile.blockDurations.get());
 
     }

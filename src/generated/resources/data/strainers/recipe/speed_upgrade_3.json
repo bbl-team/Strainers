@@ -4,10 +4,10 @@
   "group": "strainers",
   "key": {
     "M": {
-      "tag": "strainers:tier_4_meshes"
+      "tag": "c:storage_blocks/netherite"
     },
     "U": {
-      "item": "strainers:mesh_upgrade_1"
+      "item": "strainers:speed_upgrade_2"
     }
   },
   "pattern": [
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "strainers:mesh_upgrade_2"
+    "id": "strainers:speed_upgrade_3"
   }
 }

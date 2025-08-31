@@ -1,8 +1,10 @@
 package com.benbenlaw.strainers.item;
 
 import com.benbenlaw.strainers.Strainers;
+import com.benbenlaw.strainers.config.StrainersConfigFile;
 import com.benbenlaw.strainers.item.custom.MulchItem;
 import com.benbenlaw.strainers.item.custom.MeshItem;
+import com.benbenlaw.strainers.item.custom.UpgradeItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -119,18 +121,21 @@ public class ModItems {
     public static final DeferredItem<Item> DEBRIS_ORE_PIECE = ITEMS.register("debris_ore_piece", () -> new Item(new Item.Properties()));
 
     //Strainer Upgrades
-    public static final DeferredItem<Item> MESH_UPGRADE_1 = ITEMS.register("mesh_upgrade_1",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> MESH_UPGRADE_2 = ITEMS.register("mesh_upgrade_2",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> MESH_UPGRADE_3 = ITEMS.register("mesh_upgrade_3",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> OUTPUT_UPGRADE_1 = ITEMS.register("output_upgrade_1",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> OUTPUT_UPGRADE_2 = ITEMS.register("output_upgrade_2",
-            () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> OUTPUT_UPGRADE_3 = ITEMS.register("output_upgrade_3",
-            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> CHANCE_UPGRADE_1 = ITEMS.register("chance_upgrade_1",
+            () -> new UpgradeItem(new Item.Properties(), StrainersConfigFile.chanceIncrease1.get()));
+    public static final DeferredItem<Item> CHANCE_UPGRADE_2 = ITEMS.register("chance_upgrade_2",
+            () -> new UpgradeItem(new Item.Properties(), StrainersConfigFile.chanceIncrease2.get()));
+    public static final DeferredItem<Item> CHANCE_UPGRADE_3 = ITEMS.register("chance_upgrade_3",
+            () -> new UpgradeItem(new Item.Properties(), StrainersConfigFile.chanceIncrease3.get()));
+
+    public static final DeferredItem<Item> SPEED_UPGRADE_1 = ITEMS.register("speed_upgrade_1",
+            () -> new UpgradeItem(new Item.Properties(), StrainersConfigFile.speedReduction1.get().intValue()));
+    public static final DeferredItem<Item> SPEED_UPGRADE_2 = ITEMS.register("speed_upgrade_2",
+            () -> new UpgradeItem(new Item.Properties(), StrainersConfigFile.speedReduction2.get()));
+    public static final DeferredItem<Item> SPEED_UPGRADE_3 = ITEMS.register("speed_upgrade_3",
+            () -> new UpgradeItem(new Item.Properties(), StrainersConfigFile.speedReduction3.get()));
+
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

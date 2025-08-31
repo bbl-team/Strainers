@@ -14,6 +14,15 @@ public final class StrainersConfigFile {
     public static final ModConfigSpec.ConfigValue<Integer> strainerMaxProgress;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> blockDurations;
 
+    public static final ModConfigSpec.ConfigValue<Integer> speedReduction1;
+    public static final ModConfigSpec.ConfigValue<Integer> speedReduction2;
+    public static final ModConfigSpec.ConfigValue<Integer> speedReduction3;
+    public static final ModConfigSpec.ConfigValue<Double> chanceIncrease1;
+    public static final ModConfigSpec.ConfigValue<Double> chanceIncrease2;
+    public static final ModConfigSpec.ConfigValue<Double> chanceIncrease3;
+
+
+
 
     static {
         BUILDER.push("Strainers Config File");
@@ -29,6 +38,24 @@ public final class StrainersConfigFile {
 
         blockDurations = BUILDER.comment("The durations of the blocks in the world, default = [], example \"minecraft:cherry_leaves=1000\"")
                 .defineList("Block Durations", List.of(), o -> o instanceof String);
+
+        speedReduction1 = BUILDER.comment("The speed reduction of the tier 1 upgrade, default = 50")
+                        .define("Speed Reduction 1", 50);
+
+        speedReduction2 = BUILDER.comment("The speed reduction of the tier 2 upgrade, default = 100")
+                        .define("Speed Reduction 2", 100);
+
+        speedReduction3 = BUILDER.comment("The speed reduction of the tier 3 upgrade, default = 150")
+                        .define("Speed Reduction 3", 150);
+
+        chanceIncrease1 = BUILDER.comment("The chance increase of the tier 1 upgrade, default = 0.5")
+                .define("Chance Increase 1", 0.5);
+
+        chanceIncrease2 = BUILDER.comment("The chance increase of the tier 2 upgrade, default = 1.0")
+                .define("Chance Increase 2", 1.0);
+
+        chanceIncrease3 = BUILDER.comment("The chance increase of the tier 3 upgrade, default = 1.5")
+                .define("Chance Increase 3", 1.5);
 
 
         BUILDER.pop();

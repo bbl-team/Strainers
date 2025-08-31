@@ -4,10 +4,10 @@
   "group": "strainers",
   "key": {
     "M": {
-      "tag": "c:storage_blocks/netherite"
+      "tag": "strainers:tier_5_meshes"
     },
     "U": {
-      "item": "strainers:output_upgrade_2"
+      "item": "strainers:chance_upgrade_1"
     }
   },
   "pattern": [
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "strainers:output_upgrade_3"
+    "id": "strainers:chance_upgrade_2"
   }
 }

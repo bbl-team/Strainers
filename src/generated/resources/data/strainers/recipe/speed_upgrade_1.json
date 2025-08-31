@@ -4,10 +4,10 @@
   "group": "strainers",
   "key": {
     "M": {
-      "tag": "strainers:tier_6_meshes"
+      "tag": "c:storage_blocks/iron"
     },
     "U": {
-      "item": "strainers:mesh_upgrade_2"
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "strainers:mesh_upgrade_3"
+    "id": "strainers:speed_upgrade_1"
   }
 }

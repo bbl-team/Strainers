@@ -4,6 +4,7 @@ import com.benbenlaw.core.block.entity.SyncableBlockEntity;
 import com.benbenlaw.core.block.entity.handler.IInventoryHandlingBlockEntity;
 import com.benbenlaw.core.block.entity.handler.InputOutputItemHandler;
 import com.benbenlaw.core.recipe.ChanceResult;
+import com.benbenlaw.strainers.item.custom.UpgradeItem;
 import com.benbenlaw.strainers.recipe.MeshChanceResult;
 import com.benbenlaw.strainers.recipe.ModRecipes;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
@@ -57,11 +58,18 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
-
             if (slot == UPGRADE_SLOT_1 || slot == UPGRADE_SLOT_2 || slot == UPGRADE_SLOT_3 || slot == MESH_SLOT) {
                 return 1;
             }
             return super.getStackLimit(slot, stack);
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            if (slot == UPGRADE_SLOT_1 || slot == UPGRADE_SLOT_2 || slot == UPGRADE_SLOT_3 || slot == MESH_SLOT) {
+                return 1;
+            }
+            return super.getSlotLimit(slot);
         }
     };
     private FakePlayer fakePlayer;
@@ -232,6 +240,8 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
             if (match.isPresent()) {
                 maxProgress = StrainersIngredientDurations.getDuration(itemHandler.getStackInSlot(INPUT_SLOT));
+                maxProgress = getNewMaxProgress(maxProgress);
+
                 StrainerRecipe currentRecipe = match.get().value();
 
                 if (hasCorrectBlockAbove(currentRecipe)) {
@@ -265,6 +275,26 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
                 resetProgress();
             }
         }
+    }
+
+    public int getNewMaxProgress(int adjustedMaxProgress) {
+
+        int newMaxProgress = adjustedMaxProgress;
+
+        ItemStack upgradeSlot1 = itemHandler.getStackInSlot(UPGRADE_SLOT_1);
+        ItemStack upgradeSlot2 = itemHandler.getStackInSlot(UPGRADE_SLOT_2);
+        ItemStack upgradeSlot3 = itemHandler.getStackInSlot(UPGRADE_SLOT_3);
+
+        ItemStack[] upgradeSlots = {upgradeSlot1, upgradeSlot2, upgradeSlot3};
+
+        for (ItemStack upgradeSlot : upgradeSlots) {
+            if (upgradeSlot.isEmpty()) continue;
+
+            if (upgradeSlot.getItem() instanceof UpgradeItem upgradeItem) {
+                newMaxProgress -= upgradeItem.getSpeedReduction();
+            }
+        }
+        return Math.max(20, newMaxProgress);
     }
 
     public void fillOutputSlots(List<ItemStack> results) {
@@ -317,13 +347,37 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
                 if (meshChance == MeshChanceResult.EMPTY) continue;
                 if (!meshChance.mesh().isEmpty() && !meshChance.mesh().test(meshStack)) continue;
 
-                combinedResults.add(meshChance.chanceResult());
+                ChanceResult original = meshChance.chanceResult();
+                ChanceResult booster = applyUpgradeBoost(original);
+
+                combinedResults.add(booster);
             }
         }
 
         return combinedResults;
     }
 
+    private ChanceResult applyUpgradeBoost(ChanceResult original) {
+
+        double newChance = original.chance();
+
+        ItemStack upgradeSlot1 = itemHandler.getStackInSlot(UPGRADE_SLOT_1);
+        ItemStack upgradeSlot2 = itemHandler.getStackInSlot(UPGRADE_SLOT_2);
+        ItemStack upgradeSlot3 = itemHandler.getStackInSlot(UPGRADE_SLOT_3);
+
+        ItemStack[] upgradeSlots = {upgradeSlot1, upgradeSlot2, upgradeSlot3};
+
+        for (ItemStack upgradeSlot : upgradeSlots) {
+            if (upgradeSlot.isEmpty()) continue;
+
+            if (upgradeSlot.getItem() instanceof UpgradeItem upgradeItem) {
+                newChance += upgradeItem.getOutputIncrease();
+            }
+        }
+
+        double boostedChance = original.chance() + Math.min(1, newChance);
+        return new ChanceResult(original.stack(), (float) boostedChance);
+    }
 
     private boolean hasCorrectBlockAbove(StrainerRecipe recipe) {
         return recipe.getBlockAbove() == getBlockAbove();

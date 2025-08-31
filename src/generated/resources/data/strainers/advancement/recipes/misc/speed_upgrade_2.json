@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:output_upgrade_2"
+        "recipe": "strainers:speed_upgrade_2"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:output_upgrade_2"
+      "strainers:speed_upgrade_2"
     ]
   }
 }

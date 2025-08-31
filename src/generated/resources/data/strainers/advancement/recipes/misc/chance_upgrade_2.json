@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#strainers:tier_6_meshes"
+            "items": "#strainers:tier_4_meshes"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:mesh_upgrade_3"
+        "recipe": "strainers:chance_upgrade_2"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:mesh_upgrade_3"
+      "strainers:chance_upgrade_2"
     ]
   }
 }

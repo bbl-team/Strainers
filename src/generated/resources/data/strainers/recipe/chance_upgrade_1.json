@@ -4,10 +4,10 @@
   "group": "strainers",
   "key": {
     "M": {
-      "tag": "c:storage_blocks/diamond"
+      "tag": "strainers:tier_2_meshes"
     },
     "U": {
-      "item": "strainers:output_upgrade_1"
+      "item": "minecraft:iron_ingot"
     }
   },
   "pattern": [
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "strainers:output_upgrade_2"
+    "id": "strainers:chance_upgrade_1"
   }
 }

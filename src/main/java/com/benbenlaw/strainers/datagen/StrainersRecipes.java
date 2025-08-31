@@ -43,68 +43,68 @@ public class StrainersRecipes extends RecipeProvider {
     protected void buildRecipes(RecipeOutput consumer) {
 
         //Mesh Upgrade 1
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CHANCE_UPGRADE_1)
                 .pattern(" M ")
                 .pattern("MUM")
                 .pattern(" M ")
                 .define('M', ModTags.Items.TIER_2_MESHES)
-                .define('U', CoreItems.UPGRADE_BASE)
+                .define('U', Items.IRON_INGOT)
                 .group("strainers")
                 .unlockedBy("has_item", has(ModTags.Items.TIER_2_MESHES))
                 .save(consumer);
 
         //Mesh Upgrade 2
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CHANCE_UPGRADE_2)
                 .pattern(" M ")
                 .pattern("MUM")
                 .pattern(" M ")
-                .define('M', ModTags.Items.TIER_4_MESHES)
-                .define('U', ModItems.MESH_UPGRADE_1)
+                .define('M', ModTags.Items.TIER_5_MESHES)
+                .define('U', ModItems.CHANCE_UPGRADE_1)
                 .group("strainers")
                 .unlockedBy("has_item", has(ModTags.Items.TIER_4_MESHES))
                 .save(consumer);
 
         //Mesh Upgrade 3
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MESH_UPGRADE_3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CHANCE_UPGRADE_3)
                 .pattern(" M ")
                 .pattern("MUM")
                 .pattern(" M ")
-                .define('M', ModTags.Items.TIER_6_MESHES)
-                .define('U', ModItems.MESH_UPGRADE_2)
+                .define('M', ModTags.Items.TIER_8_MESHES)
+                .define('U', ModItems.CHANCE_UPGRADE_2)
                 .group("strainers")
                 .unlockedBy("has_item", has(ModTags.Items.TIER_6_MESHES))
                 .save(consumer);
 
 
         //Output Upgrade 1
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPEED_UPGRADE_1)
                 .pattern(" M ")
                 .pattern("MUM")
                 .pattern(" M ")
                 .define('M', Tags.Items.STORAGE_BLOCKS_IRON)
-                .define('U', CoreItems.UPGRADE_BASE)
+                .define('U', Items.IRON_INGOT)
                 .group("strainers")
                 .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_IRON))
                 .save(consumer);
 
         //Output Upgrade 2
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPEED_UPGRADE_2)
                 .pattern(" M ")
                 .pattern("MUM")
                 .pattern(" M ")
                 .define('M', Tags.Items.STORAGE_BLOCKS_DIAMOND)
-                .define('U', ModItems.OUTPUT_UPGRADE_1)
+                .define('U', ModItems.SPEED_UPGRADE_1)
                 .group("strainers")
                 .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_DIAMOND))
                 .save(consumer);
 
         //Output Upgrade 3
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OUTPUT_UPGRADE_3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.SPEED_UPGRADE_3)
                 .pattern(" M ")
                 .pattern("MUM")
                 .pattern(" M ")
                 .define('M', Tags.Items.STORAGE_BLOCKS_NETHERITE)
-                .define('U', ModItems.OUTPUT_UPGRADE_2)
+                .define('U', ModItems.SPEED_UPGRADE_2)
                 .group("strainers")
                 .unlockedBy("has_item", has(Tags.Items.STORAGE_BLOCKS_NETHERITE))
                 .save(consumer);
