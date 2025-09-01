@@ -775,8 +775,8 @@ public class StrainersRecipes extends RecipeProvider {
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/stone/purified_stone"));
 
         //Soul Sand -> Purified Soul Sand
-        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(ItemTags.SAND), createMeshChanceResultList(
-                new ItemStack(ModBlocks.PURIFIED_SAND.get()),
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(Items.SOUL_SAND), createMeshChanceResultList(
+                new ItemStack(ModBlocks.PURIFIED_SOUL_SAND.get()),
                 0.8f, 5,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/soul_sand/purified_soul_sand"));
 

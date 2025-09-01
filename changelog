@@ -2,6 +2,9 @@ Changelog BBL Strainers
 
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
 
+5.1.1
+Fixed purified soul sand recipe
+
 5.1.0 (ALPHA)
 Remove old upgrades
 Added Chance Upgrades 1-3 increases the chance of items by 0.5, 1.0 and 1.5
