@@ -46,13 +46,30 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
 
         assert blockEntity != null;
 
-        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.INPUT_SLOT, 8, 17)); //Upgrade
-        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_SLOT, 8, 35)); //Mesh
+        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.INPUT_SLOT, 8, 17) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return !stack.is(ModTags.Items.MESHES) && !stack.is(ModTags.Items.UPGRADES);
+            }
+        });
+
+        this.addSlot(new CoreSlot(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.MESH_SLOT, 8, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModTags.Items.MESHES);
+            }
+        });
+
 
         this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.UPGRADE_SLOT_1, 8, 53) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
+            }
+
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModTags.Items.UPGRADES);
             }
         });
 
@@ -61,11 +78,21 @@ public class WoodenStrainerMenu extends AbstractContainerMenu {
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
             }
+
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModTags.Items.UPGRADES);
+            }
         });
         this.addSlot(new SlotItemHandler(blockEntity.getItemStackHandler(), WoodenStrainerBlockEntity.UPGRADE_SLOT_3, 8, 89) {
             @Override
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, CoreSlotTextures.UPGRADE_SLOT);
+            }
+
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(ModTags.Items.UPGRADES);
             }
         });
 

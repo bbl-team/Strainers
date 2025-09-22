@@ -20,7 +20,7 @@ public class MulchItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
         if(Screen.hasShiftDown()) {
-            components.add(Component.translatable(translation).withStyle(ChatFormatting.YELLOW));
+            components.add(Component.translatable(translation).withStyle(ChatFormatting.BLUE));
         } else {
             components.add(Component.translatable("tooltips.bblcore.shift").withStyle(ChatFormatting.YELLOW));
         }

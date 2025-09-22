@@ -22,6 +22,15 @@ public class StrainersItemTags extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
 
+        tag(ModTags.Items.UPGRADES)
+                .add(ModItems.SPEED_UPGRADE_1.get())
+                .add(ModItems.SPEED_UPGRADE_2.get())
+                .add(ModItems.SPEED_UPGRADE_3.get())
+                .add(ModItems.CHANCE_UPGRADE_1.get())
+                .add(ModItems.CHANCE_UPGRADE_2.get())
+                .add(ModItems.CHANCE_UPGRADE_3.get())
+        ;
+
         tag(ModTags.Items.TIER_1_MESHES)
                 .add(ModItems.WOODEN_MESH.get())
         ;

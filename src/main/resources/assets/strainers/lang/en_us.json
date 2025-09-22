@@ -32,6 +32,9 @@
   "item.strainers.purifying_salt_mulch": "Purifying Salt Mulch",
   "item.strainers.eroding_salt_mulch": "Eroding Salt Mulch",
   "item.strainers.blazing_salt_mulch": "Blazing Salt Mulch",
+  "item.strainers.leaf_pile": "Leaf Pile",
+
+
 
   "item.strainers.speed_upgrade_1": "Speed Upgrade 1",
   "item.strainers.speed_upgrade_2": "Speed Upgrade 2",
@@ -129,13 +132,13 @@
   "tooltips.strainers.eroding_salt_mulch": "Right click on a Block of Mulch with Eroding Salt Mulch to create a source block of Eroding Water.",
   "tooltips.strainers.blazing_salt_mulch": "Right click on a Block of Mulch with Blazing Salt Mulch to create a source block of Lava.",
 
-  "tooltip.strainers.output_increase": "Output Increase: %s",
+  "tooltip.strainers.output_increase": "%s added to output chance",
   "tooltip.strainers.duration_decrease": "Duration Decrease: %s",
 
   "jei.strainers.mulch_block": "Right click with a hoe to create a source block of Water.\n\nRight click on a Block of Mulch with Eroding Salt Mulch to create a source block of Eroding Water.\n\nRight click on a Block of Mulch with Eroding Salt Mulch to create a source block of Eroding Water.",
   "jei.strainer.place_block": "Place Block Above",
   "jei.strainer.place_fluid": "Place Fluid Above",
-  "jei.strainer.duration": "Duration",
+  "jei.strainer.duration": "Duration: %s Ticks",
 
   "block.gui.output_upgrade": "Output Upgrade",
   "block.gui.mesh_upgrade": "Mesh Upgrade",

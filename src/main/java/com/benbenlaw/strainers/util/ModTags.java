@@ -39,6 +39,7 @@ public class ModTags {
         public static final TagKey<Item> TIER_8_MESHES = tag("tier_8_meshes");
         public static final TagKey<Item> TIER_9_MESHES = tag("tier_9_meshes");
         public static final TagKey<Item> TIER_10_MESHES = tag("tier_10_meshes");
+        public static final TagKey<Item> UPGRADES = tag("upgrades");
 
         public static final TagKey<Item> MESHES = tag("meshes");
 

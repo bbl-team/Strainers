@@ -37,7 +37,7 @@ public class JEIBlockRenderHelper {
 
         // Render the block
         blockRenderer.renderSingleBlock(
-                Blocks.WATER.defaultBlockState(),
+                state,
                 poseStack,
                 guiGraphics.bufferSource(),
                 0xF000F0,

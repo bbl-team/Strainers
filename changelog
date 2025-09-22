@@ -1,6 +1,34 @@
 Changelog BBL Strainers
 
 //********** UPDATE VERSION IN GRADLE PROPERTIES WHEN CHANGING THIS **********//
+//MAKE AIR VALID
+//FIX JEI ISSUES WHEN BLOCKS ARE USED INSTEAD OF FLUIDS
+
+5.1.3
+Tooltips now the correct color, updated tooltips to make more sense
+Slots now only accept the correct items
+Fixed Purified Stone texture
+Added Leaf Pile texture
+Added leaf pile to composter
+Added mulch to composter
+Duration now shows in JEI
+Fixed JEI not rendering blocks
+Recipe tweaks;
+    Added Rare Clay drop from purified dirt
+    Reduced sapling chances to 0.1 from 0.5
+    Reduced most drops from purified sand to 0.1 from 0.4
+    Reduced strings from leaves to 0.05 from 0.4
+    Added mulch to dirt recipe in purifying water
+    Mulch to dirt crafting recipe now makes 2 dirt
+    Added Melon and Pumpkin seeds to purified dirt
+    Added Beetroot seeds to purified dirt
+    Added Carrot and Potato to purified dirt
+    Added Sweet Berries to purified dirt
+    Removed Bamboo from purified dirt
+
+
+5.1.2
+Updated config defaults
 
 5.1.1
 Fixed purified soul sand recipe

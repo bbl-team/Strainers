@@ -35,6 +35,7 @@ public class StrainersItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.PURIFYING_SALT_MULCH);
         simpleItem(ModItems.ERODING_SALT_MULCH);
         simpleItem(ModItems.BLAZING_SALT_MULCH);
+        simpleItem(ModItems.LEAF_PILE);
 
         //Upgrades
         simpleItem(ModItems.SPEED_UPGRADE_1);
@@ -76,7 +77,6 @@ public class StrainersItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HEAVY_MESH);
 
         //Ore Pieces
-
         simpleItem(ModItems.IRON_ORE_PIECE);
         simpleItem(ModItems.GOLD_ORE_PIECE);
         simpleItem(ModItems.COPPER_ORE_PIECE);

@@ -39,7 +39,8 @@ public class UpgradeItem extends Item {
 
         if (Screen.hasShiftDown()) {
             if (speedReduction == 0) {
-                components.add(Component.translatable("tooltip.strainers.output_increase", outputIncrease).withStyle(ChatFormatting.YELLOW));
+                String outputIncrease = String.format("%.0f%%", this.outputIncrease * 100);
+                components.add(Component.translatable("tooltip.strainers.output_increase", outputIncrease).withStyle(ChatFormatting.BLUE));
             } else {
                 components.add(Component.translatable("tooltip.strainers.duration_decrease", speedReduction).withStyle(ChatFormatting.YELLOW));
             }

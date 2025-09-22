@@ -2,7 +2,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:strainer/dirt/bamboo"
+        "recipe": "strainers:strainer/mulch/dirt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -14,7 +14,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:strainer/dirt/bamboo"
+      "strainers:strainer/mulch/dirt"
     ]
   },
   "sends_telemetry_event": true

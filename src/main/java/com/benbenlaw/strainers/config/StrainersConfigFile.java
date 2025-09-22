@@ -48,14 +48,14 @@ public final class StrainersConfigFile {
         speedReduction3 = BUILDER.comment("The speed reduction of the tier 3 upgrade, default = 150")
                         .define("Speed Reduction 3", 150);
 
-        chanceIncrease1 = BUILDER.comment("The chance increase of the tier 1 upgrade, default = 0.5")
-                .define("Chance Increase 1", 0.5);
+        chanceIncrease1 = BUILDER.comment("The chance increase of the tier 1 upgrade, default = 0.1")
+                .define("Chance Increase 1",  0.1);
 
-        chanceIncrease2 = BUILDER.comment("The chance increase of the tier 2 upgrade, default = 1.0")
-                .define("Chance Increase 2", 1.0);
+        chanceIncrease2 = BUILDER.comment("The chance increase of the tier 2 upgrade, default = 0.2")
+                .define("Chance Increase 2",  0.2);
 
-        chanceIncrease3 = BUILDER.comment("The chance increase of the tier 3 upgrade, default = 1.5")
-                .define("Chance Increase 3", 1.5);
+        chanceIncrease3 = BUILDER.comment("The chance increase of the tier 3 upgrade, default = 0.3")
+                .define("Chance Increase 3",  0.3);
 
 
         BUILDER.pop();

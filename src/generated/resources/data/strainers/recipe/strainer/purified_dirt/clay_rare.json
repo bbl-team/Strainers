@@ -11,30 +11,10 @@
   },
   "results": [
     {
-      "chance": 0.1,
-      "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
-      },
-      "mesh": {
-        "tag": "strainers:tier_1_meshes"
-      }
-    },
-    {
-      "chance": 0.15,
-      "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
-      },
-      "mesh": {
-        "tag": "strainers:tier_2_meshes"
-      }
-    },
-    {
       "chance": 0.2,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_3_meshes"
@@ -43,8 +23,8 @@
     {
       "chance": 0.25,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_4_meshes"
@@ -53,8 +33,8 @@
     {
       "chance": 0.3,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_5_meshes"
@@ -63,8 +43,8 @@
     {
       "chance": 0.35,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_6_meshes"
@@ -73,8 +53,8 @@
     {
       "chance": 0.4,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_7_meshes"
@@ -83,8 +63,8 @@
     {
       "chance": 0.45,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_8_meshes"
@@ -93,8 +73,8 @@
     {
       "chance": 0.5,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_9_meshes"
@@ -103,8 +83,8 @@
     {
       "chance": 0.55,
       "item": {
-        "count": 1,
-        "id": "minecraft:acacia_sapling"
+        "count": 4,
+        "id": "minecraft:clay_ball"
       },
       "mesh": {
         "tag": "strainers:tier_10_meshes"

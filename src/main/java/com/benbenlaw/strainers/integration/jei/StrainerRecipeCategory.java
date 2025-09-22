@@ -1,9 +1,11 @@
 package com.benbenlaw.strainers.integration.jei;
 
 import com.benbenlaw.core.recipe.ChanceResult;
+import com.benbenlaw.core.util.MouseUtil;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
+import com.benbenlaw.strainers.util.StrainersIngredientDurations;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -86,13 +89,14 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
     public void setRecipe(IRecipeLayoutBuilder builder, StrainerRecipeDisplay recipe, IFocusGroup focusGroup) {
 
         Fluid fluidState = recipe.aboveBlock().getFluidState().getType();
+        System.out.println(fluidState);
 
-        if (fluidState == null) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).addItemStack(new ItemStack(Blocks.SAND))
+        if (fluidState == Fluids.EMPTY) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).addItemStack(recipe.aboveBlock().getBlock().asItem().getDefaultInstance())
                     .setCustomRenderer(VanillaTypes.ITEM_STACK, new IIngredientRenderer<>() {
                         @Override
                         public void render(GuiGraphics guiGraphics, ItemStack stack) {
-                            JEIBlockRenderHelper.renderBlock(guiGraphics, recipe.aboveBlock(), 1,12 , 0.60f);
+                            JEIBlockRenderHelper.renderBlock(guiGraphics, recipe.aboveBlock(), 1,12, 0.60f);
                         }
 
                         @Override
@@ -128,16 +132,6 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
         builder.addSlot(RecipeIngredientRole.INPUT, 2, 20).addIngredients(recipe.input());
         builder.addSlot(RecipeIngredientRole.CATALYST, 2, 38).addIngredients(recipe.mesh());
 
-        List<ChanceResult> modifiedOutputs = recipe.getChanceResults();
-        int size = modifiedOutputs.size();
-
-        int outputsPerRow = 5;
-        int maxRows = 3;
-        int slotSize = 18;
-
-        int startX = 51;
-        int startY = 2;
-
         for (var result : recipe.getChanceResults()) {
             builder.addSlotToWidget(RecipeIngredientRole.OUTPUT, this.scrollGridWidgetFactory)
                     .addItemStack(result.stack())
@@ -150,31 +144,16 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
                                 .append("%").withStyle(ChatFormatting.GOLD));
                     });
         }
-
-        /*
-        for (int i = 0; i < size && i < outputsPerRow * maxRows; i++) {
-            int xOffset = startX + (i % outputsPerRow) * slotSize;
-            int yOffset = startY + (i / outputsPerRow) * slotSize;
-
-            int finalIndex = i;
-            builder.addSlot(RecipeIngredientRole.OUTPUT, xOffset, yOffset)
-                    .addItemStack(modifiedOutputs.get(i).stack())
-                    .addRichTooltipCallback((slotView, tooltip) -> {
-                        ChanceResult output = modifiedOutputs.get(finalIndex);
-                        double baseChance = output.chance();
-                        int asPercent = Math.round((float) (baseChance * 100));
-
-                        tooltip.add(Component.translatable("block.strainer.jei.chance")
-                                .append(String.valueOf(asPercent))
-                                .append("%").withStyle(ChatFormatting.GOLD));
-                    });
-        }
-
-         */
     }
 
     @Override
     public void draw(StrainerRecipeDisplay recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+
+        if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 22, 20, 0, 0, 26, 19)) {
+            int duration = StrainersIngredientDurations.getDuration(recipe.input().getItems()[0]);
+            guiGraphics.renderTooltip(Minecraft.getInstance().font, Component.translatable("jei.strainer.duration", duration), (int) mouseX, (int) mouseY);
+        }
+
 
     }
 

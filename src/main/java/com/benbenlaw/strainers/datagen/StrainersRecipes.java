@@ -164,7 +164,7 @@ public class StrainersRecipes extends RecipeProvider {
                 .save(consumer);
 
         //Dirt
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.DIRT)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Blocks.DIRT, 2)
                 .pattern("AA")
                 .pattern("AA")
                 .define('A', ModBlocks.MULCH)
@@ -475,12 +475,6 @@ public class StrainersRecipes extends RecipeProvider {
                 0.2f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/dirt/stone_pebble_rar"));
 
-        //Dirt -> Bamboo
-        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.DIRT), createMeshChanceResultList(
-                new ItemStack(Items.BAMBOO),
-                0.1f, 1,10,0.07f
-        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/dirt/bamboo"));
-
         //Dirt -> Stick
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(Items.DIRT), createMeshChanceResultList(
                 new ItemStack(Items.STICK),
@@ -490,7 +484,7 @@ public class StrainersRecipes extends RecipeProvider {
         //Leaves -> String
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ItemTags.LEAVES), createMeshChanceResultList(
                 new ItemStack(Items.STRING),
-                0.4f, 1,10,0.1f
+                0.05f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/leaves/string"));
 
         //Leaves -> Stick
@@ -529,6 +523,42 @@ public class StrainersRecipes extends RecipeProvider {
                 0.1f, 2,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/gravel/flint"));
 
+        //Purified Dirt -> Melon Seeds
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.MELON_SEEDS),
+                0.15f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/melon_seeds"));
+
+        //Purified Dirt -> Beetroot Seeds
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.BEETROOT_SEEDS),
+                0.25f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/beetroot_seeds"));
+
+        //Purified Dirt -> Carrot
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.CARROT),
+                0.2f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/carrot"));
+
+        //Purified Dirt -> Potato
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.POTATO),
+                0.2f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/potato"));
+
+        //Purified Dirt -> Pumpkin Seeds
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.PUMPKIN_SEEDS),
+                0.15f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/pumpkin_seeds"));
+
+        //Purified Dirt -> Sweet Berries
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.SWEET_BERRIES),
+                0.15f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/sweet_berries"));
+
         //Purified Dirt -> Wheat Seeds
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.WHEAT_SEEDS),
@@ -541,61 +571,65 @@ public class StrainersRecipes extends RecipeProvider {
                 0.2f, 3,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/bone_meal"));
 
-        //Purified Dirt -> Clay
+        //Purified Dirt -> Clay Ball
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.CLAY_BALL),
-                0.4f, 3,10,0.05f
+                0.5f, 3,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/clay"));
+
+        //Purified Dirt -> Clay Ball (RARE)
+        StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
+                new ItemStack(Items.CLAY_BALL, 4),
+                0.2f, 3,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/clay_rare"));
 
         //Purified Dirt -> Oak Sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.OAK_SAPLING),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/oak_sapling"));
 
         //Purified Dirt -> Birch Sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.BIRCH_SAPLING),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/birch_sapling"));
 
         //Purified Dirt -> Spruce Sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.SPRUCE_SAPLING),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/spruce_sapling"));
 
         //Purified Dirt -> Jungle Sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.JUNGLE_SAPLING),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/jungle_sapling"));
 
         //Purified Dirt -> Acacia Sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.ACACIA_SAPLING),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/acacia_sapling"));
 
         //Purified Dirt -> Dark Oak Sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.DARK_OAK_SAPLING),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/dark_oak_sapling"));
 
         //Purified Dirt -> Cherry Sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.CHERRY_SAPLING),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/cherry_sapling"));
 
         //Purified Dirt -> Mangrove Propagule
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.MANGROVE_PROPAGULE),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/mangrove_propagule"));
-
-
 
         //Purified Gravel -> Aluminum Ore Piece
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_GRAVEL), createMeshChanceResultList(
@@ -792,6 +826,12 @@ public class StrainersRecipes extends RecipeProvider {
                 0.8f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/soul_soil"));
 
+        //Mulch -> DirtSoil
+        StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(ModBlocks.MULCH), createMeshChanceResultList(
+                new ItemStack(Items.DIRT),
+                0.8f, 1,10,0.05f
+        )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/mulch/dirt"));
+
         //Copper Block -> Breeze Rod
         StrainerRecipeBuilder.strainerRecipe(PURIFYING_WATER, Ingredient.of(Blocks.COPPER_BLOCK), createMeshChanceResultList(
                 new ItemStack(Items.BREEZE_ROD),
@@ -873,37 +913,37 @@ public class StrainersRecipes extends RecipeProvider {
         //Purified Sand -> Cactus
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
                 new ItemStack(Items.CACTUS),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/cactus"));
 
         //Purified Sand -> Sugar Cane
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
                 new ItemStack(Items.SUGAR_CANE),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/sugar_cane"));
 
         //Purified Sand -> Sea Pickle
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
                 new ItemStack(Items.SEA_PICKLE ),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/sea_pickle"));
 
         //Purified Sand -> Kelp
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
                 new ItemStack(Items.KELP),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/kelp"));
 
         //Purified Sand -> Sea Grass
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
                 new ItemStack(Items.SEAGRASS),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/sea_grass"));
 
         //Purified Sand -> Bamboo
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_SAND), createMeshChanceResultList(
                 new ItemStack(Items.BAMBOO),
-                0.4f, 1,10,0.05f
+                0.1f, 1,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_sand/bamboo"));
 
     }

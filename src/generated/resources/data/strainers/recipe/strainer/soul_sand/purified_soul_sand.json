@@ -7,14 +7,14 @@
     }
   },
   "input": {
-    "tag": "minecraft:sand"
+    "item": "minecraft:soul_sand"
   },
   "results": [
     {
       "chance": 0.8,
       "item": {
         "count": 1,
-        "id": "strainers:purified_sand"
+        "id": "strainers:purified_soul_sand"
       },
       "mesh": {
         "tag": "strainers:tier_5_meshes"
@@ -24,7 +24,7 @@
       "chance": 0.85,
       "item": {
         "count": 1,
-        "id": "strainers:purified_sand"
+        "id": "strainers:purified_soul_sand"
       },
       "mesh": {
         "tag": "strainers:tier_6_meshes"
@@ -34,7 +34,7 @@
       "chance": 0.9,
       "item": {
         "count": 1,
-        "id": "strainers:purified_sand"
+        "id": "strainers:purified_soul_sand"
       },
       "mesh": {
         "tag": "strainers:tier_7_meshes"
@@ -44,7 +44,7 @@
       "chance": 0.95,
       "item": {
         "count": 1,
-        "id": "strainers:purified_sand"
+        "id": "strainers:purified_soul_sand"
       },
       "mesh": {
         "tag": "strainers:tier_8_meshes"
@@ -53,7 +53,7 @@
     {
       "item": {
         "count": 1,
-        "id": "strainers:purified_sand"
+        "id": "strainers:purified_soul_sand"
       },
       "mesh": {
         "tag": "strainers:tier_9_meshes"
@@ -62,7 +62,7 @@
     {
       "item": {
         "count": 1,
-        "id": "strainers:purified_sand"
+        "id": "strainers:purified_soul_sand"
       },
       "mesh": {
         "tag": "strainers:tier_10_meshes"
