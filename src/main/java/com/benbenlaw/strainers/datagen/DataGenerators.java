@@ -40,8 +40,6 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new StrainersBlockStatesProvider(packOutput, event.getExistingFileHelper()));
 
 
-
-
     }
 
 
