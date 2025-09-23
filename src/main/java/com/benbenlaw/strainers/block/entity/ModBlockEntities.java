@@ -26,10 +26,18 @@ public class ModBlockEntities {
             register("strainer_tank_block_entity", () ->
                     BlockEntityType.Builder.of(StrainerTankBlockEntity::new, ModBlocks.STRAINER_TANK.get()));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CompactorBlockEntity>> COMPACTOR_BLOCK_ENTITY =
+            register("compactor_block_entity", () ->
+                    BlockEntityType.Builder.of(CompactorBlockEntity::new, ModBlocks.COMPACTOR.get()));
+
+
     //Capability Registration (Item Handler)
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK,
                 ModBlockEntities.WOODEN_STRAINER_BLOCK_ENTITY.get(), WoodenStrainerBlockEntity::getItemHandlerCapability);
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK,
+                ModBlockEntities.COMPACTOR_BLOCK_ENTITY.get(), CompactorBlockEntity::getItemHandlerCapability);
 
     }
 

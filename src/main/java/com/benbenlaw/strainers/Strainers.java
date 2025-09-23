@@ -10,6 +10,7 @@ import com.benbenlaw.strainers.item.ModItems;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.recipe.ModRecipes;
 import com.benbenlaw.strainers.screen.ModMenuTypes;
+import com.benbenlaw.strainers.screen.custom.CompactorScreen;
 import com.benbenlaw.strainers.screen.custom.WoodenStrainerScreen;
 import com.benbenlaw.strainers.util.StrainersIngredientDurations;
 import com.benbenlaw.strainers.util.StrainersColorHandler;
@@ -73,13 +74,15 @@ public class Strainers {
 
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(modid = MOD_ID)
     public static class ClientModEvents {
 
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
 
             event.register(ModMenuTypes.WOODEN_STRAINER_MENU.get(), WoodenStrainerScreen::new);
+            event.register(ModMenuTypes.COMPACTOR_MENU.get(), CompactorScreen::new);
+
 
         }
 

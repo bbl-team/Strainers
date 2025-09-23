@@ -78,6 +78,7 @@
   "block.strainers.purified_soul_soil": "Purified Soul Soil",
   "block.strainers.purified_gravel": "Purified Gravel",
   "block.strainers.strainer_tank": "Strainer Tank",
+  "block.strainers.compactor": "Compactor",
 
   "block.strainers.gui.input_slot": "Input Slot",
   "block.strainers.gui.mesh_slot": "Mesh Slot",

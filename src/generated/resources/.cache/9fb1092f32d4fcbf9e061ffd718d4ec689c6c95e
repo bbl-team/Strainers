@@ -1,4 +1,4 @@
-// 1.21.1	2025-09-22T19:05:32.8943676	Recipes
+// 1.21.1	2025-09-23T15:55:37.110206	Recipes
 6495430b293f9e9f376935b3c3538d11333f1e0a data/strainers/advancement/recipes/misc/amethyst_mesh.json
 309e8e21fc3c6ddc5dca61b6190ce16b183c7eb3 data/strainers/advancement/recipes/misc/bamboo_mesh.json
 8925ac158cf532612ea35778f29e95f7c01f1796 data/strainers/advancement/recipes/misc/blaze_mesh.json
@@ -9,6 +9,7 @@ b8a1e0f9b6e145fe378271184e829637590b603e data/strainers/advancement/recipes/misc
 14b149993bab95bd8a2de20a38bcd3cdc45b9b3b data/strainers/advancement/recipes/misc/chance_upgrade_1.json
 fe2a8af0e181a5293f2e3cd06fdab21f400f5962 data/strainers/advancement/recipes/misc/chance_upgrade_2.json
 9dac4d8b038a4738db104d0fa4bfb430a00984eb data/strainers/advancement/recipes/misc/chance_upgrade_3.json
+cefd1336644c40c75f6e06b2e1220f8d0861d8af data/strainers/advancement/recipes/misc/compactor.json
 6b73b4d80de5ded2501e46588e69802dba3d9198 data/strainers/advancement/recipes/misc/copper_mesh.json
 4154707b2f2a38313871a095a0043d506abdaac5 data/strainers/advancement/recipes/misc/diamond_mesh.json
 da7131ed34bcdccdd37debd9ed5ee3d5483bc0f8 data/strainers/advancement/recipes/misc/dirt_from_mulch.json
@@ -126,6 +127,7 @@ f6ff92bf3cda04d808a5832850819e63a420a85c data/strainers/recipe/bronze_mesh.json
 71740f70ddd4278c247dc8b7bf1987db9b5932b4 data/strainers/recipe/chance_upgrade_1.json
 f678c6663808729c21d2ad8f6cccca84f768679d data/strainers/recipe/chance_upgrade_2.json
 94fe64d3ff6de8b654cc7650ac695509aa53c146 data/strainers/recipe/chance_upgrade_3.json
+eea4f88d72c44ca0482de4b6c0c92532c4d7ed6a data/strainers/recipe/compactor.json
 1bf3dd49588923bc273bf529b14268e450c88ea1 data/strainers/recipe/copper_mesh.json
 686db0447496eb91edab35c2e7a800f0d68f9ce0 data/strainers/recipe/diamond_mesh.json
 b7b00d1cc54d5073a9faf148b6416c7c1321a8e4 data/strainers/recipe/dirt_from_mulch.json

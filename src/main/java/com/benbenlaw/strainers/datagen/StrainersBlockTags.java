@@ -28,6 +28,7 @@ public class StrainersBlockTags extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.STRAINER_TANK.get())
                 .add(ModBlocks.PURIFIED_STONE.get())
+                .add(ModBlocks.COMPACTOR.get())
         ;
 
         //Shovel

@@ -42,6 +42,17 @@ public class StrainersRecipes extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
 
+        //Compactor
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.COMPACTOR)
+                .pattern("III")
+                .pattern("ICI")
+                .pattern("III")
+                .define('I', Tags.Items.INGOTS_IRON)
+                .define('C', Items.PISTON)
+                .group("strainers")
+                .unlockedBy("has_item", has(Tags.Items.INGOTS_IRON))
+                .save(consumer);
+
         //Mesh Upgrade 1
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.CHANCE_UPGRADE_1)
                 .pattern(" M ")

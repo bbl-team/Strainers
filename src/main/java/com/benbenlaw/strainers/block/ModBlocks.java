@@ -1,6 +1,7 @@
 package com.benbenlaw.strainers.block;
 
 import com.benbenlaw.strainers.Strainers;
+import com.benbenlaw.strainers.block.custom.CompactorBlock;
 import com.benbenlaw.strainers.block.custom.MulchBlock;
 import com.benbenlaw.strainers.block.custom.StrainerTankBlock;
 import com.benbenlaw.strainers.block.custom.WoodenStrainerBlock;
@@ -30,6 +31,10 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> STRAINER_TANK = registerBlock("strainer_tank",
             () -> new StrainerTankBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).sound(SoundType.GLASS)
+                    .noOcclusion()));
+
+    public static final DeferredBlock<Block> COMPACTOR = registerBlock("compactor",
+            () -> new CompactorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).sound(SoundType.STONE)
                     .noOcclusion()));
 
     public static final DeferredBlock<Block> MULCH = registerBlock("mulch",
