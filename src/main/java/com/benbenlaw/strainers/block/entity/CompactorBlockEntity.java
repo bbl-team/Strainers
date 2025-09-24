@@ -52,7 +52,26 @@ public class CompactorBlockEntity extends SyncableBlockEntity implements MenuPro
             setChanged();
             sync();
         }
+
+        @Override
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            if (stack.isEmpty()) return ItemStack.EMPTY;
+
+            // If this is an input slot, use custom logic
+            if (isInputSlot(slot, stack)) {
+                return insertIntoInputs(stack, simulate);
+            }
+
+            // If this is an output slot, use custom logic
+            if (isOutputSlot(slot)) {
+                return insertIntoOutputs(stack, simulate);
+            }
+
+            // Fallback: behave normally
+            return super.insertItem(slot, stack, simulate);
+        }
     };
+
 
     public final ContainerData data;
     public static final int[] INPUT_SLOTS = {0, 1, 2, 3, 4, 5, 6, 7, 8};
@@ -196,20 +215,139 @@ public class CompactorBlockEntity extends SyncableBlockEntity implements MenuPro
     }
 
     private boolean insertResult(ItemStack result) {
+        // Try merging with existing stacks first
         for (int slot : OUTPUT_SLOTS) {
             ItemStack outputStack = itemHandler.getStackInSlot(slot);
 
-            if (outputStack.isEmpty()) {
-                itemHandler.setStackInSlot(slot, result.copy());
-                return true;
-            } else if (ItemStack.isSameItemSameComponents(outputStack, result) &&
-                    outputStack.getCount() + result.getCount() <= outputStack.getMaxStackSize()) {
-                outputStack.grow(result.getCount());
+            if (!outputStack.isEmpty() &&
+                    ItemStack.isSameItemSameComponents(outputStack, result) &&
+                    outputStack.getCount() < outputStack.getMaxStackSize()) {
+
+                int transferable = Math.min(result.getCount(),
+                        outputStack.getMaxStackSize() - outputStack.getCount());
+
+                outputStack.grow(transferable);
+                result.shrink(transferable);
                 itemHandler.setStackInSlot(slot, outputStack);
+
+                if (result.isEmpty()) return true;
+            }
+        }
+
+        // If not fully inserted, try empty slots
+        for (int slot : OUTPUT_SLOTS) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
+                itemHandler.setStackInSlot(slot, result.copy());
+                result.setCount(0);
                 return true;
             }
         }
-        return false;
+
+        return result.isEmpty();
     }
+
+    private boolean insertInput(ItemStack stack) {
+        // Try merging into existing stacks first
+        for (int slot : INPUT_SLOTS) {
+            ItemStack existing = itemHandler.getStackInSlot(slot);
+            if (!existing.isEmpty() &&
+                    ItemStack.isSameItemSameComponents(existing, stack) &&
+                    existing.getCount() < existing.getMaxStackSize()) {
+
+                int transferable = Math.min(stack.getCount(),
+                        existing.getMaxStackSize() - existing.getCount());
+
+                existing.grow(transferable);
+                stack.shrink(transferable);
+                itemHandler.setStackInSlot(slot, existing);
+
+                if (stack.isEmpty()) return true;
+            }
+        }
+
+        // If not fully inserted, try empty slots
+        for (int slot : INPUT_SLOTS) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
+                itemHandler.setStackInSlot(slot, stack.copy());
+                stack.setCount(0);
+                return true;
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+    private ItemStack insertIntoInputs(ItemStack stack, boolean simulate) {
+        ItemStack remaining = stack.copy();
+
+        // Merge with existing stacks
+        for (int slot : INPUT_SLOTS) {
+            ItemStack existing = itemHandler.getStackInSlot(slot);
+            if (!existing.isEmpty() &&
+                    ItemStack.isSameItemSameComponents(existing, remaining)) {
+
+                int transferable = Math.min(remaining.getCount(),
+                        existing.getMaxStackSize() - existing.getCount());
+
+                if (transferable > 0) {
+                    if (!simulate) {
+                        existing.grow(transferable);
+                        itemHandler.setStackInSlot(slot, existing);
+                    }
+                    remaining.shrink(transferable);
+                    if (remaining.isEmpty()) return ItemStack.EMPTY;
+                }
+            }
+        }
+
+        // Fill empty slots
+        for (int slot : INPUT_SLOTS) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
+                if (!simulate) {
+                    itemHandler.setStackInSlot(slot, remaining.copy());
+                }
+                return ItemStack.EMPTY;
+            }
+        }
+
+        return remaining; // Couldn’t insert all
+    }
+
+    private ItemStack insertIntoOutputs(ItemStack stack, boolean simulate) {
+        ItemStack remaining = stack.copy();
+
+        // Merge with existing stacks
+        for (int slot : OUTPUT_SLOTS) {
+            ItemStack existing = itemHandler.getStackInSlot(slot);
+            if (!existing.isEmpty() &&
+                    ItemStack.isSameItemSameComponents(existing, remaining)) {
+
+                int transferable = Math.min(remaining.getCount(),
+                        existing.getMaxStackSize() - existing.getCount());
+
+                if (transferable > 0) {
+                    if (!simulate) {
+                        existing.grow(transferable);
+                        itemHandler.setStackInSlot(slot, existing);
+                    }
+                    remaining.shrink(transferable);
+                    if (remaining.isEmpty()) return ItemStack.EMPTY;
+                }
+            }
+        }
+
+        // Fill empty slots
+        for (int slot : OUTPUT_SLOTS) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
+                if (!simulate) {
+                    itemHandler.setStackInSlot(slot, remaining.copy());
+                }
+                return ItemStack.EMPTY;
+            }
+        }
+
+        return remaining;
+    }
+
 }
 

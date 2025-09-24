@@ -4,6 +4,9 @@ Changelog BBL Strainers
 //MAKE AIR VALID
 //FIX JEI ISSUES WHEN BLOCKS ARE USED INSTEAD OF FLUIDS
 
+5.1.6
+Tweaked compactor itemhandler to fill a fit better to prevent the same item being in multiple slots
+
 5.1.5
 Added Compactor, compacts 2x2 and 3x3 crafting recipes
 
