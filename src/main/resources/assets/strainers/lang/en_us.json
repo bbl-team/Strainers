@@ -140,6 +140,7 @@
   "jei.strainer.place_block": "Place Block Above",
   "jei.strainer.place_fluid": "Place Fluid Above",
   "jei.strainer.duration": "Duration: %s Ticks",
+  "block.strainer.jei.not_consumed": "Not Consumed",
 
   "block.gui.output_upgrade": "Output Upgrade",
   "block.gui.mesh_upgrade": "Mesh Upgrade",

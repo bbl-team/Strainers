@@ -5,6 +5,7 @@ import com.benbenlaw.core.util.MouseUtil;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
+import com.benbenlaw.strainers.util.ModTags;
 import com.benbenlaw.strainers.util.StrainersIngredientDurations;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -24,6 +25,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDisplay> {
     public final static ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer");
@@ -89,7 +92,6 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
     public void setRecipe(IRecipeLayoutBuilder builder, StrainerRecipeDisplay recipe, IFocusGroup focusGroup) {
 
         Fluid fluidState = recipe.aboveBlock().getFluidState().getType();
-        System.out.println(fluidState);
 
         if (fluidState == Fluids.EMPTY) {
             builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).addItemStack(recipe.aboveBlock().getBlock().asItem().getDefaultInstance())
@@ -129,7 +131,14 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipeDis
         }
 
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 2, 20).addIngredients(recipe.input());
+        builder.addSlot(RecipeIngredientRole.INPUT, 2, 20).addIngredients(recipe.input())
+                .addRichTooltipCallback((slotView, tooltip) -> {
+                    Optional<ItemStack> currentItem = Optional.of(slotView.getDisplayedItemStack().orElse(ItemStack.EMPTY));
+                    if (currentItem.get().is(ModTags.Items.NOT_CONSUMED)) {
+                        tooltip.add(Component.translatable("block.strainer.jei.not_consumed").withStyle(ChatFormatting.GOLD));
+                    }
+                });
+
         builder.addSlot(RecipeIngredientRole.CATALYST, 2, 38).addIngredients(recipe.mesh());
 
         for (var result : recipe.getChanceResults()) {

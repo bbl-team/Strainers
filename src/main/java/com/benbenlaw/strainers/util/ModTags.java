@@ -43,6 +43,8 @@ public class ModTags {
 
         public static final TagKey<Item> MESHES = tag("meshes");
 
+        public static final TagKey<Item> NOT_CONSUMED = tag("not_consumed");
+
 
 
         private static TagKey<Item> tag(String name) {

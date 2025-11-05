@@ -298,7 +298,12 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
     }
 
     public void fillOutputSlots(List<ItemStack> results) {
-        itemHandler.getStackInSlot(INPUT_SLOT).shrink(1);
+
+        ItemStack inputStack = itemHandler.getStackInSlot(INPUT_SLOT);
+
+        if (!inputStack.is(ModTags.Items.NOT_CONSUMED)) {
+            inputStack.shrink(1);
+        }
 
         ItemStack meshItem = this.itemHandler.getStackInSlot(MESH_SLOT);
         if (meshItem.isDamageableItem()) {

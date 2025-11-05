@@ -4,6 +4,16 @@ Changelog BBL Strainers
 //MAKE AIR VALID
 //FIX JEI ISSUES WHEN BLOCKS ARE USED INSTEAD OF FLUIDS
 
+5.2.0
+- Versions no longer marked as alphas, rewrite is complete
+- Added "strainers:not_consumed" item tag, items in this tag will not be consumed when used in a strainer recipe
+- JEI now also shows this information in recipes
+- Added empty "strainers:not_consumed" tag to allow pack makers to add items to this tag
+
+5.1.7
+Fixed leaf pile recipe causing error in KubeJS
+Updated to In World Recipes 1.5.9
+
 5.1.6
 Tweaked compactor itemhandler to fill a fit better to prevent the same item being in multiple slots
 
