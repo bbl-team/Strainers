@@ -4,6 +4,9 @@ Changelog BBL Strainers
 //MAKE AIR VALID
 //FIX JEI ISSUES WHEN BLOCKS ARE USED INSTEAD OF FLUIDS
 
+5.2.1
+- Updated compactor texture
+
 5.2.0
 - Versions no longer marked as alphas, rewrite is complete
 - Added "strainers:not_consumed" item tag, items in this tag will not be consumed when used in a strainer recipe

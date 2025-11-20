@@ -73,23 +73,9 @@ dependencies {
     compileOnly "curse.maven:in-world-recipes-1123257:7031541"
     runtimeOnly "curse.maven:in-world-recipes-1123257:7031541"
 
-    //Opolis Utilities
-    compileOnly "curse.maven:opolis-utilities-649644:6106709"
-    runtimeOnly "curse.maven:opolis-utilities-649644:6106709"
-
     //JEI
     compileOnly "curse.maven:jei-238222:5846880"
     runtimeOnly "curse.maven:jei-238222:5846880"
-
-    //EMI
-
-    //compileOnly "curse.maven:emi-580555:5619579"
-    //runtimeOnly "curse.maven:emi-580555:5619579"
-
-    //Ender IO
-
-    compileOnly "curse.maven:enderio-64578:5771156"
-    runtimeOnly "curse.maven:enderio-64578:5771156"
 
 
 }
