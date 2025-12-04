@@ -314,21 +314,34 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
         }
 
         for (ItemStack result : results) {
+            if (result.isEmpty()) continue;
+
             for (int outputSlot : OUTPUT_SLOTS) {
+                if (result.isEmpty()) break;
+
                 ItemStack slotStack = itemHandler.getStackInSlot(outputSlot);
-                if (slotStack.isEmpty()) {
-                    itemHandler.setStackInSlot(outputSlot, result.copy());
-                    result.setCount(0);
-                    break;
-                } else if (ItemStack.isSameItem(slotStack, result)) {
+
+                if (!slotStack.isEmpty() && ItemStack.isSameItem(slotStack, result)) {
                     int maxStackSize = slotStack.getMaxStackSize();
                     int spaceLeft = maxStackSize - slotStack.getCount();
+
                     if (spaceLeft > 0) {
                         int toAdd = Math.min(spaceLeft, result.getCount());
                         slotStack.grow(toAdd);
                         result.shrink(toAdd);
-                        if (result.isEmpty()) break;
                     }
+                }
+            }
+
+            for (int outputSlot : OUTPUT_SLOTS) {
+                if (result.isEmpty()) break;
+
+                ItemStack slotStack = itemHandler.getStackInSlot(outputSlot);
+
+                if (slotStack.isEmpty()) {
+                    itemHandler.setStackInSlot(outputSlot, result.copy());
+                    result.setCount(0);
+                    break;
                 }
             }
         }
