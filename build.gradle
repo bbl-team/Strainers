@@ -5,8 +5,8 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.165'
-    id 'net.darkhax.curseforgegradle' version '1.1.24'
+    id 'net.neoforged.moddev' version '2.0.115'
+    id 'net.darkhax.curseforgegradle' version '1.1.25'
     id "com.modrinth.minotaur" version "2.+"
 }
 
@@ -23,6 +23,14 @@ repositories {
             includeGroup("curse.maven")
         }
     }
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 base {
     archivesName = mod_id
@@ -30,53 +38,55 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-runs {
-    configureEach {
 
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
-        systemProperty 'forge.logging.console.level', 'debug'
-        modSource project.sourceSets.main
+
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
     }
 
-    client {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+    runs {
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            systemProperty 'forge.logging.console.level', 'debug'
+        }
+
+        client {
+            client()
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+            programArgument '--nogui'
+        }
+
+        clientData {
+            clientData()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
     }
 
-    server {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
-    }
-    gameTestServer {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-    }
-
-    data {
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
-}
-
 dependencies {
 
-    implementation "net.neoforged:neoforge:${neo_version}"
-
-    //BBL Core
-    compileOnly "curse.maven:bbl-core-1135181:6486837"
-    runtimeOnly "curse.maven:bbl-core-1135181:6486837"
-
-    //In World Recipes
-    compileOnly "curse.maven:in-world-recipes-1123257:7031541"
-    runtimeOnly "curse.maven:in-world-recipes-1123257:7031541"
-
     //JEI
-    compileOnly "curse.maven:jei-238222:5846880"
-    runtimeOnly "curse.maven:jei-238222:5846880"
+    //implementation("mezz.jei:jei-${jei_mc_version}:${jei_version}")
 
+    implementation("curse.maven:bblcore-1135181:7335770")
 
 }
 
@@ -133,38 +143,42 @@ idea {
     }
 }
 
-
 tasks.register('publishCurseForge', TaskPublishCurseForge) {
     group "modpublishing"
 
     apiToken = System.getenv("curseforge_token").toString()
 
-    def projectId = 882351
+    def projectId = curseforge_id
     def mainFile = upload(projectId, jar)
 
     mainFile.changelog = changelog
-    mainFile.addOptional("jei") // JEI
-    mainFile.releaseType = "release"
-    mainFile.gameVersions.addAll("1.21", "1.21.1")
+    mainFile.releaseType = "${release_type}"
+
+    "${release_versions}".split(',').each {
+        mainFile.addGameVersion("${it}")
+    }
+
+    mainFile.addModLoader("neoforge")
     mainFile.addEnvironment("server", "client")
 
 }
+
 
 tasks.getByName("modrinth").setGroup("modpublishing")
 
 modrinth {
     token = System.getenv("modrinth_token").toString()
-    projectId = "uwQqLJQs"
-    versionType = "release"
-    versionName = "strainers-" + "$minecraft_version" + "-" + "$mod_version"
+    projectId = "${modrinth_id}"
+    versionType = "${release_type}"
+    versionName = "${mod_id}" + "$minecraft_version" + "-" + "$mod_version"
     uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
 
-    gameVersions.addAll("1.21", "1.21.1")
-
+    gameVersions = "${release_versions}".split(',').collect {e -> e}
     loaders = ["neoforge"]
     changelog = project.changelog
     dependencies {
         optional.project "jei"
-
     }
 }
+
+
