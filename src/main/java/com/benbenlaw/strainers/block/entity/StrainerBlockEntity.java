@@ -1,0 +1,367 @@
+package com.benbenlaw.strainers.block.entity;
+
+import com.benbenlaw.core.block.entity.SyncableBlockEntity;
+import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;
+import com.benbenlaw.core.block.entity.handler.item.CombinedItemHandler;
+import com.benbenlaw.core.block.entity.handler.item.InputItemHandler;
+import com.benbenlaw.core.block.entity.handler.item.OutputItemHandler;
+import com.benbenlaw.core.util.FakePlayerUtil;
+import com.benbenlaw.strainers.block.StrainersBlockEntities;
+import com.benbenlaw.strainers.item.StrainersDataComponents;
+import com.benbenlaw.strainers.item.util.FluidListComponent;
+import com.benbenlaw.strainers.recipe.StrainerRecipe;
+import com.benbenlaw.strainers.recipe.StrainerRecipeInput;
+import com.benbenlaw.strainers.screen.custom.StrainerMenu;
+import com.benbenlaw.strainers.util.StrainersTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidUtil;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+
+import java.util.List;
+
+public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProvider {
+
+    private final ContainerData data;
+    private int maxProgress = 200;
+    private int progress = 0;
+
+    private final InputItemHandler inputHandler = new InputItemHandler(this, 2,
+            (i, stack) -> i == 0 || i == 1) {
+        @Override
+        protected void onContentsChanged(int index, ItemStack previousContents) {
+            updateCachedRecipes();
+            super.onContentsChanged(index, previousContents);
+        }
+    };
+
+    private final InputFluidHandler inputFluidHandler =
+            new InputFluidHandler(this, 1, 1000, (i, stack) -> i == 0);
+
+    private final OutputItemHandler outputHandler =
+            new OutputItemHandler(this, 18, i -> true);
+
+    private List<RecipeHolder<StrainerRecipe>> cachedRecipes = List.of();
+
+    public StrainerBlockEntity(BlockPos pos, BlockState state) {
+        super(StrainersBlockEntities.STRAINER_BLOCK_ENTITY.get(), pos, state);
+
+        this.data = new ContainerData() {
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> progress;
+                    case 1 -> maxProgress;
+                    default -> 0;
+                };
+            }
+
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> progress = value;
+                    case 1 -> maxProgress = value;
+                }
+            }
+
+            public int getCount() {
+                return 2;
+            }
+        };
+    }
+
+    public void tick() {
+        if (level == null || level.isClientSide()) return;
+
+        ItemStack input = inputHandler.getResource(0).toStack();
+        ItemStack mesh = inputHandler.getResource(1).toStack();
+
+        if (input.isEmpty() || mesh.isEmpty()) {
+            progress = 0;
+            cachedRecipes = List.of();
+            sync();
+            return;
+        }
+
+        int meshTier = getMeshTier(mesh);
+
+        if (meshTier <= 0) {
+            progress = 0;
+            cachedRecipes = List.of();
+            sync();
+            return;
+        }
+
+        if (cachedRecipes.isEmpty()) {
+            updateCachedRecipes();
+        }
+
+        List<RecipeHolder<StrainerRecipe>> validRecipes = cachedRecipes.stream()
+                .filter(holder -> meshTier >= holder.value().minMeshTier())
+                .toList();
+
+        if (validRecipes.isEmpty()) {
+            progress = 0;
+            sync();
+            return;
+        }
+
+        if (canInsertAnyOutput(validRecipes)) {
+            progress++;
+
+            if (progress >= maxProgress) {
+                craftItem(meshTier, validRecipes);
+            }
+        } else {
+            progress = 0;
+            sync();
+        }
+    }
+
+    private boolean canInsertAnyOutput(List<RecipeHolder<StrainerRecipe>> validRecipes) {
+        for (RecipeHolder<StrainerRecipe> holder : validRecipes) {
+            ItemStack stack = holder.value().result().template().create();
+
+            if (canInsertOutputs(List.of(stack))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<ItemStack> getPreviewOutputs() {
+        if (cachedRecipes.isEmpty()) return List.of();
+
+        List<ItemStack> outputs = new java.util.ArrayList<>();
+
+        for (RecipeHolder<StrainerRecipe> holder : cachedRecipes) {
+            ItemStack stack = holder.value().result().template().create();
+            if (!stack.isEmpty()) {
+                outputs.add(stack);
+            }
+        }
+
+        return outputs;
+    }
+
+    private void updateCachedRecipes() {
+        if (level == null || level.getServer() == null) return;
+
+        var input = new StrainerRecipeInput(inputHandler, inputFluidHandler);
+
+        cachedRecipes = level.getServer().getRecipeManager()
+                .recipeMap().getRecipesFor(StrainerRecipe.TYPE, input, level)
+                .filter(holder -> holder.value().matches(input, level))
+                .toList();
+    }
+
+    private List<ItemStack> rollAllOutputs() {
+        if (level == null) return List.of();
+
+        RandomSource random = level.getRandom();
+        List<ItemStack> outputs = new java.util.ArrayList<>();
+
+        for (RecipeHolder<StrainerRecipe> holder : cachedRecipes) {
+            int meshTier = getMeshTier(inputHandler.getResource(1).toStack());
+
+            ItemStack stack = holder.value().rollWithTier(random, meshTier);
+            if (!stack.isEmpty()) {
+                outputs.add(stack);
+            }
+        }
+
+        return outputs;
+    }
+    private void craftItem(int meshTier, List<RecipeHolder<StrainerRecipe>> validRecipes) {
+        if (level == null || validRecipes.isEmpty()) return;
+
+        RandomSource random = level.getRandom();
+        List<ItemStack> outputs = new java.util.ArrayList<>();
+
+        for (RecipeHolder<StrainerRecipe> holder : validRecipes) {
+            ItemStack rolled = holder.value().rollWithTier(random, meshTier);
+            if (!rolled.isEmpty()) {
+                outputs.add(rolled);
+            }
+        }
+
+        if (outputs.isEmpty()) {
+            try (Transaction tx = Transaction.open(null)) {
+                int cost = validRecipes.getFirst().value().input().count();
+                inputHandler.extractInternal(0, inputHandler.getResource(0), cost, tx);
+                tx.commit();
+            }
+
+            progress = 0;
+            sync();
+            return;
+        }
+
+        try (Transaction tx = Transaction.open(null)) {
+
+            for (ItemStack stack : outputs) {
+                int remaining = stack.getCount();
+
+                for (int i = 0; i < outputHandler.size() && remaining > 0; i++) {
+                    int inserted = outputHandler.insertInternalReturn(
+                            i,
+                            ItemResource.of(stack),
+                            remaining,
+                            tx
+                    );
+                    remaining -= inserted;
+                }
+
+                if (remaining > 0) {
+                    return;
+                }
+            }
+
+            int cost = validRecipes.getFirst().value().input().count();
+            inputHandler.extractInternal(0, inputHandler.getResource(0), cost, tx);
+            ItemStack mesh = inputHandler.getResource(1).toStack();
+            if (mesh.isDamageableItem()) {
+                int oldDamage = mesh.getDamageValue();
+                mesh.setDamageValue(oldDamage + 1);
+                inputHandler.set(1, ItemResource.of(mesh), 1);
+                if (mesh.getDamageValue() >= mesh.getMaxDamage()) {
+                    inputHandler.extractInternal(1, inputHandler.getResource(1), 1, tx);
+                    level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                }
+            }
+
+            tx.commit();
+        }
+
+        progress = 0;
+        sync();
+    }
+
+    private boolean canInsertOutputs(List<ItemStack> outputs) {
+        try (Transaction tx = Transaction.open(null)) {
+            for (ItemStack stack : outputs) {
+                int remaining = stack.getCount();
+
+                for (int i = 0; i < outputHandler.size() && remaining > 0; i++) {
+                    int inserted = outputHandler.insertInternalReturn(
+                            i,
+                            ItemResource.of(stack),
+                            remaining,
+                            tx
+                    );
+                    remaining -= inserted;
+                }
+
+                if (remaining > 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+
+    private int getMeshTier(ItemStack mesh) {
+        if (mesh.isEmpty()) return 0;
+
+        if (mesh.is(StrainersTags.Items.TIER_1_MESHES)) return 1;
+        if (mesh.is(StrainersTags.Items.TIER_2_MESHES)) return 2;
+        if (mesh.is(StrainersTags.Items.TIER_3_MESHES)) return 3;
+        if (mesh.is(StrainersTags.Items.TIER_4_MESHES)) return 4;
+        if (mesh.is(StrainersTags.Items.TIER_5_MESHES)) return 5;
+        if (mesh.is(StrainersTags.Items.TIER_6_MESHES)) return 6;
+        if (mesh.is(StrainersTags.Items.TIER_7_MESHES)) return 7;
+        if (mesh.is(StrainersTags.Items.TIER_8_MESHES)) return 8;
+
+        return 0;
+    }
+
+    public boolean onPlayerUse(Player player, InteractionHand hand) {
+        return FluidUtil.interactWithFluidHandler(player, hand, this.worldPosition, inputFluidHandler);
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output) {
+        inputHandler.serialize(output.child("input"));
+        inputFluidHandler.serialize(output.child("inputFluid"));
+        outputHandler.serialize(output.child("output"));
+        output.putInt("progress", progress);
+        output.putInt("maxProgress", maxProgress);
+        super.saveAdditional(output);
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput input) {
+        inputHandler.deserialize(input.childOrEmpty("input"));
+        inputFluidHandler.deserialize(input.childOrEmpty("inputFluid"));
+        outputHandler.deserialize(input.childOrEmpty("output"));
+        progress = input.getIntOr("progress", 0);
+        maxProgress = input.getIntOr("maxProgress", 200);
+        super.loadAdditional(input);
+    }
+
+    public InputItemHandler getInputHandler() { return inputHandler; }
+    public InputFluidHandler getInputFluidHandler() { return inputFluidHandler; }
+    public OutputItemHandler getOutputHandler() { return outputHandler; }
+
+    public ResourceHandler<ItemResource> getItemCapability() {
+        return new CombinedItemHandler(inputHandler, outputHandler);
+    }
+
+    public ResourceHandler<FluidResource> getFluidCapability() {
+        return inputFluidHandler;
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int container, Inventory inventory, Player player) {
+        return new StrainerMenu(container, inventory, this.worldPosition, data);
+    }
+
+    @Override
+    public @NonNull Component getDisplayName() {
+        return Component.translatable("block.strainers.strainer");
+    }
+
+    @Override
+    public void preRemoveSideEffects(@NonNull BlockPos pos, @NonNull BlockState state) {
+        dropInventoryContents(inputHandler);
+        dropInventoryContents(outputHandler);
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.Builder builder) {
+        super.collectImplicitComponents(builder);
+        builder.set(StrainersDataComponents.FLUIDS.get(),
+                FluidListComponent.fromHandlers(inputFluidHandler));
+    }
+
+    @Override
+    protected void applyImplicitComponents(DataComponentGetter components) {
+        super.applyImplicitComponents(components);
+        FluidListComponent component = components.get(StrainersDataComponents.FLUIDS.get());
+        if (component != null) {
+            component.applyToHandlers(inputFluidHandler);
+        }
+    }
+}

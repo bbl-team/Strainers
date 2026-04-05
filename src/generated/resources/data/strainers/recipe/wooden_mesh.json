@@ -1,19 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "strainers",
   "key": {
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "A": "#c:rods/wooden",
+    "B": "#c:rods/wooden"
   },
   "pattern": [
-    "SSS",
-    "S S",
-    "SSS"
+    "ABA",
+    "B B",
+    "ABA"
   ],
   "result": {
-    "count": 1,
     "id": "strainers:wooden_mesh"
   }
 }

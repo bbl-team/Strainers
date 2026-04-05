@@ -4,6 +4,7 @@ Changelog BBL Strainers
 //MAKE AIR VALID
 //FIX JEI ISSUES WHEN BLOCKS ARE USED INSTEAD OF FLUIDS
 
+
 5.2.2
 - Strainer now adds to stacks before creating a new stack in output slots
 

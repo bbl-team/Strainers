@@ -31,10 +31,3 @@ type="required"
 versionRange="1.21-1.1.34"
 ordering="NONE"
 side="BOTH"
-
-[[dependencies."${mod_id}"]]
-modId="inworldrecipes"
-type="required"
-versionRange="1.21-1.1.0,"
-ordering="NONE"
-side="BOTH"

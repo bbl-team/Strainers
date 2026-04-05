@@ -1,0 +1,18 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 1.0,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 2,
+    "ingredient": "#minecraft:leaves"
+  },
+  "min_mesh_tier": 1,
+  "result": {
+    "item": {
+      "id": "strainers:leaf_pile"
+    }
+  }
+}

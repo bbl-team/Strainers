@@ -1,22 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "strainers",
   "key": {
-    "B": {
-      "tag": "c:ingots/iron"
-    },
-    "S": {
-      "tag": "c:rods/wooden"
-    }
+    "A": "#c:rods/wooden",
+    "B": "#c:ingots/iron"
   },
   "pattern": [
-    "SBS",
-    "BBB",
-    "SBS"
+    "ABA",
+    "B B",
+    "ABA"
   ],
   "result": {
-    "count": 1,
     "id": "strainers:iron_mesh"
   }
 }

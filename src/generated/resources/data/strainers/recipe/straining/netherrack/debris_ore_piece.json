@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.15000000596046448,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:netherrack"
+  },
+  "min_mesh_tier": 7,
+  "result": {
+    "chance": 0.75,
+    "item": {
+      "id": "strainers:debris_ore_piece"
+    }
+  }
+}

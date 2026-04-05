@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.25,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "#minecraft:dirt"
+  },
+  "min_mesh_tier": 1,
+  "result": {
+    "chance": 0.75,
+    "item": {
+      "id": "strainers:stone_pebble"
+    }
+  }
+}

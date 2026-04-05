@@ -11,15 +11,14 @@
   "type": "strainers:shaped_tag_output",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "strainers:copper_ore_piece"
-    }
+    "#":  "strainers:copper_ore_piece"
+
   },
   "pattern": [
     "##",
     "##"
   ],
-  "result": {
+  "tag_result": {
     "count": 1,
     "tag": "c:ores/copper"
 

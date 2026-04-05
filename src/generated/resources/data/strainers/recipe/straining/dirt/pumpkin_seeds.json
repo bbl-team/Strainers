@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.10000000149011612,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "#minecraft:dirt"
+  },
+  "min_mesh_tier": 4,
+  "result": {
+    "chance": 0.1,
+    "item": {
+      "id": "minecraft:pumpkin_seeds"
+    }
+  }
+}
