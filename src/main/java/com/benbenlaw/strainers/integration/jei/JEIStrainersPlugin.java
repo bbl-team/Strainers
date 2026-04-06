@@ -50,6 +50,6 @@ public class JEIStrainersPlugin implements IModPlugin {
     }
 
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(StrainerScreen.class, 24, 2, 24, 16, StrainerRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeClickArea(StrainerScreen.class, 32, 33, 24, 16, StrainerRecipeCategory.RECIPE_TYPE);
     }
 }
