@@ -25,18 +25,19 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class StrainerRecipeBuilder implements RecipeBuilder {
 
     protected String group;
     SizedIngredient input;
-    SizedFluidIngredient fluid;
+    Optional<SizedFluidIngredient> fluid;
     ChanceResult result;
     int minMeshTier;
     double additionalChancePerTier;
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public StrainerRecipeBuilder(SizedIngredient input, SizedFluidIngredient fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) {
+    public StrainerRecipeBuilder(SizedIngredient input, Optional<SizedFluidIngredient> fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) {
         this.input = input;
         this.fluid = fluid;
         this.result = result;
@@ -44,8 +45,12 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
         this.additionalChancePerTier = additionalChancePerTier;
     }
 
-    public static StrainerRecipeBuilder strainerRecipeBuilder(SizedIngredient input, SizedFluidIngredient fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) {
+    public static StrainerRecipeBuilder strainerRecipeBuilder(SizedIngredient input, Optional<SizedFluidIngredient> fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) {
         return new StrainerRecipeBuilder(input, fluid, result, minMeshTier, additionalChancePerTier);
+    }
+
+    public static StrainerRecipeBuilder strainerRecipeBuilder(SizedIngredient input, ChanceResult result, int minMeshTier, double additionalChancePerTier) {
+        return new StrainerRecipeBuilder(input, Optional.empty(), result, minMeshTier, additionalChancePerTier);
     }
 
     @Override

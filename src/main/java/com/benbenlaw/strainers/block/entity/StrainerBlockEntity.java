@@ -41,6 +41,7 @@ import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProvider {
@@ -127,7 +128,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
             return;
         }
 
-        if (canInsertAnyOutput(validRecipes)) {
+        if (canFitAllRecipeTemplate(validRecipes)) {
             progress++;
 
             if (progress >= maxProgress) {
@@ -150,19 +151,17 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         return false;
     }
 
-    private List<ItemStack> getPreviewOutputs() {
-        if (cachedRecipes.isEmpty()) return List.of();
+    private boolean canFitAllRecipeTemplate(List<RecipeHolder<StrainerRecipe>> validRecipes) {
+        List<ItemStack> allPotentialOutputs = new ArrayList<>();
 
-        List<ItemStack> outputs = new java.util.ArrayList<>();
-
-        for (RecipeHolder<StrainerRecipe> holder : cachedRecipes) {
+        for (RecipeHolder<StrainerRecipe> holder : validRecipes) {
             ItemStack stack = holder.value().result().template().create();
             if (!stack.isEmpty()) {
-                outputs.add(stack);
+                allPotentialOutputs.add(stack);
             }
         }
 
-        return outputs;
+        return canInsertOutputs(allPotentialOutputs);
     }
 
     private void updateCachedRecipes() {

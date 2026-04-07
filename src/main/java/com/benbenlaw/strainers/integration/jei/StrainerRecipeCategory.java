@@ -31,6 +31,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -96,7 +97,12 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, StrainerRecipe recipe, IFocusGroup focusGroup) {
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(recipe.fluid().ingredient().display());
+        if (recipe.fluid().isPresent()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(recipe.fluid().get().ingredient().display());
+        } else {
+            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(new ItemStack(Items.AIR));
+        }
+
         builder.addSlot(RecipeIngredientRole.INPUT, 20, 2).add(recipe.input().ingredient().display());
         builder.addSlot(RecipeIngredientRole.INPUT, 38, 2).add(getItem(getMeshTier(recipe.minMeshTier())));
 

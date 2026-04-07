@@ -46,6 +46,9 @@ public class StrainersRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
 
+        //Reset
+        shapeless(RecipeCategory.MISC, StrainersBlocks.STRAINER).requires(StrainersBlocks.STRAINER);
+
         //Strainer
         shaped(RecipeCategory.MISC, StrainersBlocks.STRAINER.get())
                 .pattern("ABA")

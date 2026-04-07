@@ -1,7 +1,9 @@
 package com.benbenlaw.strainers.item;
 
 import com.benbenlaw.strainers.Strainers;
+import com.benbenlaw.strainers.fluid.StrainersFluids;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -13,6 +15,17 @@ public class StrainersItems {
     public static final DeferredItem<Item> SAND_DUST = ITEMS.registerSimpleItem("sand_dust");
     public static final DeferredItem<Item> DUST = ITEMS.registerSimpleItem("dust");
     public static final DeferredItem<Item> LEAF_PILE = ITEMS.registerSimpleItem("leaf_pile");
+    public static final DeferredItem<Item> WATER_DROP = ITEMS.registerItem("water_drop",
+            (properties) -> new FluidDropItem(properties, Fluids.WATER));
+    public static final DeferredItem<Item> LAVA_DROP = ITEMS.registerItem("lava_drop",
+            (properties) -> new FluidDropItem(properties, Fluids.LAVA));
+    public static final DeferredItem<Item> ERODING_DROP = ITEMS.registerItem("eroding_drop",
+            (properties) -> new FluidDropItem(properties, StrainersFluids.ERODING_WATER.getFluid()));
+    public static final DeferredItem<Item> PURIFYING_DROP = ITEMS.registerItem("purifying_drop",
+            (properties) -> new FluidDropItem(properties, StrainersFluids.PURIFYING_WATER.getFluid()));
+
+
+    //public static final DeferredItem<Item> EMPTY_DROP = ITEMS.registerSimpleItem("empty_drop");
 
     //Meshes
     public static final DeferredItem<Item> WOODEN_MESH = ITEMS.registerItem("wooden_mesh",

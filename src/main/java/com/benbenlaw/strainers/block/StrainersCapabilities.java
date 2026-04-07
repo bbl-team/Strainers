@@ -1,15 +1,12 @@
 package com.benbenlaw.strainers.block;
 
-import com.benbenlaw.strainers.block.entity.StrainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
+import com.benbenlaw.strainers.item.FluidDropItem;
+import com.benbenlaw.strainers.item.StrainersItems;
+import com.benbenlaw.strainers.item.util.FluidDropResourceHandler;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-
-import javax.annotation.Nonnull;
-import java.util.function.Supplier;
 
 public class StrainersCapabilities {
 
@@ -24,9 +21,16 @@ public class StrainersCapabilities {
                 (blockEntity, side) -> blockEntity.getFluidCapability());
 
 
-
-
-
+        //Drop
+        StrainersItems.ITEMS.getEntries().forEach(item -> {
+            if (item.get() instanceof FluidDropItem) {
+                event.registerItem(Capabilities.Fluid.ITEM, (stack, access) -> {
+                    if (stack.getItem() instanceof FluidDropItem) {
+                        return new FluidDropResourceHandler(access);
+                    }
+                    return null;
+                }, item.get());
+            }
+        });
     }
-
 }

@@ -5,7 +5,9 @@ import com.benbenlaw.core.tag.CommonTags;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.data.recipes.StrainerRecipeBuilder;
+import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.StrainersItems;
+import com.benbenlaw.strainers.util.StrainersTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -30,6 +32,7 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class StrainersProcessingRecipeProvider extends RecipeProvider {
@@ -57,16 +60,17 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
 
-        //Leaves -> Stone Pebble/Gravel
-        simpleWaterStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stone_pebble");
-        simpleWaterStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/gravel_pebble");
-        simpleWaterStrainer(Items.STICK, 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stick");
-        simpleWaterStrainer(StrainersItems.LEAF_PILE.get(), 2, 1f, ItemTags.LEAVES, 1, 1f, "leaves/leaf_pile");
+        //Leaves -> Stone Pebble/ Gravel/ Stick/ Leaf Pile/ Water Drop
+        simpleStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stone_pebble");
+        simpleStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/gravel_pebble");
+        simpleStrainer(Items.STICK, 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stick");
+        simpleStrainer(StrainersItems.LEAF_PILE.get(), 2, 1f, ItemTags.LEAVES, 1, 1f, "leaves/leaf_pile");
+        simpleStrainer(StrainersItems.WATER_DROP.get(),0.5f, ItemTags.LEAVES, 1, 0.1f, "leaves/water_drop");
 
         //Dirt -> Stone Pebble/Gravel/Stick
-        simpleWaterStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/stone_pebble");
-        simpleWaterStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/gravel_pebble");
-        simpleWaterStrainer(Items.STICK, 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/stick");
+        simpleStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/stone_pebble");
+        simpleStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/gravel_pebble");
+        simpleStrainer(Items.STICK, 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/stick");
 
         //Dirt -> Seeds
         simpleWaterStrainer(Items.WHEAT_SEEDS, 0.1f, ItemTags.DIRT, 1, 0.1f, "dirt/wheat_seeds");
@@ -82,19 +86,36 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         simpleWaterStrainer(Items.SWEET_BERRIES, 0.01f, ItemTags.DIRT, 4, 0.01f, "dirt/sweet_berries");
 
         //Mud -> Clay Ball
-        simpleWaterStrainer(Items.CLAY_BALL, 2, 0.75f, Items.MUD, 1, 0.25f, "mud/clay_ball");
+        simpleStrainer(Items.CLAY_BALL, 2, 0.75f, Items.MUD, 1, 0.25f, "mud/clay_ball");
 
         //Cobblestone -> Gravel Pebble
         simpleWaterStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 2f, Tags.Items.COBBLESTONES, 1, 0.5f, "cobblestone/gravel_pebble");
 
+        //Cobblestone -> Eroding Drop
+        simpleWaterStrainer(StrainersItems.ERODING_DROP.get(), 0.1f, Tags.Items.COBBLESTONES, 1, 0.1f, "cobblestone/eroding_drop");
+
+        //Cobblestone -> Gravel -> Sand -> Dust (Progression)
+        simpleErodingStrainer(Items.GRAVEL, 1.0f, Tags.Items.COBBLESTONES, 1, 0.0f, "cobblestone/gravel");
+        simpleErodingStrainer(Items.SAND, 1.0f, Tags.Items.GRAVELS, 1, 0.0f, "gravel/sand");
+        simpleErodingStrainer(StrainersBlocks.DUST_BLOCK.get().asItem(), 1.0f, Tags.Items.SANDS, 1, 0.0f, "sand/dust_block");
+
+        //Stone -> Netherrack
+        simpleErodingStrainer(Blocks.NETHERRACK.asItem(), 0.75f, Tags.Items.STONES, 5, 0.15f, "stone/netherrack");
+
+        //Netherrack -> Lava Drop
+        simpleErodingStrainer(StrainersItems.LAVA_DROP.get(), 0.1f, Blocks.NETHERRACK.asItem(), 6, 0.1f, "netherrack/lava_drop");
+
         //Gravel -> Sand Dust
-        simpleWaterStrainer(StrainersItems.SAND_DUST.get(), 2f, Items.GRAVEL, 1, 0.5f, "gravel/sand_dust");
+        simpleWaterStrainer(StrainersItems.SAND_DUST.get(), 2, 1f, Items.GRAVEL, 1, 0.5f, "gravel/sand_dust");
 
         //Sand -> Dust
-        simpleWaterStrainer(StrainersItems.DUST.get().asItem(), 2f, Items.SAND, 1, 0.5f, "sand/dust");
+        simpleWaterStrainer(StrainersItems.DUST.get().asItem(), 2,  1f, Items.SAND, 1, 0.5f, "sand/dust");
 
         //Gravel -> Flint (Progression)
         simpleWaterStrainer(Items.FLINT, 0.2f, Items.GRAVEL, 1, 0.1f, "gravel/flint");
+
+        //Ore Pieces -> Pure Drop
+        simpleWaterStrainer(StrainersItems.PURIFYING_DROP.get(), 0.01f, StrainersTags.Items.ORE_PIECES, 1, 0.1f, "ore_pieces/pure_drop");
 
         //Gravel -> Copper (Progression)/ Coal/ Tin/ Zinc/ Aluminum
         simpleWaterStrainerOre(StrainersItems.COPPER_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 2, 0.15f, "copper", "gravel/copper_ore_piece");
@@ -114,7 +135,6 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         //Gravel -> Gold (Progression)/ Silver
         simpleWaterStrainerOre(StrainersItems.GOLD_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 4, 0.15f, "gold", "gravel/gold_ore_piece");
         simpleWaterStrainerOre(StrainersItems.SILVER_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 4, 0.15f, "silver", "gravel/silver_ore_piece");
-
 
         //Gravel -> Diamond (Progression) / Osmium
         simpleWaterStrainerOre(StrainersItems.DIAMOND_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 5, 0.15f, "diamond", "gravel/diamond_ore_piece");
@@ -137,10 +157,51 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
     }
 
+    public void simpleStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
+                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
+    public void simpleStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(ingredient), 1),
+                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
+    public void simpleStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), count),
+                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
+    public void simpleStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
+
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(ingredient), 1),
+                        new ChanceResult(new ItemStackTemplate(template, count), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
     public void simpleWaterStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
         StrainerRecipeBuilder.strainerRecipeBuilder(
                         new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
                         new ChanceResult(new ItemStackTemplate(template, 1), chance),
                         tier,
                         additionalChancePerTier
@@ -152,7 +213,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
         StrainerRecipeBuilder.strainerRecipeBuilder(
                         new SizedIngredient(Ingredient.of(ingredient), 1),
-                        new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
                         new ChanceResult(new ItemStackTemplate(template, 1), chance),
                         tier,
                         additionalChancePerTier
@@ -164,7 +225,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
         StrainerRecipeBuilder.strainerRecipeBuilder(
                         new SizedIngredient(Ingredient.of(ingredient), 1),
-                        new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
                         new ChanceResult(new ItemStackTemplate(template, 1), chance),
                         tier,
                         additionalChancePerTier
@@ -174,9 +235,9 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
     public void simpleWaterStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
         StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), count),
-                        new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
+                        new ChanceResult(new ItemStackTemplate(template, count), chance),
                         tier,
                         additionalChancePerTier
                 )
@@ -187,7 +248,65 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
         StrainerRecipeBuilder.strainerRecipeBuilder(
                         new SizedIngredient(Ingredient.of(ingredient), count),
-                        new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
+                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
+    public void simpleErodingStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
+                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
+    public void simpleErodingStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
+
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(ingredient), 1),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
+                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
+    public void simpleErodingStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String resource, String id) {
+
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(ingredient), 1),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
+                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(CommonTags.getItemTag("ores", resource)))), id);
+    }
+
+    public void simpleErodingStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
+                        new ChanceResult(new ItemStackTemplate(template, count), chance),
+                        tier,
+                        additionalChancePerTier
+                )
+                .save(output, id);
+    }
+
+    public void simpleErodingStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
+
+        StrainerRecipeBuilder.strainerRecipeBuilder(
+                        new SizedIngredient(Ingredient.of(ingredient), count),
+                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
                         new ChanceResult(new ItemStackTemplate(template, 1), chance),
                         tier,
                         additionalChancePerTier

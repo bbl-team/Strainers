@@ -1,4 +1,4 @@
-// 26.1.1	2026-04-05T14:19:19.3252477	strainers Models
+// 26.1.1	2026-04-07T17:10:43.0829103	strainers Models
 234aeaefc0554e1b9f1bd9c7e489b055f3e98f75 assets/strainers/blockstates/dust_block.json
 dace3901812c24d1d3696093ad264cfbfd4632c9 assets/strainers/blockstates/strainer.json
 2c9682829c8a06d80bc8721f927bab2471b589ee assets/strainers/items/aluminum_ore_piece.json
@@ -12,6 +12,7 @@ e02d3735fab1617557bd0f176eab209f942e719d assets/strainers/items/debris_ore_piece
 2ab8c9932f5375b27e5070dd21a5697de8c06a4d assets/strainers/items/dust_block.json
 3c188c2379512f1f48483f688c38f9b53ac24e4c assets/strainers/items/emerald_mesh.json
 eec3306f4c5a52e90d8b602f655db234843c9458 assets/strainers/items/emerald_ore_piece.json
+2157c2beafef4ccbc054e87c3584dcfc06624b07 assets/strainers/items/eroding_drop.json
 0e8a81942f6454a635cf511e3733177a93299218 assets/strainers/items/eroding_water_bucket.json
 8594da45d5de9a753a24ed3d84efb4e3e6d7b453 assets/strainers/items/flint_mesh.json
 fc5b06b61a0a5154b33e1dee7b85b15c5c69fcc9 assets/strainers/items/gold_mesh.json
@@ -20,12 +21,14 @@ abb89faeecfbdfcba2eff8952f1312fbb52e1e0b assets/strainers/items/gold_ore_piece.j
 0300bd0cc16990e4fa9aa06359cb602ece67b0ab assets/strainers/items/iron_mesh.json
 1b19d392005068768fc272bf9f20f3124a3a867e assets/strainers/items/iron_ore_piece.json
 c4c4c63aef509b820df436e710e835304950bd2e assets/strainers/items/lapis_ore_piece.json
+f608c5e9685e8fa7c4ac7096a559000bd69d720a assets/strainers/items/lava_drop.json
 371c2d88324d9f8f62c9d8759dddbacf05098273 assets/strainers/items/lead_ore_piece.json
 b9eeb851948727e27ded139a7d904b78e08d90d7 assets/strainers/items/leaf_pile.json
 5c25b3b5a7389d2ea995e4423a61995feb9a1301 assets/strainers/items/netherite_mesh.json
 d12de63a4cd2d33f6242a0da4d1c59f9920ecf5d assets/strainers/items/nickel_ore_piece.json
 caae207e00906cd03cbf202bab515d07ce60aa37 assets/strainers/items/osmium_ore_piece.json
 74d7418efab7f50cfd2f00d90d9daf864c2b05ae assets/strainers/items/platinum_ore_piece.json
+23b71f5afeb3f8b8805487d7ec3b66e70b78bc6f assets/strainers/items/purifying_drop.json
 5c8bba83069b1b2825b917f11f54c572ddf42ab8 assets/strainers/items/purifying_water_bucket.json
 66a8ccff62b396d1e1f3949e010962765a8381a6 assets/strainers/items/quartz_ore_piece.json
 b848cfbaaa5ff52df573cb08c91db42015561ebe assets/strainers/items/redstone_ore_piece.json
@@ -36,6 +39,7 @@ c327939a8802bf2ce6901568b3ee998d05faaaa1 assets/strainers/items/stone_pebble.jso
 18a8de27d156cb1b82f2c835b11a3a7893883c8b assets/strainers/items/strainer.json
 a9005294e658f50b78594c2d6dd770e455d7751e assets/strainers/items/tin_ore_piece.json
 d3cdd3bff51dc5d2771fb7114a2ec03af4f5d9a4 assets/strainers/items/uranium_ore_piece.json
+68a23c5ef64d5a1aa165512f57f1a6fdbcf0dc3d assets/strainers/items/water_drop.json
 df24e4e4220c077eeca84c7834dd4d3f96d6739c assets/strainers/items/wooden_mesh.json
 8de3b48cbeaebd2f093d4c11ae97af0853b88ae8 assets/strainers/items/zinc_ore_piece.json
 e07c961f000f52bdb88dcd3caea292194751cd22 assets/strainers/models/block/dust_block.json
@@ -51,6 +55,7 @@ c1f834b5903b7b7834600d60f031182e2f1b6d5e assets/strainers/models/item/dust.json
 05742d055aacb58e76f068ca5b963c3631d1669d assets/strainers/models/item/dust_block.json
 2c797b4d257572b9224b9173bef0d919b2f15fe6 assets/strainers/models/item/emerald_mesh.json
 bc2f38f775caed465740e1ec1d8686851be8945d assets/strainers/models/item/emerald_ore_piece.json
+7ad2ab8e42cfb9381776c812dd65bbd9438ef672 assets/strainers/models/item/eroding_drop.json
 a72e6fcb43da35dd75c8aa400393f685748481ac assets/strainers/models/item/flint_mesh.json
 cdf99470f9ec1c56bd79b35599d85e66418dae61 assets/strainers/models/item/gold_mesh.json
 3685943cca82876e2c79c8e06bc9070ae2494417 assets/strainers/models/item/gold_ore_piece.json
@@ -58,12 +63,14 @@ cdf99470f9ec1c56bd79b35599d85e66418dae61 assets/strainers/models/item/gold_mesh.
 570678e0f83fd394e1139528457965c67666264c assets/strainers/models/item/iron_mesh.json
 909d71be344eac360d2b123ec9216f27cd8d452c assets/strainers/models/item/iron_ore_piece.json
 e9ac1746547e723968b75f5ead15be4f406482e4 assets/strainers/models/item/lapis_ore_piece.json
+1d6f880deb0e6851f26a168d9efabd7c80856e78 assets/strainers/models/item/lava_drop.json
 21dc8bd7b1646a696b228e30fde3c17b79b55d53 assets/strainers/models/item/lead_ore_piece.json
 bd929d37c2f8e04218f703f1dec1a8028fa6d970 assets/strainers/models/item/leaf_pile.json
 59ec7a3092f65ceca316cb755417aee35cdc2732 assets/strainers/models/item/netherite_mesh.json
 19b2b38fae3b02b97b06ff7375c8ce9d06dce9b1 assets/strainers/models/item/nickel_ore_piece.json
 a1ccb3c85c54aad2f09b6f1ea6f90c72418c2f6b assets/strainers/models/item/osmium_ore_piece.json
 d1f5f2b28ac4824424ba191072e95285442bdaf3 assets/strainers/models/item/platinum_ore_piece.json
+17c2120828781d41ee5b1994da8a465c37f2a183 assets/strainers/models/item/purifying_drop.json
 2f1309c3a9b24e7fa0425e40edc3a5fb7a8d1ea8 assets/strainers/models/item/quartz_ore_piece.json
 70edb84d5a3d36f7474a8cb822a795841ca3579d assets/strainers/models/item/redstone_ore_piece.json
 9f968dbc72084d3be241066fd5538d6a195d9e9c assets/strainers/models/item/sand_dust.json
@@ -73,5 +80,6 @@ d1f5f2b28ac4824424ba191072e95285442bdaf3 assets/strainers/models/item/platinum_o
 185b7c5b73a785eb86af2ba1407d075f4c8cbd15 assets/strainers/models/item/strainer.json
 e39c8ba3f4b3f4a0fd4a6cfe869b3bdce5e57a91 assets/strainers/models/item/tin_ore_piece.json
 a6c89f462c15f6a3a55a68f06f6c1331ffcbaf21 assets/strainers/models/item/uranium_ore_piece.json
+6e35d9391a6c70b0901d3c75665b10109e2bc637 assets/strainers/models/item/water_drop.json
 9f05ebd65820f51dc3c4ad970b961369ec4983e0 assets/strainers/models/item/wooden_mesh.json
 69fe8097fa07d58e31df8abedcc9e642e3e3576a assets/strainers/models/item/zinc_ore_piece.json

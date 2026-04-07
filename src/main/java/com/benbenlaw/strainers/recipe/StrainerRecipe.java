@@ -15,12 +15,14 @@ import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
-public record StrainerRecipe(SizedIngredient input, SizedFluidIngredient fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) implements Recipe<RecipeInput> {
+import java.util.Optional;
+
+public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredient> fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) implements Recipe<RecipeInput> {
 
     public static final MapCodec<StrainerRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     SizedIngredient.NESTED_CODEC.fieldOf("input").forGetter(StrainerRecipe::input),
-                    SizedFluidIngredient.CODEC.fieldOf("fluid").forGetter(StrainerRecipe::fluid),
+                    SizedFluidIngredient.CODEC.optionalFieldOf("fluid").forGetter(StrainerRecipe::fluid),
                     ChanceResult.CODEC.fieldOf("result").forGetter(StrainerRecipe::result),
                     Codec.INT.fieldOf("min_mesh_tier").forGetter(StrainerRecipe::minMeshTier),
                     Codec.DOUBLE.fieldOf("additional_chance_per_tier").forGetter(StrainerRecipe::additionalChancePerTier)
@@ -37,7 +39,9 @@ public record StrainerRecipe(SizedIngredient input, SizedFluidIngredient fluid, 
 
     private static StrainerRecipe read(RegistryFriendlyByteBuf buffer) {
         SizedIngredient input = SizedIngredient.STREAM_CODEC.decode(buffer);
-        SizedFluidIngredient fluid = SizedFluidIngredient.STREAM_CODEC.decode(buffer);
+
+        Optional<SizedFluidIngredient> fluid = buffer.readBoolean() ? Optional.of(SizedFluidIngredient.STREAM_CODEC.decode(buffer)) : Optional.empty();
+
         ChanceResult result = ChanceResult.read(buffer);
         int minMeshTier = buffer.readInt();
         double additionalChancePerTier = buffer.readDouble();
@@ -46,7 +50,10 @@ public record StrainerRecipe(SizedIngredient input, SizedFluidIngredient fluid, 
 
     private static void write(RegistryFriendlyByteBuf buffer, StrainerRecipe recipe) {
         SizedIngredient.STREAM_CODEC.encode(buffer, recipe.input);
-        SizedFluidIngredient.STREAM_CODEC.encode(buffer, recipe.fluid);
+
+        buffer.writeBoolean(recipe.fluid.isPresent());
+        recipe.fluid.ifPresent(sizedFluidIngredient -> SizedFluidIngredient.STREAM_CODEC.encode(buffer, sizedFluidIngredient));
+
         recipe.result.write(buffer);
         buffer.writeInt(recipe.minMeshTier);
         buffer.writeDouble(recipe.additionalChancePerTier);
@@ -73,8 +80,11 @@ public record StrainerRecipe(SizedIngredient input, SizedFluidIngredient fluid, 
 
         if (!(input instanceof StrainerRecipeInput strainerInput)) return false;
 
-        return this.input.test(strainerInput.getInputStack())
-                && this.fluid.test(strainerInput.getFluid());
+        if (fluid.isPresent()) {
+            return this.input.test(strainerInput.getInputStack()) && this.fluid.get().test(strainerInput.getFluid());
+        } else {
+            return this.input.test(strainerInput.getInputStack());
+        }
     }
 
     //Boiler Plate

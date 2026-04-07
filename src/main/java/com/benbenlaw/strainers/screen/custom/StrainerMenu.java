@@ -32,7 +32,7 @@ public class StrainerMenu extends SimpleAbstractContainerMenu {
     }
 
     public StrainerMenu(int containerID, Inventory inventory, BlockPos blockPos, ContainerData data) {
-        super(StrainersMenuTypes.WOODEN_STRAINER_MENU.get(), containerID, inventory, blockPos, 19);
+        super(StrainersMenuTypes.WOODEN_STRAINER_MENU.get(), containerID, inventory, blockPos, 20);
         this.player = inventory.player;
         this.blockPos = blockPos;
         this.level = inventory.player.level();

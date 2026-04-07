@@ -18,6 +18,8 @@ public class StrainersLangProvider extends LanguageProvider {
         //Blocks
         add("block.strainers.strainer", "Strainer");
         add("block.strainers.dust_block", "Dust Block");
+        add("block.strainers.eroding_water", "Eroding Water");
+        add("block.strainers.purifying_water", "Purifying Water");
 
         //Items
         add("item.strainers.wooden_mesh", "Wooden Mesh");
@@ -46,6 +48,8 @@ public class StrainersLangProvider extends LanguageProvider {
         add("item.strainers.aluminum_ore_piece", "Aluminum Ore Piece");
         add("item.strainers.quartz_ore_piece", "Quartz Ore Piece");
         add("item.strainers.debris_ore_piece", "Debris Ore Piece");
+        add("item.strainers.lapis_ore_piece", "Lapis Ore Piece");
+        add("item.strainers.redstone_ore_piece", "Redstone Ore Piece");
 
         add("item.strainers.stone_pebble", "Stone Pebble");
         add("item.strainers.gravel_pebble", "Gravel Pebble");
@@ -57,11 +61,22 @@ public class StrainersLangProvider extends LanguageProvider {
 
         add("item.strainers.sapling_seed", "Sapling Seeds (What's inside!)");
         add("item.strainers.leaf_pile", "Leaf Pile");
+        add("item.strainers.water_drop", "Water Drop");
+        add("item.strainers.lava_drop", "Lava Drop");
 
 
+        //Tooltip
+        add("tooltip.strainers.fluids_header", "Fluids:");
+        add("tooltip.strainers.fluid_drop_item", "Holding 4 and right clicking will create a source block of %s. Can also be used to fill tanks like a bucket would!");
 
-
-
+        add("tooltip.strainers.tier_1_mesh", "Tier 1 Mesh");
+        add("tooltip.strainers.tier_2_mesh", "Tier 2 Mesh");
+        add("tooltip.strainers.tier_3_mesh", "Tier 3 Mesh");
+        add("tooltip.strainers.tier_4_mesh", "Tier 4 Mesh");
+        add("tooltip.strainers.tier_5_mesh", "Tier 5 Mesh");
+        add("tooltip.strainers.tier_6_mesh", "Tier 6 Mesh");
+        add("tooltip.strainers.tier_7_mesh", "Tier 7 Mesh");
+        add("tooltip.strainers.tier_8_mesh", "Tier 8 Mesh");
 
 
 
