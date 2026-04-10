@@ -14,6 +14,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -35,6 +36,7 @@ import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -132,6 +134,14 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipe> {
         if (MouseUtil.isMouseAboveArea((int) mouseX, (int) mouseY, 54, 1, 0, 0, 28, 18)) {
             tooltip.add(Component.translatable("tooltip.core.ticks", 200));
         }
+    }
+
+    @Override
+    public void onDisplayedIngredientsUpdate(StrainerRecipe recipe, List<IRecipeSlotDrawable> recipeSlots, IFocusGroup focuses) {
+        //IRecipeSlotDrawable outputSlot = recipeSlots.get(0); // jei adds the output first
+        //outputSlot.getDisplayedItemStack().ifPresent(outputStack -> {
+        //    outputStack.setCount(1);
+        //});
     }
 
     private TagKey<Item> getMeshTier(int mesh) {
