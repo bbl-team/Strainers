@@ -1,6 +1,5 @@
 package com.benbenlaw.strainers.datagen;
 
-import com.benbenlaw.opolisutilities.fluid.FluidDeferredRegister;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.ModBlocks;
 import com.benbenlaw.strainers.fluid.StrainersFluids;

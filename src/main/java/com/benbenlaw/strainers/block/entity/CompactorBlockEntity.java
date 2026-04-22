@@ -45,7 +45,6 @@ import java.util.UUID;
 
 public class CompactorBlockEntity extends SyncableBlockEntity implements MenuProvider, IInventoryHandlingBlockEntity {
 
-
     private final ItemStackHandler itemHandler = new ItemStackHandler(18) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -57,55 +56,46 @@ public class CompactorBlockEntity extends SyncableBlockEntity implements MenuPro
         public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             if (stack.isEmpty()) return ItemStack.EMPTY;
 
-            // If this is an input slot, use custom logic
             if (isInputSlot(slot, stack)) {
                 return insertIntoInputs(stack, simulate);
             }
 
-            // If this is an output slot, use custom logic
             if (isOutputSlot(slot)) {
                 return insertIntoOutputs(stack, simulate);
             }
 
-            // Fallback: behave normally
             return super.insertItem(slot, stack, simulate);
         }
     };
 
-
     public final ContainerData data;
-    public static final int[] INPUT_SLOTS = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-    public static final int[] OUTPUT_SLOTS = {9, 10, 11, 12, 13, 14, 15, 16, 17};
+    public static final int[] INPUT_SLOTS = {0,1,2,3,4,5,6,7,8};
+    public static final int[] OUTPUT_SLOTS = {9,10,11,12,13,14,15,16,17};
 
-    private final IItemHandler compactorItemHandler = new InputOutputItemHandler(
-            itemHandler,
-            this::isInputSlot,
-            this::isOutputSlot
-    );
+    private final IItemHandler compactorItemHandler =
+            new InputOutputItemHandler(itemHandler, this::isInputSlot, this::isOutputSlot);
 
-    private boolean isInputSlot(int slot, ItemStack itemStack) {
-        for (int inputSlot : INPUT_SLOTS) {
-            if (slot == inputSlot) {
-                return true;
-            }
-        }
+    // 🔥 CACHE
+    private final List<CachedRecipe> cachedRecipes = new ArrayList<>();
+    private boolean recipesCached = false;
+
+    public CompactorBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.COMPACTOR_BLOCK_ENTITY.get(), pos, state);
+        this.data = new SimpleContainerData(2);
+    }
+
+    private boolean isInputSlot(int slot, ItemStack stack) {
+        for (int s : INPUT_SLOTS) if (s == slot) return true;
         return false;
     }
+
     private boolean isOutputSlot(int slot) {
-        for (int outputSlot : OUTPUT_SLOTS) {
-            if (slot == outputSlot) {
-                return true;
-            }
-        }
+        for (int s : OUTPUT_SLOTS) if (s == slot) return true;
         return false;
     }
-
 
     public IItemHandler getItemHandlerCapability(Direction side) {
-        if (side == null)
-            return itemHandler;
-
-        return compactorItemHandler;
+        return side == null ? itemHandler : compactorItemHandler;
     }
 
     public void setHandler(ItemStackHandler handler) {
@@ -118,10 +108,47 @@ public class CompactorBlockEntity extends SyncableBlockEntity implements MenuPro
         return this.itemHandler;
     }
 
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        cacheRecipes();
+        this.setChanged();
+    }
 
-    public CompactorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.COMPACTOR_BLOCK_ENTITY.get(), blockPos, blockState);
-        this.data = new SimpleContainerData(2);
+    private void cacheRecipes() {
+        if (recipesCached || level == null) return;
+
+        cachedRecipes.clear();
+
+        for (RecipeHolder<CraftingRecipe> holder :
+                level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING)) {
+
+            if (!(holder.value() instanceof ShapedRecipe shaped)) continue;
+
+            int size = shaped.getWidth();
+            if (size != shaped.getHeight()) continue;
+            if (size != 2 && size != 3) continue;
+
+            Ingredient first = shaped.getIngredients().get(0);
+
+            boolean allSame = true;
+            for (Ingredient ing : shaped.getIngredients()) {
+                if (ing != first) {
+                    allSame = false;
+                    break;
+                }
+            }
+
+            if (!allSame) continue;
+
+            cachedRecipes.add(new CachedRecipe(
+                    first,
+                    size,
+                    shaped.getResultItem(level.registryAccess()).copy()
+            ));
+        }
+
+        recipesCached = true;
     }
 
     @Override
@@ -136,212 +163,110 @@ public class CompactorBlockEntity extends SyncableBlockEntity implements MenuPro
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-        this.setChanged();
-    }
-
-
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag compoundTag, HolderLookup.@NotNull Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-        compoundTag.put("inventory", this.itemHandler.serializeNBT(provider));
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
+        super.saveAdditional(tag, provider);
+        tag.put("inventory", this.itemHandler.serializeNBT(provider));
     }
 
     @Override
-    protected void loadAdditional(CompoundTag compoundTag, HolderLookup.@NotNull Provider provider) {
-        this.itemHandler.deserializeNBT(provider, compoundTag.getCompound("inventory"));
-        super.loadAdditional(compoundTag, provider);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.@NotNull Provider provider) {
+        this.itemHandler.deserializeNBT(provider, tag.getCompound("inventory"));
+        super.loadAdditional(tag, provider);
     }
 
     public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
+            inv.setItem(i, itemHandler.getStackInSlot(i));
         }
-        assert this.level != null;
-        Containers.dropContents(this.level, this.worldPosition, inventory);
+        assert level != null;
+        Containers.dropContents(level, worldPosition, inv);
     }
-
 
     public void tick() {
+        if (level == null || level.isClientSide()) return;
+        if (level.getGameTime() % 20 != 0) return;
 
-        if (!level.isClientSide() && level.getGameTime() % 20 == 0) {
+        if (!recipesCached) cacheRecipes();
 
-            for (int slot : INPUT_SLOTS) {
-                ItemStack stack = itemHandler.getStackInSlot(slot);
-                if (stack.isEmpty() || stack.getCount() < 4) continue;
+        for (int slot : INPUT_SLOTS) {
+            ItemStack stack = itemHandler.getStackInSlot(slot);
+            if (stack.isEmpty() || stack.getCount() < 4) continue;
 
-                if (stack.getCount() >= 9 && tryCraft(stack, 3, slot)) {
-                    return;
-                }
+            for (CachedRecipe recipe : cachedRecipes) {
+                int needed = recipe.size * recipe.size;
 
-                if (stack.getCount() >= 4 && tryCraft(stack, 2, slot)) {
-                    return;
-                }
-            }
-        }
-    }
+                if (stack.getCount() < needed) continue;
+                if (!recipe.ingredient.test(stack)) continue;
 
-    private boolean tryCraft(ItemStack stack, int currentSize, int inputSlot) {
-        assert level != null;
-        for (RecipeHolder<CraftingRecipe> holder : level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING)) {
-            CraftingRecipe recipe = holder.value();
-            if (!(recipe instanceof ShapedRecipe shapedRecipe)) continue;
+                ItemStack result = recipe.result.copy();
 
-            if (shapedRecipe.getWidth() != currentSize || shapedRecipe.getHeight() != currentSize) continue;
-
-            boolean matches = true;
-            for (Ingredient ingredient : shapedRecipe.getIngredients()) {
-                if (!ingredient.test(stack)) {
-                    matches = false;
-                    break;
-                }
-            }
-
-            if (matches) {
-                ItemStack result = recipe.getResultItem(level.registryAccess()).copy();
-
-                if (!result.isEmpty() && insertResult(result)) {
-                    stack.shrink(currentSize * currentSize);
-                    itemHandler.setStackInSlot(inputSlot, stack);
+                if (insertResult(result)) {
+                    stack.shrink(needed);
+                    itemHandler.setStackInSlot(slot, stack);
                     setChanged();
                     sync();
-                    return true;
+                    return;
                 }
             }
         }
-        return false;
     }
 
     private boolean insertResult(ItemStack result) {
-        // Try merging with existing stacks first
         for (int slot : OUTPUT_SLOTS) {
-            ItemStack outputStack = itemHandler.getStackInSlot(slot);
+            ItemStack out = itemHandler.getStackInSlot(slot);
 
-            if (!outputStack.isEmpty() &&
-                    ItemStack.isSameItemSameComponents(outputStack, result) &&
-                    outputStack.getCount() < outputStack.getMaxStackSize()) {
+            if (!out.isEmpty() &&
+                    ItemStack.isSameItemSameComponents(out, result) &&
+                    out.getCount() < out.getMaxStackSize()) {
 
-                int transferable = Math.min(result.getCount(),
-                        outputStack.getMaxStackSize() - outputStack.getCount());
+                int transfer = Math.min(result.getCount(),
+                        out.getMaxStackSize() - out.getCount());
 
-                outputStack.grow(transferable);
-                result.shrink(transferable);
-                itemHandler.setStackInSlot(slot, outputStack);
+                out.grow(transfer);
+                result.shrink(transfer);
+                itemHandler.setStackInSlot(slot, out);
 
                 if (result.isEmpty()) return true;
             }
         }
 
-        // If not fully inserted, try empty slots
         for (int slot : OUTPUT_SLOTS) {
             if (itemHandler.getStackInSlot(slot).isEmpty()) {
                 itemHandler.setStackInSlot(slot, result.copy());
-                result.setCount(0);
                 return true;
             }
         }
 
-        return result.isEmpty();
-    }
-
-    private boolean insertInput(ItemStack stack) {
-        // Try merging into existing stacks first
-        for (int slot : INPUT_SLOTS) {
-            ItemStack existing = itemHandler.getStackInSlot(slot);
-            if (!existing.isEmpty() &&
-                    ItemStack.isSameItemSameComponents(existing, stack) &&
-                    existing.getCount() < existing.getMaxStackSize()) {
-
-                int transferable = Math.min(stack.getCount(),
-                        existing.getMaxStackSize() - existing.getCount());
-
-                existing.grow(transferable);
-                stack.shrink(transferable);
-                itemHandler.setStackInSlot(slot, existing);
-
-                if (stack.isEmpty()) return true;
-            }
-        }
-
-        // If not fully inserted, try empty slots
-        for (int slot : INPUT_SLOTS) {
-            if (itemHandler.getStackInSlot(slot).isEmpty()) {
-                itemHandler.setStackInSlot(slot, stack.copy());
-                stack.setCount(0);
-                return true;
-            }
-        }
-
-        return stack.isEmpty();
+        return false;
     }
 
     private ItemStack insertIntoInputs(ItemStack stack, boolean simulate) {
         ItemStack remaining = stack.copy();
 
-        // Merge with existing stacks
         for (int slot : INPUT_SLOTS) {
             ItemStack existing = itemHandler.getStackInSlot(slot);
+
             if (!existing.isEmpty() &&
                     ItemStack.isSameItemSameComponents(existing, remaining)) {
 
-                int transferable = Math.min(remaining.getCount(),
+                int transfer = Math.min(remaining.getCount(),
                         existing.getMaxStackSize() - existing.getCount());
 
-                if (transferable > 0) {
+                if (transfer > 0) {
                     if (!simulate) {
-                        existing.grow(transferable);
+                        existing.grow(transfer);
                         itemHandler.setStackInSlot(slot, existing);
                     }
-                    remaining.shrink(transferable);
+                    remaining.shrink(transfer);
                     if (remaining.isEmpty()) return ItemStack.EMPTY;
                 }
             }
         }
 
-        // Fill empty slots
         for (int slot : INPUT_SLOTS) {
             if (itemHandler.getStackInSlot(slot).isEmpty()) {
-                if (!simulate) {
-                    itemHandler.setStackInSlot(slot, remaining.copy());
-                }
-                return ItemStack.EMPTY;
-            }
-        }
-
-        return remaining; // Couldn’t insert all
-    }
-
-    private ItemStack insertIntoOutputs(ItemStack stack, boolean simulate) {
-        ItemStack remaining = stack.copy();
-
-        // Merge with existing stacks
-        for (int slot : OUTPUT_SLOTS) {
-            ItemStack existing = itemHandler.getStackInSlot(slot);
-            if (!existing.isEmpty() &&
-                    ItemStack.isSameItemSameComponents(existing, remaining)) {
-
-                int transferable = Math.min(remaining.getCount(),
-                        existing.getMaxStackSize() - existing.getCount());
-
-                if (transferable > 0) {
-                    if (!simulate) {
-                        existing.grow(transferable);
-                        itemHandler.setStackInSlot(slot, existing);
-                    }
-                    remaining.shrink(transferable);
-                    if (remaining.isEmpty()) return ItemStack.EMPTY;
-                }
-            }
-        }
-
-        // Fill empty slots
-        for (int slot : OUTPUT_SLOTS) {
-            if (itemHandler.getStackInSlot(slot).isEmpty()) {
-                if (!simulate) {
-                    itemHandler.setStackInSlot(slot, remaining.copy());
-                }
+                if (!simulate) itemHandler.setStackInSlot(slot, remaining.copy());
                 return ItemStack.EMPTY;
             }
         }
@@ -349,5 +274,38 @@ public class CompactorBlockEntity extends SyncableBlockEntity implements MenuPro
         return remaining;
     }
 
-}
+    private ItemStack insertIntoOutputs(ItemStack stack, boolean simulate) {
+        ItemStack remaining = stack.copy();
 
+        for (int slot : OUTPUT_SLOTS) {
+            ItemStack existing = itemHandler.getStackInSlot(slot);
+
+            if (!existing.isEmpty() &&
+                    ItemStack.isSameItemSameComponents(existing, remaining)) {
+
+                int transfer = Math.min(remaining.getCount(),
+                        existing.getMaxStackSize() - existing.getCount());
+
+                if (transfer > 0) {
+                    if (!simulate) {
+                        existing.grow(transfer);
+                        itemHandler.setStackInSlot(slot, existing);
+                    }
+                    remaining.shrink(transfer);
+                    if (remaining.isEmpty()) return ItemStack.EMPTY;
+                }
+            }
+        }
+
+        for (int slot : OUTPUT_SLOTS) {
+            if (itemHandler.getStackInSlot(slot).isEmpty()) {
+                if (!simulate) itemHandler.setStackInSlot(slot, remaining.copy());
+                return ItemStack.EMPTY;
+            }
+        }
+
+        return remaining;
+    }
+
+    private record CachedRecipe(Ingredient ingredient, int size, ItemStack result) {}
+}
