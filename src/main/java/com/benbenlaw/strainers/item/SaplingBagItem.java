@@ -15,15 +15,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 
 import java.util.Collections;
 import java.util.List;
 
-public class SaplingSeedItem extends Item {
-    public SaplingSeedItem(Properties properties) {
+public class SaplingBagItem extends Item {
+    public SaplingBagItem(Properties properties) {
         super(properties);
     }
 

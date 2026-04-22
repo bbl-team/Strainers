@@ -2,7 +2,6 @@ package com.benbenlaw.strainers.event.client;
 
 import com.benbenlaw.core.util.TooltipUtil;
 import com.benbenlaw.strainers.Strainers;
-import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.FluidDropItem;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.item.StrainersItems;
@@ -12,7 +11,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -24,7 +22,7 @@ public class TooltipEvent {
     @SubscribeEvent
     public static void onTooltipEvent(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
-        TooltipUtil.addShiftTooltip(stack, event, StrainersItems.SAPLING_SEED.get(), "tooltip.strainers.sapling_seed");
+        TooltipUtil.addShiftTooltip(stack, event, StrainersItems.SAPLING_BAG.get(), "tooltip.strainers.sapling_seed");
 
         if (stack.getItem() instanceof FluidDropItem dropItem) {
 

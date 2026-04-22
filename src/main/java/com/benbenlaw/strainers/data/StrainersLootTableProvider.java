@@ -25,6 +25,7 @@ public class StrainersLootTableProvider extends VanillaBlockLoot {
     protected void generate() {
 
         this.dropWithFluidComponent(StrainersBlocks.STRAINER.get());
+        this.dropSelf(StrainersBlocks.DUST_BLOCK.get());
 
 
     }

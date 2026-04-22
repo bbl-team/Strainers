@@ -47,14 +47,18 @@ public class StrainersModelProvider extends ModelProvider {
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
 
         //Items
-        StrainersItems.ITEMS.getEntries().forEach(entry -> itemModels.generateFlatItem(entry.get(), ModelTemplates.FLAT_ITEM));
+        StrainersItems.ITEMS.getEntries().stream()
+                .filter(entry -> entry.get() != StrainersBlocks.STRAINER.get().asItem())
+                .filter(entry -> entry.get() != StrainersBlocks.DUST_BLOCK.get().asItem())
+                .forEach(entry ->
+                        itemModels.generateFlatItem(entry.get(), ModelTemplates.FLAT_ITEM)
+                );
 
         //Buckets
         bucketItem(itemModels, StrainersFluids.ERODING_WATER.getBucket(), StrainersFluids.ERODING_WATER.getFluid(), false, true);
         bucketItem(itemModels, StrainersFluids.PURIFYING_WATER.getBucket(), StrainersFluids.PURIFYING_WATER.getFluid(), false, true);
 
         //Blocks
-        blockModels.createTrivialCube(StrainersBlocks.STRAINER.get());
         blockModels.createTrivialCube(StrainersBlocks.DUST_BLOCK.get());
 
     }
@@ -97,12 +101,16 @@ public class StrainersModelProvider extends ModelProvider {
 
     @Override
     protected @NotNull Stream<? extends Holder<Block>> getKnownBlocks() {
-        return StrainersBlocks.BLOCKS.getEntries().stream();
+        return StrainersBlocks.BLOCKS.getEntries().stream().filter(
+                x -> !x.is(StrainersBlocks.STRAINER.getId())
+        );
     }
 
     @Override
     protected @NotNull Stream<? extends Holder<Item>> getKnownItems() {
-        return StrainersItems.ITEMS.getEntries().stream();
+        return StrainersItems.ITEMS.getEntries().stream().filter(
+                x -> !x.is(StrainersBlocks.STRAINER.getId())
+        );
     }
 
     @Override

@@ -1,4 +1,4 @@
-// 26.1.1	2026-04-07T17:10:43.0854147	strainers Processing Recipes
+// 26.1.2	2026-04-22T13:09:39.1104005	strainers Processing Recipes
 fb5d7febd36b1d16e2f88a0ea20da0e914923447 data/strainers/advancement/recipe/strainer/straining/cobblestone/eroding_drop.json
 9d6cf31bc7022f6acd02afe70b922ddd7e755a10 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel.json
 b854409189c160d0e2c21f39c146685ffbd4e5c8 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel_pebble.json
@@ -14,6 +14,7 @@ e8afcac3769e235cf6f8a6d9555249721bb29ea1 data/strainers/advancement/recipe/strai
 35944f336f090bfdc2caa373fa0c7668a2cfb2d4 data/strainers/advancement/recipe/strainer/straining/dirt/sweet_berries.json
 d7347f9b96eb2327ef0315c1c9600251f77e05f2 data/strainers/advancement/recipe/strainer/straining/dirt/wheat.json
 ed42cbd7ccfe0af824edadead3794d3b29893f5f data/strainers/advancement/recipe/strainer/straining/dirt/wheat_seeds.json
+da9a5ff0120bfee191f00336854d965acf9bf67b data/strainers/advancement/recipe/strainer/straining/dust/redstone_ore_piece.json
 7147b3a5df52af81bc74a3b504c065f3b6b21ef8 data/strainers/advancement/recipe/strainer/straining/gravel/aluminum_ore_piece.json
 fb736d6af26f5de4e88c15b386b3450187a3aeba data/strainers/advancement/recipe/strainer/straining/gravel/amethyst_shard.json
 9b96997249beaa06496b3e3c0647eb6f911a8941 data/strainers/advancement/recipe/strainer/straining/gravel/coal_ore_piece.json
@@ -28,7 +29,6 @@ b9ecdd4e08561ea0ce93882f175c11d706c2303e data/strainers/advancement/recipe/strai
 24e24c4cde1268546136f870efba7ca7730cafc0 data/strainers/advancement/recipe/strainer/straining/gravel/nickel_ore_piece.json
 10447b51e38637206c45b9802a805a546269749c data/strainers/advancement/recipe/strainer/straining/gravel/osmium_ore_piece.json
 c42180b10bd52703e1434ff98894b2e36221eeb6 data/strainers/advancement/recipe/strainer/straining/gravel/platinum_ore_piece.json
-133078045e29e47d7c9df65457dfcb13b0235215 data/strainers/advancement/recipe/strainer/straining/gravel/redstone_ore_piece.json
 547d232ea2f2cc2e5c96aa6cf9e6819a89311247 data/strainers/advancement/recipe/strainer/straining/gravel/sand.json
 006b52f66345977c9f43761724afd7d26c8f49be data/strainers/advancement/recipe/strainer/straining/gravel/sand_dust.json
 3c43f864573a5acff166d74b507c1d43eb141486 data/strainers/advancement/recipe/strainer/straining/gravel/silver_ore_piece.json
@@ -59,12 +59,13 @@ a3197ed60ff84fc1780a5a7edf7a97ab227d5f58 data/strainers/recipe/straining/dirt/gr
 3ac87ab0a9ed239abace3844babca8688c10052f data/strainers/recipe/straining/dirt/poisonous_potato.json
 0fe7b9c605c80373400d227de35b25d950efa6c5 data/strainers/recipe/straining/dirt/potato.json
 eacedebd9395c86c5ef9d6d60b95e462316452e1 data/strainers/recipe/straining/dirt/pumpkin_seeds.json
-3c095b4b133784f4560ff3c88ece5af496d83e59 data/strainers/recipe/straining/dirt/sapling_seed.json
+3ab5b87be913d3c7c6459dbfa83a3b4e0337e5ff data/strainers/recipe/straining/dirt/sapling_seed.json
 fd315938f52c306143fd5807844fab1bcb28ccdf data/strainers/recipe/straining/dirt/stick.json
 29d71331ec85bf9deb423d83a5129a207aee3640 data/strainers/recipe/straining/dirt/stone_pebble.json
 b85ed80e3f15c873569dcd536839793e8ff7218e data/strainers/recipe/straining/dirt/sweet_berries.json
 14fda7004223f56917972363564a0ac08ffbed81 data/strainers/recipe/straining/dirt/wheat.json
 0dcfdbbdd1864fe4dfab2109fe14825bcd55b04c data/strainers/recipe/straining/dirt/wheat_seeds.json
+8045bcad0cd2d99309fe19d140181a8e10e6c71f data/strainers/recipe/straining/dust/redstone_ore_piece.json
 6836c7b4baa516417d3c02d7526423d7d2b00796 data/strainers/recipe/straining/gravel/aluminum_ore_piece.json
 a1a108817b70a707225d9f5b43af97003bae404e data/strainers/recipe/straining/gravel/amethyst_shard.json
 5a230de52e15c1da914a8ccbb2df06433f97b70c data/strainers/recipe/straining/gravel/coal_ore_piece.json
@@ -79,7 +80,6 @@ b72ac48a4c40b6f39cdfd9d3dbd202465d082adb data/strainers/recipe/straining/gravel/
 08067a440a0d30a8dd34399d4e407bb9877ead32 data/strainers/recipe/straining/gravel/nickel_ore_piece.json
 41fac0ba64bac4266203dd74ce82989087c6592e data/strainers/recipe/straining/gravel/osmium_ore_piece.json
 661e73adcc2d577ae49690ec674f531d72202341 data/strainers/recipe/straining/gravel/platinum_ore_piece.json
-f75f5d941449e01967450306c714d5fbb2911481 data/strainers/recipe/straining/gravel/redstone_ore_piece.json
 62390ff40021481742ef5d2112469cc1c430e52e data/strainers/recipe/straining/gravel/sand.json
 0499c0ea5364950dbf1b92cc9044c3764ab94ee0 data/strainers/recipe/straining/gravel/sand_dust.json
 01938a9fef25821e85d83811d1b360126e23a890 data/strainers/recipe/straining/gravel/silver_ore_piece.json

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "strainers:item/strainer"
+    "model": "strainers:block/strainer"
   }
 }

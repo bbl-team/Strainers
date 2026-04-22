@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "strainers:item/sapling_seed"
+    "model": "strainers:item/sapling_bag"
   }
 }

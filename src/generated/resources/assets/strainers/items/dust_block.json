@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "strainers:item/dust_block"
+    "model": "strainers:block/dust_block"
   }
 }

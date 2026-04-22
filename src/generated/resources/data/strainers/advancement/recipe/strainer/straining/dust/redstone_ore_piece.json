@@ -11,7 +11,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:straining/gravel/redstone_ore_piece"
+        "recipe": "strainers:straining/dust/redstone_ore_piece"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,7 +23,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:straining/gravel/redstone_ore_piece"
+      "strainers:straining/dust/redstone_ore_piece"
     ]
   },
   "sends_telemetry_event": true

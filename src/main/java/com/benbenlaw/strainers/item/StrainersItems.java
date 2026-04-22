@@ -67,7 +67,7 @@ public class StrainersItems {
     public static final DeferredItem<Item> DEBRIS_ORE_PIECE = ITEMS.registerSimpleItem("debris_ore_piece");
 
     //Misc
-    public static final DeferredItem<Item> SAPLING_SEED = ITEMS.registerItem("sapling_seed",
-            SaplingSeedItem::new, properties -> properties);
+    public static final DeferredItem<Item> SAPLING_BAG = ITEMS.registerItem("sapling_bag",
+            SaplingBagItem::new, properties -> properties);
 
 }

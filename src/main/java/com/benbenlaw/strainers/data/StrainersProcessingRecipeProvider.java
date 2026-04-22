@@ -9,7 +9,6 @@ import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.StrainersItems;
 import com.benbenlaw.strainers.util.StrainersTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -31,7 +30,6 @@ import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Locale;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -75,7 +73,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         //Dirt -> Seeds
         simpleWaterStrainer(Items.WHEAT_SEEDS, 0.1f, ItemTags.DIRT, 1, 0.1f, "dirt/wheat_seeds");
         simpleWaterStrainer(Items.BEETROOT_SEEDS, 0.1f, ItemTags.DIRT, 2, 0.1f, "dirt/beetroot_seeds");
-        simpleWaterStrainer(StrainersItems.SAPLING_SEED.get(), 0.1f, ItemTags.DIRT, 2, 0.1f, "dirt/sapling_seed");
+        simpleWaterStrainer(StrainersItems.SAPLING_BAG.get(), 0.1f, ItemTags.DIRT, 2, 0.1f, "dirt/sapling_seed");
         simpleWaterStrainer(Items.PUMPKIN_SEEDS, 0.1f, ItemTags.DIRT, 4, 0.1f, "dirt/pumpkin_seeds");
         simpleWaterStrainer(Items.MELON_SEEDS, 0.1f, ItemTags.DIRT, 4, 0.1f, "dirt/melon_seeds");
 
@@ -129,8 +127,10 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         simpleWaterStrainerOre(StrainersItems.LEAD_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 3, 0.15f, "lead", "gravel/lead_ore_piece");
         simpleWaterStrainerOre(StrainersItems.NICKEL_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 3, 0.15f, "nickel", "gravel/nickel_ore_piece");
         simpleWaterStrainerOre(StrainersItems.LAPIS_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 3, 0.15f, "lapis", "gravel/lapis_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.REDSTONE_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 3, 0.15f, "redstone", "gravel/redstone_ore_piece");
         simpleWaterStrainer(Items.AMETHYST_SHARD, 0.75f, Items.GRAVEL, 3, 0.15f, "gravel/amethyst_shard");
+
+        //Dust -> Redstone
+        simpleWaterStrainerOre(StrainersItems.REDSTONE_ORE_PIECE.get(), 0.75f, StrainersBlocks.DUST_BLOCK, 3, 0.15f, "redstone", "dust/redstone_ore_piece");
 
         //Gravel -> Gold (Progression)/ Silver
         simpleWaterStrainerOre(StrainersItems.GOLD_ORE_PIECE.get(), 0.75f, Items.GRAVEL, 4, 0.15f, "gold", "gravel/gold_ore_piece");

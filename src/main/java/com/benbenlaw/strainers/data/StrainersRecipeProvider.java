@@ -71,6 +71,8 @@ public class StrainersRecipeProvider extends RecipeProvider {
 
         twoByTwoPacker(RecipeCategory.MISC, Items.COBBLESTONE, StrainersItems.STONE_PEBBLE);
         twoByTwoPacker(RecipeCategory.MISC, Items.GRAVEL, StrainersItems.GRAVEL_PEBBLE);
+        twoByTwoPacker(RecipeCategory.MISC, Items.SAND, StrainersItems.SAND_DUST);
+        twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.DUST_BLOCK, StrainersItems.DUST);
 
 
         /* Currently adding manually because getting "Cannot encode unpacked recipe" error not sure how to fix, when completed will probably migrate to core

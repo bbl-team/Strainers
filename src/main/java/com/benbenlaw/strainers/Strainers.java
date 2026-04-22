@@ -3,6 +3,8 @@ package com.benbenlaw.strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.block.StrainersBlockEntities;
 import com.benbenlaw.strainers.block.StrainersCapabilities;
+import com.benbenlaw.strainers.block.entity.StrainerBlockEntity;
+import com.benbenlaw.strainers.block.entity.renderer.StrainerBlockEntityRenderer;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.StrainersCreativeTab;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
@@ -16,6 +18,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.apache.logging.log4j.LogManager;
@@ -62,11 +65,13 @@ public class Strainers {
     public static class ClientModEvents {
 
         @SubscribeEvent
+        public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(StrainersBlockEntities.STRAINER_BLOCK_ENTITY.get(), StrainerBlockEntityRenderer::new);
+        }
+
+        @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
-
             event.register(StrainersMenuTypes.WOODEN_STRAINER_MENU.get(), StrainerScreen::new);
-
-
         }
     }
 

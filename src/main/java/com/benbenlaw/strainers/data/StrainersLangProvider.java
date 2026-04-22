@@ -59,11 +59,12 @@ public class StrainersLangProvider extends LanguageProvider {
         add("item.strainers.eroding_water_bucket", "Eroding Water Bucket");
         add("item.strainers.purifying_water_bucket", "Purifying Water Bucket");
 
-        add("item.strainers.sapling_seed", "Sapling Seeds (What's inside!)");
+        add("item.strainers.sapling_bag", "Sapling Bag (What's inside!)");
         add("item.strainers.leaf_pile", "Leaf Pile");
         add("item.strainers.water_drop", "Water Drop");
         add("item.strainers.lava_drop", "Lava Drop");
-
+        add("item.strainers.eroding_drop", "Eroding Drop");
+        add("item.strainers.purifying_drop", "Purifying Drop");
 
         //Tooltip
         add("tooltip.strainers.fluids_header", "Fluids:");
@@ -77,8 +78,6 @@ public class StrainersLangProvider extends LanguageProvider {
         add("tooltip.strainers.tier_6_mesh", "Tier 6 Mesh");
         add("tooltip.strainers.tier_7_mesh", "Tier 7 Mesh");
         add("tooltip.strainers.tier_8_mesh", "Tier 8 Mesh");
-
-
 
         //JEI
         add("jei.strainers.strainer", "Strainer");
