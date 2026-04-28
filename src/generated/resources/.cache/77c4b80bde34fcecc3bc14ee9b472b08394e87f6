@@ -1,4 +1,4 @@
-// 26.1.2	2026-04-22T13:09:39.1104005	strainers Processing Recipes
+// 26.1.2	2026-04-28T15:22:41.0847705	strainers Processing Recipes
 fb5d7febd36b1d16e2f88a0ea20da0e914923447 data/strainers/advancement/recipe/strainer/straining/cobblestone/eroding_drop.json
 9d6cf31bc7022f6acd02afe70b922ddd7e755a10 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel.json
 b854409189c160d0e2c21f39c146685ffbd4e5c8 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel_pebble.json
@@ -81,7 +81,7 @@ b72ac48a4c40b6f39cdfd9d3dbd202465d082adb data/strainers/recipe/straining/gravel/
 41fac0ba64bac4266203dd74ce82989087c6592e data/strainers/recipe/straining/gravel/osmium_ore_piece.json
 661e73adcc2d577ae49690ec674f531d72202341 data/strainers/recipe/straining/gravel/platinum_ore_piece.json
 62390ff40021481742ef5d2112469cc1c430e52e data/strainers/recipe/straining/gravel/sand.json
-0499c0ea5364950dbf1b92cc9044c3764ab94ee0 data/strainers/recipe/straining/gravel/sand_dust.json
+0e245347c98ed616893204658f9cda607b953ee9 data/strainers/recipe/straining/gravel/sand_dust.json
 01938a9fef25821e85d83811d1b360126e23a890 data/strainers/recipe/straining/gravel/silver_ore_piece.json
 44268c3707bbabcdface5c17284c9ebad48ee476 data/strainers/recipe/straining/gravel/tin_ore_piece.json
 5d4cad1a90b73849b7750d4615f9679e4e88895d data/strainers/recipe/straining/gravel/uranium_ore_piece.json
@@ -96,7 +96,7 @@ b411956163a3ea6c438e16ff63ec85752658f762 data/strainers/recipe/straining/leaves/
 4d5f7c38df3174ac28fa1831cdb98a719de81e73 data/strainers/recipe/straining/netherrack/lava_drop.json
 b56ff0a43d25de24ed4840b3d81d0534db480b2f data/strainers/recipe/straining/netherrack/quartz_piece.json
 67dc9635028655607c0dc75c91f35a19aca65739 data/strainers/recipe/straining/ore_pieces/pure_drop.json
-96b2f015baab7ac3e0eb8aa9ebf81e764d3ad542 data/strainers/recipe/straining/sand/dust.json
+c60aad40cc061204ab2d728eaea21aa2be312ef8 data/strainers/recipe/straining/sand/dust.json
 36b01feb2756736f71ac57ba73db347b56425f14 data/strainers/recipe/straining/sand/dust_block.json
 89e3871b9860a8c457e2141e0d28acd0f1f8a77d data/strainers/recipe/straining/sand/prismarine_crystal.json
 7d98c9d831ebb30a9b5d7b9b569455ea6e4de518 data/strainers/recipe/straining/sand/prismarine_shard.json

@@ -145,21 +145,21 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipe> {
     }
 
     private TagKey<Item> getMeshTier(int mesh) {
-        if (mesh == 0) {
+        if (mesh == 1) {
             return StrainersTags.Items.TIER_1_MESHES;
-        } else if (mesh == 1) {
-            return StrainersTags.Items.TIER_2_MESHES;
         } else if (mesh == 2) {
-            return StrainersTags.Items.TIER_3_MESHES;
+            return StrainersTags.Items.TIER_2_MESHES;
         } else if (mesh == 3) {
-            return StrainersTags.Items.TIER_4_MESHES;
+            return StrainersTags.Items.TIER_3_MESHES;
         } else if (mesh == 4) {
-            return StrainersTags.Items.TIER_5_MESHES;
+            return StrainersTags.Items.TIER_4_MESHES;
         } else if (mesh == 5) {
-            return StrainersTags.Items.TIER_6_MESHES;
+            return StrainersTags.Items.TIER_5_MESHES;
         } else if (mesh == 6) {
-            return StrainersTags.Items.TIER_7_MESHES;
+            return StrainersTags.Items.TIER_6_MESHES;
         } else if (mesh == 7) {
+            return StrainersTags.Items.TIER_7_MESHES;
+        } else if (mesh == 8) {
             return StrainersTags.Items.TIER_8_MESHES;
         } return  StrainersTags.Items.TIER_1_MESHES;
     }

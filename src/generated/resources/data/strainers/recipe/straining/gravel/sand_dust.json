@@ -6,12 +6,13 @@
     "ingredient": "minecraft:water"
   },
   "input": {
-    "count": 2,
+    "count": 1,
     "ingredient": "minecraft:gravel"
   },
   "min_mesh_tier": 1,
   "result": {
     "item": {
+      "count": 2,
       "id": "strainers:sand_dust"
     }
   }

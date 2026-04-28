@@ -247,9 +247,9 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
     public void simpleWaterStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
 
         StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), count),
+                        new SizedIngredient(Ingredient.of(ingredient), 1),
                         Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
+                        new ChanceResult(new ItemStackTemplate(template, count), chance),
                         tier,
                         additionalChancePerTier
                 )
