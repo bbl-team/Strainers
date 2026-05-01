@@ -1,7 +1,9 @@
-// 26.1.2	2026-04-22T13:02:15.1530157	strainers Recipes
+// 26.1.2	2026-05-01T12:05:40.2025299	strainers Recipes
+4ecefc2a4ed19c1dcbd0c1ccd9981e96f6f7bdf1 data/minecraft/advancement/recipes/misc/ancient_debris.json
 7c9d8f8d6c9efdc79867d1da5cdccd21ef0143d7 data/minecraft/advancement/recipes/misc/cobblestone.json
 15e4c62ff35af59accb5cb63a555d4596a67c2d0 data/minecraft/advancement/recipes/misc/gravel.json
 c025985c5cb13c7beb339a1847906569f0cda443 data/minecraft/advancement/recipes/misc/sand.json
+c111d018112da4a1caf4c53bcee223e33d8fa246 data/minecraft/recipe/ancient_debris.json
 0349a1553781761a847fddc5810d8c8ca24bb26d data/minecraft/recipe/cobblestone.json
 802dd0b85038af3003e181086f388b780b1f3194 data/minecraft/recipe/gravel.json
 ff3f74cd7333626a8d8abba720a3cf363c8fb6c7 data/minecraft/recipe/sand.json

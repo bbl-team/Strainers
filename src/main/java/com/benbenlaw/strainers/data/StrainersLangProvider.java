@@ -79,6 +79,8 @@ public class StrainersLangProvider extends LanguageProvider {
         add("tooltip.strainers.tier_7_mesh", "Tier 7 Mesh");
         add("tooltip.strainers.tier_8_mesh", "Tier 8 Mesh");
 
+        add("tooltip.strainers.sapling_bag", "Right Click to place a random sapling");
+
         //JEI
         add("jei.strainers.strainer", "Strainer");
         add("jei.strainers.chance", "Chance: %s%%");

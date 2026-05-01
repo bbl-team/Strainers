@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
@@ -74,13 +75,13 @@ public class StrainersRecipeProvider extends RecipeProvider {
         twoByTwoPacker(RecipeCategory.MISC, Items.SAND, StrainersItems.SAND_DUST);
         twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.DUST_BLOCK, StrainersItems.DUST);
 
-
-        /* Currently adding manually because getting "Cannot encode unpacked recipe" error not sure how to fix, when completed will probably migrate to core
-        TagOutputRecipeProvider.tagOutputRecipe(new Recipe.CommonInfo(false), new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, Strainers.MOD_ID),
-                new ShapedRecipePattern(2,2, List.of(Optional.of(Ingredient.of(StrainersItems.COAL_ORE_PIECE.asItem())), Optional.of(Ingredient.of(StrainersItems.COAL_ORE_PIECE.asItem())), Optional.of(Ingredient.of(StrainersItems.COAL_ORE_PIECE.asItem())), Optional.of(Ingredient.of(StrainersItems.COAL_ORE_PIECE.asItem())), Optional.of(Ingredient.of(StrainersItems.COAL_ORE_PIECE.asItem()))),
-                        Optional.empty()), CommonTags.getItemTag("ore", "coal"), 1).save(output);
-
-         */
+        //Debris
+        shaped(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS)
+                .pattern("AA")
+                .pattern("AA")
+                .define('A', StrainersItems.DEBRIS_ORE_PIECE)
+                .unlockedBy("has_debris_ore_piece", has(StrainersItems.DEBRIS_ORE_PIECE.get()))
+                .save(output);
 
     }
 
