@@ -16,7 +16,7 @@
   },
   "input": {
     "count": 1,
-    "ingredient": "minecraft:gravel"
+    "ingredient": "minecraft:sand"
   },
   "min_mesh_tier": 3,
   "result": {

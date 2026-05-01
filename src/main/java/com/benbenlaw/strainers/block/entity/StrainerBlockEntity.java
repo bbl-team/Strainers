@@ -51,7 +51,19 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     private int progress = 0;
 
     private final InputItemHandler inputHandler = new InputItemHandler(this, 2,
-            (i, stack) -> i == 0 || i == 1) {
+            (slot, stack) -> {
+                boolean isMesh = stack.is(StrainersTags.Items.MESHES);
+
+                if (slot == 0) {
+                    return !isMesh;
+                }
+
+                if (slot == 1) {
+                    return isMesh;
+                }
+
+                return false;
+            }) {
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
             updateCachedRecipes();
@@ -128,40 +140,33 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
             return;
         }
 
-        if (canFitAllRecipeTemplate(validRecipes)) {
-            progress++;
+        if (progress >= maxProgress) {
 
-            if (progress >= maxProgress) {
-                craftItem(meshTier, validRecipes);
+            List<ItemStack> outputs = rollOutputs(meshTier, validRecipes);
+
+            if (!canInsertOutputs(outputs)) {
+                return;
             }
+
+            craftItem(meshTier, validRecipes, outputs);
+
         } else {
-            progress = 0;
-            sync();
+            progress++;
         }
     }
 
-    private boolean canInsertAnyOutput(List<RecipeHolder<StrainerRecipe>> validRecipes) {
-        for (RecipeHolder<StrainerRecipe> holder : validRecipes) {
-            ItemStack stack = holder.value().result().template().create();
+    private List<ItemStack> rollOutputs(int meshTier, List<RecipeHolder<StrainerRecipe>> recipes) {
+        RandomSource random = level.getRandom();
+        List<ItemStack> outputs = new ArrayList<>();
 
-            if (canInsertOutputs(List.of(stack))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean canFitAllRecipeTemplate(List<RecipeHolder<StrainerRecipe>> validRecipes) {
-        List<ItemStack> allPotentialOutputs = new ArrayList<>();
-
-        for (RecipeHolder<StrainerRecipe> holder : validRecipes) {
-            ItemStack stack = holder.value().result().template().create();
-            if (!stack.isEmpty()) {
-                allPotentialOutputs.add(stack);
+        for (RecipeHolder<StrainerRecipe> holder : recipes) {
+            ItemStack rolled = holder.value().rollWithTier(random, meshTier);
+            if (!rolled.isEmpty()) {
+                outputs.add(rolled);
             }
         }
 
-        return canInsertOutputs(allPotentialOutputs);
+        return outputs;
     }
 
     private void updateCachedRecipes() {
@@ -175,35 +180,11 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 .toList();
     }
 
-    private List<ItemStack> rollAllOutputs() {
-        if (level == null) return List.of();
+    private void craftItem(int meshTier,
+                           List<RecipeHolder<StrainerRecipe>> validRecipes,
+                           List<ItemStack> outputs) {
 
-        RandomSource random = level.getRandom();
-        List<ItemStack> outputs = new java.util.ArrayList<>();
-
-        for (RecipeHolder<StrainerRecipe> holder : cachedRecipes) {
-            int meshTier = getMeshTier(inputHandler.getResource(1).toStack());
-
-            ItemStack stack = holder.value().rollWithTier(random, meshTier);
-            if (!stack.isEmpty()) {
-                outputs.add(stack);
-            }
-        }
-
-        return outputs;
-    }
-    private void craftItem(int meshTier, List<RecipeHolder<StrainerRecipe>> validRecipes) {
         if (level == null || validRecipes.isEmpty()) return;
-
-        RandomSource random = level.getRandom();
-        List<ItemStack> outputs = new java.util.ArrayList<>();
-
-        for (RecipeHolder<StrainerRecipe> holder : validRecipes) {
-            ItemStack rolled = holder.value().rollWithTier(random, meshTier);
-            if (!rolled.isEmpty()) {
-                outputs.add(rolled);
-            }
-        }
 
         if (outputs.isEmpty()) {
             try (Transaction tx = Transaction.open(null)) {
@@ -239,11 +220,13 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
             int cost = validRecipes.getFirst().value().input().count();
             inputHandler.extractInternal(0, inputHandler.getResource(0), cost, tx);
+
             ItemStack mesh = inputHandler.getResource(1).toStack();
             if (mesh.isDamageableItem()) {
                 int oldDamage = mesh.getDamageValue();
                 mesh.setDamageValue(oldDamage + 1);
                 inputHandler.set(1, ItemResource.of(mesh), 1);
+
                 if (mesh.getDamageValue() >= mesh.getMaxDamage()) {
                     inputHandler.extractInternal(1, inputHandler.getResource(1), 1, tx);
                     level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);

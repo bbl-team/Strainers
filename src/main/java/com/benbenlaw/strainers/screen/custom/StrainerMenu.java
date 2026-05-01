@@ -16,6 +16,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,9 +41,21 @@ public class StrainerMenu extends SimpleAbstractContainerMenu {
         this.data = data;
 
         assert blockEntity != null;
-        this.addSlot(new InputSlot(blockEntity.getInputHandler(), blockEntity.getInputHandler()::set, 0, 8, 35)); //input
-        this.addSlot(new InputSlot(blockEntity.getInputHandler(), blockEntity.getInputHandler()::set, 1, 8, 53)); //mesh
+        this.addSlot(new InputSlot(blockEntity.getInputHandler(), blockEntity.getInputHandler()::set, 0, 8, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return !stack.is(StrainersTags.Items.MESHES);
+            }
+        });
 
+        this.addSlot(new InputSlot(blockEntity.getInputHandler(), blockEntity.getInputHandler()::set, 1, 8, 53) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.is(StrainersTags.Items.MESHES);
+            }
+        });
+
+        this.addSlot(new WhitelistSlot(blockEntity.getInputHandler(), blockEntity.getInputHandler()::set, 1, 8, 53, StrainersTags.Items.MESHES)); //mesh
 
         for (int i = 0; i < 18; i++) {
             int row = i / 6;

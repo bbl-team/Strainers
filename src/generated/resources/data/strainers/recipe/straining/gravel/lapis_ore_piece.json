@@ -16,7 +16,7 @@
   },
   "input": {
     "count": 1,
-    "ingredient": "minecraft:gravel"
+    "ingredient": "strainers:dust_block"
   },
   "min_mesh_tier": 3,
   "result": {
