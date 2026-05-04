@@ -70,18 +70,11 @@ public class StrainersRecipeProvider extends RecipeProvider {
         meshBuilder(StrainersItems.EMERALD_MESH.get(), Tags.Items.GEMS_EMERALD);
         meshBuilder(StrainersItems.NETHERITE_MESH.get(), Tags.Items.INGOTS_NETHERITE);
 
-        twoByTwoPacker(RecipeCategory.MISC, Items.COBBLESTONE, StrainersItems.STONE_PEBBLE);
-        twoByTwoPacker(RecipeCategory.MISC, Items.GRAVEL, StrainersItems.GRAVEL_PEBBLE);
-        twoByTwoPacker(RecipeCategory.MISC, Items.SAND, StrainersItems.SAND_DUST);
-        twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.DUST_BLOCK, StrainersItems.DUST);
-
-        //Debris
-        shaped(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS)
-                .pattern("AA")
-                .pattern("AA")
-                .define('A', StrainersItems.DEBRIS_ORE_PIECE)
-                .unlockedBy("has_debris_ore_piece", has(StrainersItems.DEBRIS_ORE_PIECE.get()))
-                .save(output);
+        twoByTwoPacker(RecipeCategory.MISC, Items.COBBLESTONE, StrainersItems.STONE_PEBBLE, "cobblestone_from_pebbles");
+        twoByTwoPacker(RecipeCategory.MISC, Items.GRAVEL, StrainersItems.GRAVEL_PEBBLE, "gravel_from_pebbles");
+        twoByTwoPacker(RecipeCategory.MISC, Items.SAND, StrainersItems.SAND_DUST, "sand_from_dust");
+        twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.DUST_BLOCK, StrainersItems.DUST, "dust_block_from_dust");
+        twoByTwoPacker(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS,StrainersItems.DEBRIS_ORE_PIECE.get(), "debris_from_pieces");
 
     }
 
@@ -107,6 +100,10 @@ public class StrainersRecipeProvider extends RecipeProvider {
                 .define('B', input)
                 .unlockedBy("has_input", has(input))
                 .save(output);
+    }
+
+    protected void twoByTwoPacker(RecipeCategory category, ItemLike result, ItemLike ingredient, String id) {
+        this.shaped(category, result, 1).define('#', ingredient).pattern("##").pattern("##").unlockedBy(getHasName(ingredient), this.has(ingredient)).save(output, Strainers.identifier(id).toString());
     }
 
 }

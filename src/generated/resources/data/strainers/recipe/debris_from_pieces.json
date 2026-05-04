@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "strainers:debris_ore_piece"
+    "#": "strainers:debris_ore_piece"
   },
   "pattern": [
-    "AA",
-    "AA"
+    "##",
+    "##"
   ],
   "result": {
     "id": "minecraft:ancient_debris"

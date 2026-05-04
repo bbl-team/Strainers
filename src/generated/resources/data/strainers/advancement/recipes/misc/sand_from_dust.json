@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_debris_ore_piece": {
+    "has_sand_dust": {
       "conditions": {
         "items": [
           {
-            "items": "strainers:debris_ore_piece"
+            "items": "strainers:sand_dust"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:ancient_debris"
+        "recipe": "strainers:sand_from_dust"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_debris_ore_piece"
+      "has_sand_dust"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:ancient_debris"
+      "strainers:sand_from_dust"
     ]
   }
 }

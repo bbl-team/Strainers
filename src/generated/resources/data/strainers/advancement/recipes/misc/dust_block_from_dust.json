@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sand_dust": {
+    "has_dust": {
       "conditions": {
         "items": [
           {
-            "items": "strainers:sand_dust"
+            "items": "strainers:dust"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sand"
+        "recipe": "strainers:dust_block_from_dust"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_sand_dust"
+      "has_dust"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sand"
+      "strainers:dust_block_from_dust"
     ]
   }
 }

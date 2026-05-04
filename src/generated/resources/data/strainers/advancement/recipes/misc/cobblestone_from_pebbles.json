@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_gravel_pebble": {
+    "has_stone_pebble": {
       "conditions": {
         "items": [
           {
-            "items": "strainers:gravel_pebble"
+            "items": "strainers:stone_pebble"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:gravel"
+        "recipe": "strainers:cobblestone_from_pebbles"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_gravel_pebble"
+      "has_stone_pebble"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:gravel"
+      "strainers:cobblestone_from_pebbles"
     ]
   }
 }

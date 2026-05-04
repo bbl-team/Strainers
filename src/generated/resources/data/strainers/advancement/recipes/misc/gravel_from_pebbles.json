@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_dust": {
+    "has_gravel_pebble": {
       "conditions": {
         "items": [
           {
-            "items": "strainers:dust"
+            "items": "strainers:gravel_pebble"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:dust_block"
+        "recipe": "strainers:gravel_from_pebbles"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_dust"
+      "has_gravel_pebble"
     ]
   ],
   "rewards": {
     "recipes": [
-      "strainers:dust_block"
+      "strainers:gravel_from_pebbles"
     ]
   }
 }
