@@ -3,12 +3,12 @@
   "category": "misc",
   "key": {
     "A": "#c:rods/wooden",
-    "B": "#c:rods/wooden"
+    "B": "minecraft:stick"
   },
   "pattern": [
+    " A ",
     "ABA",
-    "B B",
-    "ABA"
+    " A "
   ],
   "result": {
     "id": "strainers:wooden_mesh"

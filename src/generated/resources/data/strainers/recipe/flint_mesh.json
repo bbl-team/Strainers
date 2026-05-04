@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "#c:rods/wooden",
-    "B": "minecraft:flint"
+    "A": "minecraft:flint",
+    "B": "strainers:wooden_mesh"
   },
   "pattern": [
+    " A ",
     "ABA",
-    "B B",
-    "ABA"
+    " A "
   ],
   "result": {
     "id": "strainers:flint_mesh"

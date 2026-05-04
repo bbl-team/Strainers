@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "#c:rods/wooden",
-    "B": "#c:ingots/iron"
+    "A": "#c:ingots/iron",
+    "B": "strainers:copper_mesh"
   },
   "pattern": [
+    " A ",
     "ABA",
-    "B B",
-    "ABA"
+    " A "
   ],
   "result": {
     "id": "strainers:iron_mesh"

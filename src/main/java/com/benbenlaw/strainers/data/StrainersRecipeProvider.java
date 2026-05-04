@@ -61,14 +61,14 @@ public class StrainersRecipeProvider extends RecipeProvider {
                 .save(output);
 
         //Meshes
-        meshBuilder(StrainersItems.WOODEN_MESH.get(), Tags.Items.RODS_WOODEN);
-        meshBuilder(StrainersItems.FLINT_MESH.get(), Items.FLINT);
-        meshBuilder(StrainersItems.COPPER_MESH.get(), Tags.Items.INGOTS_COPPER);
-        meshBuilder(StrainersItems.IRON_MESH.get(), Tags.Items.INGOTS_IRON);
-        meshBuilder(StrainersItems.GOLD_MESH.get(), Tags.Items.INGOTS_GOLD);
-        meshBuilder(StrainersItems.DIAMOND_MESH.get(), Tags.Items.GEMS_DIAMOND);
-        meshBuilder(StrainersItems.EMERALD_MESH.get(), Tags.Items.GEMS_EMERALD);
-        meshBuilder(StrainersItems.NETHERITE_MESH.get(), Tags.Items.INGOTS_NETHERITE);
+        meshBuilder(StrainersItems.WOODEN_MESH.get(), Tags.Items.RODS_WOODEN, Items.STICK);
+        meshBuilder(StrainersItems.FLINT_MESH.get(), Items.FLINT, StrainersItems.WOODEN_MESH.get());
+        meshBuilder(StrainersItems.COPPER_MESH.get(), Tags.Items.INGOTS_COPPER, StrainersItems.FLINT_MESH.get());
+        meshBuilder(StrainersItems.IRON_MESH.get(), Tags.Items.INGOTS_IRON, StrainersItems.COPPER_MESH.get());
+        meshBuilder(StrainersItems.GOLD_MESH.get(), Tags.Items.INGOTS_GOLD, StrainersItems.IRON_MESH.get());
+        meshBuilder(StrainersItems.DIAMOND_MESH.get(), Tags.Items.GEMS_DIAMOND, StrainersItems.GOLD_MESH.get());
+        meshBuilder(StrainersItems.EMERALD_MESH.get(), Tags.Items.GEMS_EMERALD, StrainersItems.DIAMOND_MESH.get());
+        meshBuilder(StrainersItems.NETHERITE_MESH.get(), Tags.Items.INGOTS_NETHERITE, StrainersItems.EMERALD_MESH.get());
 
         twoByTwoPacker(RecipeCategory.MISC, Items.COBBLESTONE, StrainersItems.STONE_PEBBLE, "cobblestone_from_pebbles");
         twoByTwoPacker(RecipeCategory.MISC, Items.GRAVEL, StrainersItems.GRAVEL_PEBBLE, "gravel_from_pebbles");
@@ -78,26 +78,26 @@ public class StrainersRecipeProvider extends RecipeProvider {
 
     }
 
-    public void meshBuilder(ItemLike mesh, TagKey<Item> input) {
+    public void meshBuilder(ItemLike mesh, TagKey<Item> input, ItemLike previousMesh) {
 
         shaped(RecipeCategory.MISC, mesh)
+                .pattern(" A ")
                 .pattern("ABA")
-                .pattern("B B")
-                .pattern("ABA")
-                .define('A', Tags.Items.RODS_WOODEN)
-                .define('B', input)
+                .pattern(" A ")
+                .define('A', input)
+                .define('B', previousMesh)
                 .unlockedBy("has_input", has(input))
                 .save(output);
     }
 
-    public void meshBuilder(ItemLike mesh, ItemLike input) {
+    public void meshBuilder(ItemLike mesh, ItemLike input, ItemLike previousMesh) {
 
         shaped(RecipeCategory.MISC, mesh)
+                .pattern(" A ")
                 .pattern("ABA")
-                .pattern("B B")
-                .pattern("ABA")
-                .define('A', Tags.Items.RODS_WOODEN)
-                .define('B', input)
+                .pattern(" A ")
+                .define('A', input)
+                .define('B', previousMesh)
                 .unlockedBy("has_input", has(input))
                 .save(output);
     }

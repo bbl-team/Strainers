@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": "#c:rods/wooden",
-    "B": "#c:gems/diamond"
+    "A": "#c:gems/diamond",
+    "B": "strainers:gold_mesh"
   },
   "pattern": [
+    " A ",
     "ABA",
-    "B B",
-    "ABA"
+    " A "
   ],
   "result": {
     "id": "strainers:diamond_mesh"
