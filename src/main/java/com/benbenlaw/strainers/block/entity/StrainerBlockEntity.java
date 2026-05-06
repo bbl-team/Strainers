@@ -255,12 +255,11 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
             ItemStack mesh = inputHandler.getResource(1).toStack();
 
             if (mesh.isDamageableItem()) {
-                int prevDamage = mesh.getDamageValue();
 
                 mesh.hurtAndConvertOnBreak(1, Items.AIR, fakePlayer, fakePlayer.getEquipmentSlotForItem(mesh));
                 inputHandler.set(1, ItemResource.of(mesh), mesh.getCount());
 
-                if (mesh.getDamageValue() > prevDamage) {
+                if (mesh.isEmpty()) {
                     level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 }
             }
