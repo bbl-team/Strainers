@@ -59,16 +59,25 @@ public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredien
         buffer.writeDouble(recipe.additionalChancePerTier);
     }
 
-    public ItemStack rollWithTier(RandomSource random, int meshTier) {
+    public ItemStack rollWithTier(RandomSource random, int meshTier, int fortuneLevel) {
         ItemStack base = result.template().create();
         if (base.isEmpty()) return ItemStack.EMPTY;
+
         double baseChance = result.chance();
+
         int bonusLevels = Math.max(0, meshTier - minMeshTier);
-        double totalChance = baseChance + bonusLevels * additionalChancePerTier;
+
+        double totalChance = baseChance
+                + bonusLevels * additionalChancePerTier
+                + fortuneLevel * (additionalChancePerTier * 0.5);
+
         int guaranteed = (int) Math.floor(totalChance);
         double fractional = totalChance - guaranteed;
+
         if (random.nextDouble() < fractional) guaranteed++;
+
         if (guaranteed <= 0) return ItemStack.EMPTY;
+
         ItemStack out = base.copy();
         out.setCount(Math.min(out.getMaxStackSize(), guaranteed));
         return out;

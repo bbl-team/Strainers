@@ -28,6 +28,6 @@ side="BOTH"
 [[dependencies."${mod_id}"]]
 modId="bblcore"
 type="required"
-versionRange="1.21-1.1.34"
+versionRange="26.1.2-12.5.5"
 ordering="NONE"
 side="BOTH"

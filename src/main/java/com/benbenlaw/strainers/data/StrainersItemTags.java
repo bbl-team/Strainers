@@ -5,6 +5,8 @@ import com.benbenlaw.strainers.item.StrainersItems;
 import com.benbenlaw.strainers.util.StrainersTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.tags.ItemTags;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
@@ -19,6 +21,12 @@ public class StrainersItemTags extends ItemTagsProvider {
     }
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
+
+        //Enchantments
+        tag(ItemTags.MINING_LOOT_ENCHANTABLE).addTag(StrainersTags.Items.MESHES);
+        tag(ItemTags.MINING_ENCHANTABLE).addTag(StrainersTags.Items.MESHES);
+        tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(StrainersTags.Items.MESHES);
+        tag(Tags.Items.ENCHANTABLES).addTag(StrainersTags.Items.MESHES);
 
         //Meshes
         tag(StrainersTags.Items.MESHES)

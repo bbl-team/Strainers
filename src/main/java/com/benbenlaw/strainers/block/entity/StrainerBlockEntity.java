@@ -28,7 +28,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -49,6 +52,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     private final ContainerData data;
     private int maxProgress = 200;
     private int progress = 0;
+    private FakePlayer fakePlayer;
 
     private final InputItemHandler inputHandler = new InputItemHandler(this, 2,
             (slot, stack) -> {
@@ -107,8 +111,12 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     public void tick() {
         if (level == null || level.isClientSide()) return;
 
+        if (fakePlayer == null) {
+            fakePlayer = FakePlayerUtil.createFakePlayer((ServerLevel) level, "StrainerBlockEntityFakePlayer");
+        }
         ItemStack input = inputHandler.getResource(0).toStack();
         ItemStack mesh = inputHandler.getResource(1).toStack();
+
 
         if (input.isEmpty() || mesh.isEmpty()) {
             progress = 0;
@@ -118,6 +126,8 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         }
 
         int meshTier = getMeshTier(mesh);
+        int maxProgress = getMaxProgress(mesh);
+        this.maxProgress = maxProgress;
 
         if (meshTier <= 0) {
             progress = 0;
@@ -142,7 +152,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
         if (progress >= maxProgress) {
 
-            List<ItemStack> outputs = rollOutputs(meshTier, validRecipes);
+            List<ItemStack> outputs = rollOutputs(meshTier, mesh, validRecipes);
 
             if (!canInsertOutputs(outputs)) {
                 return;
@@ -155,18 +165,39 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         }
     }
 
-    private List<ItemStack> rollOutputs(int meshTier, List<RecipeHolder<StrainerRecipe>> recipes) {
+    private List<ItemStack> rollOutputs(int meshTier, ItemStack mesh, List<RecipeHolder<StrainerRecipe>> recipes) {
+        assert level != null;
         RandomSource random = level.getRandom();
         List<ItemStack> outputs = new ArrayList<>();
+        int fortune = getFortuneLevel(mesh);
 
         for (RecipeHolder<StrainerRecipe> holder : recipes) {
-            ItemStack rolled = holder.value().rollWithTier(random, meshTier);
+            ItemStack rolled = holder.value().rollWithTier(random, meshTier, fortune);
             if (!rolled.isEmpty()) {
                 outputs.add(rolled);
             }
         }
 
         return outputs;
+    }
+
+    private int getFortuneLevel(ItemStack stack) {
+        assert level != null;
+        return EnchantmentHelper.getItemEnchantmentLevel(level.registryAccess().holderOrThrow(Enchantments.FORTUNE), stack);
+    }
+
+    private int getEfficiencyLevel(ItemStack stack) {
+        assert level != null;
+        return EnchantmentHelper.getItemEnchantmentLevel(level.registryAccess().holderOrThrow(Enchantments.EFFICIENCY), stack);
+    }
+
+    private int getMaxProgress(ItemStack mesh) {
+        int base = 200;
+        int efficiency = getEfficiencyLevel(mesh);
+
+        int reduced = base - (efficiency * 20);
+
+        return Math.max(5, reduced);
     }
 
     private void updateCachedRecipes() {
@@ -222,23 +253,24 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
             inputHandler.extractInternal(0, inputHandler.getResource(0), cost, tx);
 
             ItemStack mesh = inputHandler.getResource(1).toStack();
-            if (mesh.isDamageableItem()) {
-                int oldDamage = mesh.getDamageValue();
-                mesh.setDamageValue(oldDamage + 1);
-                inputHandler.set(1, ItemResource.of(mesh), 1);
 
-                if (mesh.getDamageValue() >= mesh.getMaxDamage()) {
-                    inputHandler.extractInternal(1, inputHandler.getResource(1), 1, tx);
+            if (mesh.isDamageableItem()) {
+                int prevDamage = mesh.getDamageValue();
+
+                mesh.hurtAndConvertOnBreak(1, Items.AIR, fakePlayer, fakePlayer.getEquipmentSlotForItem(mesh));
+                inputHandler.set(1, ItemResource.of(mesh), mesh.getCount());
+
+                if (mesh.getDamageValue() > prevDamage) {
                     level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
                 }
             }
-
             tx.commit();
         }
 
         progress = 0;
         sync();
     }
+
 
     private boolean canInsertOutputs(List<ItemStack> outputs) {
         try (Transaction tx = Transaction.open(null)) {

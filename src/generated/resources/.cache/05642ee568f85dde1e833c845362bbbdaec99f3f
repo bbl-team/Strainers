@@ -1,5 +1,9 @@
-// 26.1.2	2026-04-22T13:09:39.1124206	strainers Item Tags
+// 26.1.2	2026-05-06T14:52:23.4867896	strainers Item Tags
 0eb6e6efd8ea178731322e84da5c265bb857c0b1 data/c/tags/item/dusts.json
+6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/c/tags/item/enchantables.json
+6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/minecraft/tags/item/enchantable/durability.json
+6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/minecraft/tags/item/enchantable/mining.json
+6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/minecraft/tags/item/enchantable/mining_loot.json
 dd27a98d383ea2617b909f6eae4811e274e854cf data/strainers/tags/item/meshes.json
 3382bf536234a19739a4968aafbb5fee81e93897 data/strainers/tags/item/ore_pieces.json
 fcdf4509fa7151f17ae57dac766912928a12d5c4 data/strainers/tags/item/tier_1_meshes.json

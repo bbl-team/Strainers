@@ -29,21 +29,21 @@ public class StrainersItems {
 
     //Meshes
     public static final DeferredItem<Item> WOODEN_MESH = ITEMS.registerItem("wooden_mesh",
-            Item::new, properties -> properties.durability(64));
+            Item::new, properties -> properties.durability(64).enchantable(15));
     public static final DeferredItem<Item> FLINT_MESH = ITEMS.registerItem("flint_mesh",
-            Item::new, properties -> properties.durability(128));
+            Item::new, properties -> properties.durability(128).enchantable(5));
     public static final DeferredItem<Item> COPPER_MESH = ITEMS.registerItem("copper_mesh",
-            Item::new, properties -> properties.durability(256));
+            Item::new, properties -> properties.durability(256).enchantable(12));
     public static final DeferredItem<Item> IRON_MESH = ITEMS.registerItem("iron_mesh",
-            Item::new, properties -> properties.durability(512));
+            Item::new, properties -> properties.durability(512).enchantable(15));
     public static final DeferredItem<Item> GOLD_MESH = ITEMS.registerItem("gold_mesh",
-            Item::new, properties -> properties.durability(256));
+            Item::new, properties -> properties.durability(256).enchantable(22));
     public static final DeferredItem<Item> DIAMOND_MESH = ITEMS.registerItem("diamond_mesh",
-            Item::new, properties -> properties.durability(1024));
+            Item::new, properties -> properties.durability(1024).enchantable(10));
     public static final DeferredItem<Item> EMERALD_MESH = ITEMS.registerItem("emerald_mesh",
-            Item::new, properties -> properties.durability(1024));
+            Item::new, properties -> properties.durability(1024).enchantable(22));
     public static final DeferredItem<Item> NETHERITE_MESH = ITEMS.registerItem("netherite_mesh",
-            Item::new, properties -> properties.durability(2048));
+            Item::new, properties -> properties.durability(2048).enchantable(15));
 
     //ORE PIECES
     public static final DeferredItem<Item> IRON_ORE_PIECE = ITEMS.registerSimpleItem("iron_ore_piece");
