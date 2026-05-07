@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -22,6 +23,7 @@ import org.joml.Quaternionf;
 public class StrainerBlockEntityRenderer implements BlockEntityRenderer<StrainerBlockEntity, StrainerBlockEntityRenderState> {
 
     private final ItemModelResolver itemModelResolver;
+    public final ItemStackRenderState glassRenderer = new ItemStackRenderState();
 
     public StrainerBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.itemModelResolver = context.itemModelResolver();
@@ -49,6 +51,7 @@ public class StrainerBlockEntityRenderer implements BlockEntityRenderer<Strainer
 
         itemModelResolver.updateForTopItem(renderState.meshStackRenderer, renderState.mesh, ItemDisplayContext.FIXED, blockEntity.getLevel(), null,0);
         itemModelResolver.updateForTopItem(renderState.processingStackRenderer, renderState.processingItem, ItemDisplayContext.FIXED, blockEntity.getLevel(), null,0);
+        itemModelResolver.updateForTopItem(renderState.glassStack, Blocks.GLASS.asItem().getDefaultInstance(), ItemDisplayContext.FIXED, blockEntity.getLevel(), null, 0);
 
     }
 
@@ -82,6 +85,16 @@ public class StrainerBlockEntityRenderer implements BlockEntityRenderer<Strainer
             poseStack.mulPose(new Quaternionf().rotationX((float) Math.toRadians(90)));
             itemModelResolver.updateForTopItem(renderState.processingStackRenderer, renderState.processingItem, ItemDisplayContext.FIXED, renderState.blockEntityLevel, null, 0);
             renderState.processingStackRenderer.submit(poseStack, submitNodeCollector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+            poseStack.popPose();
+        }
+
+        //Glass Casing
+        if (!renderState.fluidStack.isEmpty()) {
+            poseStack.pushPose();
+            poseStack.translate(0.5, 1.4, 0.5);
+            poseStack.scale(1.8f, 1.8f, 1.8f);
+            itemModelResolver.updateForTopItem(renderState.glassStack, Blocks.GLASS.asItem().getDefaultInstance(), ItemDisplayContext.FIXED, renderState.blockEntityLevel, null, 0);
+            renderState.glassStack.submit(poseStack, submitNodeCollector, renderState.lightCoords, OverlayTexture.NO_OVERLAY, 0);
             poseStack.popPose();
         }
     }

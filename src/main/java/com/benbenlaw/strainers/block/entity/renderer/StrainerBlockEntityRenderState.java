@@ -15,5 +15,6 @@ public class StrainerBlockEntityRenderState extends BlockEntityRenderState {
 
     final ItemStackRenderState meshStackRenderer = new ItemStackRenderState();
     final ItemStackRenderState processingStackRenderer = new ItemStackRenderState();
+    final ItemStackRenderState glassStack = new ItemStackRenderState();
 
 }
