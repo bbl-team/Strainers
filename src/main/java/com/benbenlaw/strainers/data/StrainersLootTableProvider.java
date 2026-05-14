@@ -26,6 +26,16 @@ public class StrainersLootTableProvider extends VanillaBlockLoot {
 
         this.dropWithFluidComponent(StrainersBlocks.STRAINER.get());
         this.dropSelf(StrainersBlocks.DUST_BLOCK.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_DUST_BLOCK.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_SAND.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_GRAVEL.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_DIRT.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_STONE.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_SOUL_SAND.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_SOUL_SOIL.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_NETHERRACK.get());
+        this.dropSelf(StrainersBlocks.MULCH.get());
+
 
 
     }

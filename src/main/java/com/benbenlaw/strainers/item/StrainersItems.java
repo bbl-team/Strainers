@@ -15,6 +15,8 @@ public class StrainersItems {
     public static final DeferredItem<Item> SAND_DUST = ITEMS.registerSimpleItem("sand_dust");
     public static final DeferredItem<Item> DUST = ITEMS.registerSimpleItem("dust");
     public static final DeferredItem<Item> LEAF_PILE = ITEMS.registerSimpleItem("leaf_pile");
+    public static final DeferredItem<Item> DIRT_PILE = ITEMS.registerSimpleItem("dirt_pile");
+    public static final DeferredItem<Item> DEPLETED_DROP = ITEMS.registerSimpleItem("depleted_drop");
     public static final DeferredItem<Item> WATER_DROP = ITEMS.registerItem("water_drop",
             (properties) -> new FluidDropItem(properties, Fluids.WATER));
     public static final DeferredItem<Item> LAVA_DROP = ITEMS.registerItem("lava_drop",
@@ -23,6 +25,8 @@ public class StrainersItems {
             (properties) -> new FluidDropItem(properties, StrainersFluids.ERODING_WATER.getFluid()));
     public static final DeferredItem<Item> PURIFYING_DROP = ITEMS.registerItem("purifying_drop",
             (properties) -> new FluidDropItem(properties, StrainersFluids.PURIFYING_WATER.getFluid()));
+    public static final DeferredItem<Item> SALT_WATER_DROP = ITEMS.registerItem("salt_water_drop",
+            (properties) -> new FluidDropItem(properties, StrainersFluids.SALTY_WATER.getFluid()));
 
 
     //public static final DeferredItem<Item> EMPTY_DROP = ITEMS.registerSimpleItem("empty_drop");

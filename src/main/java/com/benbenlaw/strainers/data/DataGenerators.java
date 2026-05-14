@@ -33,6 +33,7 @@ public class DataGenerators {
         generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(),
                 List.of(new LootTableProvider.SubProviderEntry(StrainersLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
         generator.addProvider(true, new StrainersModelProvider(packOutput));
+        generator.addProvider(true, new StrainersLootModifierProvider(packOutput, lookupProvider));
 
         //Recipes
         generator.addProvider(true, new StrainersRecipeProvider.Runner(packOutput, lookupProvider));

@@ -1,0 +1,18 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.0,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "strainers:purifying_water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:dust_block"
+  },
+  "min_mesh_tier": 3,
+  "result": {
+    "item": {
+      "id": "strainers:purified_dust_block"
+    }
+  }
+}

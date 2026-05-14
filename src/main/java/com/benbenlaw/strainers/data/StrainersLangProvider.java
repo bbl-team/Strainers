@@ -20,6 +20,16 @@ public class StrainersLangProvider extends LanguageProvider {
         add("block.strainers.dust_block", "Dust Block");
         add("block.strainers.eroding_water", "Eroding Water");
         add("block.strainers.purifying_water", "Purifying Water");
+        add("block.strainers.salty_water", "Salty Water");
+        add("block.strainers.mulch", "Mulch");
+        add("block.strainers.purified_dust_block", "Purified Dust Block");
+        add("block.strainers.purified_sand", "Purified Sand");
+        add("block.strainers.purified_gravel", "Purified Gravel");
+        add("block.strainers.purified_dirt", "Purified Dirt");
+        add("block.strainers.purified_stone", "Purified Stone");
+        add("block.strainers.purified_netherrack", "Purified Netherrack");
+        add("block.strainers.purified_soul_sand", "Purified Soul Sand");
+        add("block.strainers.purified_soul_soil", "Purified Soul Soil");
 
         //Items
         add("item.strainers.wooden_mesh", "Wooden Mesh");
@@ -58,6 +68,7 @@ public class StrainersLangProvider extends LanguageProvider {
 
         add("item.strainers.eroding_water_bucket", "Eroding Water Bucket");
         add("item.strainers.purifying_water_bucket", "Purifying Water Bucket");
+        add("item.strainers.salty_water_bucket", "Salty Water Bucket");
 
         add("item.strainers.sapling_bag", "Sapling Bag (What's inside!)");
         add("item.strainers.leaf_pile", "Leaf Pile");
@@ -65,6 +76,9 @@ public class StrainersLangProvider extends LanguageProvider {
         add("item.strainers.lava_drop", "Lava Drop");
         add("item.strainers.eroding_drop", "Eroding Drop");
         add("item.strainers.purifying_drop", "Purifying Drop");
+        add("item.strainers.salt_water_drop", "Salt Water Drop");
+        add("item.strainers.depleted_drop", "Depleted Drop");
+        add("item.strainers.dirt_pile", "Dirt Pile");
 
         //Tooltip
         add("tooltip.strainers.fluids_header", "Fluids:");
@@ -80,11 +94,13 @@ public class StrainersLangProvider extends LanguageProvider {
         add("tooltip.strainers.tier_8_mesh", "Tier 8 Mesh");
 
         add("tooltip.strainers.sapling_bag", "Right Click to place a random sapling");
+        add("tooltip.strainers.depleted_drop", "Yes its useless just throw me away !");
 
         //JEI
         add("jei.strainers.strainer", "Strainer");
         add("jei.strainers.chance", "Chance: %s%%");
         add("jei.strainers.additional", "Additional %s%% per level above minimum mesh tier");
+        add("jei.strainers.leaf_pile", "Leaf Piles can be obtained when breaking leaves with a Stick");
 
     }
 

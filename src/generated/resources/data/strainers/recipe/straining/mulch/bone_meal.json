@@ -1,0 +1,15 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.10000000149011612,
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:mulch"
+  },
+  "min_mesh_tier": 1,
+  "result": {
+    "chance": 0.4,
+    "item": {
+      "id": "minecraft:bone_meal"
+    }
+  }
+}

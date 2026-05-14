@@ -9,6 +9,8 @@ import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.StrainersCreativeTab;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.item.StrainersItems;
+import com.benbenlaw.strainers.loot.StrainersLootConditions;
+import com.benbenlaw.strainers.loot.StrainersLootModifiers;
 import com.benbenlaw.strainers.recipe.StrainersRecipes;
 import com.benbenlaw.strainers.screen.StrainersMenuTypes;
 import com.benbenlaw.strainers.screen.custom.StrainerScreen;
@@ -46,6 +48,8 @@ public class Strainers {
         StrainersMenuTypes.MENUS.register(modEventBus);
         StrainersRecipes.SERIALIZER.register(modEventBus);
         StrainersRecipes.TYPES.register(modEventBus);
+        StrainersLootConditions.LOOT_CONDITION_SERIALIZERS.register(modEventBus);
+        StrainersLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::registerCapabilities);

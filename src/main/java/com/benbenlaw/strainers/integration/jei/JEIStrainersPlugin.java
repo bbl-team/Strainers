@@ -4,16 +4,19 @@ import com.benbenlaw.core.recipe.ChanceResult;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.event.client.ClientRecipeCache;
+import com.benbenlaw.strainers.item.StrainersItems;
 import com.benbenlaw.strainers.recipe.*;
 import com.benbenlaw.strainers.screen.custom.StrainerScreen;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeCache;
@@ -47,6 +50,8 @@ public class JEIStrainersPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(StrainerRecipeCategory.RECIPE_TYPE, ClientRecipeCache.getCachedStrainerRecipes().stream().toList());
+
+        registration.addIngredientInfo(StrainersItems.LEAF_PILE.get(), Component.translatable("jei.strainers.leaf_pile"));
     }
 
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {

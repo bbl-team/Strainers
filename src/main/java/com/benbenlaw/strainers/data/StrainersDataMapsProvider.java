@@ -23,6 +23,7 @@ public class StrainersDataMapsProvider extends DataMapProvider {
         var burnable = this.builder(NeoForgeDataMaps.COMPOSTABLES);
 
         burnable.add(StrainersItems.LEAF_PILE, new Compostable(0.25f), false);
+        burnable.add(StrainersBlocks.MULCH.getId(), new Compostable(1f), false);
         //burnable.add(StrainersBlocks.MULCH.get().asItem().builtInRegistryHolder(), new Compostable(0.75f), false);
 
 

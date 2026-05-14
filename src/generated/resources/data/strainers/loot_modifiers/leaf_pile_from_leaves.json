@@ -1,0 +1,17 @@
+{
+  "type": "strainers:add_item",
+  "conditions": [
+    {
+      "type": "is_leaves",
+      "condition": "strainers:is_leaves"
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "items": "minecraft:stick"
+      }
+    }
+  ],
+  "item": "strainers:leaf_pile",
+  "priority": 1001
+}

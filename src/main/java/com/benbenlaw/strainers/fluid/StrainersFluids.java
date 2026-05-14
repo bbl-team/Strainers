@@ -20,4 +20,8 @@ public class StrainersFluids {
             renderProperties -> renderProperties.texture(Core.identifier("block/liquid"),
                     Core.identifier("block/liquid_flow")).tint(0xBFff13d6));
 
+    public static final FluidRegistryObject<FluidDeferredRegister.CoreFluidTypes, BaseFlowingFluid.Source, BaseFlowingFluid.Flowing, LiquidBlock, BucketItem> SALTY_WATER = FLUIDS.register("salty_water",
+            renderProperties -> renderProperties.texture(Core.identifier("block/liquid"),
+                    Core.identifier("block/liquid_flow")).tint(0xBF7E92E8));
+
 }

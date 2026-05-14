@@ -21,7 +21,21 @@ public class StrainersBlockTags extends BlockTagsProvider {
         //Pickaxe
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(StrainersBlocks.STRAINER.get())
+                .add(StrainersBlocks.PURIFIED_STONE.get())
+                .add(StrainersBlocks.PURIFIED_NETHERRACK.get())
         ;
+
+        //Shovel
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(StrainersBlocks.DUST_BLOCK.get())
+                .add(StrainersBlocks.PURIFIED_DUST_BLOCK.get())
+                .add(StrainersBlocks.PURIFIED_SAND.get())
+                .add(StrainersBlocks.PURIFIED_GRAVEL.get())
+                .add(StrainersBlocks.PURIFIED_DIRT.get())
+                .add(StrainersBlocks.PURIFIED_SOUL_SAND.get())
+                .add(StrainersBlocks.PURIFIED_SOUL_SOIL.get())
+                .add(StrainersBlocks.MULCH.get())
+                ;
     }
 
     @Override

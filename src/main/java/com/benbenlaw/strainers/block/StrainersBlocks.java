@@ -5,7 +5,6 @@ import com.benbenlaw.strainers.block.custom.StrainerBlock;
 import com.benbenlaw.strainers.item.StrainersItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -27,6 +26,56 @@ public class StrainersBlocks {
             properties -> new Block(properties
                     .strength(1.0F)
                     .sound(SoundType.SAND)));
+
+
+    public static final DeferredBlock<Block> MULCH = registerBlock("mulch",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.MUD)));
+
+    public static final DeferredBlock<Block> PURIFIED_DUST_BLOCK = registerBlock("purified_dust_block",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.SAND)));
+
+    public static final DeferredBlock<Block> PURIFIED_SAND = registerBlock("purified_sand",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.SAND)));
+
+    public static final DeferredBlock<Block> PURIFIED_GRAVEL = registerBlock("purified_gravel",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.GRAVEL)));
+
+    public static final DeferredBlock<Block> PURIFIED_DIRT = registerBlock("purified_dirt",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.GRAVEL)));
+
+    public static final DeferredBlock<Block> PURIFIED_STONE = registerBlock("purified_stone",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.STONE)));
+
+    public static final DeferredBlock<Block> PURIFIED_SOUL_SAND = registerBlock("purified_soul_sand",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.SOUL_SAND)));
+
+    public static final DeferredBlock<Block> PURIFIED_SOUL_SOIL = registerBlock("purified_soul_soil",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.SOUL_SOIL)));
+
+    public static final DeferredBlock<Block> PURIFIED_NETHERRACK = registerBlock("purified_netherrack",
+            properties -> new Block(properties
+                    .strength(1.0F)
+                    .sound(SoundType.NETHERRACK)));
+
+
+
+
 
 
 

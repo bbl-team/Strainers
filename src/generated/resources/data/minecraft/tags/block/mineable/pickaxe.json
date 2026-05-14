@@ -1,5 +1,7 @@
 {
   "values": [
-    "strainers:strainer"
+    "strainers:strainer",
+    "strainers:purified_stone",
+    "strainers:purified_netherrack"
   ]
 }

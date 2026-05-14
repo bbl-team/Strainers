@@ -1,6 +1,7 @@
 package com.benbenlaw.strainers.item.util;
 
 import com.benbenlaw.strainers.item.FluidDropItem;
+import com.benbenlaw.strainers.item.StrainersItems;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.transfer.ItemAccessResourceHandler;
@@ -39,7 +40,7 @@ public final class FluidDropResourceHandler extends ItemAccessResourceHandler<Fl
     @Override
     protected ItemResource update(ItemResource accessResource, int index, FluidResource newResource, int newAmount) {
         if (newAmount == 0) {
-            return ItemResource.of(Items.STICK);
+            return ItemResource.of(StrainersItems.DEPLETED_DROP.asItem());
         } else if (newAmount != dropCapacity) {
             return ItemResource.EMPTY;
         } else {

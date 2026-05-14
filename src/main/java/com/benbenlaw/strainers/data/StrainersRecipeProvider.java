@@ -75,6 +75,8 @@ public class StrainersRecipeProvider extends RecipeProvider {
         twoByTwoPacker(RecipeCategory.MISC, Items.SAND, StrainersItems.SAND_DUST, "sand_from_dust");
         twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.DUST_BLOCK, StrainersItems.DUST, "dust_block_from_dust");
         twoByTwoPacker(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS,StrainersItems.DEBRIS_ORE_PIECE.get(), "debris_from_pieces");
+        twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.MULCH, StrainersItems.LEAF_PILE.get(), "mulch_from_leaf_pile");
+        twoByTwoPacker(RecipeCategory.MISC, Blocks.DIRT, StrainersItems.DIRT_PILE.get(), "dirt_from_dirt_pile");
 
     }
 

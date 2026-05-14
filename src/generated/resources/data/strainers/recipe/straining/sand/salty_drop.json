@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.05000000074505806,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:sand"
+  },
+  "min_mesh_tier": 2,
+  "result": {
+    "chance": 0.1,
+    "item": {
+      "id": "strainers:salt_water_drop"
+    }
+  }
+}

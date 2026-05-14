@@ -23,6 +23,7 @@ public class TooltipEvent {
     public static void onTooltipEvent(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
         TooltipUtil.addShiftTooltip(stack, event, StrainersItems.SAPLING_BAG.get(), "tooltip.strainers.sapling_bag");
+        TooltipUtil.addShiftTooltip(stack, event, StrainersItems.DEPLETED_DROP.get(), "tooltip.strainers.depleted_drop");
 
         if (stack.getItem() instanceof FluidDropItem dropItem) {
 

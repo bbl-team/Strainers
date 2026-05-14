@@ -1,0 +1,12 @@
+{
+  "values": [
+    "strainers:dust_block",
+    "strainers:purified_dust_block",
+    "strainers:purified_sand",
+    "strainers:purified_gravel",
+    "strainers:purified_dirt",
+    "strainers:purified_soul_sand",
+    "strainers:purified_soul_soil",
+    "strainers:mulch"
+  ]
+}

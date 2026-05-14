@@ -79,7 +79,7 @@ public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredien
         if (guaranteed <= 0) return ItemStack.EMPTY;
 
         ItemStack out = base.copy();
-        out.setCount(Math.min(out.getMaxStackSize(), guaranteed));
+        out.setCount(Math.min(out.getMaxStackSize(), base.getCount() * guaranteed));
         return out;
     }
 

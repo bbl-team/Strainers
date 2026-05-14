@@ -20,6 +20,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -48,8 +49,7 @@ public class StrainersModelProvider extends ModelProvider {
 
         //Items
         StrainersItems.ITEMS.getEntries().stream()
-                .filter(entry -> entry.get() != StrainersBlocks.STRAINER.get().asItem())
-                .filter(entry -> entry.get() != StrainersBlocks.DUST_BLOCK.get().asItem())
+                .filter(entry -> !(entry.get() instanceof BlockItem))
                 .forEach(entry ->
                         itemModels.generateFlatItem(entry.get(), ModelTemplates.FLAT_ITEM)
                 );
@@ -57,9 +57,20 @@ public class StrainersModelProvider extends ModelProvider {
         //Buckets
         bucketItem(itemModels, StrainersFluids.ERODING_WATER.getBucket(), StrainersFluids.ERODING_WATER.getFluid(), false, true);
         bucketItem(itemModels, StrainersFluids.PURIFYING_WATER.getBucket(), StrainersFluids.PURIFYING_WATER.getFluid(), false, true);
+        bucketItem(itemModels, StrainersFluids.SALTY_WATER.getBucket(), StrainersFluids.SALTY_WATER.getFluid(), false, true);
 
         //Blocks
         blockModels.createTrivialCube(StrainersBlocks.DUST_BLOCK.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DUST_BLOCK.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_SAND.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_GRAVEL.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DIRT.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_STONE.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_SOUL_SAND.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_SOUL_SOIL.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_NETHERRACK.get());
+        blockModels.createTrivialCube(StrainersBlocks.MULCH.get());
+
 
     }
 

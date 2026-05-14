@@ -2,6 +2,9 @@
   "values": {
     "strainers:leaf_pile": {
       "chance": 0.25
+    },
+    "strainers:mulch": {
+      "chance": 1.0
     }
   }
 }
