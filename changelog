@@ -4,6 +4,10 @@ Changelog BBL Strainers
 //MAKE AIR VALID
 //FIX JEI ISSUES WHEN BLOCKS ARE USED INSTEAD OF FLUIDS
 
+5.2.3
+- Actually implemented recipe and result caching to improve performance
+- Syncing amount reduced, strainers will not look as smooth
+
 5.2.2
 - Strainer now adds to stacks before creating a new stack in output slots
 

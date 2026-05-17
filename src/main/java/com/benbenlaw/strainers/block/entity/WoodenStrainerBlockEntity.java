@@ -86,9 +86,12 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
     private Optional<RecipeHolder<StrainerRecipe>> cachedRecipe = Optional.empty();
     private ItemStack lastInput = ItemStack.EMPTY;
     private ItemStack lastMesh = ItemStack.EMPTY;
+    private ItemStack lastUpgrade1 = ItemStack.EMPTY;
+    private ItemStack lastUpgrade2 = ItemStack.EMPTY;
+    private ItemStack lastUpgrade3 = ItemStack.EMPTY;
     private BlockState lastAboveBlock = Blocks.AIR.defaultBlockState();
     public String errorMessage = "";
-
+    private List<ChanceResult> cachedCombinedResults = new ArrayList<>();
 
     //UPGRADE VALUES
     public double outputChanceIncrease = 0.0;
@@ -225,54 +228,53 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
 
     public void tick() {
+        if (level == null || level.isClientSide()) return;
 
         if (this.fakePlayer == null && level instanceof ServerLevel serverLevel) {
             this.fakePlayer = createFakePlayer(serverLevel);
         }
 
-        sync();
+        updateCachedRecipe();
 
-        assert level != null;
-        if (!level.isClientSide()) {
+        if (cachedRecipe.isPresent()) {
+            StrainerRecipe currentRecipe = cachedRecipe.get().value();
 
-            updateCachedRecipe();
-            Optional<RecipeHolder<StrainerRecipe>> match = cachedRecipe;
+            int baseDuration = StrainersIngredientDurations.getDuration(itemHandler.getStackInSlot(INPUT_SLOT));
+            maxProgress = getNewMaxProgress(baseDuration);
 
-            if (match.isPresent()) {
-                maxProgress = StrainersIngredientDurations.getDuration(itemHandler.getStackInSlot(INPUT_SLOT));
-                maxProgress = getNewMaxProgress(maxProgress);
+            if (hasCorrectBlockAbove(currentRecipe) && !cachedCombinedResults.isEmpty()) {
 
-                StrainerRecipe currentRecipe = match.get().value();
+                progress++;
 
-                if (hasCorrectBlockAbove(currentRecipe)) {
-                    List<ChanceResult> resultsToRoll = getAllCombinedResults(
-                            itemHandler.getStackInSlot(INPUT_SLOT),
-                            itemHandler.getStackInSlot(MESH_SLOT)
-                    );
+                if (progress >= maxProgress) {
 
-                    List<ItemStack> results = resultsToRoll.stream()
+                    List<ItemStack> results = cachedCombinedResults.stream()
+                            .map(this::applyUpgradeBoost) // Apply luck upgrades
                             .map(r -> r.rollOutput(level.random))
                             .filter(r -> !r.isEmpty())
                             .toList();
 
-                    if (!canFitResults(results)) {
+                    if (canFitResults(results)) {
+                        fillOutputSlots(results);
+                        resetProgress();
+                        errorMessage = "";
+                        setChanged();
+                        sync();
+                    } else {
+                        progress = maxProgress;
                         if (!"block.cloche.error.output_full".equals(errorMessage)) {
                             errorMessage = "block.cloche.error.output_full";
+                            setChanged();
                             sync();
                         }
-                        return;
-                    }
-
-                    progress++;
-
-                    if (progress >= maxProgress) {
-                        resetProgress();
-                        fillOutputSlots(results);
-                        sync();
                     }
                 }
-            } else {
+            }
+        } else {
+            if (progress > 0) {
                 resetProgress();
+                setChanged();
+                sync();
             }
         }
     }
@@ -347,11 +349,13 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
         }
     }
 
-    private List<ChanceResult> getAllCombinedResults(ItemStack inputStack, ItemStack meshStack) {
-        assert level != null;
-        var recipeManager = level.getRecipeManager();
+    private List<ChanceResult> calculateResults() {
+        if (level == null) return new ArrayList<>();
 
-        List<StrainerRecipe> matchingRecipes = recipeManager
+        ItemStack inputStack = itemHandler.getStackInSlot(INPUT_SLOT);
+        ItemStack meshStack = itemHandler.getStackInSlot(MESH_SLOT);
+
+        List<StrainerRecipe> matchingRecipes = level.getRecipeManager()
                 .getAllRecipesFor(ModRecipes.STRAINER_TYPE.get())
                 .stream()
                 .map(RecipeHolder::value)
@@ -365,13 +369,9 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
                 if (meshChance == MeshChanceResult.EMPTY) continue;
                 if (!meshChance.mesh().isEmpty() && !meshChance.mesh().test(meshStack)) continue;
 
-                ChanceResult original = meshChance.chanceResult();
-                ChanceResult booster = applyUpgradeBoost(original);
-
-                combinedResults.add(booster);
+                combinedResults.add(meshChance.chanceResult());
             }
         }
-
         return combinedResults;
     }
 
@@ -407,9 +407,13 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
 
             cachedRecipe = level.getRecipeManager().getRecipeFor(StrainerRecipe.Type.INSTANCE, inventory, level);
 
-            // Update last inputs
+            this.cachedCombinedResults = calculateResults();
+
             lastInput = itemHandler.getStackInSlot(INPUT_SLOT).copy();
             lastMesh = itemHandler.getStackInSlot(MESH_SLOT).copy();
+            lastUpgrade1 = itemHandler.getStackInSlot(UPGRADE_SLOT_1).copy();
+            lastUpgrade2 = itemHandler.getStackInSlot(UPGRADE_SLOT_2).copy();
+            lastUpgrade3 = itemHandler.getStackInSlot(UPGRADE_SLOT_3).copy();
             lastAboveBlock = getBlockAbove();
         }
     }
@@ -434,6 +438,9 @@ public class WoodenStrainerBlockEntity extends SyncableBlockEntity implements Me
     private boolean inputsChanged() {
         return !ItemStack.matches(itemHandler.getStackInSlot(INPUT_SLOT), lastInput) ||
                 !ItemStack.matches(itemHandler.getStackInSlot(MESH_SLOT), lastMesh) ||
+                !ItemStack.matches(itemHandler.getStackInSlot(UPGRADE_SLOT_1), lastUpgrade1) ||
+                !ItemStack.matches(itemHandler.getStackInSlot(UPGRADE_SLOT_2), lastUpgrade2) ||
+                !ItemStack.matches(itemHandler.getStackInSlot(UPGRADE_SLOT_3), lastUpgrade3) ||
                 getBlockAbove() != lastAboveBlock;
     }
 
