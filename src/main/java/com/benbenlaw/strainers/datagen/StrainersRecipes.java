@@ -594,7 +594,7 @@ public class StrainersRecipes extends RecipeProvider {
                 0.2f, 3,10,0.05f
         )).save(consumer, ResourceLocation.fromNamespaceAndPath(Strainers.MOD_ID, "strainer/purified_dirt/clay_rare"));
 
-        //Purified Dirt -> Oak Sapling
+        //Purified Dirt -> Oak sapling
         StrainerRecipeBuilder.strainerRecipe(WATER, Ingredient.of(ModBlocks.PURIFIED_DIRT), createMeshChanceResultList(
                 new ItemStack(Items.OAK_SAPLING),
                 0.1f, 1,10,0.05f
