@@ -63,6 +63,8 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         simpleStrainer(StrainersItems.DIRT_PILE.get(), 3, 1.0f, StrainersBlocks.MULCH, 1, 0.5f, "mulch/dirt_pile");
         simpleStrainer(StrainersItems.WATER_DROP.get(),0.5f, StrainersBlocks.MULCH, 1, 0.1f, "mulch/water_drop");
         simpleStrainer(Items.BONE_MEAL, 0.4f, StrainersBlocks.MULCH, 1, 0.1f, "mulch/bone_meal");
+        simpleWaterStrainer(StrainersItems.SAPLING_BAG.get(), 0.2f, StrainersBlocks.MULCH, 2, 0.05f, "mulch/sapling_seed");
+
 
         //Leaves -> Gravel Pebble, Stick, Leaf Pile, Sapling Bag
         simpleStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/gravel_pebble");

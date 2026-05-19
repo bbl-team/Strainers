@@ -9,12 +9,15 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
+import java.util.List;
 import java.util.Optional;
 
 public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredient> fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) implements Recipe<RecipeInput> {
@@ -97,6 +100,13 @@ public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredien
     }
 
     //Boiler Plate
+    @Override
+    public List<RecipeDisplay> display() {
+        return List.of(
+            new StrainerRecipeDisplay(input.ingredient().display(), new SlotDisplay.ItemStackSlotDisplay(result.template()))
+        );
+    }
+
     @Override
     public @NonNull ItemStack assemble(RecipeInput recipeInput) {
         return result.template().create();
