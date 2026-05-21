@@ -67,7 +67,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
 
         //Leaves -> Gravel Pebble, Stick, Leaf Pile, Sapling Bag
-        simpleStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/gravel_pebble");
+        simpleStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stone_pebble");
         simpleStrainer(Items.STICK, 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stick");
         simpleStrainer(StrainersItems.LEAF_PILE.get(), 2, 1f, ItemTags.LEAVES, 1, 1f, "leaves/leaf_pile");
         simpleWaterStrainer(StrainersItems.SAPLING_BAG.get(), 0.1f, ItemTags.LEAVES, 2, 0.05f, "leaves/sapling_seed");
