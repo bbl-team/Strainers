@@ -11,6 +11,7 @@ import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.item.StrainersItems;
 import com.benbenlaw.strainers.loot.StrainersLootConditions;
 import com.benbenlaw.strainers.loot.StrainersLootModifiers;
+import com.benbenlaw.strainers.network.StrainersMessages;
 import com.benbenlaw.strainers.recipe.StrainersRecipes;
 import com.benbenlaw.strainers.screen.StrainersMenuTypes;
 import com.benbenlaw.strainers.screen.custom.StrainerScreen;
@@ -53,7 +54,7 @@ public class Strainers {
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::registerCapabilities);
-
+        modEventBus.addListener(this::networkingSetup);
 
     }
 
@@ -77,6 +78,10 @@ public class Strainers {
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(StrainersMenuTypes.WOODEN_STRAINER_MENU.get(), StrainerScreen::new);
         }
+    }
+
+    public void networkingSetup(RegisterPayloadHandlersEvent event) {
+        StrainersMessages.registerNetworking(event);
     }
 
     public static Identifier identifier(String path) {

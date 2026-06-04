@@ -38,16 +38,16 @@ public class StrainerBlockEntityRenderer implements BlockEntityRenderer<Strainer
     public void extractRenderState(StrainerBlockEntity blockEntity, StrainerBlockEntityRenderState renderState, float partialTick, Vec3 cameraPosition, ModelFeatureRenderer.CrumblingOverlay breakProgress) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, renderState, partialTick, cameraPosition, breakProgress);
 
-        renderState.fluidStack = FluidUtil.getStack(blockEntity.getInputFluidHandler(), 0);
+        renderState.fluidStack = FluidUtil.getStack(blockEntity.getFluidHandler(), 0);
 
-        renderState.tankCapacity = blockEntity.getInputFluidHandler().getCapacityAsInt(
+        renderState.tankCapacity = blockEntity.getFluidHandler().getCapacityAsInt(
                 0,
                 FluidResource.of(renderState.fluidStack)
         );
 
-        renderState.mesh = ItemUtil.getStack(blockEntity.getItemCapability(), 1);
+        renderState.mesh = ItemUtil.getStack(blockEntity.getItemHandler(), 1);
         renderState.blockEntityLevel = blockEntity.getLevel();
-        renderState.processingItem = ItemUtil.getStack(blockEntity.getItemCapability(), 0);
+        renderState.processingItem = ItemUtil.getStack(blockEntity.getItemHandler(), 0);
 
         itemModelResolver.updateForTopItem(renderState.meshStackRenderer, renderState.mesh, ItemDisplayContext.FIXED, blockEntity.getLevel(), null,0);
         itemModelResolver.updateForTopItem(renderState.processingStackRenderer, renderState.processingItem, ItemDisplayContext.FIXED, blockEntity.getLevel(), null,0);

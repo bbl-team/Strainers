@@ -1,7 +1,9 @@
 package com.benbenlaw.strainers.recipe;
 
 import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;
+import com.benbenlaw.core.block.entity.handler.fluid.SyncableFluidHandler;
 import com.benbenlaw.core.block.entity.handler.item.InputItemHandler;
+import com.benbenlaw.core.block.entity.handler.item.SyncableItemHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -11,10 +13,10 @@ import net.neoforged.neoforge.transfer.item.ItemUtil;
 
 public class StrainerRecipeInput implements RecipeInput {
 
-    private final InputItemHandler itemHandler;
-    private final InputFluidHandler fluidHandler;
+    private final SyncableItemHandler itemHandler;
+    private final SyncableFluidHandler fluidHandler;
 
-    public StrainerRecipeInput(InputItemHandler itemHandler, InputFluidHandler fluidHandler) {
+    public StrainerRecipeInput(SyncableItemHandler itemHandler, SyncableFluidHandler fluidHandler) {
         this.itemHandler = itemHandler;
         this.fluidHandler = fluidHandler;
     }

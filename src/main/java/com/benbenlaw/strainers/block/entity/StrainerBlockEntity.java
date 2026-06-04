@@ -1,10 +1,8 @@
 package com.benbenlaw.strainers.block.entity;
 
 import com.benbenlaw.core.block.entity.SyncableBlockEntity;
-import com.benbenlaw.core.block.entity.handler.fluid.InputFluidHandler;
-import com.benbenlaw.core.block.entity.handler.item.CombinedItemHandler;
-import com.benbenlaw.core.block.entity.handler.item.InputItemHandler;
-import com.benbenlaw.core.block.entity.handler.item.OutputItemHandler;
+import com.benbenlaw.core.block.entity.handler.fluid.SyncableFluidHandler;
+import com.benbenlaw.core.block.entity.handler.item.SyncableItemHandler;
 import com.benbenlaw.core.util.FakePlayerUtil;
 import com.benbenlaw.strainers.block.StrainersBlockEntities;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
@@ -38,8 +36,11 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemUtil;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
@@ -54,7 +55,12 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     private int progress = 0;
     private FakePlayer fakePlayer;
 
-    private final InputItemHandler inputHandler = new InputItemHandler(this, 2,
+    public static final int INPUT_SLOT = 0;
+    public static final int MESH_SLOT = 1;
+    public static final int FIRST_OUTPUT_SLOT = 2;
+    public static final int LAST_OUTPUT_SLOT = 51;
+
+    private final SyncableItemHandler inventory = new SyncableItemHandler(this, 52,
             (slot, stack) -> {
                 boolean isMesh = stack.is(StrainersTags.Items.MESHES);
 
@@ -67,7 +73,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 }
 
                 return false;
-            }) {
+            }, i -> i >= 2) {
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
             updateCachedRecipes();
@@ -75,11 +81,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         }
     };
 
-    private final InputFluidHandler inputFluidHandler =
-            new InputFluidHandler(this, 1, 1000, (i, stack) -> i == 0);
-
-    private final OutputItemHandler outputHandler =
-            new OutputItemHandler(this, 18, i -> true);
+    private final SyncableFluidHandler fluidInventory = new SyncableFluidHandler(this, 1, 1000, (i, stack) -> i == 0, i -> true);
 
     private List<RecipeHolder<StrainerRecipe>> cachedRecipes = List.of();
 
@@ -114,8 +116,8 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         if (fakePlayer == null) {
             fakePlayer = FakePlayerUtil.createFakePlayer((ServerLevel) level, "StrainerBlockEntityFakePlayer");
         }
-        ItemStack input = inputHandler.getResource(0).toStack();
-        ItemStack mesh = inputHandler.getResource(1).toStack();
+        ItemStack input = ItemUtil.getStack(inventory, INPUT_SLOT);
+        ItemStack mesh = ItemUtil.getStack(inventory, MESH_SLOT);
 
 
         if (input.isEmpty() || mesh.isEmpty()) {
@@ -203,7 +205,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     private void updateCachedRecipes() {
         if (level == null || level.getServer() == null) return;
 
-        var input = new StrainerRecipeInput(inputHandler, inputFluidHandler);
+        var input = new StrainerRecipeInput(inventory, fluidInventory);
 
         cachedRecipes = level.getServer().getRecipeManager()
                 .recipeMap().getRecipesFor(StrainerRecipe.TYPE, input, level)
@@ -211,60 +213,47 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 .toList();
     }
 
-    private void craftItem(int meshTier,
-                           List<RecipeHolder<StrainerRecipe>> validRecipes,
-                           List<ItemStack> outputs) {
+    private void craftItem(int meshTier, List<RecipeHolder<StrainerRecipe>> validRecipes, List<ItemStack> outputs) {
 
-        if (level == null || validRecipes.isEmpty()) return;
-
-        if (outputs.isEmpty()) {
-            try (Transaction tx = Transaction.open(null)) {
-                int cost = validRecipes.getFirst().value().input().count();
-                inputHandler.extractInternal(0, inputHandler.getResource(0), cost, tx);
-                tx.commit();
-            }
-
-            progress = 0;
-            sync();
+        if (level == null || validRecipes.isEmpty()) {
             return;
         }
 
-        try (Transaction tx = Transaction.open(null)) {
+        inventory.runInternal(() -> {
 
-            for (ItemStack stack : outputs) {
-                int remaining = stack.getCount();
+            try (Transaction tx = Transaction.open(null)) {
 
-                for (int i = 0; i < outputHandler.size() && remaining > 0; i++) {
-                    int inserted = outputHandler.insertInternalReturn(
-                            i,
-                            ItemResource.of(stack),
-                            remaining,
-                            tx
-                    );
-                    remaining -= inserted;
+                for (ItemStack stack : outputs) {
+                    int remaining = stack.getCount();
+
+                    for (int slot = FIRST_OUTPUT_SLOT;
+                         slot <= LAST_OUTPUT_SLOT && remaining > 0;
+                         slot++) {
+
+                        remaining -= inventory.insert(slot, ItemResource.of(stack), remaining, tx);
+                    }
+
+                    if (remaining > 0) {
+                        return;
+                    }
                 }
 
-                if (remaining > 0) {
-                    return;
+                int cost = validRecipes.getFirst().value().input().count();
+                inventory.extract(INPUT_SLOT, inventory.getResource(INPUT_SLOT), cost,tx);
+                ItemStack mesh = inventory.getResource(MESH_SLOT).toStack();
+
+                if (mesh.isDamageableItem()) {
+
+                    mesh.hurtAndConvertOnBreak(1, Items.AIR, fakePlayer, fakePlayer.getEquipmentSlotForItem(mesh));
+                    inventory.set(MESH_SLOT, ItemResource.of(mesh),mesh.getCount());
+                    if (mesh.isEmpty()) {
+                        level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                    }
                 }
+
+                tx.commit();
             }
-
-            int cost = validRecipes.getFirst().value().input().count();
-            inputHandler.extractInternal(0, inputHandler.getResource(0), cost, tx);
-
-            ItemStack mesh = inputHandler.getResource(1).toStack();
-
-            if (mesh.isDamageableItem()) {
-
-                mesh.hurtAndConvertOnBreak(1, Items.AIR, fakePlayer, fakePlayer.getEquipmentSlotForItem(mesh));
-                inputHandler.set(1, ItemResource.of(mesh), mesh.getCount());
-
-                if (mesh.isEmpty()) {
-                    level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                }
-            }
-            tx.commit();
-        }
+        });
 
         progress = 0;
         sync();
@@ -272,26 +261,27 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
 
     private boolean canInsertOutputs(List<ItemStack> outputs) {
-        try (Transaction tx = Transaction.open(null)) {
-            for (ItemStack stack : outputs) {
-                int remaining = stack.getCount();
+        return inventory.runInternal(() -> {
+            try (Transaction tx = Transaction.open(null)) {
 
-                for (int i = 0; i < outputHandler.size() && remaining > 0; i++) {
-                    int inserted = outputHandler.insertInternalReturn(
-                            i,
-                            ItemResource.of(stack),
-                            remaining,
-                            tx
-                    );
-                    remaining -= inserted;
+                for (ItemStack stack : outputs) {
+                    int remaining = stack.getCount();
+
+                    for (int slot = FIRST_OUTPUT_SLOT;
+                         slot <= LAST_OUTPUT_SLOT && remaining > 0;
+                         slot++) {
+
+                        remaining -= inventory.insert(slot,ItemResource.of(stack), remaining, tx);
+                    }
+
+                    if (remaining > 0) {
+                        return false;
+                    }
                 }
 
-                if (remaining > 0) {
-                    return false;
-                }
+                return true;
             }
-            return true;
-        }
+        });
     }
 
 
@@ -311,14 +301,13 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     }
 
     public boolean onPlayerUse(Player player, InteractionHand hand) {
-        return FluidUtil.interactWithFluidHandler(player, hand, this.worldPosition, inputFluidHandler);
+        return FluidUtil.interactWithFluidHandler(player, hand, this.worldPosition, fluidInventory);
     }
 
     @Override
     protected void saveAdditional(ValueOutput output) {
-        inputHandler.serialize(output.child("input"));
-        inputFluidHandler.serialize(output.child("inputFluid"));
-        outputHandler.serialize(output.child("output"));
+        inventory.serialize(output.child("inventory"));
+        fluidInventory.serialize(output.child("fluidInventory"));
         output.putInt("progress", progress);
         output.putInt("maxProgress", maxProgress);
         super.saveAdditional(output);
@@ -326,24 +315,19 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
     @Override
     protected void loadAdditional(ValueInput input) {
-        inputHandler.deserialize(input.childOrEmpty("input"));
-        inputFluidHandler.deserialize(input.childOrEmpty("inputFluid"));
-        outputHandler.deserialize(input.childOrEmpty("output"));
+        inventory.deserialize(input.childOrEmpty("inventory"));
+        fluidInventory.deserialize(input.childOrEmpty("fluidInventory"));
         progress = input.getIntOr("progress", 0);
         maxProgress = input.getIntOr("maxProgress", 200);
         super.loadAdditional(input);
     }
 
-    public InputItemHandler getInputHandler() { return inputHandler; }
-    public InputFluidHandler getInputFluidHandler() { return inputFluidHandler; }
-    public OutputItemHandler getOutputHandler() { return outputHandler; }
-
-    public ResourceHandler<ItemResource> getItemCapability() {
-        return new CombinedItemHandler(inputHandler, outputHandler);
+    public ItemStacksResourceHandler getItemHandler() {
+        return inventory;
     }
 
-    public ResourceHandler<FluidResource> getFluidCapability() {
-        return inputFluidHandler;
+    public FluidStacksResourceHandler getFluidHandler() {
+        return fluidInventory;
     }
 
     @Override
@@ -358,15 +342,14 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
     @Override
     public void preRemoveSideEffects(@NonNull BlockPos pos, @NonNull BlockState state) {
-        dropInventoryContents(inputHandler);
-        dropInventoryContents(outputHandler);
+        dropInventoryContents(inventory);
     }
 
     @Override
     protected void collectImplicitComponents(DataComponentMap.Builder builder) {
         super.collectImplicitComponents(builder);
         builder.set(StrainersDataComponents.FLUIDS.get(),
-                FluidListComponent.fromHandlers(inputFluidHandler));
+                FluidListComponent.fromHandlers(fluidInventory));
     }
 
     @Override
@@ -374,7 +357,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         super.applyImplicitComponents(components);
         FluidListComponent component = components.get(StrainersDataComponents.FLUIDS.get());
         if (component != null) {
-            component.applyToHandlers(inputFluidHandler);
+            component.applyToHandlers(fluidInventory);
         }
     }
 }

@@ -15,10 +15,10 @@ public class StrainersCapabilities {
 
         //Strainer
         event.registerBlockEntity(Capabilities.Item.BLOCK, StrainersBlockEntities.STRAINER_BLOCK_ENTITY.get(),
-                (blockEntity, side) -> blockEntity.getItemCapability());       
+                (blockEntity, side) -> blockEntity.getItemHandler());
 
         event.registerBlockEntity(Capabilities.Fluid.BLOCK, StrainersBlockEntities.STRAINER_BLOCK_ENTITY.get(),
-                (blockEntity, side) -> blockEntity.getFluidCapability());
+                (blockEntity, side) -> blockEntity.getFluidHandler());
 
 
         //Drop

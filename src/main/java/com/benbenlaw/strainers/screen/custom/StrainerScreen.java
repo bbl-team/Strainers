@@ -3,41 +3,32 @@ package com.benbenlaw.strainers.screen.custom;
 import com.benbenlaw.core.Core;
 import com.benbenlaw.core.screen.util.DurationTooltip;
 import com.benbenlaw.core.screen.util.FluidRenderingUtils;
-import com.benbenlaw.core.screen.util.TooltipArea;
-import com.benbenlaw.core.util.MouseUtil;
 import com.benbenlaw.strainers.Strainers;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.benbenlaw.strainers.network.packet.ChangeScrollOffsetPacket;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
-import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
-import net.neoforged.neoforge.transfer.fluid.FluidUtil;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
 
     private static final Identifier TEXTURE = Strainers.identifier("textures/gui/strainer_gui.png");
     private static final Identifier PROGRESS_ARROW = Core.identifier("progress_arrow");
+    private static final Identifier SCROLL_ICON = Strainers.identifier("scroll");
+
+    private boolean isDraggingScrollbar = false;
 
     public StrainerScreen(StrainerMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
     }
 
     @Override
-    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a) {
-        super.extractBackground(guiGraphics, mouseX, mouseY, a);
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTick);
 
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -45,11 +36,15 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
 
         if (menu.isCrafting()) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PROGRESS_ARROW, 24, 16, 0, 0, x + 31, y + 35, menu.getScaledProgress() + 1, 16);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, PROGRESS_ARROW, 24, 16, 0, 0,x + 31, y + 35, menu.getScaledProgress() + 1, 16);
         }
-        renderTankTextures(guiGraphics, x, y);
 
+        float max = menu.getMaxScroll();
+        float scroll = max == 0 ? 0 : ((float) menu.getScrollOffset() / max);
 
+        int barY = y + 17 + (int)(scroll * 37);
+
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SCROLL_ICON, 12, 15, 0, 0, x + 154, barY, 12, 15);
     }
 
     @Override
@@ -60,42 +55,68 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
         int y = (height - imageHeight) / 2;
 
         DurationTooltip.renderDurationTooltip(guiGraphics, mouseX, mouseY, x, y, 161, 5, menu.data.get(0), menu.data.get(1));
-        renderTankTooltips(guiGraphics, x, y, mouseX, mouseY);
 
+        FluidRenderingUtils.renderFluid(guiGraphics, menu.blockEntity.getFluidHandler(), 0, x, y, 8, 17, 16, 16,
+                mouseX, mouseY, Component.translatable("tooltip.strainers.empty")
+        );
     }
 
-    private void renderTankTextures(GuiGraphicsExtractor guiGraphics, int x, int y) {
-        drawTankFluid(guiGraphics, menu.blockEntity.getInputFluidHandler(), 0, x + 8, y + 17, 16, 16);
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        int max = menu.getMaxScroll();
+        if (max <= 0) return false;
 
+        int next = menu.getScrollOffset() - (int) Math.signum(scrollY);
+        next = Math.max(0, Math.min(max, next));
+
+        menu.setScrollOffset(next);
+
+        ClientPacketDistributor.sendToServer(new ChangeScrollOffsetPacket(menu.containerId, next));
+
+        return true;
     }
 
-    private void renderTankTooltips(GuiGraphicsExtractor guiGraphics, int x, int y, int mouseX, int mouseY) {
-        drawTankTooltip(guiGraphics, menu.blockEntity.getInputFluidHandler(), 0, x + 8, y + 17, 16, 16, mouseX, mouseY, "Empty");
-    }
+    @Override
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        int x = leftPos + 154;
+        int y = topPos + 17;
 
-    private void drawTankTooltip(GuiGraphicsExtractor guiGraphics, Object handler, int slot, int x, int y, int width, int height, int mouseX, int mouseY, String emptyName) {
-        var fluidHandler = (FluidStacksResourceHandler) handler;
-        FluidStack stack = FluidUtil.getStack(fluidHandler, slot);
-
-        if (mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height) {
-            if (stack.isEmpty()) {
-                Component text = Component.literal(emptyName);
-                List<ClientTooltipComponent> components = List.of(ClientTooltipComponent.create(text.getVisualOrderText()));
-                guiGraphics.tooltip(this.font, components, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null);
-            } else {
-                FluidRenderingUtils.renderFluidStackTooltip(guiGraphics, stack, fluidHandler, slot, x, y, width, height, mouseX, mouseY);
-            }
+        if (event.button() == 0 &&
+                event.x() >= x && event.x() < x + 12 &&
+                event.y() >= y && event.y() < y + 52) {
+            isDraggingScrollbar = true;
+            updateScrollFromMouse((int) event.y());
+            return true;
         }
+
+        return super.mouseClicked(event, doubleClick);
     }
 
-    private void drawTankFluid(GuiGraphicsExtractor guiGraphics, Object handler, int slot, int x, int y, int width, int height) {
-        var fluidHandler = (FluidStacksResourceHandler) handler;
-        FluidStack stack = FluidUtil.getStack(fluidHandler, slot);
+    @Override
+    public boolean mouseReleased(MouseButtonEvent event) {
+        if (event.button() == 0) isDraggingScrollbar = false;
+        return super.mouseReleased(event);
+    }
 
-        if (!stack.isEmpty()) {
-            int capacity = fluidHandler.getCapacityAsInt(slot, FluidResource.of(stack));
-            int displayLevel = (int) ((float) stack.getAmount() / (float) capacity * (float) height);
-            FluidRenderingUtils.renderFluidStack(guiGraphics, stack, x, y + height - displayLevel, width, displayLevel, 0, 0);
+    @Override
+    public boolean mouseDragged(MouseButtonEvent event, double dx, double dy) {
+        if (isDraggingScrollbar) {
+            updateScrollFromMouse((int) event.y());
+            return true;
         }
+        return super.mouseDragged(event, dx, dy);
+    }
+
+    private void updateScrollFromMouse(int mouseY) {
+        int top = topPos + 17 + 7;
+        int bottom = topPos + 17 + 37 + 7;
+        float ratio = (float)(mouseY - top) / (bottom - top);
+        ratio = Math.max(0, Math.min(1, ratio));
+
+        int max = menu.getMaxScroll();
+        int next = Math.round(ratio * max);
+
+        menu.setScrollOffset(next);
+        ClientPacketDistributor.sendToServer(new ChangeScrollOffsetPacket(menu.containerId, next));
     }
 }

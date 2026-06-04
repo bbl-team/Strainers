@@ -112,9 +112,6 @@ public class TagOutputRecipe extends NormalCraftingRecipe {
     public List<RecipeDisplay> display() {
         ItemStackTemplate result = ItemStackTemplate.fromNonEmptyStack(getItem().getDefaultInstance());
         result.withCount(this.count);
-
-        System.out.println(result);
-
         return List.of(
                 new ShapedCraftingRecipeDisplay(
                         this.pattern.width(),
