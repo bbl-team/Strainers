@@ -2,6 +2,7 @@
   "values": [
     "strainers:strainer",
     "strainers:purified_stone",
-    "strainers:purified_netherrack"
+    "strainers:purified_netherrack",
+    "strainers:purified_deepslate"
   ]
 }

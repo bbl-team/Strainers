@@ -1,6 +1,7 @@
-// 26.1.2	2026-05-14T11:06:32.1756538	strainers Models
+// 26.1.2	2026-06-05T12:34:33.0679359	strainers Models
 234aeaefc0554e1b9f1bd9c7e489b055f3e98f75 assets/strainers/blockstates/dust_block.json
 e10d9344218da33ff4b507e211b266c6bdb831b6 assets/strainers/blockstates/mulch.json
+73de2cc4cf95a2d21f28ce8b9c5a24e53a6ba7cd assets/strainers/blockstates/purified_deepslate.json
 a973a15236de0f651da2707605308aabf57268b2 assets/strainers/blockstates/purified_dirt.json
 88bd47848c3408a7d75482decc20ffb5b8efbcc4 assets/strainers/blockstates/purified_dust_block.json
 502ab51f2bc219fcc8600e3f24e42e7d774aede3 assets/strainers/blockstates/purified_gravel.json
@@ -39,6 +40,7 @@ b9eeb851948727e27ded139a7d904b78e08d90d7 assets/strainers/items/leaf_pile.json
 d12de63a4cd2d33f6242a0da4d1c59f9920ecf5d assets/strainers/items/nickel_ore_piece.json
 caae207e00906cd03cbf202bab515d07ce60aa37 assets/strainers/items/osmium_ore_piece.json
 74d7418efab7f50cfd2f00d90d9daf864c2b05ae assets/strainers/items/platinum_ore_piece.json
+3d1adfb8cca50b25532d4b0f2e64cb3c6399815c assets/strainers/items/purified_deepslate.json
 4bb5c64a3b762f159dece434d4ebb70e49523d62 assets/strainers/items/purified_dirt.json
 1874f561f631934f878ebffeaec2b8f79b108ac2 assets/strainers/items/purified_dust_block.json
 630818bbd9d85bd1d27813cd8c847354f25ef9ba assets/strainers/items/purified_gravel.json
@@ -55,6 +57,7 @@ b848cfbaaa5ff52df573cb08c91db42015561ebe assets/strainers/items/redstone_ore_pie
 d90cd5cc6be74e2e7cacd6fbf4fab22bd61fe576 assets/strainers/items/salt_water_drop.json
 f9129cc916fb7cf24920b25e549d6c57f447b5a0 assets/strainers/items/sand_dust.json
 d344cf4625adacb19b9d6c0980f5c82109404db1 assets/strainers/items/sapling_bag.json
+6c5939165d6c1b6a6d0c7144156c707de3036aad assets/strainers/items/sculk_dust.json
 716a588e19b9bc579900183b4b75df4a298ac9d7 assets/strainers/items/silver_ore_piece.json
 c327939a8802bf2ce6901568b3ee998d05faaaa1 assets/strainers/items/stone_pebble.json
 a9005294e658f50b78594c2d6dd770e455d7751e assets/strainers/items/tin_ore_piece.json
@@ -64,6 +67,7 @@ df24e4e4220c077eeca84c7834dd4d3f96d6739c assets/strainers/items/wooden_mesh.json
 8de3b48cbeaebd2f093d4c11ae97af0853b88ae8 assets/strainers/items/zinc_ore_piece.json
 e07c961f000f52bdb88dcd3caea292194751cd22 assets/strainers/models/block/dust_block.json
 ff42b5c0991398f0dac6f50035351e3cf70e6249 assets/strainers/models/block/mulch.json
+456d9c06905ba361b37ffc1e2e872270f0c23295 assets/strainers/models/block/purified_deepslate.json
 f95aec327fe70f63e432b061b72ee31d25a19e44 assets/strainers/models/block/purified_dirt.json
 c735ce66dd1265e979be911731a34c02e8b19a30 assets/strainers/models/block/purified_dust_block.json
 1be433e3585150912a8dcaba37d7746a3d1547ad assets/strainers/models/block/purified_gravel.json
@@ -105,6 +109,7 @@ d1f5f2b28ac4824424ba191072e95285442bdaf3 assets/strainers/models/item/platinum_o
 2d5f90946bede082ab504140df3bbb5b3c719354 assets/strainers/models/item/salt_water_drop.json
 9f968dbc72084d3be241066fd5538d6a195d9e9c assets/strainers/models/item/sand_dust.json
 9183674f21a52f8ab63c34251193bf4015878f10 assets/strainers/models/item/sapling_bag.json
+ec69f62348d6c2cbdca6307856c560dde76e6c4f assets/strainers/models/item/sculk_dust.json
 35fe7aac7a574996e55b510b322681c598ff0b84 assets/strainers/models/item/silver_ore_piece.json
 58a51e8c95f50e2695469c3067130d65aad58e2a assets/strainers/models/item/stone_pebble.json
 e39c8ba3f4b3f4a0fd4a6cfe869b3bdce5e57a91 assets/strainers/models/item/tin_ore_piece.json

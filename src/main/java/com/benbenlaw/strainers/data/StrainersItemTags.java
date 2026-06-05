@@ -79,6 +79,7 @@ public class StrainersItemTags extends ItemTagsProvider {
         tag(Tags.Items.DUSTS)
                 .add(StrainersItems.DUST.get())
                 .add(StrainersItems.SAND_DUST.get())
+                .add(StrainersItems.SCULK_DUST.get())
         ;
 
     }

@@ -1,4 +1,4 @@
-// 26.1.2	2026-05-19T16:47:00.5316108	strainers Processing Recipes
+// 26.1.2	2026-06-05T12:34:33.0691904	strainers Processing Recipes
 9d6cf31bc7022f6acd02afe70b922ddd7e755a10 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel.json
 b854409189c160d0e2c21f39c146685ffbd4e5c8 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel_pebble.json
 4bb45e092ee235f3dcaf03654793a14f21415494 data/strainers/advancement/recipe/strainer/straining/dirt/gravel_pebble.json
@@ -13,10 +13,10 @@ bd5df22627d8aa5fc50f5c495aafba06ad48832c data/strainers/advancement/recipe/strai
 119b7423c92237f14aa0bde88bb42f30cbeb745c data/strainers/advancement/recipe/strainer/straining/gravel/purifying_drop.json
 547d232ea2f2cc2e5c96aa6cf9e6819a89311247 data/strainers/advancement/recipe/strainer/straining/gravel/sand.json
 006b52f66345977c9f43761724afd7d26c8f49be data/strainers/advancement/recipe/strainer/straining/gravel/sand_dust.json
-3b93514b15f301c6b2d5b3c52a0b9497a5031c90 data/strainers/advancement/recipe/strainer/straining/leaves/gravel_pebble.json
 9764bfe7bb778d6102bf225bd14ac26466a22bef data/strainers/advancement/recipe/strainer/straining/leaves/leaf_pile.json
 282e453f889b0dff26e67523530660ce12d61cea data/strainers/advancement/recipe/strainer/straining/leaves/sapling_seed.json
 ba7dc3e744337ef4185f0d2b6eb10ae91fa22d58 data/strainers/advancement/recipe/strainer/straining/leaves/stick.json
+e25ba0dea51a7bddce9fe3867840c39081a32dac data/strainers/advancement/recipe/strainer/straining/leaves/stone_pebble.json
 adf8f1c16b73a457152ecf5bcc38738d8c4bd7bb data/strainers/advancement/recipe/strainer/straining/mud/clay_ball.json
 01f3eb91a89763662e212bd01dd1ef535626860a data/strainers/advancement/recipe/strainer/straining/mulch/bone_meal.json
 423bddaa057ad3faf305959832d86f7b3d268cc6 data/strainers/advancement/recipe/strainer/straining/mulch/dirt_pile.json
@@ -25,6 +25,10 @@ e02e4e2413e70c6be0e514a21fba2933e8d3cf4e data/strainers/advancement/recipe/strai
 1689032884cb4e162ad7db2014be70827dcbf1f2 data/strainers/advancement/recipe/strainer/straining/mulch/water_drop.json
 0485bd92748f8f26c960ce90e97aabdb9a5dcab9 data/strainers/advancement/recipe/strainer/straining/netherrack/lava_drop.json
 957907a4cf61552700bf80033ea0c78b01426df6 data/strainers/advancement/recipe/strainer/straining/netherrack/purified_netherrack.json
+89c719e13b65f2f99865adefecbd7764e4a96a26 data/strainers/advancement/recipe/strainer/straining/purified_deepslate/disc_fragment_5.json
+351cdfd863f5a9c4732a4287da2c86a9b596ed44 data/strainers/advancement/recipe/strainer/straining/purified_deepslate/echo_shard.json
+8728980c85b81c17a503b7496b16429f0696f323 data/strainers/advancement/recipe/strainer/straining/purified_deepslate/glow_berries.json
+5b286afb2f899dc0bb67d0822f405bf0ec446a07 data/strainers/advancement/recipe/strainer/straining/purified_deepslate/sculk_dust.json
 7fc6f9a5b5dc224eddf44001335b9d70e1adb6a8 data/strainers/advancement/recipe/strainer/straining/purified_dirt/beetroot_seeds.json
 7bb23bf6f5c72632914869447c27de2420ce9877 data/strainers/advancement/recipe/strainer/straining/purified_dirt/grass_block.json
 875dc210789f2c80a560f19994f2ca9331a74bd6 data/strainers/advancement/recipe/strainer/straining/purified_dirt/melon_seeds.json
@@ -73,7 +77,9 @@ e0a72714859930150bb37bfecd7970fc83f74270 data/strainers/advancement/recipe/strai
 720e77cef8fc0125ae96d8b8f519c197f981b2c5 data/strainers/advancement/recipe/strainer/straining/sand/soul_sand.json
 d9dc4ab13902ab4811408108ef3fde4d16913248 data/strainers/advancement/recipe/strainer/straining/soul_sand/purified_soul_sand.json
 5547c5addf7f0af443bfaf1b93150c9bba138d3e data/strainers/advancement/recipe/strainer/straining/soul_soil/purified_soul_soil.json
+400ea4c9725b86b1535d0e178f2a5710d6ef6dee data/strainers/advancement/recipe/strainer/straining/stone/deepslate.json
 c222bbd76d4ed43fceabe87a9572533278d4c919 data/strainers/advancement/recipe/strainer/straining/stone/netherrack.json
+766c635c5aca6cee7cc03ab9b18742591965dd2d data/strainers/advancement/recipe/strainer/straining/stone/purified_deepslate.json
 8984d36ec7372e2e0fada0070b559b2b4fc0b5fc data/strainers/advancement/recipe/strainer/straining/stone/purified_soul_soil.json
 a23656c41185e5fe69e8e2a58996800bda499260 data/strainers/recipe/straining/cobblestone/gravel.json
 075bf4523c6510c69df8798c024d40f18c39ffce data/strainers/recipe/straining/cobblestone/gravel_pebble.json
@@ -89,10 +95,10 @@ cd125c01e0b28805dd72e1cc61a5886318add77f data/strainers/recipe/straining/gravel/
 c9ad8b933b9ce0335116cc022ff83b8db3f93ffa data/strainers/recipe/straining/gravel/purifying_drop.json
 62390ff40021481742ef5d2112469cc1c430e52e data/strainers/recipe/straining/gravel/sand.json
 0e245347c98ed616893204658f9cda607b953ee9 data/strainers/recipe/straining/gravel/sand_dust.json
-fd6b901e2fc1d1d3ddd8a90b4bda095f1f63fd97 data/strainers/recipe/straining/leaves/gravel_pebble.json
 b411956163a3ea6c438e16ff63ec85752658f762 data/strainers/recipe/straining/leaves/leaf_pile.json
 7af4a1d82bd87b5ddb84bcf2297c0331191d95a5 data/strainers/recipe/straining/leaves/sapling_seed.json
 48d638c6429ac8b894d3e7b6cff44c9633576b79 data/strainers/recipe/straining/leaves/stick.json
+04835658ea071d7c193ae3695641c2eced5cabf5 data/strainers/recipe/straining/leaves/stone_pebble.json
 496f17217d185dc98aa6d8d8e7f95713243e260e data/strainers/recipe/straining/mud/clay_ball.json
 2ef6eaecbf8d4ae0805fc341b6573aa12c376adf data/strainers/recipe/straining/mulch/bone_meal.json
 56faa7f96b49d5238792f48a2a3f85f26b62424f data/strainers/recipe/straining/mulch/dirt_pile.json
@@ -101,6 +107,10 @@ e5602e0d917c7054ce6800cd4b6bcde7f68c732d data/strainers/recipe/straining/mulch/s
 f4988fefa804438ef49e49a38bcac346e2fef0e9 data/strainers/recipe/straining/mulch/water_drop.json
 4d5f7c38df3174ac28fa1831cdb98a719de81e73 data/strainers/recipe/straining/netherrack/lava_drop.json
 f7e39fc5756f5e3860d67075508e808e45fb402e data/strainers/recipe/straining/netherrack/purified_netherrack.json
+30f6f990fbdd93367b6b59809ba11c0159b7733c data/strainers/recipe/straining/purified_deepslate/disc_fragment_5.json
+3f45a0748ef5a48b0595819578516bea60736345 data/strainers/recipe/straining/purified_deepslate/echo_shard.json
+2830177a11989315c6d47e095ce2244fc907da4e data/strainers/recipe/straining/purified_deepslate/glow_berries.json
+09c272b104e848f09d70e1588bc31a3a59ae4238 data/strainers/recipe/straining/purified_deepslate/sculk_dust.json
 d03c5f5d4049fb8cfb219501bd44642e421fa9b6 data/strainers/recipe/straining/purified_dirt/beetroot_seeds.json
 8dda26cc356c3f4fe3a50f2e570386adbc439b52 data/strainers/recipe/straining/purified_dirt/grass_block.json
 36503c7b33da301e83b1089d9cbea1adc1a48eed data/strainers/recipe/straining/purified_dirt/melon_seeds.json
@@ -149,5 +159,7 @@ e517e5850682ac527c6a3e885b99552c8f07c747 data/strainers/recipe/straining/sand/pu
 9c978f6c86775e07f40ddc951a0424e34cc8dcd3 data/strainers/recipe/straining/sand/soul_sand.json
 5f549916423c34798906710ec4ed61ac5ce5e9a7 data/strainers/recipe/straining/soul_sand/purified_soul_sand.json
 980f94badf0acdf427a49737335ed8170dab1b0e data/strainers/recipe/straining/soul_soil/purified_soul_soil.json
+9e2747afb70b44bd98f0e03c51c9c5b7c1057ca1 data/strainers/recipe/straining/stone/deepslate.json
 be6cdd0d0dccc06fb75ec825e771f79de60e1e08 data/strainers/recipe/straining/stone/netherrack.json
+312cd28566ed4effb7926b6d20c7db421fa4e738 data/strainers/recipe/straining/stone/purified_deepslate.json
 370585ffa12db12cf35247c5adb00f0e97c9e78b data/strainers/recipe/straining/stone/purified_soul_soil.json

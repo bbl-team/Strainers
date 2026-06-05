@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "strainers:sculk_dust",
+    "B": "minecraft:comparator",
+    "C": "minecraft:sculk"
+  },
+  "pattern": [
+    "ABA",
+    "CCC"
+  ],
+  "result": {
+    "id": "minecraft:sculk_sensor"
+  }
+}

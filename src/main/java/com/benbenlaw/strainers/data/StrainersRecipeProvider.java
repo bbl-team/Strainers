@@ -50,6 +50,36 @@ public class StrainersRecipeProvider extends RecipeProvider {
         //Reset
         shapeless(RecipeCategory.MISC, StrainersBlocks.STRAINER).requires(StrainersBlocks.STRAINER);
 
+        //Sculk Sensor
+        shaped(RecipeCategory.MISC, Blocks.SCULK_SENSOR)
+                .pattern("ABA")
+                .pattern("CCC")
+                .define('A', StrainersItems.SCULK_DUST)
+                .define('B', Items.COMPARATOR)
+                .define('C', Blocks.SCULK)
+                .unlockedBy("has_sculk", has(Blocks.SCULK))
+                .save(output, Strainers.identifier("sculk").toString());
+
+        //Sculk Catalyst
+        shaped(RecipeCategory.MISC, Blocks.SCULK_CATALYST)
+                .pattern("AAA")
+                .pattern("BBB")
+                .define('A', Blocks.SCULK)
+                .define('B', Blocks.CALCITE)
+                .unlockedBy("has_mesh", has(Blocks.SCULK))
+                .save(output, Strainers.identifier("sculk_catalyst").toString());
+
+        //Sculk Shrieker
+        shaped(RecipeCategory.MISC, Blocks.SCULK_SHRIEKER)
+                .pattern("AAA")
+                .pattern("BBB")
+                .pattern("CCC")
+                .define('A', Blocks.SCULK_SENSOR)
+                .define('B', Blocks.SCULK)
+                .define('C', Blocks.CALCITE)
+                .unlockedBy("has_mesh", has(Blocks.SCULK))
+                .save(output, Strainers.identifier("sculk_shrieker").toString());
+
         //Strainer
         shaped(RecipeCategory.MISC, StrainersBlocks.STRAINER.get())
                 .pattern("ABA")
@@ -77,6 +107,7 @@ public class StrainersRecipeProvider extends RecipeProvider {
         twoByTwoPacker(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS,StrainersItems.DEBRIS_ORE_PIECE.get(), "debris_from_pieces");
         twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.MULCH, StrainersItems.LEAF_PILE.get(), "mulch_from_leaf_pile");
         twoByTwoPacker(RecipeCategory.MISC, Blocks.DIRT, StrainersItems.DIRT_PILE.get(), "dirt_from_dirt_pile");
+        twoByTwoPacker(RecipeCategory.MISC, Blocks.SCULK, StrainersItems.SCULK_DUST.get(), "sculk_from_sculk_dust");
 
     }
 

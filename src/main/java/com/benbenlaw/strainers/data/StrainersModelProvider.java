@@ -70,6 +70,7 @@ public class StrainersModelProvider extends ModelProvider {
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_SOUL_SOIL.get());
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_NETHERRACK.get());
         blockModels.createTrivialCube(StrainersBlocks.MULCH.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DEEPSLATE.get());
 
 
     }

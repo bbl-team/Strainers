@@ -2,7 +2,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:straining/leaves/gravel_pebble"
+        "recipe": "strainers:straining/purified_deepslate/disc_fragment_5"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -14,7 +14,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:straining/leaves/gravel_pebble"
+      "strainers:straining/purified_deepslate/disc_fragment_5"
     ]
   },
   "sends_telemetry_event": true

@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.05000000074505806,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:purified_deepslate"
+  },
+  "min_mesh_tier": 4,
+  "result": {
+    "chance": 0.5,
+    "item": {
+      "id": "minecraft:echo_shard"
+    }
+  }
+}

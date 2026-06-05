@@ -30,6 +30,7 @@ public class StrainersLangProvider extends LanguageProvider {
         add("block.strainers.purified_netherrack", "Purified Netherrack");
         add("block.strainers.purified_soul_sand", "Purified Soul Sand");
         add("block.strainers.purified_soul_soil", "Purified Soul Soil");
+        add("block.strainers.purified_deepslate", "Purified Deepslate");
 
         //Items
         add("item.strainers.wooden_mesh", "Wooden Mesh");
@@ -65,6 +66,7 @@ public class StrainersLangProvider extends LanguageProvider {
         add("item.strainers.gravel_pebble", "Gravel Pebble");
         add("item.strainers.sand_dust", "Sand Dust");
         add("item.strainers.dust", "Dust");
+        add("item.strainers.sculk_dust", "Sculk Dust");
 
         add("item.strainers.eroding_water_bucket", "Eroding Water Bucket");
         add("item.strainers.purifying_water_bucket", "Purifying Water Bucket");

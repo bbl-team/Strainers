@@ -1,6 +1,7 @@
 {
   "values": [
     "strainers:dust",
-    "strainers:sand_dust"
+    "strainers:sand_dust",
+    "strainers:sculk_dust"
   ]
 }

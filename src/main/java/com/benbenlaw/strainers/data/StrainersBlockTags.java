@@ -23,6 +23,7 @@ public class StrainersBlockTags extends BlockTagsProvider {
                 .add(StrainersBlocks.STRAINER.get())
                 .add(StrainersBlocks.PURIFIED_STONE.get())
                 .add(StrainersBlocks.PURIFIED_NETHERRACK.get())
+                .add(StrainersBlocks.PURIFIED_DEEPSLATE.get())
         ;
 
         //Shovel

@@ -73,6 +73,10 @@ public class StrainersBlocks {
                     .strength(1.0F)
                     .sound(SoundType.NETHERRACK)));
 
+    public static final DeferredBlock<Block> PURIFIED_DEEPSLATE = registerBlock("purified_deepslate",
+            properties -> new Block(properties
+                    .strength(3.0F)
+                    .sound(SoundType.DEEPSLATE)));
 
 
 

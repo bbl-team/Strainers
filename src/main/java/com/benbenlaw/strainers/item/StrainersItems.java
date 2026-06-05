@@ -17,6 +17,7 @@ public class StrainersItems {
     public static final DeferredItem<Item> LEAF_PILE = ITEMS.registerSimpleItem("leaf_pile");
     public static final DeferredItem<Item> DIRT_PILE = ITEMS.registerSimpleItem("dirt_pile");
     public static final DeferredItem<Item> DEPLETED_DROP = ITEMS.registerSimpleItem("depleted_drop");
+    public static final DeferredItem<Item> SCULK_DUST = ITEMS.registerSimpleItem("sculk_dust");
     public static final DeferredItem<Item> WATER_DROP = ITEMS.registerItem("water_drop",
             (properties) -> new FluidDropItem(properties, Fluids.WATER));
     public static final DeferredItem<Item> LAVA_DROP = ITEMS.registerItem("lava_drop",

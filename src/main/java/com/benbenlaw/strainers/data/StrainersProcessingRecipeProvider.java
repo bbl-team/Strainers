@@ -65,7 +65,6 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         simpleStrainer(Items.BONE_MEAL, 0.4f, StrainersBlocks.MULCH, 1, 0.1f, "mulch/bone_meal");
         simpleWaterStrainer(StrainersItems.SAPLING_BAG.get(), 0.2f, StrainersBlocks.MULCH, 2, 0.05f, "mulch/sapling_seed");
 
-
         //Leaves -> Gravel Pebble, Stick, Leaf Pile, Sapling Bag
         simpleStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stone_pebble");
         simpleStrainer(Items.STICK, 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stick");
@@ -93,6 +92,9 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         simplePurifyingStrainer(StrainersBlocks.PURIFIED_SOUL_SAND.get().asItem(), 1.0f, Blocks.SOUL_SAND.asItem(), 4, 0.0f, "soul_sand/purified_soul_sand");
         simplePurifyingStrainer(StrainersBlocks.PURIFIED_SOUL_SOIL.get().asItem(), 1.0f, Blocks.SOUL_SOIL.asItem(), 4, 0.0f, "soul_soil/purified_soul_soil");
         simplePurifyingStrainer(StrainersBlocks.PURIFIED_STONE.get().asItem(), 1.0f, Blocks.STONE, 4, 0.0f, "stone/purified_soul_soil");
+        simplePurifyingStrainer(StrainersBlocks.PURIFIED_DEEPSLATE.get().asItem(), 1.0f, Blocks.DEEPSLATE, 7, 0.0f, "stone/purified_deepslate");
+
+
 
         //Purified Dirt -> Grass Block
         simplePurifyingStrainer(Blocks.GRASS_BLOCK.asItem(), 1.0f, StrainersBlocks.PURIFIED_DIRT, 7, 0.0f, "purified_dirt/grass_block");
@@ -158,9 +160,18 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         //Dirt -> Soul Soil
         simpleErodingStrainer(Items.SOUL_SOIL, 1.0f, ItemTags.DIRT, 6, 0.0f, "dirt/soul_soil");
 
+        //Stone -> Deepslate
+        simpleErodingStrainer(Items.DEEPSLATE, 1.0f, Items.STONE, 7, 0.0f, "stone/deepslate");
+
         //Sand -> Prismarine
         simpleSaltyWaterStrainer(Items.PRISMARINE_SHARD, 0.5f, StrainersBlocks.PURIFIED_SAND, 4, 0.1f, "sand/prismarine_shard");
         simpleSaltyWaterStrainer(Items.PRISMARINE_CRYSTALS, 0.30f, StrainersBlocks.PURIFIED_SAND, 4, 0.1f, "sand/prismarine_crystal");
+
+        //Purified Deepslate ->
+        simpleWaterStrainer(StrainersItems.SCULK_DUST.get(), 0.75f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.05f, "purified_deepslate/sculk_dust");
+        simpleWaterStrainer(Items.ECHO_SHARD, 0.5f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.05f, "purified_deepslate/echo_shard");
+        simpleWaterStrainer(Items.DISC_FRAGMENT_5, 0.1f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.1f, "purified_deepslate/disc_fragment_5");
+        simpleWaterStrainer(Items.GLOW_BERRIES, 0.1f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.1f, "purified_deepslate/glow_berries");
 
         //Ore Progression T2 -> Copper (Progression)/ Coal/ Tin/ Zinc/ Aluminum
         simpleWaterStrainerOre(StrainersItems.COPPER_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "copper", "purified_gravel/copper_ore_piece");
