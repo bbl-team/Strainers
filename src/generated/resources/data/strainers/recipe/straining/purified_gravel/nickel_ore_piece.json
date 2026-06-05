@@ -4,7 +4,7 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
-        "tag": "c:ores/silver"
+        "tag": "c:ores/nickel"
       }
     }
   ],
@@ -16,13 +16,13 @@
   },
   "input": {
     "count": 1,
-    "ingredient": "strainers:purified_sand"
+    "ingredient": "strainers:purified_gravel"
   },
-  "min_mesh_tier": 4,
+  "min_mesh_tier": 3,
   "result": {
-    "chance": 0.65,
+    "chance": 0.75,
     "item": {
-      "id": "strainers:silver_ore_piece"
+      "id": "strainers:nickel_ore_piece"
     }
   }
 }

@@ -4,14 +4,14 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
-        "tag": "c:ores/osmium"
+        "tag": "c:ores/uranium"
       }
     }
   ],
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:straining/purified_sand/osmium_ore_piece"
+        "recipe": "strainers:straining/purified_gravel/uranium_ore_piece"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,7 +23,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:straining/purified_sand/osmium_ore_piece"
+      "strainers:straining/purified_gravel/uranium_ore_piece"
     ]
   },
   "sends_telemetry_event": true

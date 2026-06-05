@@ -4,7 +4,7 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
-        "tag": "c:ores/lead"
+        "tag": "c:ores/aluminum"
       }
     }
   ],
@@ -16,13 +16,13 @@
   },
   "input": {
     "count": 1,
-    "ingredient": "strainers:purified_sand"
+    "ingredient": "strainers:purified_gravel"
   },
-  "min_mesh_tier": 3,
+  "min_mesh_tier": 2,
   "result": {
     "chance": 0.75,
     "item": {
-      "id": "strainers:lead_ore_piece"
+      "id": "strainers:aluminum_ore_piece"
     }
   }
 }

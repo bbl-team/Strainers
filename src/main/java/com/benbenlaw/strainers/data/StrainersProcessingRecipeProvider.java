@@ -167,6 +167,14 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         simpleSaltyWaterStrainer(Items.PRISMARINE_SHARD, 0.5f, StrainersBlocks.PURIFIED_SAND, 4, 0.1f, "sand/prismarine_shard");
         simpleSaltyWaterStrainer(Items.PRISMARINE_CRYSTALS, 0.30f, StrainersBlocks.PURIFIED_SAND, 4, 0.1f, "sand/prismarine_crystal");
 
+        //sand -> crops
+        simpleWaterStrainer(Items.SUGAR_CANE, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/sugar_cane");
+        simpleWaterStrainer(Items.CACTUS, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/cactus");
+        simpleWaterStrainer(Items.CACTUS_FLOWER, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/cactus_flower");
+        simpleWaterStrainer(Items.DEAD_BUSH, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/dead_bush");
+        simpleWaterStrainer(Items.DRY_TALL_GRASS, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/dry_tall_grass");
+        simpleWaterStrainer(Items.DRY_SHORT_GRASS, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/dry_short_grass");
+
         //Purified Deepslate ->
         simpleWaterStrainer(StrainersItems.SCULK_DUST.get(), 0.75f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.05f, "purified_deepslate/sculk_dust");
         simpleWaterStrainer(Items.ECHO_SHARD, 0.5f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.05f, "purified_deepslate/echo_shard");
@@ -177,9 +185,9 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         simpleWaterStrainerOre(StrainersItems.COPPER_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "copper", "purified_gravel/copper_ore_piece");
         simpleWaterStrainerOre(StrainersItems.COAL_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "coal", "purified_gravel/coal_ore_piece");
 
-        simpleWaterStrainerOre(StrainersItems.TIN_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_SAND, 2, 0.05f, "tin", "purified_sand/tin_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.ZINC_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_SAND, 2, 0.05f, "zinc", "purified_sand/zinc_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.ALUMINUM_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_SAND, 2, 0.05f, "aluminum", "purified_sand/aluminum_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.TIN_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "tin", "purified_gravel/tin_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.ZINC_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "zinc", "purified_gravel/zinc_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.ALUMINUM_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "aluminum", "purified_gravel/aluminum_ore_piece");
 
         //Ore Progression T3 -> Iron (Progression)/ Lead/ Nickel / Lapis / Redstone / Amethyst
         simpleWaterStrainerOre(StrainersItems.LAPIS_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_DUST_BLOCK, 3, 0.05f, "lapis", "purified_dust_block/lapis_ore_piece");
@@ -188,25 +196,25 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
         simpleWaterStrainerOre(StrainersItems.IRON_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 3, 0.05f, "iron", "purified_gravel/iron_ore_piece");
 
-        simpleWaterStrainerOre(StrainersItems.LEAD_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_SAND, 3, 0.05f, "lead", "purified_sand/lead_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.NICKEL_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_SAND, 3, 0.05f, "nickel", "purified_sand/nickel_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.LEAD_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 3, 0.05f, "lead", "purified_gravel/lead_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.NICKEL_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 3, 0.05f, "nickel", "purified_gravel/nickel_ore_piece");
 
         simpleWaterStrainer(StrainersItems.QUARTZ_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_NETHERRACK, 3, 0.05f, "purified_netherrack/quartz_piece");
 
         //Ore Progression T4  -> Gold (Progression)/ Silver
         simpleWaterStrainerOre(StrainersItems.GOLD_ORE_PIECE.get(), 0.65f, StrainersBlocks.PURIFIED_GRAVEL, 4, 0.05f, "gold", "purified_gravel/gold_ore_piece");
         simpleWaterStrainerOre(StrainersItems.GOLD_ORE_PIECE.get(), 0.65f, StrainersBlocks.PURIFIED_NETHERRACK, 4, 0.05f, "gold", "purified_netherrack/gold_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.SILVER_ORE_PIECE.get(), 0.65f, StrainersBlocks.PURIFIED_SAND, 4, 0.05f, "silver", "purified_sand/silver_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.SILVER_ORE_PIECE.get(), 0.65f, StrainersBlocks.PURIFIED_GRAVEL, 4, 0.05f, "silver", "purified_gravel/silver_ore_piece");
 
         //Ore Progression T5 -> Diamond (Progression) / Osmium
         simpleWaterStrainerOre(StrainersItems.DIAMOND_ORE_PIECE.get(), 0.55f,  StrainersBlocks.PURIFIED_GRAVEL, 5, 0.05f, "diamond", "purified_gravel/diamond_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.OSMIUM_ORE_PIECE.get(), 0.55f, StrainersBlocks.PURIFIED_SAND, 5, 0.05f, "osmium", "purified_sand/osmium_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.OSMIUM_ORE_PIECE.get(), 0.55f, StrainersBlocks.PURIFIED_GRAVEL, 5, 0.05f, "osmium", "purified_gravel/osmium_ore_piece");
 
         //Ore Progression T6 -> Emerald (Progression) / Platinum / Uranium
         simpleWaterStrainerOre(StrainersItems.EMERALD_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_GRAVEL, 6, 0.05f, "emerald", "purified_gravel/emerald_ore_piece");
 
-        simpleWaterStrainerOre(StrainersItems.PLATINUM_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_SAND, 6, 0.05f, "platinum", "purified_sand/platinum_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.URANIUM_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_SAND, 6, 0.05f, "uranium", "purified_sand/uranium_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.PLATINUM_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_GRAVEL, 6, 0.05f, "platinum", "purified_gravel/platinum_ore_piece");
+        simpleWaterStrainerOre(StrainersItems.URANIUM_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_GRAVEL, 6, 0.05f, "uranium", "purified_gravel/uranium_ore_piece");
 
         //Ore Progression T7 -> Ancient Debris (Progression)
         simpleWaterStrainer(StrainersItems.DEBRIS_ORE_PIECE.get(), 0.01f, StrainersBlocks.PURIFIED_NETHERRACK, 7, 0.01f, "purified_netherrack/debris_ore_piece");
