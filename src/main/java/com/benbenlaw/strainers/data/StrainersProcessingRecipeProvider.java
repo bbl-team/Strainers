@@ -1,36 +1,21 @@
 package com.benbenlaw.strainers.data;
 
-import com.benbenlaw.core.recipe.ChanceResult;
-import com.benbenlaw.core.tag.CommonTags;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.data.recipes.StrainerRecipeBuilder;
-import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.StrainersItems;
-import com.benbenlaw.strainers.util.StrainersTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.NotCondition;
-import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
-import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class StrainersProcessingRecipeProvider extends RecipeProvider {
@@ -39,6 +24,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
     public StrainersProcessingRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
         super(provider, output);
     }
+
     public static class Runner extends RecipeProvider.Runner {
         public Runner(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) {
             super(packOutput, provider);
@@ -58,448 +44,720 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
 
-        //Mulch -> Stone Pebbles, Dirt Piles
-        simpleStrainer(StrainersItems.STONE_PEBBLE.get(), 3, 1.0f, StrainersBlocks.MULCH, 1, 0.5f, "mulch/stone_pebble");
-        simpleStrainer(StrainersItems.DIRT_PILE.get(), 3, 1.0f, StrainersBlocks.MULCH, 1, 0.5f, "mulch/dirt_pile");
-        simpleStrainer(StrainersItems.WATER_DROP.get(),0.5f, StrainersBlocks.MULCH, 1, 0.1f, "mulch/water_drop");
-        simpleStrainer(Items.BONE_MEAL, 0.4f, StrainersBlocks.MULCH, 1, 0.1f, "mulch/bone_meal");
-        simpleWaterStrainer(StrainersItems.SAPLING_BAG.get(), 0.2f, StrainersBlocks.MULCH, 2, 0.05f, "mulch/sapling_seed");
+        //Mulch
+        StrainerRecipeBuilder.create()
+                .input(StrainersBlocks.MULCH)
+                .output(StrainersItems.STONE_PEBBLE.get(), 3, 1.0f)
+                .tier(1, 0.5f).save(output, "mulch/stone_pebble");
 
-        //Leaves -> Gravel Pebble, Stick, Leaf Pile, Sapling Bag
-        simpleStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stone_pebble");
-        simpleStrainer(Items.STICK, 0.75f, ItemTags.LEAVES, 1, 0.25f, "leaves/stick");
-        simpleStrainer(StrainersItems.LEAF_PILE.get(), 2, 1f, ItemTags.LEAVES, 1, 1f, "leaves/leaf_pile");
-        simpleWaterStrainer(StrainersItems.SAPLING_BAG.get(), 0.1f, ItemTags.LEAVES, 2, 0.05f, "leaves/sapling_seed");
+        StrainerRecipeBuilder.create()
+                .input(StrainersBlocks.MULCH)
+                .output(StrainersItems.DIRT_PILE.get(), 3, 1.0f)
+                .tier(1, 0.5f).save(output, "mulch/dirt_pile");
 
-        //Dirt -> Stone Pebble, Gravel Pebble, Stick
-        simpleStrainer(StrainersItems.STONE_PEBBLE.get(), 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/stone_pebble");
-        simpleStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/gravel_pebble");
-        simpleStrainer(Items.STICK, 0.75f, ItemTags.DIRT, 1, 0.25f, "dirt/stick");
+        StrainerRecipeBuilder.create()
+                .input(StrainersBlocks.MULCH)
+                .output(StrainersItems.WATER_DROP.get(), 1, 0.5f)
+                .tier(1, 0.1f)
+                .save(output, "mulch/water_drop");
 
-        //Gravel -> Purified Drop, Eroding Drop
-        simpleWaterStrainer(StrainersItems.PURIFYING_DROP.get(), 0.1f, Items.GRAVEL, 2, 0.05f, "gravel/purifying_drop");
-        simpleWaterStrainer(StrainersItems.ERODING_DROP.get(), 0.1f, Items.GRAVEL, 2, 0.05f, "gravel/eroding_drop");
+        StrainerRecipeBuilder.create()
+                .input(StrainersBlocks.MULCH)
+                .output(Items.BONE_MEAL, 1, 0.4f)
+                .tier(1, 0.1f)
+                .save(output, "mulch/bone_meal");
 
-        //Sand -> Salty Drop
-        simpleWaterStrainer(StrainersItems.SALT_WATER_DROP.get(), 0.1f, Items.SAND, 2, 0.05f, "sand/salty_drop");
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.MULCH)
+                .output(StrainersItems.SAPLING_BAG.get(), 1, 0.2f)
+                .tier(2, 0.05f)
+                .save(output, "mulch/gravel_pebble");
 
-        //Purified Blocks
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_DIRT.get().asItem(), 1.0f, ItemTags.DIRT, 2, 0.0f, "dirt/purified_dirt");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_GRAVEL.get().asItem(), 1.0f, Items.GRAVEL, 2, 0.0f, "gravel/purified_gravel");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_SAND.get().asItem(), 1.0f, Items.SAND, 2, 0.0f, "sand/purified_sand");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_DUST_BLOCK.get().asItem(), 1.0f, StrainersBlocks.DUST_BLOCK, 3, 0.0f, "dust_block/purified_dust_block");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_NETHERRACK.get().asItem(), 1.0f, Blocks.NETHERRACK.asItem(), 4, 0.0f, "netherrack/purified_netherrack");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_SOUL_SAND.get().asItem(), 1.0f, Blocks.SOUL_SAND.asItem(), 4, 0.0f, "soul_sand/purified_soul_sand");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_SOUL_SOIL.get().asItem(), 1.0f, Blocks.SOUL_SOIL.asItem(), 4, 0.0f, "soul_soil/purified_soul_soil");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_STONE.get().asItem(), 1.0f, Blocks.STONE, 4, 0.0f, "stone/purified_soul_soil");
-        simplePurifyingStrainer(StrainersBlocks.PURIFIED_DEEPSLATE.get().asItem(), 1.0f, Blocks.DEEPSLATE, 7, 0.0f, "stone/purified_deepslate");
+        //Leaves
+        StrainerRecipeBuilder.create()
+                .input(ItemTags.LEAVES, this.registries)
+                .output(StrainersItems.STONE_PEBBLE.get(), 1, 1.0f)
+                .tier(1, 0.25f)
+                .save(output, "leaves/stone_pebble");
 
+        StrainerRecipeBuilder.create()
+                .input(ItemTags.LEAVES, this.registries)
+                .output(Items.STICK, 1, 0.75f)
+                .tier(1, 0.25f)
+                .save(output, "leaves/stick");
 
+        StrainerRecipeBuilder.create()
+                .input(ItemTags.LEAVES, this.registries)
+                .output(StrainersItems.LEAF_PILE.get(), 2, 1f)
+                .tier(1, 1.0f)
+                .save(output, "leaves/leaf_pile");
 
-        //Purified Dirt -> Grass Block
-        simplePurifyingStrainer(Blocks.GRASS_BLOCK.asItem(), 1.0f, StrainersBlocks.PURIFIED_DIRT, 7, 0.0f, "purified_dirt/grass_block");
+        StrainerRecipeBuilder.create().water()
+                .input(ItemTags.LEAVES, this.registries)
+                .output(StrainersItems.SAPLING_BAG.get(), 1, 0.1f)
+                .tier(1, 0.05f)
+                .save(output, "leaves/sapling_seed");
 
-        //Purified Netherrack -> Nether Blocks
-        simpleWaterStrainer(Blocks.BASALT.asItem(), 0.1f, StrainersBlocks.PURIFIED_NETHERRACK, 4, 0.1f, "purified_netherrack/basalt");
-        simpleWaterStrainer(Blocks.BLACKSTONE.asItem(), 0.1f, StrainersBlocks.PURIFIED_NETHERRACK, 4, 0.1f, "purified_netherrack/blackstone");
+        //Dirt
+        StrainerRecipeBuilder.create()
+                .input(ItemTags.DIRT, this.registries)
+                .output(StrainersItems.STONE_PEBBLE.get(), 1, 0.75f)
+                .tier(1, 0.25f)
+                .save(output, "dirt/stone_pebble");
 
-        //Purified Stone -> Granite, Diorite, Andesite, Calcite
-        simpleWaterStrainer(Blocks.GRANITE.asItem(), 0.1f, StrainersBlocks.PURIFIED_STONE, 4, 0.1f, "purified_stone/granite");
-        simpleWaterStrainer(Blocks.DIORITE.asItem(), 0.1f, StrainersBlocks.PURIFIED_STONE, 4, 0.1f, "purified_stone/diorite");
-        simpleWaterStrainer(Blocks.ANDESITE.asItem(), 0.1f, StrainersBlocks.PURIFIED_STONE, 4, 0.1f, "purified_stone/andesite");
-        simpleWaterStrainer(Blocks.CALCITE.asItem(), 0.1f, StrainersBlocks.PURIFIED_STONE, 4, 0.1f, "purified_stone/calcite");
+        StrainerRecipeBuilder.create()
+                .input(ItemTags.DIRT, this.registries)
+                .output(Items.STICK, 1, 0.75f)
+                .tier(1, 0.25f)
+                .save(output, "dirt/stick");
 
-        //Purified Soul Sand -> Nether Wart
-        simpleWaterStrainer(Items.NETHER_WART, 0.1f, StrainersBlocks.PURIFIED_SOUL_SAND, 4, 0.1f, "purified_soul_sand/nether_wart");
+        StrainerRecipeBuilder.create()
+                .input(ItemTags.DIRT, this.registries)
+                .output(StrainersItems.GRAVEL_PEBBLE.get(), 1, 0.75f)
+                .tier(1, 0.25f)
+                .save(output, "dirt/gravel_pebble");
 
-        //Purified Soul Soil -> Crimson/ Warped Fungus
-        simpleWaterStrainer(Items.CRIMSON_FUNGUS, 0.1f, StrainersBlocks.PURIFIED_SOUL_SOIL, 4, 0.1f, "purified_soul_soil/crimson_fungus");
-        simpleWaterStrainer(Items.WARPED_FUNGUS, 0.1f, StrainersBlocks.PURIFIED_SOUL_SOIL, 4, 0.1f, "purified_soul_soil/warped_fungus");
-
-        //Purified Dirt -> Seeds
-        simpleWaterStrainer(Items.WHEAT_SEEDS, 0.1f, StrainersBlocks.PURIFIED_DIRT, 1, 0.1f, "purified_dirt/wheat_seeds");
-        simpleWaterStrainer(Items.BEETROOT_SEEDS, 0.1f, StrainersBlocks.PURIFIED_DIRT, 2, 0.1f, "purified_dirt/beetroot_seeds");
-        simpleWaterStrainer(Items.PUMPKIN_SEEDS, 0.1f, StrainersBlocks.PURIFIED_DIRT, 4, 0.1f, "purified_dirt/pumpkin_seeds");
-        simpleWaterStrainer(Items.MELON_SEEDS, 0.1f, StrainersBlocks.PURIFIED_DIRT, 4, 0.1f, "purified_dirt/melon_seeds");
-
-        //Purified Dirt -> Crops
-        simpleWaterStrainer(Items.CARROT, 0.1f, ItemTags.DIRT, 1, 0.1f, "purified_dirt/wheat");
-        simpleWaterStrainer(Items.POTATO, 0.1f, ItemTags.DIRT, 4, 0.1f, "purified_dirt/potato");
-        simpleWaterStrainer(Items.POISONOUS_POTATO, 0.01f, ItemTags.DIRT, 4, 0.01f, "purified_dirt/poisonous_potato");
-        simpleWaterStrainer(Items.SWEET_BERRIES, 0.01f, ItemTags.DIRT, 4, 0.01f, "purified_dirt/sweet_berries");
-
-        //Mud -> Clay Ball
-        simpleStrainer(Items.CLAY_BALL, 2, 0.75f, Items.MUD, 1, 0.25f, "mud/clay_ball");
-
-        //Cobblestone -> Gravel Pebble
-        simpleWaterStrainer(StrainersItems.GRAVEL_PEBBLE.get(), 2f, Tags.Items.COBBLESTONES, 1, 0.5f, "cobblestone/gravel_pebble");
-
-        //Cobblestone -> Gravel -> Sand -> Dust (Progression)
-        simpleErodingStrainer(Items.GRAVEL, 1.0f, Tags.Items.COBBLESTONES, 1, 0.0f, "cobblestone/gravel");
-        simpleErodingStrainer(Items.SAND, 1.0f, Tags.Items.GRAVELS, 1, 0.0f, "gravel/sand");
-        simpleErodingStrainer(StrainersBlocks.DUST_BLOCK.get().asItem(), 1.0f, Tags.Items.SANDS, 1, 0.0f, "sand/dust_block");
-
-        //Stone -> Netherrack
-        simpleErodingStrainer(Blocks.NETHERRACK.asItem(), 0.75f, Tags.Items.STONES, 5, 0.15f, "stone/netherrack");
-
-        //Netherrack -> Lava Drop
-        simpleErodingStrainer(StrainersItems.LAVA_DROP.get(), 0.1f, Blocks.NETHERRACK.asItem(), 6, 0.1f, "netherrack/lava_drop");
-
-        //Gravel -> Sand Dust
-        simpleWaterStrainer(StrainersItems.SAND_DUST.get(), 2, 1f, Items.GRAVEL, 1, 0.5f, "gravel/sand_dust");
-
-        //Sand -> Dust
-        simpleWaterStrainer(StrainersItems.DUST.get().asItem(), 2,  1f, Items.SAND, 1, 0.5f, "sand/dust");
-
-        //Gravel -> Flint (Progression)
-        simpleWaterStrainer(Items.FLINT, 0.2f, Items.GRAVEL, 1, 0.1f, "gravel/flint");
-
-        //Sand -> Soul Sand
-        simpleErodingStrainer(Items.SOUL_SAND, 1.0f, Items.SAND, 6, 0.0f, "sand/soul_sand");
-
-        //Dirt -> Soul Soil
-        simpleErodingStrainer(Items.SOUL_SOIL, 1.0f, ItemTags.DIRT, 6, 0.0f, "dirt/soul_soil");
-
-        //Stone -> Deepslate
-        simpleErodingStrainer(Items.DEEPSLATE, 1.0f, Items.STONE, 7, 0.0f, "stone/deepslate");
-
-        //Sand -> Prismarine
-        simpleSaltyWaterStrainer(Items.PRISMARINE_SHARD, 0.5f, StrainersBlocks.PURIFIED_SAND, 4, 0.1f, "sand/prismarine_shard");
-        simpleSaltyWaterStrainer(Items.PRISMARINE_CRYSTALS, 0.30f, StrainersBlocks.PURIFIED_SAND, 4, 0.1f, "sand/prismarine_crystal");
-
-        //sand -> crops
-        simpleWaterStrainer(Items.SUGAR_CANE, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/sugar_cane");
-        simpleWaterStrainer(Items.CACTUS, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/cactus");
-        simpleWaterStrainer(Items.CACTUS_FLOWER, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/cactus_flower");
-        simpleWaterStrainer(Items.DEAD_BUSH, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/dead_bush");
-        simpleWaterStrainer(Items.DRY_TALL_GRASS, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/dry_tall_grass");
-        simpleWaterStrainer(Items.DRY_SHORT_GRASS, 0.1f, StrainersBlocks.PURIFIED_SAND, 3, 0.1f, "purified_sand/dry_short_grass");
-
-        //Purified Deepslate ->
-        simpleWaterStrainer(StrainersItems.SCULK_DUST.get(), 0.75f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.05f, "purified_deepslate/sculk_dust");
-        simpleWaterStrainer(Items.ECHO_SHARD, 0.5f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.05f, "purified_deepslate/echo_shard");
-        simpleWaterStrainer(Items.DISC_FRAGMENT_5, 0.1f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.1f, "purified_deepslate/disc_fragment_5");
-        simpleWaterStrainer(Items.GLOW_BERRIES, 0.1f, StrainersBlocks.PURIFIED_DEEPSLATE, 4, 0.1f, "purified_deepslate/glow_berries");
-
-        //Ore Progression T2 -> Copper (Progression)/ Coal/ Tin/ Zinc/ Aluminum
-        simpleWaterStrainerOre(StrainersItems.COPPER_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "copper", "purified_gravel/copper_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.COAL_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "coal", "purified_gravel/coal_ore_piece");
-
-        simpleWaterStrainerOre(StrainersItems.TIN_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "tin", "purified_gravel/tin_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.ZINC_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "zinc", "purified_gravel/zinc_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.ALUMINUM_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 2, 0.05f, "aluminum", "purified_gravel/aluminum_ore_piece");
-
-        //Ore Progression T3 -> Iron (Progression)/ Lead/ Nickel / Lapis / Redstone / Amethyst
-        simpleWaterStrainerOre(StrainersItems.LAPIS_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_DUST_BLOCK, 3, 0.05f, "lapis", "purified_dust_block/lapis_ore_piece");
-        simpleWaterStrainer(Items.AMETHYST_SHARD, 0.75f, StrainersBlocks.PURIFIED_DUST_BLOCK, 3, 0.05f, "purified_dust_block/amethyst_shard");
-        simpleWaterStrainerOre(StrainersItems.REDSTONE_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_DUST_BLOCK, 3, 0.05f, "redstone", "purified_dust_block/redstone_ore_piece");
-
-        simpleWaterStrainerOre(StrainersItems.IRON_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 3, 0.05f, "iron", "purified_gravel/iron_ore_piece");
-
-        simpleWaterStrainerOre(StrainersItems.LEAD_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 3, 0.05f, "lead", "purified_gravel/lead_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.NICKEL_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_GRAVEL, 3, 0.05f, "nickel", "purified_gravel/nickel_ore_piece");
-
-        simpleWaterStrainer(StrainersItems.QUARTZ_ORE_PIECE.get(), 0.75f, StrainersBlocks.PURIFIED_NETHERRACK, 3, 0.05f, "purified_netherrack/quartz_piece");
-
-        //Ore Progression T4  -> Gold (Progression)/ Silver
-        simpleWaterStrainerOre(StrainersItems.GOLD_ORE_PIECE.get(), 0.65f, StrainersBlocks.PURIFIED_GRAVEL, 4, 0.05f, "gold", "purified_gravel/gold_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.GOLD_ORE_PIECE.get(), 0.65f, StrainersBlocks.PURIFIED_NETHERRACK, 4, 0.05f, "gold", "purified_netherrack/gold_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.SILVER_ORE_PIECE.get(), 0.65f, StrainersBlocks.PURIFIED_GRAVEL, 4, 0.05f, "silver", "purified_gravel/silver_ore_piece");
-
-        //Ore Progression T5 -> Diamond (Progression) / Osmium
-        simpleWaterStrainerOre(StrainersItems.DIAMOND_ORE_PIECE.get(), 0.55f,  StrainersBlocks.PURIFIED_GRAVEL, 5, 0.05f, "diamond", "purified_gravel/diamond_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.OSMIUM_ORE_PIECE.get(), 0.55f, StrainersBlocks.PURIFIED_GRAVEL, 5, 0.05f, "osmium", "purified_gravel/osmium_ore_piece");
-
-        //Ore Progression T6 -> Emerald (Progression) / Platinum / Uranium
-        simpleWaterStrainerOre(StrainersItems.EMERALD_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_GRAVEL, 6, 0.05f, "emerald", "purified_gravel/emerald_ore_piece");
-
-        simpleWaterStrainerOre(StrainersItems.PLATINUM_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_GRAVEL, 6, 0.05f, "platinum", "purified_gravel/platinum_ore_piece");
-        simpleWaterStrainerOre(StrainersItems.URANIUM_ORE_PIECE.get(), 0.45f, StrainersBlocks.PURIFIED_GRAVEL, 6, 0.05f, "uranium", "purified_gravel/uranium_ore_piece");
-
-        //Ore Progression T7 -> Ancient Debris (Progression)
-        simpleWaterStrainer(StrainersItems.DEBRIS_ORE_PIECE.get(), 0.01f, StrainersBlocks.PURIFIED_NETHERRACK, 7, 0.01f, "purified_netherrack/debris_ore_piece");
-
-        //Ore Progression T8 -> ????
+        StrainerRecipeBuilder.create().eroding()
+                .input(ItemTags.DIRT, this.registries)
+                .output(Items.SOUL_SOIL, 1, 1.0f)
+                .tier(6, 0.0f)
+                .save(output, "dirt/soul_soil");
 
 
+        //Gravel
+        StrainerRecipeBuilder.create().water()
+                .input(Items.GRAVEL)
+                .output(StrainersItems.PURIFYING_DROP.get(), 1, 0.1f)
+                .tier(1, 0.05f)
+                .save(output, "gravel/purifying_drop");
 
+        StrainerRecipeBuilder.create().water()
+                .input(Items.GRAVEL)
+                .output(StrainersItems.ERODING_DROP.get(), 1, 0.1f)
+                .tier(1, 0.05f)
+                .save(output, "gravel/eroding_drop");
+
+        //Sand
+        StrainerRecipeBuilder.create().water()
+                .input(Tags.Items.SANDS, registries)
+                .output(StrainersItems.SALT_WATER_DROP.get(), 1, 0.1f)
+                .tier(1, 0.05f)
+                .save(output, "sand/salt_water_drop");
+
+        StrainerRecipeBuilder.create().water()
+                .input(Tags.Items.SANDS, registries)
+                .output(StrainersItems.SAND_DUST.get(), 2, 1.0f)
+                .tier(1, 0.0f)
+                .save(output, "sand/sand_dust");
+
+        StrainerRecipeBuilder.create().eroding()
+                .input(Tags.Items.SANDS, registries)
+                .output(StrainersBlocks.DUST_BLOCK.get().asItem(), 1, 1.0f)
+                .tier(1, 0.0f)
+                .save(output, "sand/dust_block");
+
+        StrainerRecipeBuilder.create().eroding()
+                .input(Tags.Items.SANDS, registries)
+                .output(Items.SOUL_SAND, 1, 1.0f)
+                .tier(6, 0.0f)
+                .save(output, "sand/soul_sand");
+
+        //Sandstone
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.SANDSTONE)
+                .output(Items.END_STONE, 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output, "sandstone/end_stone");
+
+        //Blocks to Purified versions
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.COBBLESTONE)
+                .output(StrainersBlocks.PURIFIED_DIRT.get().asItem(), 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output, "cobblestone/purified_dirt");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.GRAVEL)
+                .output(StrainersBlocks.PURIFIED_GRAVEL.get().asItem(), 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output, "gravel/purified_gravel");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.SAND)
+                .output(StrainersBlocks.PURIFIED_SAND.get().asItem(), 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output, "sand/purified_sand");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(StrainersBlocks.DUST_BLOCK)
+                .output(StrainersBlocks.PURIFIED_DUST_BLOCK.get().asItem(), 1, 1.0f)
+                .tier(3, 0.0f)
+                .save(output, "dust_block/purified_dust_block");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.NETHERRACK)
+                .output(StrainersBlocks.PURIFIED_NETHERRACK.get().asItem(), 1, 1.0f)
+                .tier(4, 0.0f)
+                .save(output, "netherrack/purified_netherrack");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.SOUL_SAND)
+                .output(StrainersBlocks.PURIFIED_SOUL_SAND.get().asItem(), 1, 1.0f)
+                .tier(4, 0.0f)
+                .save(output, "soul_sand/purified_soul_sand");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.SOUL_SOIL)
+                .output(StrainersBlocks.PURIFIED_SOUL_SOIL.get().asItem(), 1, 1.0f)
+                .tier(4, 0.0f)
+                .save(output, "soul_soil/purified_soul_soil");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.STONE)
+                .output(StrainersBlocks.PURIFIED_STONE.get().asItem(), 1, 1.0f)
+                .tier(4, 0.0f)
+                .save(output, "stone/purified_stone");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.DEEPSLATE)
+                .output(StrainersBlocks.PURIFIED_DEEPSLATE.get().asItem(), 1, 1.0f)
+                .tier(4, 0.0f)
+                .save(output, "stone/purified_deepslate");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(Blocks.END_STONE)
+                .output(StrainersBlocks.PURIFIED_END_STONE.get().asItem(), 1, 1.0f)
+                .tier(8, 0.0f)
+                .save(output, "end_stone/purified_end_stone");
+
+        //Purified Dirt
+        StrainerRecipeBuilder.create().purifying()
+                .input(StrainersBlocks.PURIFIED_DIRT)
+                .output(Blocks.GRASS_BLOCK.asItem(), 1, 1.0f)
+                .tier(7, 0.0f)
+                .save(output, "purified_dirt/dirt");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DIRT)
+                .output(StrainersItems.SEED_BAG.asItem(), 1, 0.1f)
+                .tier(1, 0.1f)
+                .save(output, "purified_dirt/seed_bag");
+
+        //Purified Netherrack
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_NETHERRACK)
+                .output(Blocks.BASALT.asItem(), 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_netherrack/basalt");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_NETHERRACK)
+                .output(Blocks.BLACKSTONE.asItem(), 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_netherrack/blackstone");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_NETHERRACK)
+                .output("quartz", 0.75f)
+                .tier(3, 0.05f)
+                .save(output, "purified_netherrack/quartz");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_NETHERRACK)
+                .output("gold", 0.70f)
+                .tier(4, 0.05f)
+                .save(output, "purified_netherrack/gold");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_NETHERRACK)
+                .output("netherite_scrap", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "purified_netherrack/netherite_scrap");
+
+
+        //Purified Stone
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_STONE)
+                .output(Blocks.GRANITE.asItem(), 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_stone/granite");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_STONE)
+                .output(Blocks.DIORITE.asItem(), 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_stone/diorite");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_STONE)
+                .output(Blocks.ANDESITE.asItem(), 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_stone/andesite");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_STONE)
+                .output(Blocks.CALCITE.asItem(), 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_stone/calcite");
+
+        //Purified Soul Sand
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SOUL_SAND)
+                .output(Items.NETHER_WART, 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_soul_sand/nether_wart");
+
+        //Purified Soul Soil
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SOUL_SOIL)
+                .output(Items.CRIMSON_FUNGUS, 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_soul_soil/crimson_fungus");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SOUL_SOIL)
+                .output(Items.WARPED_FUNGUS, 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_soul_soil/warped_fungus");
+
+        //Mud
+        StrainerRecipeBuilder.create().water()
+                .input(Items.MUD)
+                .output(Items.CLAY_BALL, 1, 1.5f)
+                .tier(1, 0.25f)
+                .save(output, "mud/clay_ball");
+
+        //Cobblestone
+        StrainerRecipeBuilder.create().water()
+                .input(Tags.Items.COBBLESTONES, registries)
+                .output(StrainersItems.GRAVEL_PEBBLE.get(), 1, 2f)
+                .tier(1, 0.5f)
+                .save(output, "cobblestone/gravel_pebble");
+
+        StrainerRecipeBuilder.create().eroding()
+                .input(Tags.Items.COBBLESTONES, registries)
+                .output(Items.GRAVEL, 1, 1.0f)
+                .tier(1, 0.0f)
+                .save(output, "cobblestone/gravel");
+
+        //Gravel
+        StrainerRecipeBuilder.create().eroding()
+                .input(Tags.Items.GRAVELS, registries)
+                .output(Items.SAND, 1, 1.0f)
+                .tier(1, 0.0f)
+                .save(output, "gravel/sand");
+
+        //Stone
+        StrainerRecipeBuilder.create().eroding()
+                .input(Tags.Items.STONES, registries)
+                .output(Items.NETHERRACK, 1, 1.0f)
+                .tier(1, 0.0f)
+                .save(output, "stone/netherrack");
+
+        StrainerRecipeBuilder.create().eroding()
+                .input(Tags.Items.STONES, registries)
+                .output(Items.DEEPSLATE, 1, 1.0f)
+                .tier(7, 0.0f)
+                .save(output, "stone/deepslate");
+
+
+        //Netherrack
+        StrainerRecipeBuilder.create().eroding()
+                .input(Tags.Items.NETHERRACKS, registries)
+                .output(StrainersItems.LAVA_DROP.get(), 6, 0.1f)
+                .tier(1, 0.0f)
+                .save(output, "netherrack/lava_drop");
+
+        //Gravel
+        StrainerRecipeBuilder.create().water()
+                .input(Tags.Items.GRAVELS, registries)
+                .output(StrainersItems.SAND_DUST.get(), 1, 1.0f)
+                .tier(1, 0.5f)
+                .save(output, "gravel/sand_dust");
+
+        StrainerRecipeBuilder.create().water()
+                .input(Items.GRAVEL)
+                .output(Items.FLINT, 1, 0.2f)
+                .tier(1, 0.1f)
+                .save(output, "gravel/flint");
+
+        //Purified Sand
+        StrainerRecipeBuilder.create().salty()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.PRISMARINE_SHARD, 1, 0.5f)
+                .tier(4, 0.1f)
+                .save(output, "purified_sand/prismarine_shard");
+
+        StrainerRecipeBuilder.create().salty()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.PRISMARINE_CRYSTALS, 1, 0.3f)
+                .tier(4, 0.05f)
+                .save(output, "purified_sand/prismarine_crystal");
+
+        StrainerRecipeBuilder.create().salty()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output("salt", 0.3f)
+                .tier(3, 0.05f)
+                .save(output, "purified_sand/salt");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.SUGAR_CANE, 1, 0.1f)
+                .tier(3, 0.1f)
+                .save(output, "purified_sand/sugar_cane");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.CACTUS, 1, 0.1f)
+                .tier(3, 0.1f)
+                .save(output, "purified_sand/cactus");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.CACTUS_FLOWER, 1, 0.1f)
+                .tier(3, 0.1f)
+                .save(output, "purified_sand/cactus_flower");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.DEAD_BUSH, 1, 0.1f)
+                .tier(3, 0.1f)
+                .save(output, "purified_sand/dead_bush");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.DRY_TALL_GRASS, 1, 0.1f)
+                .tier(3, 0.1f)
+                .save(output, "purified_sand/dry_tall_grass");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SAND)
+                .output(Items.DRY_SHORT_GRASS, 1, 0.1f)
+                .tier(3, 0.1f)
+                .save(output, "purified_sand/dry_short_grass");
+
+        //Purified Deepslate
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DEEPSLATE)
+                .output(StrainersItems.SCULK_DUST.get(), 1, 0.75f)
+                .tier(4, 0.15f)
+                .save(output, "purified_deepslate/sculk_dust");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DEEPSLATE)
+                .output(Items.ECHO_SHARD, 1, 0.5f)
+                .tier(4, 0.05f)
+                .save(output, "purified_deepslate/echo_shard");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DEEPSLATE)
+                .output(Items.DISC_FRAGMENT_5, 1, 0.1f)
+                .tier(5, 0.1f)
+                .save(output, "purified_deepslate/disc_fragment_5");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DEEPSLATE)
+                .output(Items.GLOW_BERRIES, 1, 0.1f)
+                .tier(4, 0.1f)
+                .save(output, "purified_deepslate/glow_berries");
+
+        //Purified Gravel
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("copper", 0.75f)
+                .tier(2, 0.05f)
+                .save(output, "purified_gravel/copper");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("coal", 0.75f)
+                .tier(2, 0.05f)
+                .save(output, "purified_gravel/coal");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("tin", 0.75f)
+                .tier(2, 0.05f)
+                .save(output, "tin", "purified_gravel/tin");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("zinc", 0.75f)
+                .tier(2, 0.05f)
+                .save(output, "zinc", "purified_gravel/zinc");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("aluminum", 0.75f)
+                .tier(2, 0.05f)
+                .save(output, "aluminum", "purified_gravel/aluminum");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("lapis", 0.75f)
+                .tier(3, 0.05f)
+                .save(output, "purified_gravel/lapis");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("iron", 0.75f)
+                .tier(3, 0.05f)
+                .save(output, "purified_gravel/iron");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("lead", 0.75f)
+                .tier(3, 0.05f)
+                .save(output, "lead", "purified_gravel/lead");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("nickel", 0.75f)
+                .tier(3, 0.05f)
+                .save(output, "nickel", "purified_gravel/nickel");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("gold", 0.70f)
+                .tier(4, 0.05f)
+                .save(output, "purified_gravel/gold");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("silver", 0.70f)
+                .tier(4, 0.05f)
+                .save(output, "silver", "purified_gravel/silver");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("diamond", 0.65f)
+                .tier(5, 0.05f)
+                .save(output, "purified_gravel/diamond");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("sulfur", 0.65f)
+                .tier(5, 0.05f)
+                .save(output, "sulfur", "purified_gravel/sulfur");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("osmium", 0.65f)
+                .tier(5, 0.05f)
+                .save(output, "osmium", "purified_gravel/osmium");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("emerald", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "purified_gravel/emerald");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("topaz", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "topaz", "purified_gravel/topaz");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("peridot", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "peridot", "purified_gravel/peridot");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("ruby", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "ruby", "purified_gravel/ruby");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("sapphire", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "sapphire", "purified_gravel/sapphire");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("fluorite", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "fluorite", "purified_gravel/fluorite");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("platinum", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "platinum", "purified_gravel/platinum");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("uranium", 0.60f)
+                .tier(6, 0.05f)
+                .save(output, "uranium", "purified_gravel/uranium");
+
+
+        //Purified Dust
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
+                .output("redstone", 0.75f)
+                .tier(3, 0.05f)
+                .save(output, "purified_dust_block/redstone");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
+                .output(Items.AMETHYST_SHARD, 1, 0.15f)
+                .tier(3, 0.05f)
+                .save(output, "purified_dust_block/amethyst_shard");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
+                .output("cinnabar", 0.15f)
+                .tier(5, 0.05f)
+                .save(output, "cinnabar", "purified_dust_block/cinnabar");
+
+
+        //Mod Support
+        addSilentGems();
+        addForbiddenArcanus();
+        addPowah();
+        addTheurgy();
+        addAllTheModium();
+        addMysticalAgriculture();
+    }
+
+    public void addSilentGems() {
+
+        List<String> ores = new ArrayList<>();
+        ores.add("opal");
+        ores.add("garnet");
+        ores.add("tanzanite");
+        ores.add("black_diamond");
+        ores.add("azure_silver");
+        ores.add("white_diamond");
+        ores.add("bort");
+        ores.add("ammolite");
+        ores.add("turquoise");
+        ores.add("aquamarine");
+        ores.add("alexandrite");
+        ores.add("carnelian");
+        ores.add("citrin");
+        ores.add("iolite");
+        ores.add("kyanite");
+        ores.add("pearl");
+
+        for (String ore : ores) {
+            StrainerRecipeBuilder.create().water()
+                    .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
+                    .output(ore, 0.35f)
+                    .tier(6, 0.05f)
+                    .save(output, ore, "purified_dust_block/" + ore);
+        }
+
+        List<String> netherOres = new ArrayList<>();
+        netherOres.add("crimson_iron");
+        netherOres.add("rose_quartz");
+
+        for (String ore : netherOres) {
+            StrainerRecipeBuilder.create().water()
+                    .input(StrainersBlocks.PURIFIED_NETHERRACK)
+                    .output(ore, 0.35f)
+                    .tier(6, 0.05f)
+                    .save(output, ore, "purified_netherrack/" + ore);
+        }
+    }
+
+    public void addForbiddenArcanus() {
+
+        List<String> ores = new ArrayList<>();
+        ores.add("runic");
+        ores.add("stellarite");
+        ores.add("arcane_crystal");
+
+        for (String ore : ores) {
+            StrainerRecipeBuilder.create().water()
+                    .input(StrainersBlocks.PURIFIED_GRAVEL)
+                    .output(ore, 0.35f)
+                    .tier(6, 0.05f)
+                    .save(output, ore, "purified_gravel/" + ore);
+        }
+    }
+
+    public void addPowah() {
+
+        List<String> ores = new ArrayList<>();
+        ores.add("uraninite");
+        ores.add("uraninite_dense");
+        ores.add("uraninite_regular");
+        ores.add("uraninite_poor");
+
+        for (String ore : ores) {
+            StrainerRecipeBuilder.create().water()
+                    .input(StrainersBlocks.PURIFIED_GRAVEL)
+                    .output(ore, 0.1f)
+                    .tier(7, 0.05f)
+                    .save(output, ore, "purified_gravel/" + ore);
+        }
+    }
+    public void addMysticalAgriculture() {
+
+        List<String> ores = new ArrayList<>();
+        ores.add("prosperity");
+        ores.add("inferium");
+
+        for (String ore : ores) {
+            StrainerRecipeBuilder.create().water()
+                    .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
+                    .output(ore, 0.15f)
+                    .tier(7, 0.05f)
+                    .save(output, ore, "purified_dust_block/" + ore);
+        }
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_SOUL_SAND)
+                .output("soulium", 0.15f)
+                .tier(3, 0.05f)
+                .save(output, "soulium", "purified_soul_sand/soulium");
+    }
+
+    public void addTheurgy() {
+
+        List<String> ores = new ArrayList<>();
+        ores.add("sal_ammoniac");
+
+        for (String ore : ores) {
+            StrainerRecipeBuilder.create().water()
+                    .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
+                    .output(ore, 0.15f)
+                    .tier(7, 0.05f)
+                    .save(output, ore, "purified_dust_block/" + ore);
+        }
+    }
+
+    public void addAllTheModium() {
+
+        List<String> ores = new ArrayList<>();
+        ores.add("allthemodium");
+        ores.add("vibranium");
+        ores.add("unobtainium");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_DEEPSLATE)
+                .output("allthemodium", 0.01f)
+                .tier(8, 0.01f)
+                .save(output, "allthemodium", "purified_dust_block/allthemodium");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_NETHERRACK)
+                .output("vibranium", 0.01f)
+                .tier(8, 0.01f)
+                .save(output, "vibranium", "purified_dust_block/vibranium");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.PURIFIED_END_STONE)
+                .output("unobtainium", 0.01f)
+                .tier(8, 0.01f)
+                .save(output, "unobtainium", "purified_dust_block/unobtainium");
 
     }
 
-    public void simpleStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), count),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleWaterStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleWaterStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleWaterStrainerOre(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String resource, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(CommonTags.getItemTag("ores", resource)))), id);
-    }
-
-    public void simpleWaterStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleWaterStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleErodingStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleErodingStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleErodingStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String resource, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(CommonTags.getItemTag("ores", resource)))), id);
-    }
-
-    public void simpleErodingStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleErodingStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), count),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simplePurifyingStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simplePurifyingStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), count),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simplePurifyingStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simplePurifyingStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), count),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simplePurifyingStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String resource, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(CommonTags.getItemTag("ores", resource)))), id);
-    }
-
-    public void simpleSaltyWaterStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleSaltyWaterStrainer(Item template, int count, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), count),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleSaltyWaterStrainer(Item template, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleSaltyWaterStrainer(Item template, int count, float chance, TagKey<Item> tag, int tier, double additionalChancePerTier, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(this.registries.lookupOrThrow(Registries.ITEM).getOrThrow(tag)), count),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, count), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output, id);
-    }
-
-    public void simpleSaltyWaterStrainer(Item template, float chance, ItemLike ingredient, int tier, double additionalChancePerTier, String resource, String id) {
-
-        StrainerRecipeBuilder.strainerRecipeBuilder(
-                        new SizedIngredient(Ingredient.of(ingredient), 1),
-                        Optional.of(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()), 1000)),
-                        new ChanceResult(new ItemStackTemplate(template, 1), chance),
-                        tier,
-                        additionalChancePerTier
-                )
-                .save(output.withConditions(new NotCondition(new TagEmptyCondition<>(CommonTags.getItemTag("ores", resource)))), id);
-    }
 }

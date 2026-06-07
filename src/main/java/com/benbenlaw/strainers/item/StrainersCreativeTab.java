@@ -2,11 +2,13 @@ package com.benbenlaw.strainers.item;
 
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
+import com.benbenlaw.strainers.event.ServerEvents;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -25,6 +27,13 @@ public class StrainersCreativeTab {
                 StrainersItems.ITEMS.getEntries().forEach((entry) -> output.accept(entry.get()));
 
                 StrainersFluids.FLUIDS.getBucketEntries().forEach(bucket -> output.accept(bucket.get()));
+
+                for (String ore : ServerEvents.AVAILABLE_ORES) {
+                    ItemStack stack = new ItemStack(StrainersItems.ORE_PIECE.get());
+                    stack.set(StrainersDataComponents.ORE_TYPE.get(), ore);
+                    output.accept(stack);
+                }
+
             }).build());
     
 }

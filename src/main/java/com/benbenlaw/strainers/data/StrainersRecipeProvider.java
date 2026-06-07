@@ -1,13 +1,17 @@
 package com.benbenlaw.strainers.data;
 
-import com.benbenlaw.core.tag.CommonTags;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
+import com.benbenlaw.strainers.client.OreDefaults;
 import com.benbenlaw.strainers.data.recipes.TagOutputRecipeProvider;
+import com.benbenlaw.strainers.item.OrePieceItem;
 import com.benbenlaw.strainers.item.StrainersItems;
+import com.geckolib.loading.definition.animation.DoubleOrString;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -16,9 +20,14 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.NotCondition;
+import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -28,6 +37,7 @@ public class StrainersRecipeProvider extends RecipeProvider {
     public StrainersRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
         super(provider, output);
     }
+
     public static class Runner extends RecipeProvider.Runner {
         public Runner(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) {
             super(packOutput, provider);
@@ -104,10 +114,22 @@ public class StrainersRecipeProvider extends RecipeProvider {
         twoByTwoPacker(RecipeCategory.MISC, Items.GRAVEL, StrainersItems.GRAVEL_PEBBLE, "gravel_from_pebbles");
         twoByTwoPacker(RecipeCategory.MISC, Items.SAND, StrainersItems.SAND_DUST, "sand_from_dust");
         twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.DUST_BLOCK, StrainersItems.DUST, "dust_block_from_dust");
-        twoByTwoPacker(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS,StrainersItems.DEBRIS_ORE_PIECE.get(), "debris_from_pieces");
+        twoByTwoPacker(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS, StrainersItems.DEBRIS_ORE_PIECE.get(), "debris_from_pieces");
         twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.MULCH, StrainersItems.LEAF_PILE.get(), "mulch_from_leaf_pile");
         twoByTwoPacker(RecipeCategory.MISC, Blocks.DIRT, StrainersItems.DIRT_PILE.get(), "dirt_from_dirt_pile");
         twoByTwoPacker(RecipeCategory.MISC, Blocks.SCULK, StrainersItems.SCULK_DUST.get(), "sculk_from_sculk_dust");
+
+        shaped(RecipeCategory.MISC, Items.ANCIENT_DEBRIS)
+                .pattern("AA")
+                .pattern("AA")
+                .define('A', DataComponentIngredient.of(false, OrePieceItem.createOrePiece("netherite_scrap")))
+                .unlockedBy("has_mesh", has(StrainersItems.WOODEN_MESH.get()))
+                .save(output);
+
+
+        for (String ore : OreDefaults.COLORS.keySet()) {
+            generateOrePieceRecipe(ore);
+        }
 
     }
 
@@ -139,4 +161,20 @@ public class StrainersRecipeProvider extends RecipeProvider {
         this.shaped(category, result, 1).define('#', ingredient).pattern("##").pattern("##").unlockedBy(getHasName(ingredient), this.has(ingredient)).save(output, Strainers.identifier(id).toString());
     }
 
+    private void generateOrePieceRecipe(String ore) {
+
+        String id = "ore_piece/" + ore;
+
+        TagKey<Item> outputTag = TagKey.create(
+                Registries.ITEM,
+                Identifier.parse("c:ores/" + ore)
+        );
+
+        var pattern = ShapedRecipePattern.of(Map.of('#', DataComponentIngredient.of(false, OrePieceItem.createOrePiece(ore))),"##", "##");
+
+        TagOutputRecipeProvider.tagOutputRecipe(new Recipe.CommonInfo(false), new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, "ore_pieces"),
+                        pattern, outputTag, 1).save(output.withConditions(new NotCondition(new TagEmptyCondition<>(outputTag))), id);
+    }
+
 }
+

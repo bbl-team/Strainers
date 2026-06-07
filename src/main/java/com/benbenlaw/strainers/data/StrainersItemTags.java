@@ -51,29 +51,7 @@ public class StrainersItemTags extends ItemTagsProvider {
 
         //Ore Pieces
         tag(StrainersTags.Items.ORE_PIECES)
-                .add(StrainersItems.IRON_ORE_PIECE.get())
-                .add(StrainersItems.GOLD_ORE_PIECE.get())
-                .add(StrainersItems.COPPER_ORE_PIECE.get())
-                .add(StrainersItems.DIAMOND_ORE_PIECE.get())
-                .add(StrainersItems.EMERALD_ORE_PIECE.get())
-                .add(StrainersItems.DEBRIS_ORE_PIECE.get())
-
-
-                .add(StrainersItems.SILVER_ORE_PIECE.get())
-                .add(StrainersItems.LEAD_ORE_PIECE.get())
-                .add(StrainersItems.NICKEL_ORE_PIECE.get())
-                .add(StrainersItems.URANIUM_ORE_PIECE.get())
-                .add(StrainersItems.ZINC_ORE_PIECE.get())
-                .add(StrainersItems.PLATINUM_ORE_PIECE.get())
-                .add(StrainersItems.TIN_ORE_PIECE.get())
-                .add(StrainersItems.NICKEL_ORE_PIECE.get())
-                .add(StrainersItems.OSMIUM_ORE_PIECE.get())
-                .add(StrainersItems.ALUMINUM_ORE_PIECE.get())
-                .add(StrainersItems.LAPIS_ORE_PIECE.get())
-                .add(StrainersItems.REDSTONE_ORE_PIECE.get())
-                .add(StrainersItems.COAL_ORE_PIECE.get())
-                .add(StrainersItems.QUARTZ_ORE_PIECE.get())
-
+                .add(StrainersItems.ORE_PIECE.get())
         ;
 
         tag(Tags.Items.DUSTS)

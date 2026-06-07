@@ -9,7 +9,7 @@
     "count": 1,
     "ingredient": "minecraft:gravel"
   },
-  "min_mesh_tier": 2,
+  "min_mesh_tier": 1,
   "result": {
     "chance": 0.1,
     "item": {

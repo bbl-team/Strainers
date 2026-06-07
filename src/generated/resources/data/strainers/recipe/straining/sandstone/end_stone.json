@@ -1,0 +1,18 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.0,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "strainers:purifying_water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "minecraft:sandstone"
+  },
+  "min_mesh_tier": 2,
+  "result": {
+    "item": {
+      "id": "minecraft:end_stone"
+    }
+  }
+}

@@ -1,9 +1,10 @@
-// 26.1.2	2026-06-05T12:17:20.9263156	Loot Tables
+// 26.1.2	2026-06-07T17:18:47.5393999	Loot Tables
 3682084cc4d6f332136c14324b9eee9b0a9e0a27 data/strainers/loot_table/blocks/dust_block.json
 ad2c354c88946f227b89811156b72d95dbb26c25 data/strainers/loot_table/blocks/mulch.json
 5455d07dbb5e24bdbf4706e36cc174bd221d6d77 data/strainers/loot_table/blocks/purified_deepslate.json
 0978af04097c72e9b8f1b791573c30d822ddb6fe data/strainers/loot_table/blocks/purified_dirt.json
 73f8246fb22996c722943fd9f780860db3b30cbc data/strainers/loot_table/blocks/purified_dust_block.json
+fdc612d30b97e66b2821ceed6a15d3d2203dbdc6 data/strainers/loot_table/blocks/purified_end_stone.json
 43171cd963cb2f49755a4e4063cf67599265940a data/strainers/loot_table/blocks/purified_gravel.json
 7d650bb0dfcf36b1c0fe618b7f97e4aef5b6369d data/strainers/loot_table/blocks/purified_netherrack.json
 9636b768be6f81cde6079674fcc49160c42bd913 data/strainers/loot_table/blocks/purified_sand.json

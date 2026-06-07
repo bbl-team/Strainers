@@ -5,6 +5,7 @@ import com.benbenlaw.strainers.block.StrainersBlockEntities;
 import com.benbenlaw.strainers.block.StrainersCapabilities;
 import com.benbenlaw.strainers.block.entity.StrainerBlockEntity;
 import com.benbenlaw.strainers.block.entity.renderer.StrainerBlockEntityRenderer;
+import com.benbenlaw.strainers.config.StrainersConfig;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
 import com.benbenlaw.strainers.item.StrainersCreativeTab;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
@@ -18,8 +19,10 @@ import com.benbenlaw.strainers.screen.custom.StrainerScreen;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -36,9 +39,7 @@ public class Strainers {
     private static final Logger LOGGER = LogManager.getLogger();
 
 
-    public Strainers(IEventBus modEventBus) {
-
-
+    public Strainers(IEventBus modEventBus, final ModContainer modContainer) {
 
         StrainersBlocks.BLOCKS.register(modEventBus);
         StrainersItems.ITEMS.register(modEventBus);
@@ -51,6 +52,8 @@ public class Strainers {
         StrainersRecipes.TYPES.register(modEventBus);
         StrainersLootConditions.LOOT_CONDITION_SERIALIZERS.register(modEventBus);
         StrainersLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
+
+        modContainer.registerConfig(ModConfig.Type.COMMON, StrainersConfig.SPEC, "bbl/strainers/common.toml");
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::registerCapabilities);

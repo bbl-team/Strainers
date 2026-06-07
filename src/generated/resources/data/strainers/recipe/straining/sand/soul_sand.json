@@ -7,7 +7,7 @@
   },
   "input": {
     "count": 1,
-    "ingredient": "minecraft:sand"
+    "ingredient": "#c:sands"
   },
   "min_mesh_tier": 6,
   "result": {

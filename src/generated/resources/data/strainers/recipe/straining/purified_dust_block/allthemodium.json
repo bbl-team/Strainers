@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/allthemodium"
+      }
+    }
+  ],
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.009999999776482582,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:purified_deepslate"
+  },
+  "min_mesh_tier": 8,
+  "result": {
+    "chance": 0.01,
+    "item": {
+      "components": {
+        "strainers:ore_type": "allthemodium"
+      },
+      "id": "strainers:ore_piece"
+    }
+  }
+}

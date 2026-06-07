@@ -3,6 +3,7 @@
     "strainers:strainer",
     "strainers:purified_stone",
     "strainers:purified_netherrack",
-    "strainers:purified_deepslate"
+    "strainers:purified_deepslate",
+    "strainers:purified_end_stone"
   ]
 }

@@ -31,6 +31,7 @@ public class StrainersLangProvider extends LanguageProvider {
         add("block.strainers.purified_soul_sand", "Purified Soul Sand");
         add("block.strainers.purified_soul_soil", "Purified Soul Soil");
         add("block.strainers.purified_deepslate", "Purified Deepslate");
+        add("block.strainers.purified_end_stone", "Purified End Stone");
 
         //Items
         add("item.strainers.wooden_mesh", "Wooden Mesh");
@@ -42,25 +43,27 @@ public class StrainersLangProvider extends LanguageProvider {
         add("item.strainers.emerald_mesh", "Emerald Mesh");
         add("item.strainers.netherite_mesh", "Netherite Mesh");
 
-        add("item.strainers.iron_ore_piece", "Iron Ore Piece");
-        add("item.strainers.gold_ore_piece", "Gold Ore Piece");
-        add("item.strainers.copper_ore_piece", "Copper Ore Piece");
-        add("item.strainers.coal_ore_piece", "Coal Ore Piece");
-        add("item.strainers.diamond_ore_piece", "Diamond Ore Piece");
-        add("item.strainers.emerald_ore_piece", "Emerald Ore Piece");
-        add("item.strainers.tin_ore_piece", "Tin Ore Piece");
-        add("item.strainers.silver_ore_piece", "Silver Ore Piece");
-        add("item.strainers.lead_ore_piece", "Lead Ore Piece");
-        add("item.strainers.nickel_ore_piece", "Nickel Ore Piece");
-        add("item.strainers.zinc_ore_piece", "Zinc Ore Piece");
-        add("item.strainers.platinum_ore_piece", "Platinum Ore Piece");
-        add("item.strainers.osmium_ore_piece", "Osmium Ore Piece");
-        add("item.strainers.uranium_ore_piece", "Uranium Ore Piece");
-        add("item.strainers.aluminum_ore_piece", "Aluminum Ore Piece");
-        add("item.strainers.quartz_ore_piece", "Quartz Ore Piece");
-        add("item.strainers.debris_ore_piece", "Debris Ore Piece");
-        add("item.strainers.lapis_ore_piece", "Lapis Ore Piece");
-        add("item.strainers.redstone_ore_piece", "Redstone Ore Piece");
+        add("item.strainers.iron_ore_piece", "Iron Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.gold_ore_piece", "Gold Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.copper_ore_piece", "Copper Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.coal_ore_piece", "Coal Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.diamond_ore_piece", "Diamond Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.emerald_ore_piece", "Emerald Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.tin_ore_piece", "Tin Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.silver_ore_piece", "Silver Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.lead_ore_piece", "Lead Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.nickel_ore_piece", "Nickel Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.zinc_ore_piece", "Zinc Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.platinum_ore_piece", "Platinum Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.osmium_ore_piece", "Osmium Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.uranium_ore_piece", "Uranium Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.aluminum_ore_piece", "Aluminum Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.quartz_ore_piece", "Quartz Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.debris_ore_piece", "Debris Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.lapis_ore_piece", "Lapis Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+        add("item.strainers.redstone_ore_piece", "Redstone Ore Piece (THIS ITEM WILL BE REMOVED IN FUTURE MOD UPDATE)");
+
+        add("item.strainers.ore_piece", "%s Ore Piece");
 
         add("item.strainers.stone_pebble", "Stone Pebble");
         add("item.strainers.gravel_pebble", "Gravel Pebble");
@@ -73,6 +76,7 @@ public class StrainersLangProvider extends LanguageProvider {
         add("item.strainers.salty_water_bucket", "Salty Water Bucket");
 
         add("item.strainers.sapling_bag", "Sapling Bag (What's inside!)");
+        add("item.strainers.seed_bag", "Seed Bag (What's inside!)");
         add("item.strainers.leaf_pile", "Leaf Pile");
         add("item.strainers.water_drop", "Water Drop");
         add("item.strainers.lava_drop", "Lava Drop");
@@ -95,7 +99,8 @@ public class StrainersLangProvider extends LanguageProvider {
         add("tooltip.strainers.tier_7_mesh", "Tier 7 Mesh");
         add("tooltip.strainers.tier_8_mesh", "Tier 8 Mesh");
 
-        add("tooltip.strainers.sapling_bag", "Right Click to place a random sapling");
+        add("tooltip.strainers.sapling_bag", "Right Click to place a random sapling, on Dirt or Grass");
+        add("tooltip.strainers.seed_bag", "Right Click to place a random seed, on Farmland");
         add("tooltip.strainers.depleted_drop", "Yes its useless just throw me away !");
 
         //JEI

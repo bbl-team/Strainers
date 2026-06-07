@@ -3,7 +3,9 @@ package com.benbenlaw.strainers.data;
 import com.benbenlaw.core.block.SyncableBlock;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
+import com.benbenlaw.strainers.client.OreTintSource;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
+import com.benbenlaw.strainers.item.OrePieceItem;
 import com.benbenlaw.strainers.item.StrainersItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -13,18 +15,15 @@ import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerato
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.special.SpecialModelRenderer;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
@@ -49,10 +48,16 @@ public class StrainersModelProvider extends ModelProvider {
 
         //Items
         StrainersItems.ITEMS.getEntries().stream()
-                .filter(entry -> !(entry.get() instanceof BlockItem))
+                .filter(entry -> !(entry.get() instanceof BlockItem || entry.get().asItem() instanceof OrePieceItem))
                 .forEach(entry ->
                         itemModels.generateFlatItem(entry.get(), ModelTemplates.FLAT_ITEM)
                 );
+
+        itemModels.createFlatItemModel(StrainersItems.ORE_PIECE.get(), ModelTemplates.FLAT_ITEM);
+
+        itemModels.itemModelOutput.accept(StrainersItems.ORE_PIECE.get().asItem(),
+                ItemModelUtils.tintedModel(ModelLocationUtils.getModelLocation(StrainersItems.ORE_PIECE.asItem()), new OreTintSource()));
+
 
         //Buckets
         bucketItem(itemModels, StrainersFluids.ERODING_WATER.getBucket(), StrainersFluids.ERODING_WATER.getFluid(), false, true);
@@ -71,6 +76,8 @@ public class StrainersModelProvider extends ModelProvider {
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_NETHERRACK.get());
         blockModels.createTrivialCube(StrainersBlocks.MULCH.get());
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DEEPSLATE.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_END_STONE.get());
+
 
 
     }

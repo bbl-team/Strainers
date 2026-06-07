@@ -2,12 +2,13 @@
   "type": "strainers:strainer",
   "additional_chance_per_tier": 1.0,
   "input": {
-    "count": 2,
+    "count": 1,
     "ingredient": "#minecraft:leaves"
   },
   "min_mesh_tier": 1,
   "result": {
     "item": {
+      "count": 2,
       "id": "strainers:leaf_pile"
     }
   }

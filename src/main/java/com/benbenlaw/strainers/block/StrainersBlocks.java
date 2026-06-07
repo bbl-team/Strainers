@@ -78,6 +78,11 @@ public class StrainersBlocks {
                     .strength(3.0F)
                     .sound(SoundType.DEEPSLATE)));
 
+    public static final DeferredBlock<Block> PURIFIED_END_STONE = registerBlock("purified_end_stone",
+            properties -> new Block(properties
+                    .strength(3.0F)
+                    .sound(SoundType.STONE)));
+
 
 
 

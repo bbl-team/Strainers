@@ -7,12 +7,11 @@
   },
   "input": {
     "count": 1,
-    "ingredient": "minecraft:gravel"
+    "ingredient": "#c:gravels"
   },
   "min_mesh_tier": 1,
   "result": {
     "item": {
-      "count": 2,
       "id": "strainers:sand_dust"
     }
   }

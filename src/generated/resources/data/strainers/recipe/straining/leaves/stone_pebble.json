@@ -7,7 +7,6 @@
   },
   "min_mesh_tier": 1,
   "result": {
-    "chance": 0.75,
     "item": {
       "id": "strainers:stone_pebble"
     }

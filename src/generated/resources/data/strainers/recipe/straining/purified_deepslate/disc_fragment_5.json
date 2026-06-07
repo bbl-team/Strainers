@@ -9,7 +9,7 @@
     "count": 1,
     "ingredient": "strainers:purified_deepslate"
   },
-  "min_mesh_tier": 4,
+  "min_mesh_tier": 5,
   "result": {
     "chance": 0.1,
     "item": {

@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "strainers:item/ore_piece",
+    "tints": [
+      {
+        "type": "strainers:ore_tint_color"
+      }
+    ]
+  }
+}

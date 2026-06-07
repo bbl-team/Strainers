@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/garnet"
+      }
+    }
+  ],
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.05000000074505806,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:purified_dust_block"
+  },
+  "min_mesh_tier": 6,
+  "result": {
+    "chance": 0.35,
+    "item": {
+      "components": {
+        "strainers:ore_type": "garnet"
+      },
+      "id": "strainers:ore_piece"
+    }
+  }
+}

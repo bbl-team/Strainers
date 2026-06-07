@@ -1,6 +1,6 @@
 {
   "type": "strainers:strainer",
-  "additional_chance_per_tier": 0.15000000596046448,
+  "additional_chance_per_tier": 0.0,
   "fluid": {
     "amount": 1000,
     "ingredient": "strainers:eroding_water"
@@ -9,9 +9,8 @@
     "count": 1,
     "ingredient": "#c:stones"
   },
-  "min_mesh_tier": 5,
+  "min_mesh_tier": 1,
   "result": {
-    "chance": 0.75,
     "item": {
       "id": "minecraft:netherrack"
     }

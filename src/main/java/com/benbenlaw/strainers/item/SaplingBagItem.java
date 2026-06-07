@@ -1,10 +1,12 @@
 package com.benbenlaw.strainers.item;
 
+import com.benbenlaw.strainers.config.StrainersConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,11 +40,14 @@ public class SaplingBagItem extends Item {
 
         if (level.isClientSide()) return InteractionResult.FAIL;
 
-        List<Block> saplings = BuiltInRegistries.BLOCK.get(BlockTags.SAPLINGS)
+        List<Block> saplings = new ArrayList<>(BuiltInRegistries.BLOCK.get(BlockTags.SAPLINGS)
                 .map(holders -> holders.stream()
                         .map(Holder::value)
                         .toList())
-                .orElse(Collections.emptyList());
+                .orElse(Collections.emptyList()));
+
+        StrainersConfig.ADD_SAPLING_BAG_OUTPUTS.get().forEach(sapling -> saplings.add(BuiltInRegistries.BLOCK.getValue(Identifier.tryParse(sapling))));
+        StrainersConfig.REMOVE_SAPLING_BAG_OUTPUTS.get().forEach(sapling -> saplings.remove(BuiltInRegistries.BLOCK.getValue(Identifier.tryParse(sapling))));
 
         if (state.is(BlockTags.SUPPORTS_VEGETATION) && direction == Direction.UP && above.canBeReplaced()) {
 

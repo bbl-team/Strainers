@@ -1,0 +1,22 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.05000000074505806,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:purified_gravel"
+  },
+  "min_mesh_tier": 5,
+  "result": {
+    "chance": 0.65,
+    "item": {
+      "components": {
+        "strainers:ore_type": "diamond"
+      },
+      "id": "strainers:ore_piece"
+    }
+  }
+}

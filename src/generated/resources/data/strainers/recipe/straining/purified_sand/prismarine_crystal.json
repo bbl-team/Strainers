@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.05000000074505806,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "strainers:salty_water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:purified_sand"
+  },
+  "min_mesh_tier": 4,
+  "result": {
+    "chance": 0.3,
+    "item": {
+      "id": "minecraft:prismarine_crystals"
+    }
+  }
+}

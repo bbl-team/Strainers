@@ -1,18 +1,19 @@
 {
   "type": "strainers:strainer",
-  "additional_chance_per_tier": 0.10000000149011612,
+  "additional_chance_per_tier": 0.0,
   "fluid": {
     "amount": 1000,
     "ingredient": "strainers:eroding_water"
   },
   "input": {
     "count": 1,
-    "ingredient": "minecraft:netherrack"
+    "ingredient": "#c:netherracks"
   },
-  "min_mesh_tier": 6,
+  "min_mesh_tier": 1,
   "result": {
     "chance": 0.1,
     "item": {
+      "count": 6,
       "id": "strainers:lava_drop"
     }
   }

@@ -1,24 +1,5 @@
 {
   "values": [
-    "strainers:iron_ore_piece",
-    "strainers:gold_ore_piece",
-    "strainers:copper_ore_piece",
-    "strainers:diamond_ore_piece",
-    "strainers:emerald_ore_piece",
-    "strainers:debris_ore_piece",
-    "strainers:silver_ore_piece",
-    "strainers:lead_ore_piece",
-    "strainers:nickel_ore_piece",
-    "strainers:uranium_ore_piece",
-    "strainers:zinc_ore_piece",
-    "strainers:platinum_ore_piece",
-    "strainers:tin_ore_piece",
-    "strainers:nickel_ore_piece",
-    "strainers:osmium_ore_piece",
-    "strainers:aluminum_ore_piece",
-    "strainers:lapis_ore_piece",
-    "strainers:redstone_ore_piece",
-    "strainers:coal_ore_piece",
-    "strainers:quartz_ore_piece"
+    "strainers:ore_piece"
   ]
 }
