@@ -9,7 +9,7 @@
     }
   ],
   "type": "strainers:strainer",
-  "additional_chance_per_tier": 0.05000000074505806,
+  "additional_chance_per_tier": 0.15000000596046448,
   "fluid": {
     "amount": 1000,
     "ingredient": "minecraft:water"
@@ -18,9 +18,9 @@
     "count": 1,
     "ingredient": "strainers:purified_soul_sand"
   },
-  "min_mesh_tier": 3,
+  "min_mesh_tier": 5,
   "result": {
-    "chance": 0.15,
+    "chance": 0.2,
     "item": {
       "components": {
         "strainers:ore_type": "soulium"

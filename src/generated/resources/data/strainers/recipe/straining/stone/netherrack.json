@@ -12,6 +12,7 @@
   "min_mesh_tier": 1,
   "result": {
     "item": {
+      "count": 4,
       "id": "minecraft:netherrack"
     }
   }

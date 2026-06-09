@@ -9,7 +9,7 @@
     }
   ],
   "type": "strainers:strainer",
-  "additional_chance_per_tier": 0.05000000074505806,
+  "additional_chance_per_tier": 0.30000001192092896,
   "fluid": {
     "amount": 1000,
     "ingredient": "minecraft:water"

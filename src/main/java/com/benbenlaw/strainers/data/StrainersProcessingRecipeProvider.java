@@ -351,7 +351,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         //Stone
         StrainerRecipeBuilder.create().eroding()
                 .input(Tags.Items.STONES, registries)
-                .output(Items.NETHERRACK, 1, 1.0f)
+                .output(Items.NETHERRACK, 4, 1.0f)
                 .tier(1, 0.0f)
                 .save(output, "stone/netherrack");
 
@@ -365,8 +365,8 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         //Netherrack
         StrainerRecipeBuilder.create().eroding()
                 .input(Tags.Items.NETHERRACKS, registries)
-                .output(StrainersItems.LAVA_DROP.get(), 6, 0.1f)
-                .tier(1, 0.0f)
+                .output(StrainersItems.LAVA_DROP.get(), 1, 0.1f)
+                .tier(5, 0.1f)
                 .save(output, "netherrack/lava_drop");
 
         //Gravel
@@ -472,127 +472,127 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("coal", 0.75f)
-                .tier(2, 0.05f)
+                .tier(2, 0.15f)
                 .save(output, "purified_gravel/coal");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("tin", 0.75f)
-                .tier(2, 0.05f)
+                .tier(2, 0.15f)
                 .save(output, "tin", "purified_gravel/tin");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("zinc", 0.75f)
-                .tier(2, 0.05f)
+                .tier(2, 0.15f)
                 .save(output, "zinc", "purified_gravel/zinc");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("aluminum", 0.75f)
-                .tier(2, 0.05f)
+                .tier(2, 0.15f)
                 .save(output, "aluminum", "purified_gravel/aluminum");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("lapis", 0.75f)
-                .tier(3, 0.05f)
+                .tier(3, 0.15f)
                 .save(output, "purified_gravel/lapis");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("iron", 0.75f)
-                .tier(3, 0.05f)
+                .tier(3, 0.15f)
                 .save(output, "purified_gravel/iron");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("lead", 0.75f)
-                .tier(3, 0.05f)
+                .tier(3, 0.15f)
                 .save(output, "lead", "purified_gravel/lead");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("nickel", 0.75f)
-                .tier(3, 0.05f)
+                .tier(3, 0.15f)
                 .save(output, "nickel", "purified_gravel/nickel");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("gold", 0.70f)
-                .tier(4, 0.05f)
+                .tier(4, 0.2f)
                 .save(output, "purified_gravel/gold");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("silver", 0.70f)
-                .tier(4, 0.05f)
+                .tier(4, 0.2f)
                 .save(output, "silver", "purified_gravel/silver");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("diamond", 0.65f)
-                .tier(5, 0.05f)
+                .tier(5, 0.25f)
                 .save(output, "purified_gravel/diamond");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("sulfur", 0.65f)
-                .tier(5, 0.05f)
+                .tier(5, 0.25f)
                 .save(output, "sulfur", "purified_gravel/sulfur");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("osmium", 0.65f)
-                .tier(5, 0.05f)
+                .tier(5, 0.25f)
                 .save(output, "osmium", "purified_gravel/osmium");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("emerald", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "purified_gravel/emerald");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("topaz", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "topaz", "purified_gravel/topaz");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("peridot", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "peridot", "purified_gravel/peridot");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("ruby", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "ruby", "purified_gravel/ruby");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("sapphire", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "sapphire", "purified_gravel/sapphire");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("fluorite", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "fluorite", "purified_gravel/fluorite");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("platinum", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "platinum", "purified_gravel/platinum");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("uranium", 0.60f)
-                .tier(6, 0.05f)
+                .tier(6, 0.3f)
                 .save(output, "uranium", "purified_gravel/uranium");
 
 
@@ -600,19 +600,19 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                 .output("redstone", 0.75f)
-                .tier(3, 0.05f)
+                .tier(3, 0.15f)
                 .save(output, "purified_dust_block/redstone");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                 .output(Items.AMETHYST_SHARD, 1, 0.15f)
-                .tier(3, 0.05f)
+                .tier(3, 0.105f)
                 .save(output, "purified_dust_block/amethyst_shard");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                 .output("cinnabar", 0.15f)
-                .tier(5, 0.05f)
+                .tier(5, 0.15f)
                 .save(output, "cinnabar", "purified_dust_block/cinnabar");
 
 
@@ -649,7 +649,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
             StrainerRecipeBuilder.create().water()
                     .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                     .output(ore, 0.35f)
-                    .tier(6, 0.05f)
+                    .tier(6, 0.25f)
                     .save(output, ore, "purified_dust_block/" + ore);
         }
 
@@ -661,7 +661,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
             StrainerRecipeBuilder.create().water()
                     .input(StrainersBlocks.PURIFIED_NETHERRACK)
                     .output(ore, 0.35f)
-                    .tier(6, 0.05f)
+                    .tier(6, 0.25f)
                     .save(output, ore, "purified_netherrack/" + ore);
         }
     }
@@ -677,7 +677,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
             StrainerRecipeBuilder.create().water()
                     .input(StrainersBlocks.PURIFIED_GRAVEL)
                     .output(ore, 0.35f)
-                    .tier(6, 0.05f)
+                    .tier(6, 0.25f)
                     .save(output, ore, "purified_gravel/" + ore);
         }
     }
@@ -693,8 +693,8 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         for (String ore : ores) {
             StrainerRecipeBuilder.create().water()
                     .input(StrainersBlocks.PURIFIED_GRAVEL)
-                    .output(ore, 0.1f)
-                    .tier(7, 0.05f)
+                    .output(ore, 0.15f)
+                    .tier(7, 0.1f)
                     .save(output, ore, "purified_gravel/" + ore);
         }
     }
@@ -707,15 +707,15 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         for (String ore : ores) {
             StrainerRecipeBuilder.create().water()
                     .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
-                    .output(ore, 0.15f)
+                    .output(ore, 0.2f)
                     .tier(7, 0.05f)
                     .save(output, ore, "purified_dust_block/" + ore);
         }
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_SOUL_SAND)
-                .output("soulium", 0.15f)
-                .tier(3, 0.05f)
+                .output("soulium", 0.2f)
+                .tier(5, 0.15f)
                 .save(output, "soulium", "purified_soul_sand/soulium");
     }
 
