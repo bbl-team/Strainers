@@ -1,20 +1,26 @@
 package com.benbenlaw.strainers.data;
 
+import com.benbenlaw.core.data.recipe.RecipeProviderHelper;
+import com.benbenlaw.core.data.recipe.ShapedComponentCopyRecipeProvider;
+import com.benbenlaw.core.data.recipe.ShapedTagOutputRecipeProvider;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.client.OreDefaults;
-import com.benbenlaw.strainers.data.recipes.TagOutputRecipeProvider;
 import com.benbenlaw.strainers.item.OrePieceItem;
 import com.benbenlaw.strainers.item.StrainersItems;
-import com.geckolib.loading.definition.animation.DoubleOrString;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -27,8 +33,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -114,7 +120,6 @@ public class StrainersRecipeProvider extends RecipeProvider {
         twoByTwoPacker(RecipeCategory.MISC, Items.GRAVEL, StrainersItems.GRAVEL_PEBBLE, "gravel_from_pebbles");
         twoByTwoPacker(RecipeCategory.MISC, Items.SAND, StrainersItems.SAND_DUST, "sand_from_dust");
         twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.DUST_BLOCK, StrainersItems.DUST, "dust_block_from_dust");
-        twoByTwoPacker(RecipeCategory.MISC, Blocks.ANCIENT_DEBRIS, StrainersItems.DEBRIS_ORE_PIECE.get(), "debris_from_pieces");
         twoByTwoPacker(RecipeCategory.MISC, StrainersBlocks.MULCH, StrainersItems.LEAF_PILE.get(), "mulch_from_leaf_pile");
         twoByTwoPacker(RecipeCategory.MISC, Blocks.DIRT, StrainersItems.DIRT_PILE.get(), "dirt_from_dirt_pile");
         twoByTwoPacker(RecipeCategory.MISC, Blocks.SCULK, StrainersItems.SCULK_DUST.get(), "sculk_from_sculk_dust");
@@ -135,26 +140,40 @@ public class StrainersRecipeProvider extends RecipeProvider {
 
     public void meshBuilder(ItemLike mesh, TagKey<Item> input, ItemLike previousMesh) {
 
-        shaped(RecipeCategory.MISC, mesh)
-                .pattern(" A ")
-                .pattern("ABA")
-                .pattern(" A ")
-                .define('A', input)
-                .define('B', previousMesh)
-                .unlockedBy("has_input", has(input))
-                .save(output);
+        var pattern = ShapedRecipePattern.of(
+                Map.of('A', Ingredient.of(tag(input).getValues()), 'B', Ingredient.of(previousMesh)),
+                " A ", "ABA", " A "
+        );
+        List<DataComponentType<?>> components = new ArrayList<>();
+        components.add(DataComponents.ENCHANTMENTS);
+
+        ShapedComponentCopyRecipeProvider.componentCopyRecipe(
+                RecipeProviderHelper.simpleCommonInfo(),
+                RecipeProviderHelper.simpleCraftingBookInfo(),
+                pattern,
+                new ItemStackTemplate(mesh.asItem()),
+                Ingredient.of(previousMesh),
+                components
+        ).save(output, ResourceKey.create(Registries.RECIPE, mesh.asItem().builtInRegistryHolder().key().identifier()));
     }
 
     public void meshBuilder(ItemLike mesh, ItemLike input, ItemLike previousMesh) {
 
-        shaped(RecipeCategory.MISC, mesh)
-                .pattern(" A ")
-                .pattern("ABA")
-                .pattern(" A ")
-                .define('A', input)
-                .define('B', previousMesh)
-                .unlockedBy("has_input", has(input))
-                .save(output);
+        var pattern = ShapedRecipePattern.of(
+                Map.of('A', Ingredient.of(input), 'B', Ingredient.of(previousMesh)),
+                " A ", "ABA", " A "
+        );
+        List<DataComponentType<?>> components = new ArrayList<>();
+        components.add(DataComponents.ENCHANTMENTS);
+
+        ShapedComponentCopyRecipeProvider.componentCopyRecipe(
+                RecipeProviderHelper.simpleCommonInfo(),
+                RecipeProviderHelper.simpleCraftingBookInfo(),
+                pattern,
+                new ItemStackTemplate(mesh.asItem()),
+                Ingredient.of(previousMesh),
+                components
+        ).save(output, ResourceKey.create(Registries.RECIPE, mesh.asItem().builtInRegistryHolder().key().identifier()));
     }
 
     protected void twoByTwoPacker(RecipeCategory category, ItemLike result, ItemLike ingredient, String id) {
@@ -170,10 +189,19 @@ public class StrainersRecipeProvider extends RecipeProvider {
                 Identifier.parse("c:ores/" + ore)
         );
 
-        var pattern = ShapedRecipePattern.of(Map.of('#', DataComponentIngredient.of(false, OrePieceItem.createOrePiece(ore))),"##", "##");
+        var pattern = ShapedRecipePattern.of(
+                Map.of('#', DataComponentIngredient.of(false, OrePieceItem.createOrePiece(ore))),
+                "##", "##"
+        );
 
-        TagOutputRecipeProvider.tagOutputRecipe(new Recipe.CommonInfo(false), new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, "ore_pieces"),
-                        pattern, outputTag, 1).save(output.withConditions(new NotCondition(new TagEmptyCondition<>(outputTag))), id);
+        ShapedTagOutputRecipeProvider.tagOutputRecipe(
+                new Recipe.CommonInfo(false),
+                new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, "ore_pieces"),
+                pattern, outputTag, 1
+        ).save(
+                output.withConditions(new NotCondition(new TagEmptyCondition<>(outputTag))),
+                ResourceKey.create(Registries.RECIPE, Strainers.identifier(id))
+        );
     }
 
 }

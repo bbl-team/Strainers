@@ -1,6 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "bblcore:shaped_component_copy",
   "category": "misc",
+  "copy_components": [
+    "minecraft:enchantments"
+  ],
   "key": {
     "A": "#c:ingots/gold",
     "B": "strainers:iron_mesh"
@@ -12,5 +15,6 @@
   ],
   "result": {
     "id": "strainers:gold_mesh"
-  }
+  },
+  "source": "strainers:iron_mesh"
 }

@@ -47,47 +47,7 @@ public class StrainersItems {
             Item::new, properties -> properties.durability(1024).enchantable(22));
     public static final DeferredItem<Item> NETHERITE_MESH = ITEMS.registerItem("netherite_mesh",
             Item::new, properties -> properties.durability(2048).enchantable(15));
-
-    //ORE PIECES
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> IRON_ORE_PIECE = ITEMS.registerSimpleItem("iron_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> COPPER_ORE_PIECE = ITEMS.registerSimpleItem("copper_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> TIN_ORE_PIECE = ITEMS.registerSimpleItem("tin_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> SILVER_ORE_PIECE = ITEMS.registerSimpleItem("silver_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> LEAD_ORE_PIECE = ITEMS.registerSimpleItem("lead_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> NICKEL_ORE_PIECE = ITEMS.registerSimpleItem("nickel_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> ZINC_ORE_PIECE = ITEMS.registerSimpleItem("zinc_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> PLATINUM_ORE_PIECE = ITEMS.registerSimpleItem("platinum_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> OSMIUM_ORE_PIECE = ITEMS.registerSimpleItem("osmium_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> URANIUM_ORE_PIECE = ITEMS.registerSimpleItem("uranium_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> ALUMINUM_ORE_PIECE = ITEMS.registerSimpleItem("aluminum_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> GOLD_ORE_PIECE = ITEMS.registerSimpleItem("gold_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> DIAMOND_ORE_PIECE = ITEMS.registerSimpleItem("diamond_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> EMERALD_ORE_PIECE = ITEMS.registerSimpleItem("emerald_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> LAPIS_ORE_PIECE = ITEMS.registerSimpleItem("lapis_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> REDSTONE_ORE_PIECE = ITEMS.registerSimpleItem("redstone_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> COAL_ORE_PIECE = ITEMS.registerSimpleItem("coal_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> QUARTZ_ORE_PIECE = ITEMS.registerSimpleItem("quartz_ore_piece");
-    @Deprecated(forRemoval = true, since = "6.7.0")
-    public static final DeferredItem<Item> DEBRIS_ORE_PIECE = ITEMS.registerSimpleItem("debris_ore_piece");
-
+    
     //Misc
     public static final DeferredItem<Item> SAPLING_BAG = ITEMS.registerItem("sapling_bag", SaplingBagItem::new);
     public static final DeferredItem<Item> SEED_BAG = ITEMS.registerItem("seed_bag", SeedBagItem::new);

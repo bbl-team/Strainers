@@ -24,6 +24,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
@@ -78,6 +79,9 @@ public class StrainersModelProvider extends ModelProvider {
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DEEPSLATE.get());
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_END_STONE.get());
 
+        //Fluids
+        blockModels.createNonTemplateModelBlock(StrainersFluids.ERODING_WATER.getBlock(), Blocks.WATER);
+        blockModels.createNonTemplateModelBlock(StrainersFluids.PURIFYING_WATER.getBlock(), Blocks.WATER);
 
 
     }

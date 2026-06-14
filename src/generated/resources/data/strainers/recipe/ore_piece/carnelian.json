@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ores/carnelian"
+      }
+    }
+  ],
+  "type": "bblcore:shaped_tag_output",
+  "category": "misc",
+  "group": "ore_pieces",
+  "key": {
+    "#": {
+      "neoforge:ingredient_type": "neoforge:components",
+      "components": {
+        "strainers:ore_type": "carnelian"
+      },
+      "items": "strainers:ore_piece"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "show_notification": false,
+  "tag_result": {
+    "tag": "c:ores/carnelian"
+  }
+}

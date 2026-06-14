@@ -1,6 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "bblcore:shaped_component_copy",
   "category": "misc",
+  "copy_components": [
+    "minecraft:enchantments"
+  ],
   "key": {
     "A": "#c:gems/emerald",
     "B": "strainers:diamond_mesh"
@@ -12,5 +15,6 @@
   ],
   "result": {
     "id": "strainers:emerald_mesh"
-  }
+  },
+  "source": "strainers:diamond_mesh"
 }
