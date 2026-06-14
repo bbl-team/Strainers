@@ -6,24 +6,24 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SeedBagItem extends Item {
     public SeedBagItem(Properties properties) {
@@ -47,24 +47,52 @@ public class SeedBagItem extends Item {
                         .toList())
                 .orElse(Collections.emptyList()));
 
-        StrainersConfig.ADD_SEED_BAG_OUTPUTS.get().forEach(seed -> seeds.add(BuiltInRegistries.BLOCK.getValue(Identifier.tryParse(seed))));
-        StrainersConfig.REMOVE_SEED_BAG_OUTPUTS.get().forEach(seed -> seeds.remove(BuiltInRegistries.BLOCK.getValue(Identifier.tryParse(seed))));
+        StrainersConfig.ADD_SEED_BAG_OUTPUTS.get()
+                .forEach(entry -> seeds.addAll(resolveConfigEntry(entry)));
+        StrainersConfig.REMOVE_SEED_BAG_OUTPUTS.get()
+                .forEach(entry -> seeds.removeAll(resolveConfigEntry(entry)));
 
         if (state.is(BlockTags.SUPPORTS_CROPS) && direction == Direction.UP && above.canBeReplaced()) {
-
             if (!seeds.isEmpty()) {
-                Block randomSapling = seeds.get(level.getRandom().nextInt(seeds.size()));
-                level.setBlockAndUpdate(abovePos, randomSapling.defaultBlockState());
+                Block randomSeed = seeds.get(level.getRandom().nextInt(seeds.size()));
+                level.setBlockAndUpdate(abovePos, randomSeed.defaultBlockState());
                 context.getItemInHand().shrink(1);
                 spawnParticles(level, abovePos, DyeColor.GREEN);
                 playSound(level, abovePos);
                 return InteractionResult.SUCCESS_SERVER;
             }
-
         }
+
         return InteractionResult.FAIL;
     }
 
+    private List<Block> resolveConfigEntry(String entry) {
+        if (entry == null || entry.isBlank()) return Collections.emptyList();
+
+        if (entry.startsWith("#")) {
+            Identifier tagId = Identifier.tryParse(entry.substring(1));
+            if (tagId == null) return Collections.emptyList();
+            TagKey<Block> tag = TagKey.create(Registries.BLOCK, tagId);
+            return BuiltInRegistries.BLOCK.get(tag)
+                    .map(holders -> holders.stream().map(Holder::value).toList())
+                    .orElse(Collections.emptyList());
+        }
+
+        if (entry.endsWith(":*")) {
+            String modId = entry.substring(0, entry.length() - 2);
+            if (modId.isBlank()) return Collections.emptyList();
+            return BuiltInRegistries.BLOCK.entrySet().stream()
+                    .filter(e -> e.getKey().identifier().getNamespace().equals(modId))
+                    .map(Map.Entry::getValue)
+                    .toList();
+        }
+
+        Identifier id = Identifier.tryParse(entry);
+        if (id == null) return Collections.emptyList();
+        Block block = BuiltInRegistries.BLOCK.getValue(id);
+        if (block == Blocks.AIR && !entry.equals("minecraft:air")) return Collections.emptyList();
+        return List.of(block);
+    }
 
     private void spawnParticles(Level level, BlockPos pos, DyeColor color) {
         int colorInt = color.getTextureDiffuseColor();
@@ -80,5 +108,4 @@ public class SeedBagItem extends Item {
     private void playSound(Level level, BlockPos pos) {
         level.playSound(null, pos, SoundEvents.SLIME_ATTACK, SoundSource.BLOCKS, 0.5F, 1.0F);
     }
-
 }

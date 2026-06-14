@@ -16,57 +16,49 @@ public class StrainersConfig {
 
     static {
 
-        // Strainers Configs
         BUILDER.comment("Strainers Startup Config")
                 .push("Strainers");
 
         ADD_SEED_BAG_OUTPUTS = BUILDER
-                .comment("Add crops to the seed bag, eg minecraft:wheat, by default all crops in the tag are allowed")
+                .comment("Add crops to the seed bag. Supports: 'minecraft:wheat' (block), '#minecraft:crops' (tag), 'minecraft:*' (all blocks from a mod)")
                 .defineListAllowEmpty(
                         "add_to_seed_bag",
                         List.of(""),
                         () -> "",
-                        o -> {
-                            if (!(o instanceof String s)) return false;
-                            return Identifier.tryParse(s) != null;
-                        });
+                        StrainersConfig::isValidEntry);
 
         REMOVE_SEED_BAG_OUTPUTS = BUILDER
-                .comment("Remove crops from the seed bag, eg minecraft:wheat, by default all crops in the tag are allowed")
+                .comment("Remove crops from the seed bag. Supports: 'minecraft:wheat' (block), '#minecraft:crops' (tag), 'minecraft:*' (all blocks from a mod)")
                 .defineListAllowEmpty(
                         "remove_from_seed_bag",
-                        List.of("minecraft:pitcher_crop", "minecraft:torchflower_crop"),
+                        List.of("minecraft:pitcher_crop", "minecraft:torchflower_crop", "croptopia:*", "mysticalagriculture:*", "productivefarming:*"),
                         () -> "",
-                        o -> {
-                            if (!(o instanceof String s)) return false;
-                            return Identifier.tryParse(s) != null;
-                        });
+                        StrainersConfig::isValidEntry);
 
         ADD_SAPLING_BAG_OUTPUTS = BUILDER
-                .comment("Add saplings to the sapling bag, eg minecraft:oak_sapling, by default all saplings in the tag are allowed")
+                .comment("Add saplings to the sapling bag. Supports: 'minecraft:oak_sapling' (block), '#minecraft:saplings' (tag), 'minecraft:*' (all blocks from a mod)")
                 .defineListAllowEmpty(
                         "add_to_sapling_bag",
                         List.of(""),
                         () -> "",
-                        o -> {
-                            if (!(o instanceof String s)) return false;
-                            return Identifier.tryParse(s) != null;
-                        });
+                        StrainersConfig::isValidEntry);
 
         REMOVE_SAPLING_BAG_OUTPUTS = BUILDER
-                .comment("Remove saplings from the sapling bag, eg minecraft:oak_sapling, by default all saplings in the tag are allowed")
+                .comment("Remove saplings from the sapling bag. Supports: 'minecraft:oak_sapling' (block), '#minecraft:saplings' (tag), 'minecraft:*' (all blocks from a mod)")
                 .defineListAllowEmpty(
                         "remove_from_sapling_bag",
-                        List.of(""),
+                        List.of("productivetrees:*", "productivetrees:*", "allthemodium:*"),
                         () -> "",
-                        o -> {
-                            if (!(o instanceof String s)) return false;
-                            return Identifier.tryParse(s) != null;
-                        });
-
-
+                        StrainersConfig::isValidEntry);
         BUILDER.pop();
         SPEC = BUILDER.build();
+    }
 
+    private static boolean isValidEntry(Object o) {
+        if (!(o instanceof String s)) return false;
+        if (s.isBlank()) return true;
+        if (s.startsWith("#")) return Identifier.tryParse(s.substring(1)) != null;
+        if (s.endsWith(":*")) return s.length() > 2;
+        return Identifier.tryParse(s) != null;
     }
 }
