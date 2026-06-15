@@ -108,5 +108,17 @@ public class ClientEvent {
         else if (stack.is(StrainersTags.Items.TIER_8_MESHES)) {
             TooltipUtil.addShiftTooltip(stack, event, StrainersTags.Items.TIER_8_MESHES, "tooltip.strainers.tier_8_mesh");
         }
+        else if (stack.is(StrainersTags.Items.TIER_9_MESHES)) {
+            TooltipUtil.addShiftTooltip(stack, event, StrainersTags.Items.TIER_9_MESHES, "tooltip.strainers.tier_9_mesh");
+        }
+        else if (stack.is(StrainersTags.Items.TIER_10_MESHES)) {
+            TooltipUtil.addShiftTooltip(stack, event, StrainersTags.Items.TIER_10_MESHES, "tooltip.strainers.tier_10_mesh");
+        }
+        else if (stack.is(StrainersTags.Items.TIER_11_MESHES)) {
+            TooltipUtil.addShiftTooltip(stack, event, StrainersTags.Items.TIER_11_MESHES, "tooltip.strainers.tier_11_mesh");
+        }
+        else if (stack.is(StrainersTags.Items.TIER_12_MESHES)) {
+            TooltipUtil.addShiftTooltip(stack, event, StrainersTags.Items.TIER_12_MESHES, "tooltip.strainers.tier_12_mesh");
+        }
     }
 }

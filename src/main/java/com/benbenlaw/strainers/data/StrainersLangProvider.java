@@ -98,6 +98,10 @@ public class StrainersLangProvider extends LanguageProvider {
         add("tooltip.strainers.tier_6_mesh", "Tier 6 Mesh");
         add("tooltip.strainers.tier_7_mesh", "Tier 7 Mesh");
         add("tooltip.strainers.tier_8_mesh", "Tier 8 Mesh");
+        add("tooltip.strainers.tier_9_mesh", "Tier 9 Mesh");
+        add("tooltip.strainers.tier_10_mesh", "Tier 10 Mesh");
+        add("tooltip.strainers.tier_11_mesh", "Tier 11 Mesh");
+        add("tooltip.strainers.tier_12_mesh", "Tier 12 Mesh");
 
         add("tooltip.strainers.sapling_bag", "Right Click to place a random sapling, on Dirt or Grass");
         add("tooltip.strainers.seed_bag", "Right Click to place a random seed, on Farmland");

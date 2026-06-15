@@ -296,6 +296,10 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         if (mesh.is(StrainersTags.Items.TIER_6_MESHES)) return 6;
         if (mesh.is(StrainersTags.Items.TIER_7_MESHES)) return 7;
         if (mesh.is(StrainersTags.Items.TIER_8_MESHES)) return 8;
+        if (mesh.is(StrainersTags.Items.TIER_9_MESHES)) return 9;
+        if (mesh.is(StrainersTags.Items.TIER_10_MESHES)) return 10;
+        if (mesh.is(StrainersTags.Items.TIER_11_MESHES)) return 11;
+        if (mesh.is(StrainersTags.Items.TIER_12_MESHES)) return 12;
 
         return 0;
     }

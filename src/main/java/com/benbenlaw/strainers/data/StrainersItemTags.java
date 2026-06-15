@@ -38,6 +38,10 @@ public class StrainersItemTags extends ItemTagsProvider {
                 .addTag(StrainersTags.Items.TIER_6_MESHES)
                 .addTag(StrainersTags.Items.TIER_7_MESHES)
                 .addTag(StrainersTags.Items.TIER_8_MESHES)
+                .addTag(StrainersTags.Items.TIER_9_MESHES)
+                .addTag(StrainersTags.Items.TIER_10_MESHES)
+                .addTag(StrainersTags.Items.TIER_11_MESHES)
+                .addTag(StrainersTags.Items.TIER_12_MESHES)
         ;
 
         tag(StrainersTags.Items.TIER_1_MESHES).add(StrainersItems.WOODEN_MESH.get());
@@ -48,6 +52,10 @@ public class StrainersItemTags extends ItemTagsProvider {
         tag(StrainersTags.Items.TIER_6_MESHES).add(StrainersItems.DIAMOND_MESH.get());
         tag(StrainersTags.Items.TIER_7_MESHES).add(StrainersItems.EMERALD_MESH.get());
         tag(StrainersTags.Items.TIER_8_MESHES).add(StrainersItems.NETHERITE_MESH.get());
+        tag(StrainersTags.Items.TIER_9_MESHES);
+        tag(StrainersTags.Items.TIER_10_MESHES);
+        tag(StrainersTags.Items.TIER_11_MESHES);
+        tag(StrainersTags.Items.TIER_12_MESHES);
 
         //Ore Pieces
         tag(StrainersTags.Items.ORE_PIECES)

@@ -71,6 +71,9 @@
   "tooltip.strainers.fluids_header": "Fluids:",
   "tooltip.strainers.sapling_bag": "Right Click to place a random sapling, on Dirt or Grass",
   "tooltip.strainers.seed_bag": "Right Click to place a random seed, on Farmland",
+  "tooltip.strainers.tier_10_mesh": "Tier 10 Mesh",
+  "tooltip.strainers.tier_11_mesh": "Tier 11 Mesh",
+  "tooltip.strainers.tier_12_mesh": "Tier 12 Mesh",
   "tooltip.strainers.tier_1_mesh": "Tier 1 Mesh",
   "tooltip.strainers.tier_2_mesh": "Tier 2 Mesh",
   "tooltip.strainers.tier_3_mesh": "Tier 3 Mesh",
@@ -78,5 +81,6 @@
   "tooltip.strainers.tier_5_mesh": "Tier 5 Mesh",
   "tooltip.strainers.tier_6_mesh": "Tier 6 Mesh",
   "tooltip.strainers.tier_7_mesh": "Tier 7 Mesh",
-  "tooltip.strainers.tier_8_mesh": "Tier 8 Mesh"
+  "tooltip.strainers.tier_8_mesh": "Tier 8 Mesh",
+  "tooltip.strainers.tier_9_mesh": "Tier 9 Mesh"
 }

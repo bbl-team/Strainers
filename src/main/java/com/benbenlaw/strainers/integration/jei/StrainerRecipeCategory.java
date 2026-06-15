@@ -161,7 +161,16 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipe> {
             return StrainersTags.Items.TIER_7_MESHES;
         } else if (mesh == 8) {
             return StrainersTags.Items.TIER_8_MESHES;
-        } return  StrainersTags.Items.TIER_1_MESHES;
+        } else if (mesh == 9) {
+            return StrainersTags.Items.TIER_9_MESHES;
+        } else if (mesh == 10) {
+            return StrainersTags.Items.TIER_10_MESHES;
+        } else if (mesh == 11) {
+            return StrainersTags.Items.TIER_11_MESHES;
+        } else if (mesh == 12) {
+            return StrainersTags.Items.TIER_12_MESHES;
+        }
+        return  StrainersTags.Items.TIER_1_MESHES;
     }
 
     public Item getItem(TagKey<Item> tag) {

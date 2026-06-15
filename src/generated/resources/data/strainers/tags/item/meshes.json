@@ -7,6 +7,10 @@
     "#strainers:tier_5_meshes",
     "#strainers:tier_6_meshes",
     "#strainers:tier_7_meshes",
-    "#strainers:tier_8_meshes"
+    "#strainers:tier_8_meshes",
+    "#strainers:tier_9_meshes",
+    "#strainers:tier_10_meshes",
+    "#strainers:tier_11_meshes",
+    "#strainers:tier_12_meshes"
   ]
 }

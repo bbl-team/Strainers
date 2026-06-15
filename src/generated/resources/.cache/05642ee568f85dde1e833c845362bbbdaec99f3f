@@ -1,11 +1,14 @@
-// 26.1.2	2026-06-07T16:00:05.8451735	strainers Item Tags
+// 26.1.2	2026-06-15T08:26:58.0781142	strainers Item Tags
 871ed2e91ddafeff9176afbdbced387d52fb1475 data/c/tags/item/dusts.json
 6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/c/tags/item/enchantables.json
 6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/minecraft/tags/item/enchantable/durability.json
 6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/minecraft/tags/item/enchantable/mining.json
 6aed7cb4d7fb9b4cf988d11959b7024d46a06274 data/minecraft/tags/item/enchantable/mining_loot.json
-dd27a98d383ea2617b909f6eae4811e274e854cf data/strainers/tags/item/meshes.json
+871247cd3596dd5c04a64eefe785debce3829254 data/strainers/tags/item/meshes.json
 e02f9579e1ea8bed3fe3ce98f716864e729525ce data/strainers/tags/item/ore_pieces.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/strainers/tags/item/tier_10_meshes.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/strainers/tags/item/tier_11_meshes.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/strainers/tags/item/tier_12_meshes.json
 fcdf4509fa7151f17ae57dac766912928a12d5c4 data/strainers/tags/item/tier_1_meshes.json
 5c4ee5530968b3ee402c66f8bf80a31b44ec2338 data/strainers/tags/item/tier_2_meshes.json
 b39a466d40983e54d60be3a5983a26290ddbf027 data/strainers/tags/item/tier_3_meshes.json
@@ -14,3 +17,4 @@ c6284fff6c3acfff8be9dfbef58e80199f7c20ac data/strainers/tags/item/tier_4_meshes.
 7cba215f1ee6029a5ded61b3ee4ff30c3170f593 data/strainers/tags/item/tier_6_meshes.json
 4d9b4abe4de0ef19330b19354a51e73c607ee844 data/strainers/tags/item/tier_7_meshes.json
 c95564bd7202fd0320358f1afb7e02392c53ece2 data/strainers/tags/item/tier_8_meshes.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/strainers/tags/item/tier_9_meshes.json

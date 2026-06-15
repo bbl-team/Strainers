@@ -36,6 +36,10 @@ public class StrainersTags {
         public static final TagKey<Item> TIER_6_MESHES = tag("tier_6_meshes");
         public static final TagKey<Item> TIER_7_MESHES = tag("tier_7_meshes");
         public static final TagKey<Item> TIER_8_MESHES = tag("tier_8_meshes");
+        public static final TagKey<Item> TIER_9_MESHES = tag("tier_9_meshes");
+        public static final TagKey<Item> TIER_10_MESHES = tag("tier_10_meshes");
+        public static final TagKey<Item> TIER_11_MESHES = tag("tier_11_meshes");
+        public static final TagKey<Item> TIER_12_MESHES = tag("tier_12_meshes");
 
         public static final TagKey<Item> MESHES = tag("meshes");
 
