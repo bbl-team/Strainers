@@ -334,9 +334,15 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         //Mud
         StrainerRecipeBuilder.create().water()
                 .input(Items.MUD)
-                .output(Items.CLAY_BALL, 1, 1.5f)
-                .tier(1, 0.25f)
+                .output(Items.CLAY_BALL, 1, 1f)
+                .tier(1, 0.5f)
                 .save(output, "mud/clay_ball");
+
+        StrainerRecipeBuilder.create().water()
+                .input(Items.MUD)
+                .output(Items.CLAY_BALL, 1, 0.5f)
+                .tier(1, 0.25f)
+                .save(output, "mud/clay_ball_low");
 
         //Purified End Stone
         StrainerRecipeBuilder.create().water()
@@ -354,9 +360,15 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         //Cobblestone
         StrainerRecipeBuilder.create().water()
                 .input(Tags.Items.COBBLESTONES, registries)
-                .output(StrainersItems.GRAVEL_PEBBLE.get(), 1, 2f)
+                .output(StrainersItems.GRAVEL_PEBBLE.get(), 1, 1f)
                 .tier(1, 0.5f)
                 .save(output, "cobblestone/gravel_pebble");
+
+        StrainerRecipeBuilder.create().water()
+                .input(Tags.Items.COBBLESTONES, registries)
+                .output(StrainersItems.GRAVEL_PEBBLE.get(), 1, 0.5f)
+                .tier(1, 0.25f)
+                .save(output, "cobblestone/gravel_pebble_low");
 
         StrainerRecipeBuilder.create().eroding()
                 .input(Tags.Items.COBBLESTONES, registries)

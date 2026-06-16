@@ -1,6 +1,6 @@
 {
   "type": "strainers:strainer",
-  "additional_chance_per_tier": 0.5,
+  "additional_chance_per_tier": 0.25,
   "fluid": {
     "amount": 1000,
     "ingredient": "minecraft:water"
@@ -11,6 +11,7 @@
   },
   "min_mesh_tier": 1,
   "result": {
+    "chance": 0.5,
     "item": {
       "id": "minecraft:clay_ball"
     }
