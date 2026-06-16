@@ -100,4 +100,43 @@ public class StrainerMenu extends SimpleAbstractContainerMenu {
         return max == 0 ? 0 : (progress * 24 / max);
     }
 
+    @Override
+    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
+        Slot sourceSlot = this.slots.get(pIndex);
+        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;
+
+        ItemStack sourceStack = sourceSlot.getItem();
+        ItemStack copyOfSourceStack = sourceStack.copy();
+
+        int inputStart = 36;
+        int inputEnd = 38; // slots 36 and 37 (the 2 input slots)
+        int resultStart = 38;
+        int resultEnd = 38 + VISIBLE_SLOTS;
+
+        if (pIndex < 36) {
+            if (!this.moveItemStackTo(sourceStack, inputStart, inputEnd, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (pIndex < inputEnd) {
+            if (!this.moveItemStackTo(sourceStack, 0, 36, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (pIndex < resultEnd) {
+            if (!this.moveItemStackTo(sourceStack, 0, 36, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else {
+            return ItemStack.EMPTY;
+        }
+
+        if (sourceStack.getCount() == 0) {
+            sourceSlot.set(ItemStack.EMPTY);
+        } else {
+            sourceSlot.setChanged();
+        }
+
+        sourceSlot.onTake(playerIn, sourceStack);
+        return copyOfSourceStack;
+    }
+
 }
