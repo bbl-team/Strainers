@@ -1,4 +1,4 @@
-// 26.1.2	2026-06-14T09:57:42.0819415	strainers Recipes
+// 26.1.2	2026-06-16T10:41:26.6404466	strainers Recipes
 a047332bb6f53ebf244e69b6b67e6b2432499017 data/minecraft/advancement/recipes/misc/ancient_debris.json
 a432164cdc235d484c9d9be0175c48feec402a27 data/minecraft/recipe/ancient_debris.json
 a795a6df2c932dbc3497eb278c856daaffb5c277 data/strainers/advancement/recipes/misc/cobblestone_from_pebbles.json
@@ -35,6 +35,7 @@ f77fe28db6e3125853666fe7f7eef1c96e30ad78 data/strainers/advancement/recipe/ore_p
 cfbe1cf6a640fa3cd6c7abd333ac52d64496f1a3 data/strainers/advancement/recipe/ore_piece/coal.json
 47b189d609758105535990160ae028e3dde276f1 data/strainers/advancement/recipe/ore_piece/copper.json
 497e3c77dd902a0d335551b3cea656c88e1ac129 data/strainers/advancement/recipe/ore_piece/crimson_iron.json
+64c3583e2cd36c504acc9db039d77a8542fe21c5 data/strainers/advancement/recipe/ore_piece/dark_gem.json
 08dc1c960bd8305092a9282774bf96ced29c1242 data/strainers/advancement/recipe/ore_piece/diamond.json
 a5d55a738954470bc0f7065e4c59128e1ceb6746 data/strainers/advancement/recipe/ore_piece/emerald.json
 5fd9fdb5ed6b2f00bd28566d4ce5434962925f4b data/strainers/advancement/recipe/ore_piece/fluorite.json
@@ -116,6 +117,7 @@ ffb2020b3823f76696143ee8edd1e92cd002b7cb data/strainers/recipe/ore_piece/carneli
 515c89bd58f4faa53fa1bcffcef97917172aef92 data/strainers/recipe/ore_piece/coal.json
 34562e95018244e1df624a8d80927a93547f5bad data/strainers/recipe/ore_piece/copper.json
 3324895c7ad2768a23b5cdb84b9a54ceeac3841e data/strainers/recipe/ore_piece/crimson_iron.json
+429254af5bb885f8a6465d6b34e7e9f10aea5afc data/strainers/recipe/ore_piece/dark_gem.json
 1b0c9cbcaf55c2c19fa39d03a58d566654356c59 data/strainers/recipe/ore_piece/diamond.json
 7ccdd09dd479495c62a8e7f4f7e92fb2247e21b1 data/strainers/recipe/ore_piece/emerald.json
 8d880fa8880888ad3ecc893dbe7992a7e71b871b data/strainers/recipe/ore_piece/fluorite.json

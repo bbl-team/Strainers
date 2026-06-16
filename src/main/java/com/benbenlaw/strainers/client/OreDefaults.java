@@ -89,11 +89,10 @@ public final class OreDefaults {
             //Mystical Agriculture
             Map.entry("soulium", 0xFF8C563C),
             Map.entry("prosperity", 0xFF84A2A2),
-            Map.entry("inferium", 0xFF8FAF00)
+            Map.entry("inferium", 0xFF8FAF00),
 
-
-
-
+            //Evil Craft
+            Map.entry("dark_gem", 0xFF1A1A1A)
 
 
     );

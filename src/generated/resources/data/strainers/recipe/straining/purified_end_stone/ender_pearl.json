@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.05000000074505806,
+  "fluid": {
+    "amount": 1000,
+    "ingredient": "minecraft:water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "strainers:purified_end_stone"
+  },
+  "min_mesh_tier": 5,
+  "result": {
+    "chance": 0.05,
+    "item": {
+      "id": "minecraft:ender_pearl"
+    }
+  }
+}
