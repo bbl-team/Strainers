@@ -2,7 +2,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "strainers:straining/cobblestone/purified_dirt"
+        "recipe": "strainers:straining/dirt/purified_dirt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -14,7 +14,7 @@
   ],
   "rewards": {
     "recipes": [
-      "strainers:straining/cobblestone/purified_dirt"
+      "strainers:straining/dirt/purified_dirt"
     ]
   },
   "sends_telemetry_event": true

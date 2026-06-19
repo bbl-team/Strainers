@@ -7,7 +7,7 @@
   },
   "input": {
     "count": 1,
-    "ingredient": "minecraft:cobblestone"
+    "ingredient": "minecraft:dirt"
   },
   "min_mesh_tier": 2,
   "result": {

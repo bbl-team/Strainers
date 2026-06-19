@@ -1,12 +1,12 @@
-// 26.1.2	2026-06-16T15:14:39.3624703	strainers Processing Recipes
+// 26.1.2	2026-06-19T08:58:24.1541856	strainers Processing Recipes
 2b31f0a5b36ba6aa2f8f286e57e9cdeb7fed1cc3 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_dust_block/allthemodium.json
 007aa37f40d4560384fad8a42934612808e9a286 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_end_stone/unobtainium.json
 b26d220b4786cdb76a936dd1a19363210d806878 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_netherrack/vibranium.json
 9d6cf31bc7022f6acd02afe70b922ddd7e755a10 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel.json
 b854409189c160d0e2c21f39c146685ffbd4e5c8 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel_pebble.json
 f003e14c5ff5c3b34637201661befd1bbe164ee9 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel_pebble_low.json
-6df1b2201afa202b5ad8836e18b38a6c1775f201 data/strainers/advancement/recipe/strainer/straining/cobblestone/purified_dirt.json
 4bb45e092ee235f3dcaf03654793a14f21415494 data/strainers/advancement/recipe/strainer/straining/dirt/gravel_pebble.json
+49408f5db7de03c3778b585b3cecf6e51d865b03 data/strainers/advancement/recipe/strainer/straining/dirt/purified_dirt.json
 b726e3a475ec0da0769f0a2b9a13c38df7764b4d data/strainers/advancement/recipe/strainer/straining/dirt/soul_soil.json
 e8afcac3769e235cf6f8a6d9555249721bb29ea1 data/strainers/advancement/recipe/strainer/straining/dirt/stick.json
 3318acf62718999f025e765a93a93b09a1014ca4 data/strainers/advancement/recipe/strainer/straining/dirt/stone_pebble.json
@@ -134,8 +134,8 @@ e8674504b350612abd55b77ea188ac5b85f926d6 data/strainers/recipe/straining/allthem
 a23656c41185e5fe69e8e2a58996800bda499260 data/strainers/recipe/straining/cobblestone/gravel.json
 221f790f8e792772587069bd933a10a95e971ff1 data/strainers/recipe/straining/cobblestone/gravel_pebble.json
 7f8435eb7bf679baf4a42cf9c910102cf76125ca data/strainers/recipe/straining/cobblestone/gravel_pebble_low.json
-65a0512d643a5349f09db278b60a6ebb7c33a6c1 data/strainers/recipe/straining/cobblestone/purified_dirt.json
 a3197ed60ff84fc1780a5a7edf7a97ab227d5f58 data/strainers/recipe/straining/dirt/gravel_pebble.json
+a6d43befa2843cfc2780f183cdd2a2ed4f2bd3f0 data/strainers/recipe/straining/dirt/purified_dirt.json
 0a0ddd309c9f532abaeea320fc3dcdadec0dcb1f data/strainers/recipe/straining/dirt/soul_soil.json
 fd315938f52c306143fd5807844fab1bcb28ccdf data/strainers/recipe/straining/dirt/stick.json
 29d71331ec85bf9deb423d83a5129a207aee3640 data/strainers/recipe/straining/dirt/stone_pebble.json
