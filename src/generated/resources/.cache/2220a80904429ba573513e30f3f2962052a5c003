@@ -1,6 +1,4 @@
-// 26.1.2	2026-06-16T10:41:26.6404466	strainers Recipes
-a047332bb6f53ebf244e69b6b67e6b2432499017 data/minecraft/advancement/recipes/misc/ancient_debris.json
-a432164cdc235d484c9d9be0175c48feec402a27 data/minecraft/recipe/ancient_debris.json
+// 26.1.2	2026-06-18T09:47:05.7897525	strainers Recipes
 a795a6df2c932dbc3497eb278c856daaffb5c277 data/strainers/advancement/recipes/misc/cobblestone_from_pebbles.json
 03fb6c119ee9c9efd15e635c80de8be9bc327104 data/strainers/advancement/recipes/misc/dirt_from_dirt_pile.json
 8fbef28f590bd7423a63f28448b779245f372d0a data/strainers/advancement/recipes/misc/dust_block_from_dust.json

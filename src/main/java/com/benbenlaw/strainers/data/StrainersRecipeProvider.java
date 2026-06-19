@@ -124,13 +124,6 @@ public class StrainersRecipeProvider extends RecipeProvider {
         twoByTwoPacker(RecipeCategory.MISC, Blocks.DIRT, StrainersItems.DIRT_PILE.get(), "dirt_from_dirt_pile");
         twoByTwoPacker(RecipeCategory.MISC, Blocks.SCULK, StrainersItems.SCULK_DUST.get(), "sculk_from_sculk_dust");
 
-        shaped(RecipeCategory.MISC, Items.ANCIENT_DEBRIS)
-                .pattern("AA")
-                .pattern("AA")
-                .define('A', DataComponentIngredient.of(false, OrePieceItem.createOrePiece("netherite_scrap")))
-                .unlockedBy("has_mesh", has(StrainersItems.WOODEN_MESH.get()))
-                .save(output);
-
 
         for (String ore : OreDefaults.COLORS.keySet()) {
             generateOrePieceRecipe(ore);

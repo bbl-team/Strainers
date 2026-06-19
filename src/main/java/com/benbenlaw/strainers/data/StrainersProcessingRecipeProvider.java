@@ -171,10 +171,10 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
 
         //Blocks to Purified versions
         StrainerRecipeBuilder.create().purifying()
-                .input(Blocks.COBBLESTONE)
+                .input(Blocks.DIRT)
                 .output(StrainersBlocks.PURIFIED_DIRT.get().asItem(), 1, 1.0f)
                 .tier(2, 0.0f)
-                .save(output, "cobblestone/purified_dirt");
+                .save(output, "dirt/purified_dirt");
 
         StrainerRecipeBuilder.create().purifying()
                 .input(Blocks.GRAVEL)

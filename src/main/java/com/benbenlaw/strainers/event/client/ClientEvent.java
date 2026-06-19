@@ -43,7 +43,7 @@ public class ClientEvent {
         ItemStack stack = event.getItemStack();
         TooltipUtil.addShiftTooltip(stack, event, StrainersItems.SAPLING_BAG.get(), "tooltip.strainers.sapling_bag");
         TooltipUtil.addShiftTooltip(stack, event, StrainersItems.SEED_BAG.get(), "tooltip.strainers.seed_bag");
-        TooltipUtil.addShiftTooltip(stack, event, StrainersItems.DEPLETED_DROP.get(), "tooltip.strainers.depleted_drop");
+        //TooltipUtil.addShiftTooltip(stack, event, StrainersItems.DEPLETED_DROP.get(), "tooltip.strainers.depleted_drop");
 
         if (stack.getItem() instanceof FluidDropItem dropItem) {
 

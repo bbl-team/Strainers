@@ -47,7 +47,7 @@ public class StrainersConfig {
                 .comment("Remove saplings from the sapling bag. Supports: 'minecraft:oak_sapling' (block), '#minecraft:saplings' (tag), 'minecraft:*' (all blocks from a mod)")
                 .defineListAllowEmpty(
                         "remove_from_sapling_bag",
-                        List.of("productivetrees:*", "productivetrees:*", "allthemodium:*"),
+                        List.of("productivetrees:*", "allthemodium:*"),
                         () -> "",
                         StrainersConfig::isValidEntry);
         BUILDER.pop();
