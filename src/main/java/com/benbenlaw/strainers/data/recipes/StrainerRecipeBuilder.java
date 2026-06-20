@@ -111,19 +111,35 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
     }
 
     public StrainerRecipeBuilder water() {
-        return fluid(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER),1000));
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER),1));
+    }
+
+    public StrainerRecipeBuilder water(int amount) {
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(Fluids.WATER),amount));
     }
 
     public StrainerRecipeBuilder eroding() {
-        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()),1000));
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()),1));
+    }
+
+    public StrainerRecipeBuilder eroding(int amount) {
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.ERODING_WATER.getFluid()),amount));
     }
 
     public StrainerRecipeBuilder purifying() {
-        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()),1000));
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()),1));
+    }
+
+    public StrainerRecipeBuilder purifying(int amount) {
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.PURIFYING_WATER.getFluid()),amount));
     }
 
     public StrainerRecipeBuilder salty() {
-        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()),1000));
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()),1));
+    }
+
+    public StrainerRecipeBuilder salty(int amount) {
+        return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()),amount));
     }
 
     public StrainerRecipeBuilder tier(int minMeshTier, double additionalChancePerTier) {

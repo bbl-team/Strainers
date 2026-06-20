@@ -5,6 +5,7 @@ import com.benbenlaw.core.block.entity.handler.fluid.SyncableFluidHandler;
 import com.benbenlaw.core.block.entity.handler.item.SyncableItemHandler;
 import com.benbenlaw.core.util.FakePlayerUtil;
 import com.benbenlaw.strainers.block.StrainersBlockEntities;
+import com.benbenlaw.strainers.config.StrainersConfig;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.item.util.FluidListComponent;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
@@ -34,6 +35,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
@@ -81,7 +84,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         }
     };
 
-    private final SyncableFluidHandler fluidInventory = new SyncableFluidHandler(this, 1, 1000, (i, stack) -> i == 0, i -> true);
+    private final SyncableFluidHandler fluidInventory = new SyncableFluidHandler(this, 1, 4000, (i, stack) -> i == 0, i -> true);
 
     private List<RecipeHolder<StrainerRecipe>> cachedRecipes = List.of();
 
@@ -155,12 +158,17 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         if (progress >= maxProgress) {
 
             List<ItemStack> outputs = rollOutputs(meshTier, mesh, validRecipes);
+            int fluidCost = getTotalFluidAmount(validRecipes);
 
             if (!canInsertOutputs(outputs)) {
                 return;
             }
 
-            craftItem(meshTier, validRecipes, outputs);
+            if (!hasEnoughFluid(fluidCost)) {
+                return;
+            }
+
+            craftItem(meshTier, validRecipes, outputs, fluidCost);
 
         } else {
             progress++;
@@ -181,6 +189,22 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         }
 
         return outputs;
+    }
+
+    private int getTotalFluidAmount(List<RecipeHolder<StrainerRecipe>> recipes) {
+        int total = 0;
+        for (RecipeHolder<StrainerRecipe> holder : recipes) {
+            SizedFluidIngredient fluidIngredient = holder.value().fluid().get();
+            if (fluidIngredient != null) {
+                total += fluidIngredient.amount();
+            }
+        }
+        return total;
+    }
+
+    private boolean hasEnoughFluid(int amount) {
+        if (amount <= 0) return true;
+        return fluidInventory.getAmountAsInt(0) >= amount; // method name TBC
     }
 
     private int getFortuneLevel(ItemStack stack) {
@@ -213,7 +237,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 .toList();
     }
 
-    private void craftItem(int meshTier, List<RecipeHolder<StrainerRecipe>> validRecipes, List<ItemStack> outputs) {
+    private void craftItem(int meshTier, List<RecipeHolder<StrainerRecipe>> validRecipes, List<ItemStack> outputs, int fluidCost) {
 
         if (level == null || validRecipes.isEmpty()) {
             return;
@@ -239,13 +263,13 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 }
 
                 int cost = validRecipes.getFirst().value().input().count();
-                inventory.extract(INPUT_SLOT, inventory.getResource(INPUT_SLOT), cost,tx);
+                inventory.extract(INPUT_SLOT, inventory.getResource(INPUT_SLOT), cost, tx);
                 ItemStack mesh = inventory.getResource(MESH_SLOT).toStack();
 
                 if (mesh.isDamageableItem()) {
 
                     mesh.hurtAndConvertOnBreak(1, Items.AIR, fakePlayer, fakePlayer.getEquipmentSlotForItem(mesh));
-                    inventory.set(MESH_SLOT, ItemResource.of(mesh),mesh.getCount());
+                    inventory.set(MESH_SLOT, ItemResource.of(mesh), mesh.getCount());
                     if (mesh.isEmpty()) {
                         level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     }
@@ -254,6 +278,17 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 tx.commit();
             }
         });
+
+        if (StrainersConfig.STRAINERS_CONSUME_FLUID.get()) {
+            fluidInventory.runInternal(() -> {
+                try (Transaction tx = Transaction.open(null)) {
+                    if (fluidCost > 0) {
+                        fluidInventory.extract(0, fluidInventory.getResource(0), fluidCost, tx);
+                    }
+                    tx.commit();
+                }
+            });
+        }
 
         progress = 0;
         sync();

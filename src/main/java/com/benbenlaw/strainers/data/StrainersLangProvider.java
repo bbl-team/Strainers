@@ -113,6 +113,8 @@ public class StrainersLangProvider extends LanguageProvider {
         add("jei.strainers.chance", "Chance: %s%%");
         add("jei.strainers.additional", "Additional %s%% per level above minimum mesh tier");
         add("jei.strainers.leaf_pile", "Leaf Piles can be obtained when breaking leaves with a Stick");
+        add("jei.strainers.fluid_amount_consume", "Will consume %smb of fluid");
+        add("jei.strainers.fluid_amount_no_consume", "Requires %smb of fluid");
 
     }
 

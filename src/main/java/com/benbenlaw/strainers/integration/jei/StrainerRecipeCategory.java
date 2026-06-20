@@ -7,6 +7,7 @@ import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlockEntities;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.block.entity.StrainerBlockEntity;
+import com.benbenlaw.strainers.config.StrainersConfig;
 import com.benbenlaw.strainers.event.client.ClientRecipeCache;
 import com.benbenlaw.strainers.recipe.StrainerRecipe;
 import com.benbenlaw.strainers.util.StrainersTags;
@@ -28,6 +29,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -100,7 +102,14 @@ public class StrainerRecipeCategory implements IRecipeCategory<StrainerRecipe> {
     public void setRecipe(IRecipeLayoutBuilder builder, StrainerRecipe recipe, IFocusGroup focusGroup) {
 
         if (recipe.fluid().isPresent()) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(recipe.fluid().get().ingredient().display());
+            builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(recipe.fluid().get().ingredient().display())
+                    .addRichTooltipCallback((slotView, tooltip) -> {
+                        if (StrainersConfig.STRAINERS_CONSUME_FLUID.get()) {
+                            tooltip.add(Component.translatable("jei.strainers.fluid_amount_consume", recipe.fluid().get().amount()).withStyle(ChatFormatting.RED));
+                        } else {
+                            tooltip.add(Component.translatable("jei.strainers.fluid_amount_no_consume", recipe.fluid().get().amount()).withStyle(ChatFormatting.GOLD));
+                        }
+                    });
         } else {
             builder.addSlot(RecipeIngredientRole.INPUT, 2, 2).add(new ItemStack(Items.AIR));
         }

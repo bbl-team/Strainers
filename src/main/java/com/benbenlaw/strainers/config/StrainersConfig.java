@@ -13,11 +13,16 @@ public class StrainersConfig {
     public static final ModConfigSpec.ConfigValue<List<? extends String>> REMOVE_SEED_BAG_OUTPUTS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ADD_SAPLING_BAG_OUTPUTS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> REMOVE_SAPLING_BAG_OUTPUTS;
+    public static final ModConfigSpec.ConfigValue<Boolean> STRAINERS_CONSUME_FLUID;
 
     static {
 
         BUILDER.comment("Strainers Startup Config")
                 .push("Strainers");
+
+        STRAINERS_CONSUME_FLUID = BUILDER
+                .comment("Whether Strainers consume fluid per recipe")
+                .define("strainers_consume_fluid", false);
 
         ADD_SEED_BAG_OUTPUTS = BUILDER
                 .comment("Add crops to the seed bag. Supports: 'minecraft:wheat' (block), '#minecraft:crops' (tag), 'minecraft:*' (all blocks from a mod)")

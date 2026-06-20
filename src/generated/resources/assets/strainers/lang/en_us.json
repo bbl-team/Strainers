@@ -64,6 +64,8 @@
   "itemGroup.strainers": "Strainers",
   "jei.strainers.additional": "Additional %s%% per level above minimum mesh tier",
   "jei.strainers.chance": "Chance: %s%%",
+  "jei.strainers.fluid_amount_consume": "Will consume %smb of fluid",
+  "jei.strainers.fluid_amount_no_consume": "Requires %smb of fluid",
   "jei.strainers.leaf_pile": "Leaf Piles can be obtained when breaking leaves with a Stick",
   "jei.strainers.strainer": "Strainer",
   "tooltip.strainers.depleted_drop": "Yes its useless just throw me away !",
