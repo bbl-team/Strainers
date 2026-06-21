@@ -82,6 +82,7 @@ public class StrainersModelProvider extends ModelProvider {
         //Fluids
         blockModels.createNonTemplateModelBlock(StrainersFluids.ERODING_WATER.getBlock(), Blocks.WATER);
         blockModels.createNonTemplateModelBlock(StrainersFluids.PURIFYING_WATER.getBlock(), Blocks.WATER);
+        blockModels.createNonTemplateModelBlock(StrainersFluids.SALTY_WATER.getBlock(), Blocks.WATER);
 
 
     }

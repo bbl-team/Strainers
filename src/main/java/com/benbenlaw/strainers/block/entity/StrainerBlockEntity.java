@@ -194,10 +194,10 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     private int getTotalFluidAmount(List<RecipeHolder<StrainerRecipe>> recipes) {
         int total = 0;
         for (RecipeHolder<StrainerRecipe> holder : recipes) {
+
+            if (holder.value().fluid().isEmpty()) continue;
             SizedFluidIngredient fluidIngredient = holder.value().fluid().get();
-            if (fluidIngredient != null) {
-                total += fluidIngredient.amount();
-            }
+            total += fluidIngredient.amount();
         }
         return total;
     }
