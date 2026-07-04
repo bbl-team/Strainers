@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Rotation;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class StrainerBlockEntityRenderState extends BlockEntityRenderState {
@@ -12,6 +13,7 @@ public class StrainerBlockEntityRenderState extends BlockEntityRenderState {
     public ItemStack mesh;
     public ItemStack processingItem;
     public Level blockEntityLevel;
+    public Float rotation;
 
     final ItemStackRenderState meshStackRenderer = new ItemStackRenderState();
     final ItemStackRenderState processingStackRenderer = new ItemStackRenderState();

@@ -32,6 +32,7 @@ public class StrainersLangProvider extends LanguageProvider {
         add("block.strainers.purified_soul_soil", "Purified Soul Soil");
         add("block.strainers.purified_deepslate", "Purified Deepslate");
         add("block.strainers.purified_end_stone", "Purified End Stone");
+        add("block.strainers.purified_water", "Purified End Stone");
 
         //Items
         add("item.strainers.wooden_mesh", "Wooden Mesh");
