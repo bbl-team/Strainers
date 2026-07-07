@@ -268,10 +268,31 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
                 if (mesh.isDamageableItem()) {
 
+                    boolean ejectAfterHurt = mesh.isEnchanted() && (mesh.getMaxDamage() - mesh.getDamageValue()) == 2;
+
                     mesh.hurtAndConvertOnBreak(1, Items.AIR, fakePlayer, fakePlayer.getEquipmentSlotForItem(mesh));
-                    inventory.set(MESH_SLOT, ItemResource.of(mesh), mesh.getCount());
-                    if (mesh.isEmpty()) {
-                        level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
+
+                    if (ejectAfterHurt && !mesh.isEmpty()) {
+
+                        inventory.set(MESH_SLOT, ItemResource.EMPTY, 0);
+
+                        int remaining = mesh.getCount();
+                        for (int slot = FIRST_OUTPUT_SLOT;
+                             slot <= LAST_OUTPUT_SLOT && remaining > 0;
+                             slot++) {
+
+                            remaining -= inventory.insert(slot, ItemResource.of(mesh), remaining, tx);
+                        }
+
+                        if (remaining > 0) {
+                            inventory.set(MESH_SLOT, ItemResource.of(mesh), remaining);
+                        }
+
+                    } else {
+                        inventory.set(MESH_SLOT, ItemResource.of(mesh), mesh.getCount());
+                        if (mesh.isEmpty()) {
+                            level.playSound(null, worldPosition, SoundEvents.ITEM_BREAK.value(), SoundSource.BLOCKS, 1.0f, 1.0f);
+                        }
                     }
                 }
 
