@@ -1,4 +1,4 @@
-// 26.1.2	2026-06-14T10:05:46.730838	strainers Models
+// 26.1.2	2026-07-07T13:41:40.6506855	strainers Models
 234aeaefc0554e1b9f1bd9c7e489b055f3e98f75 assets/strainers/blockstates/dust_block.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/strainers/blockstates/eroding_water.json
 e10d9344218da33ff4b507e211b266c6bdb831b6 assets/strainers/blockstates/mulch.json
@@ -13,6 +13,7 @@ eb2a4e71cd334051f29f6080fb0ae68d72176500 assets/strainers/blockstates/purified_s
 3ee49cbb7b93a600c5536814172567005fa3e7cd assets/strainers/blockstates/purified_soul_soil.json
 36f2d3f5bafd1b64b7275614d15ae466a771b151 assets/strainers/blockstates/purified_stone.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/strainers/blockstates/purifying_water.json
+e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/strainers/blockstates/salty_water.json
 c10c9b1d1d3d33e580128727dcd6ab445e64f82c assets/strainers/items/copper_mesh.json
 1b6e909a4eec204c3658bb6c132e10caa471a952 assets/strainers/items/depleted_drop.json
 8cd361154a086f5be1b66ab6ce6c6892f93c50b5 assets/strainers/items/diamond_mesh.json

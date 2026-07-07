@@ -5,6 +5,12 @@
     },
     "strainers:mulch": {
       "chance": 1.0
+    },
+    "strainers:sapling_bag": {
+      "chance": 0.45
+    },
+    "strainers:seed_bag": {
+      "chance": 0.45
     }
   }
 }
