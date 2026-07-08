@@ -763,7 +763,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
             StrainerRecipeBuilder.create().water(15)
                     .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                     .output(ore, 0.15f)
-                    .tier(7, 0.05f)
+                    .tier(73, 0.05f)
                     .save(output, ore, "theurgy/purified_dust_block/" + ore);
         }
     }

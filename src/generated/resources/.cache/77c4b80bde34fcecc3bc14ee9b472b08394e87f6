@@ -1,4 +1,4 @@
-// 26.1.2	2026-07-07T13:41:40.6528062	strainers Processing Recipes
+// 26.1.2	2026-07-08T09:29:12.8911615	strainers Processing Recipes
 2b31f0a5b36ba6aa2f8f286e57e9cdeb7fed1cc3 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_dust_block/allthemodium.json
 007aa37f40d4560384fad8a42934612808e9a286 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_end_stone/unobtainium.json
 b26d220b4786cdb76a936dd1a19363210d806878 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_netherrack/vibranium.json
@@ -256,4 +256,4 @@ b2c8733b3c211daf39540c5b0f7f1d1f936bc7e8 data/strainers/recipe/straining/stone/d
 555c5ed692f39208c4abac00373dc89c7b82dd1c data/strainers/recipe/straining/stone/netherrack.json
 2f94ff52c4cb875e431247d30b558ef54b27ecfa data/strainers/recipe/straining/stone/purified_deepslate.json
 992ec7e09abd3708c07e8e7e07d752872d98b0c4 data/strainers/recipe/straining/stone/purified_stone.json
-6979d1c53dd389347a19e88a69dc5f7fcd081a38 data/strainers/recipe/straining/theurgy/purified_dust_block/sal_ammoniac.json
+d56a502cf621f8af7f82a414707231b1b21967a5 data/strainers/recipe/straining/theurgy/purified_dust_block/sal_ammoniac.json
