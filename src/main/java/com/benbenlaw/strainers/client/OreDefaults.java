@@ -78,10 +78,10 @@ public final class OreDefaults {
             Map.entry("arcane_crystal", 0xFFA7BBFA),
 
             //Powah
-            Map.entry("uraninite", 0xFFCBCFE2),
-            Map.entry("uraninite_regular", 0xFFCBCFE2),
-            Map.entry("uraninite_dense", 0xFFCBCFE2),
-            Map.entry("uraninite_poor", 0xFFCBCFE2),
+            Map.entry("uraninite", 0xFF00A345),
+            Map.entry("uraninite_regular", 0xFF00A345),
+            Map.entry("uraninite_dense", 0xFF00A345),
+            Map.entry("uraninite_poor", 0xFF00A345),
 
             //Theurgy
             Map.entry("sal_ammoniac", 0xFFE3C6E5),
@@ -92,7 +92,10 @@ public final class OreDefaults {
             Map.entry("inferium", 0xFF8FAF00),
 
             //Evil Craft
-            Map.entry("dark_gem", 0xFF1A1A1A)
+            Map.entry("dark_gem", 0xFF1A1A1A),
+
+            //Dimensional Resources
+            Map.entry("dimensional", 0xFF7A4E8E)
 
 
     );

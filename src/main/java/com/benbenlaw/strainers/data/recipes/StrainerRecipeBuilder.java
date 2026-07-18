@@ -42,7 +42,7 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
     private Optional<SizedFluidIngredient> fluid = Optional.empty();
     private ChanceResult result;
     private int minMeshTier;
-    private double additionalChancePerTier;
+    private float additionalChancePerTier;
 
     protected final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
@@ -142,7 +142,7 @@ public class StrainerRecipeBuilder implements RecipeBuilder {
         return fluid(new SizedFluidIngredient(FluidIngredient.of(StrainersFluids.SALTY_WATER.getFluid()),amount));
     }
 
-    public StrainerRecipeBuilder tier(int minMeshTier, double additionalChancePerTier) {
+    public StrainerRecipeBuilder tier(int minMeshTier, float additionalChancePerTier) {
         this.minMeshTier = minMeshTier;
         this.additionalChancePerTier = additionalChancePerTier;
         return this;

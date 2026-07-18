@@ -5,10 +5,14 @@ import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.data.recipes.StrainerRecipeBuilder;
 import com.benbenlaw.strainers.item.StrainersItems;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -650,6 +654,19 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .tier(5, 0.15f)
                 .save(output, "cinnabar", "purified_dust_block/cinnabar");
 
+        //Sherds
+        BuiltInRegistries.ITEM.entrySet().stream()
+                .filter(entry -> entry.getKey().identifier().getPath().endsWith("_pottery_sherd"))
+                .forEach(entry -> {
+                    Item item = entry.getValue();
+                    String path = entry.getKey().identifier().getPath();
+
+                    StrainerRecipeBuilder.create().eroding(5)
+                            .input(ItemTags.TERRACOTTA, registries)
+                            .output(item, 0.01f)
+                            .tier(1, 0.01f)
+                            .save(output, "sherds/" + path);
+                });
 
         //Mod Support
         addSilentGems();
@@ -658,6 +675,8 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         addTheurgy();
         addAllTheModium();
         addMysticalAgriculture();
+        addEvilCraft();
+        addDimensionalResources();
     }
 
     public void addSilentGems() {
@@ -805,6 +824,19 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .output(ore, 0.15f)
                     .tier(7, 0.05f)
                     .save(output, ore, "evilcraft/purified_gravel/" + ore);
+        }
+    }
+
+    public void addDimensionalResources() {
+        List<String> ores = new ArrayList<>();
+        ores.add("dimensional");
+
+        for (String ore : ores) {
+            StrainerRecipeBuilder.create().water(25)
+                    .input(StrainersBlocks.PURIFIED_GRAVEL)
+                    .output(ore, 0.15f)
+                    .tier(8, 0.05f)
+                    .save(output, ore, "dimensionalresources/purified_gravel/" + ore);
         }
     }
 }

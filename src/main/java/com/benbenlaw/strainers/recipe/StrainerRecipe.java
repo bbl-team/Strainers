@@ -20,7 +20,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 import java.util.Optional;
 
-public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredient> fluid, ChanceResult result, int minMeshTier, double additionalChancePerTier) implements Recipe<RecipeInput> {
+public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredient> fluid, ChanceResult result, int minMeshTier, float additionalChancePerTier) implements Recipe<RecipeInput> {
 
     public static final MapCodec<StrainerRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
@@ -28,7 +28,7 @@ public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredien
                     SizedFluidIngredient.CODEC.optionalFieldOf("fluid").forGetter(StrainerRecipe::fluid),
                     ChanceResult.CODEC.fieldOf("result").forGetter(StrainerRecipe::result),
                     Codec.INT.fieldOf("min_mesh_tier").forGetter(StrainerRecipe::minMeshTier),
-                    Codec.DOUBLE.fieldOf("additional_chance_per_tier").forGetter(StrainerRecipe::additionalChancePerTier)
+                    Codec.FLOAT.fieldOf("additional_chance_per_tier").forGetter(StrainerRecipe::additionalChancePerTier)
             ).apply(instance, StrainerRecipe::new)
     );
 
@@ -47,7 +47,7 @@ public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredien
 
         ChanceResult result = ChanceResult.read(buffer);
         int minMeshTier = buffer.readInt();
-        double additionalChancePerTier = buffer.readDouble();
+        float additionalChancePerTier = buffer.readFloat();
         return new StrainerRecipe(input, fluid, result, minMeshTier , additionalChancePerTier);
     }
 
@@ -59,7 +59,7 @@ public record StrainerRecipe(SizedIngredient input, Optional<SizedFluidIngredien
 
         recipe.result.write(buffer);
         buffer.writeInt(recipe.minMeshTier);
-        buffer.writeDouble(recipe.additionalChancePerTier);
+        buffer.writeFloat(recipe.additionalChancePerTier);
     }
 
     public ItemStack rollWithTier(RandomSource random, int meshTier, int fortuneLevel) {

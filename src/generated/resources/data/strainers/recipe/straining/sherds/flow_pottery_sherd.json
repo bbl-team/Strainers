@@ -1,0 +1,19 @@
+{
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.01,
+  "fluid": {
+    "amount": 5,
+    "ingredient": "strainers:eroding_water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "#minecraft:terracotta"
+  },
+  "min_mesh_tier": 1,
+  "result": {
+    "chance": 0.01,
+    "item": {
+      "id": "minecraft:flow_pottery_sherd"
+    }
+  }
+}
