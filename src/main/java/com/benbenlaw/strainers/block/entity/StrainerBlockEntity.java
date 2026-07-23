@@ -5,6 +5,7 @@ import com.benbenlaw.core.block.entity.handler.fluid.SyncableFluidHandler;
 import com.benbenlaw.core.block.entity.handler.item.SyncableItemHandler;
 import com.benbenlaw.core.util.FakePlayerUtil;
 import com.benbenlaw.strainers.block.StrainersBlockEntities;
+import com.benbenlaw.strainers.block.custom.StrainerBlock;
 import com.benbenlaw.strainers.config.StrainersConfig;
 import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.item.util.FluidListComponent;
@@ -115,6 +116,12 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
     public void tick() {
         if (level == null || level.isClientSide()) return;
+
+        if (!level.getBlockState(worldPosition).getValue(StrainerBlock.RUNNING)) {
+            progress = 0;
+            sync();
+            return;
+        }
 
         if (fakePlayer == null) {
             fakePlayer = FakePlayerUtil.createFakePlayer((ServerLevel) level, "StrainerBlockEntityFakePlayer");
