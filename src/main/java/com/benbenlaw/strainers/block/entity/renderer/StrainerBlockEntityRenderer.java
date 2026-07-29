@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidUtil;
@@ -117,5 +118,10 @@ public class StrainerBlockEntityRenderer implements BlockEntityRenderer<Strainer
             rotation = 0;
         }
         return rotation;
+    }
+
+    @Override
+    public AABB getRenderBoundingBox(StrainerBlockEntity blockEntity) {
+        return new AABB(blockEntity.getBlockPos()).inflate(0, 1, 0);
     }
 }
