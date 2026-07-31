@@ -1,10 +1,11 @@
-// 26.1.2	2026-07-18T10:20:29.3863501	strainers Processing Recipes
+// 26.1.2	2026-07-31T11:41:12.2798674	strainers Processing Recipes
 2b31f0a5b36ba6aa2f8f286e57e9cdeb7fed1cc3 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_dust_block/allthemodium.json
 007aa37f40d4560384fad8a42934612808e9a286 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_end_stone/unobtainium.json
 b26d220b4786cdb76a936dd1a19363210d806878 data/strainers/advancement/recipe/strainer/straining/allthemodium/purified_netherrack/vibranium.json
 9d6cf31bc7022f6acd02afe70b922ddd7e755a10 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel.json
 b854409189c160d0e2c21f39c146685ffbd4e5c8 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel_pebble.json
 f003e14c5ff5c3b34637201661befd1bbe164ee9 data/strainers/advancement/recipe/strainer/straining/cobblestone/gravel_pebble_low.json
+1762317285b0f22269eab73ba8f89edcf21b23c9 data/strainers/advancement/recipe/strainer/straining/dimensionalresources/purified_gravel/dimensional.json
 4bb45e092ee235f3dcaf03654793a14f21415494 data/strainers/advancement/recipe/strainer/straining/dirt/gravel_pebble.json
 49408f5db7de03c3778b585b3cecf6e51d865b03 data/strainers/advancement/recipe/strainer/straining/dirt/purified_dirt.json
 b726e3a475ec0da0769f0a2b9a13c38df7764b4d data/strainers/advancement/recipe/strainer/straining/dirt/soul_soil.json
@@ -12,6 +13,7 @@ e8afcac3769e235cf6f8a6d9555249721bb29ea1 data/strainers/advancement/recipe/strai
 3318acf62718999f025e765a93a93b09a1014ca4 data/strainers/advancement/recipe/strainer/straining/dirt/stone_pebble.json
 45fa627403eeedb640440c6d8a5e7210a630fabb data/strainers/advancement/recipe/strainer/straining/dust_block/purified_dust_block.json
 e7c1e0fdc8a03b16907ad7cd4d5f931931f5e2eb data/strainers/advancement/recipe/strainer/straining/end_stone/purified_end_stone.json
+48b7fe88950d7f33e72cf1bb7b9d9de7eefed9d7 data/strainers/advancement/recipe/strainer/straining/evilcraft/purified_gravel/dark_gem.json
 48849b824845798610038aa13b92af78beebebba data/strainers/advancement/recipe/strainer/straining/forbiddenarcanus/purified_gravel/arcane_crystal.json
 3463ec3d28b18c464c360d9a0fa7b3a66c3f07f9 data/strainers/advancement/recipe/strainer/straining/forbiddenarcanus/purified_gravel/runic.json
 da4e02376a80c406f2da6e5168f1185659013846 data/strainers/advancement/recipe/strainer/straining/forbiddenarcanus/purified_gravel/stellarite.json
@@ -157,6 +159,7 @@ cf94faa758a6c24e55f944ead8b049b9e2f97593 data/strainers/recipe/straining/allthem
 450721910985469a584e5651af0465d1f7e49241 data/strainers/recipe/straining/cobblestone/gravel.json
 1719d5213804f7a933497435c77a542f26f91087 data/strainers/recipe/straining/cobblestone/gravel_pebble.json
 57c157f90db42c051284708ff42fe31cb6c1583d data/strainers/recipe/straining/cobblestone/gravel_pebble_low.json
+cd75227f3a78de99cc87ed5a716819610a45c535 data/strainers/recipe/straining/dimensionalresources/purified_gravel/dimensional.json
 a3197ed60ff84fc1780a5a7edf7a97ab227d5f58 data/strainers/recipe/straining/dirt/gravel_pebble.json
 ebb708401efc9a1d490b870d2158ff9ac1ec4c23 data/strainers/recipe/straining/dirt/purified_dirt.json
 44496b8f35112899a6cf3b8ddc1890be01c0a9f5 data/strainers/recipe/straining/dirt/soul_soil.json
@@ -164,6 +167,7 @@ fd315938f52c306143fd5807844fab1bcb28ccdf data/strainers/recipe/straining/dirt/st
 29d71331ec85bf9deb423d83a5129a207aee3640 data/strainers/recipe/straining/dirt/stone_pebble.json
 16d957e2bf73168f68337c1e3227a6f01cf5ddad data/strainers/recipe/straining/dust_block/purified_dust_block.json
 3912efed6c8c9324c699fb35a5ccfdb965ed694f data/strainers/recipe/straining/end_stone/purified_end_stone.json
+86f1c55539ae9af4fb013630fca498f4983aadf0 data/strainers/recipe/straining/evilcraft/purified_gravel/dark_gem.json
 50f3fde2b2cefea92bf41c583cafa18c2335d5f4 data/strainers/recipe/straining/forbiddenarcanus/purified_gravel/arcane_crystal.json
 f6ac5ecfd317f02c9af33c627551ea8bf16ff96c data/strainers/recipe/straining/forbiddenarcanus/purified_gravel/runic.json
 8998eee85ae9ea26745c80d81899ba29b5bcdc5b data/strainers/recipe/straining/forbiddenarcanus/purified_gravel/stellarite.json
