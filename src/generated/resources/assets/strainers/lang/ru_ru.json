@@ -1,0 +1,133 @@
+{
+
+  "item.strainers.amethyst_mesh": "Аметистовая сетка",
+  "item.strainers.wooden_mesh": "Деревянная сетка",
+  "item.strainers.bamboo_mesh": "Бамбуковая сетка",
+  "item.strainers.copper_mesh": "Медная сетка",
+  "item.strainers.diamond_mesh": "Алмазная сетка",
+  "item.strainers.echo_mesh": "Эхо-сетка",
+  "item.strainers.emerald_mesh": "Изумрудная сетка",
+  "item.strainers.flint_mesh": "Кремнёвая сетка",
+  "item.strainers.gold_mesh": "Золотая сетка",
+  "item.strainers.iron_mesh": "Железная сетка",
+  "item.strainers.leafy_mesh": "Лиственная сетка",
+  "item.strainers.netherite_mesh": "Незеритовая сетка",
+  "item.strainers.quartz_mesh": "Кварцевая сетка",
+  "item.strainers.string_mesh": "Нитяная сетка",
+  "item.strainers.blaze_mesh": "Огненная сетка",
+  "item.strainers.breeze_mesh": "Вихревая сетка",
+  "item.strainers.lapis_mesh": "Лазуритовая сетка",
+  "item.strainers.bone_mesh": "Костяная сетка",
+  "item.strainers.redstone_mesh": "Редстоуновая сетка",
+  "item.strainers.tin_mesh": "Оловянная сетка",
+  "item.strainers.bronze_mesh": "Бронзовая сетка",
+  "item.strainers.heavy_mesh": "Булавасетка",
+  "item.strainers.end_mesh": "Эндер-сетка",
+  "item.strainers.obsidian_mesh": "Обсидиановая сетка",
+  "item.strainers.prismarine_mesh": "Призмариновая сетка",
+  "item.strainers.eroding_water_bucket": "Ведро с едкой водой",
+  "item.strainers.purifying_water_bucket": "Ведро очищающей воды",
+  "item.strainers.stone_pebble": "Каменная галька",
+  "item.strainers.deepslate_pebble": "Глубинносланцевая галька",
+  "item.strainers.purifying_salt_mulch": "Мульча из очищающей соли",
+  "item.strainers.eroding_salt_mulch": "Мульча из едкой соли",
+  "item.strainers.blazing_salt_mulch": "Мульча из огненной соли",
+  "item.strainers.leaf_pile": "Кучка листьев",
+
+
+
+  "item.strainers.speed_upgrade_1": "Улучшение скорости 1",
+  "item.strainers.speed_upgrade_2": "Улучшение скорости 2",
+  "item.strainers.speed_upgrade_3": "Улучшение скорости 3",
+
+  "item.strainers.chance_upgrade_1": "Улучшение шанса 1",
+  "item.strainers.chance_upgrade_2": "Улучшение шанса 2",
+  "item.strainers.chance_upgrade_3": "Улучшение шанса 3",
+
+  "fluid_type.strainers.eroding_water_fluid": "Едкая вода",
+  "fluid_type.strainers.purifying_water_fluid": "Очищающая вода",
+
+  "block.strainers.wooden_strainer": "Просеиватель",
+  "block.strainers.eroding_water": "Едкая вода",
+  "block.strainers.purifying_water": "Очищающая вода",
+  "block.strainers.mulch": "Мульча",
+  "block.strainers.purified_dirt": "Очищенная земля",
+  "block.strainers.purified_sand": "Очищенный песок",
+  "block.strainers.purified_stone": "Очищенный камень",
+  "block.strainers.purified_soul_sand": "Очищенный песок душ",
+  "block.strainers.purified_soul_soil": "Очищенная почва душ",
+  "block.strainers.purified_gravel": "Очищенный гравий",
+  "block.strainers.strainer_tank": "Ёмкость просеивателя",
+  "block.strainers.compactor": "Компактор",
+
+  "block.strainers.gui.input_slot": "Предмет для просеивания",
+  "block.strainers.gui.mesh_slot": "Сетка",
+  "block.strainers.gui.upgrade_slot": "Улучшение",
+
+  "tooltips.strainers.improved_input_upgrade.shift": "§aДаёт шанс 20%, что предмет не потратиться при просеивании.",
+  "tooltips.strainers.sturdy_input_upgrade.shift": "§aДаёт шанс 40%, что предмет не потратиться при просеивании.",
+  "tooltips.strainers.reinforced_input_upgrade.shift": "§aДаёт шанс 60%, что предмет не потратиться при просеивании.",
+  "tooltips.strainers.everlasting_input_upgrade.shift": "§aДаёт шанс 80%, что предмет не потратиться при просеивании.",
+
+  "tooltips.strainers.improved_mesh_upgrade.shift": "§aДаёт шанс 20%, что сетки не потеряют в прочности при просеивании.",
+  "tooltips.strainers.sturdy_mesh_upgrade.shift": "§aДаёт шанс 40%, что сетки не потеряют в прочности при просеивании.",
+  "tooltips.strainers.reinforced_mesh_upgrade.shift": "§aДаёт шанс 60%, что сетки не потеряют в прочности при просеивании.",
+  "tooltips.strainers.everlasting_mesh_upgrade.shift": "§aДаёт шанс 80%, что сетки не потеряют в прочности при просеивании.",
+
+  "tooltips.strainers.improved_duration_upgrade.shift": "§aДлительность просеивания снижена на 20%.",
+  "tooltips.strainers.sturdy_duration_upgrade.shift": "§aДлительность просеивания снижена на 40%.",
+  "tooltips.strainers.reinforced_duration_upgrade.shift": "§aДлительность просеивания снижена на 60%.",
+  "tooltips.strainers.everlasting_duration_upgrade.shift": "§aДлительность просеивания снижена на 80%.",
+
+  "tooltips.strainers.improved_output_upgrade.shift": "§aДаёт шанс 20% на то, что при просеивании получится дополнительный предмет.",
+  "tooltips.strainers.sturdy_output_upgrade.shift": "§aДаёт шанс 40% на то, что при просеивании получится дополнительный предмет.",
+  "tooltips.strainers.reinforced_output_upgrade.shift": "§aДаёт шанс 60% на то, что при просеивании получится дополнительный предмет.",
+  "tooltips.strainers.everlasting_output_upgrade.shift": "§aДаёт шанс 80% на то, что при просеивании получится дополнительный предмет.",
+
+  "tooltips.strainers.improved_everything_upgrade.shift": "§aСочетает в себе эффекты всех улучшений!",
+  "tooltips.strainers.sturdy_everything_upgrade.shift": "§aСочетает в себе эффекты всех улучшений!",
+  "tooltips.strainers.reinforced_everything_upgrade.shift": "§aСочетает в себе эффекты всех улучшений!",
+  "tooltips.strainers.everlasting_everything_upgrade.shift": "§aСочетает в себе эффекты всех улучшений!",
+
+  "tooltips.strainers.specialized_output_upgrade.shift": "§aПри просеивании получается в 5 раз больше предметов.§r,§c Длительность увеличивается в 3 раза.",
+  "tooltips.strainers.specialized_speed_upgrade.shift": "§aДлительность уменьшается на 20 тиков.§r,§c Сетки теряют в прочности в 5 раз быстрее.",
+  "tooltips.strainers.specialized_mesh_upgrade.shift": "§aСетки не теряют в прочности.§r,§c Длительность увеличивается в 1.5 раза.",
+  "tooltips.strainers.specialized_input_upgrade.shift": "§aПри просеивании предметы не тратятся.§r,§c Сетки теряют в прочности в 10 раз быстрее! Длительность увеличивается в 4 раза.",
+
+  "tooltips.strainers.mesh.shift": "Информация о сетке",
+  "tooltips.strainers.mesh": "Информация о сетке",
+
+  "tooltips.strainers.tier_1_mesh": "Сетка 1 уровня",
+  "tooltips.strainers.tier_2_mesh": "Сетка 2 уровня",
+  "tooltips.strainers.tier_3_mesh": "Сетка 3 уровня",
+  "tooltips.strainers.tier_4_mesh": "Сетка 4 уровня",
+  "tooltips.strainers.tier_5_mesh": "Сетка 5 уровня",
+  "tooltips.strainers.tier_6_mesh": "Сетка 6 уровня",
+  "tooltips.strainers.tier_7_mesh": "Сетка 7 уровня",
+  "tooltips.strainers.tier_8_mesh": "Сетка 8 уровня",
+  "tooltips.strainers.tier_9_mesh": "Сетка 9 уровня",
+  "tooltips.strainers.tier_10_mesh": "Сетка 10 уровня",
+  "tooltips.strainers.mesh_damage": "Максимальный урон: %s",
+
+  "tooltips.strainers.purifying_salt_mulch": "Нажмите ПКМ по блоку мульчи, держа в руке мульчу из очищающей соли, чтобы превратить его в источник очищенной воды.",
+  "tooltips.strainers.eroding_salt_mulch": "Нажмите ПКМ по блоку мульчи, держа в руке мульчу из едкой соли, чтобы превратить его в источник едкой воды.",
+  "tooltips.strainers.blazing_salt_mulch": "Нажмите ПКМ по блоку мульчи, держа в руке мульчу из огненной соли, чтобы превратить его в источник лавы.",
+
+  "tooltip.strainers.output_increase": "Добавляет %s к шансу успешного просеивания",
+  "tooltip.strainers.duration_decrease": "Уменьшает длительность на %s",
+
+  "jei.strainers.mulch_block": "ПКМ по блоку с мотыгой в руке для создания источника воды.\n\nНажмите ПКМ по блоку мульчи, держа в руке мульчу из едкой соли, чтобы превратить его в источник едкой воды.",
+  "jei.strainer.place_block": "Разместите сверху блок",
+  "jei.strainer.place_fluid": "Разместите сверху жидкость",
+  "jei.strainer.duration": "Продолжительность: %s тиков",
+  "block.strainer.jei.not_consumed": "Не тратится",
+
+  "block.gui.output_upgrade": "Улучшение просеивания",
+  "block.gui.mesh_upgrade": "Улучшение сеток",
+  "block.gui.input_item": "Предмет для просеивания",
+  "block.gui.mesh": "Сетка",
+  "block.strainer.jei.chance": "Шанс: ",
+
+
+  "itemGroup.strainers": "BBL Strainers"
+}
