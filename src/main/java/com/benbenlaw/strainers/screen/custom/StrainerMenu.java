@@ -33,7 +33,7 @@ public class StrainerMenu extends SimpleAbstractContainerMenu {
     private int scrollOffset = 0;
 
     public StrainerMenu(int containerID, Inventory inventory, FriendlyByteBuf extraData) {
-        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(2));
+        this(containerID, inventory, extraData.readBlockPos(), new SimpleContainerData(3));
     }
 
     public StrainerMenu(int containerID, Inventory inventory, BlockPos blockPos, ContainerData data) {

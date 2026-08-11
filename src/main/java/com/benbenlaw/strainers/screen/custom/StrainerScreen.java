@@ -1,10 +1,14 @@
 package com.benbenlaw.strainers.screen.custom;
 
 import com.benbenlaw.core.Core;
+import com.benbenlaw.core.config.StartupConfig;
 import com.benbenlaw.core.screen.util.DurationTooltip;
 import com.benbenlaw.core.screen.util.FluidRenderingUtils;
+import com.benbenlaw.core.util.MouseUtil;
 import com.benbenlaw.strainers.Strainers;
+import com.benbenlaw.strainers.config.StrainersConfig;
 import com.benbenlaw.strainers.network.packet.ChangeScrollOffsetPacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -18,6 +22,7 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
 
     private static final Identifier TEXTURE = Strainers.identifier("textures/gui/strainer_gui.png");
     private static final Identifier PROGRESS_ARROW = Core.identifier("progress_arrow");
+    private static final Identifier BUCKET_ICON = Strainers.identifier("bucket_icon");
     private static final Identifier SCROLL_ICON = Strainers.identifier("scroll");
 
     private boolean isDraggingScrollbar = false;
@@ -55,6 +60,7 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
         int y = (height - imageHeight) / 2;
 
         DurationTooltip.renderDurationTooltip(guiGraphics, mouseX, mouseY, x, y, 161, 5, menu.data.get(0), menu.data.get(1));
+        renderTotalFluidAmountTooltip(guiGraphics, mouseX, mouseY, x, y, 150, 5, menu.data.get(2));
 
         FluidRenderingUtils.renderFluid(guiGraphics, menu.blockEntity.getFluidHandler(), 0, x, y, 8, 17, 16, 16,
                 mouseX, mouseY, Component.translatable("tooltip.strainers.empty")
@@ -118,5 +124,15 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
 
         menu.setScrollOffset(next);
         ClientPacketDistributor.sendToServer(new ChangeScrollOffsetPacket(menu.containerId, next));
+    }
+
+    public static void renderTotalFluidAmountTooltip(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, int x, int y, int xOffset, int yOffset, int fluidAmount) {
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BUCKET_ICON, 10, 10, 0, 0, x + xOffset, y + yOffset, 10, 10);
+        if (MouseUtil.isMouseAboveArea(mouseX, mouseY, x, y, xOffset, yOffset, 10, 10)) {
+            Component fluidInfo = StrainersConfig.STRAINERS_CONSUME_FLUID.get()
+                    ? Component.translatable("jei.strainers.fluid_amount_consume", fluidAmount)
+                    : Component.translatable("jei.strainers.fluid_amount_no_consume", fluidAmount);
+            guiGraphics.setTooltipForNextFrame(Minecraft.getInstance().font, fluidInfo, mouseX, mouseY);
+        }
     }
 }

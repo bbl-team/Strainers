@@ -38,8 +38,6 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
-import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
 import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidUtil;
 import net.neoforged.neoforge.transfer.item.ItemResource;
@@ -57,6 +55,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
     private final ContainerData data;
     private int maxProgress = 200;
     private int progress = 0;
+    private int requiredFluidAmount;
     private FakePlayer fakePlayer;
 
     public static final int INPUT_SLOT = 0;
@@ -81,13 +80,23 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         @Override
         protected void onContentsChanged(int index, ItemStack previousContents) {
             updateCachedRecipes();
+            recheckFluidRequirement();
             super.onContentsChanged(index, previousContents);
         }
     };
 
-    private final SyncableFluidHandler fluidInventory = new SyncableFluidHandler(this, 1, 4000, (i, stack) -> i == 0, i -> true);
+    private final SyncableFluidHandler fluidInventory = new SyncableFluidHandler(this, 1, 4000, (i, stack) -> i == 0, i -> true) {
+
+        @Override
+        protected void onContentsChanged(int index, FluidStack previousContents) {
+            recheckFluidRequirement();
+            super.onContentsChanged(index, previousContents);
+        }
+    };
 
     private List<RecipeHolder<StrainerRecipe>> cachedRecipes = List.of();
+    private int cachedFluidCost = 0;
+    private boolean cachedHasEnoughFluid = true;
 
     public StrainerBlockEntity(BlockPos pos, BlockState state) {
         super(StrainersBlockEntities.STRAINER_BLOCK_ENTITY.get(), pos, state);
@@ -97,6 +106,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 return switch (index) {
                     case 0 -> progress;
                     case 1 -> maxProgress;
+                    case 2 -> requiredFluidAmount;
                     default -> 0;
                 };
             }
@@ -105,11 +115,12 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
                 switch (index) {
                     case 0 -> progress = value;
                     case 1 -> maxProgress = value;
+                    case 2 -> requiredFluidAmount = value;
                 }
             }
 
             public int getCount() {
-                return 2;
+                return 3;
             }
         };
     }
@@ -162,20 +173,20 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
             return;
         }
 
+        if (!cachedHasEnoughFluid) {
+            sync();
+            return;
+        }
+
         if (progress >= maxProgress) {
 
             List<ItemStack> outputs = rollOutputs(meshTier, mesh, validRecipes);
-            int fluidCost = getTotalFluidAmount(validRecipes);
 
             if (!canInsertOutputs(outputs)) {
                 return;
             }
 
-            if (!hasEnoughFluid(fluidCost)) {
-                return;
-            }
-
-            craftItem(meshTier, validRecipes, outputs, fluidCost);
+            craftItem(meshTier, validRecipes, outputs, cachedFluidCost);
 
         } else {
             progress++;
@@ -206,12 +217,15 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
             SizedFluidIngredient fluidIngredient = holder.value().fluid().get();
             total += fluidIngredient.amount();
         }
+        requiredFluidAmount = total;
         return total;
     }
 
-    private boolean hasEnoughFluid(int amount) {
-        if (amount <= 0) return true;
-        return fluidInventory.getAmountAsInt(0) >= amount; // method name TBC
+    private void recheckFluidRequirement() {
+        cachedFluidCost = getTotalFluidAmount(cachedRecipes);
+        requiredFluidAmount = cachedFluidCost;
+        cachedHasEnoughFluid = cachedFluidCost <= 0 || fluidInventory.getAmountAsInt(0) >= cachedFluidCost;
+        sync();
     }
 
     private int getFortuneLevel(ItemStack stack) {
@@ -377,6 +391,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         fluidInventory.serialize(output.child("fluidInventory"));
         output.putInt("progress", progress);
         output.putInt("maxProgress", maxProgress);
+        output.putInt("requiredFluidAmount", requiredFluidAmount);
         super.saveAdditional(output);
     }
 
@@ -386,7 +401,17 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         fluidInventory.deserialize(input.childOrEmpty("fluidInventory"));
         progress = input.getIntOr("progress", 0);
         maxProgress = input.getIntOr("maxProgress", 200);
+        requiredFluidAmount = input.getIntOr("requiredFluidAmount", 0);
         super.loadAdditional(input);
+        updateCachedRecipes();
+        recheckFluidRequirement();
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        updateCachedRecipes();
+        recheckFluidRequirement();
     }
 
     public ItemStacksResourceHandler getItemHandler() {
