@@ -14,14 +14,14 @@ public class StrainersFluids {
 
     public static final FluidRegistryObject<FluidDeferredRegister.CoreFluidTypes, BaseFlowingFluid.Source, BaseFlowingFluid.Flowing, LiquidBlock, BucketItem> ERODING_WATER = FLUIDS.register("eroding_water",
             renderProperties -> renderProperties.texture(Core.identifier("block/liquid"),
-                    Core.identifier("block/liquid_flow")).tint(0xBFCCCCFF));
+                    Core.identifier("block/liquid_flow")).tint(0xBFCCCCFF).moveLikeWater());
 
     public static final FluidRegistryObject<FluidDeferredRegister.CoreFluidTypes, BaseFlowingFluid.Source, BaseFlowingFluid.Flowing, LiquidBlock, BucketItem> PURIFYING_WATER = FLUIDS.register("purifying_water",
             renderProperties -> renderProperties.texture(Core.identifier("block/liquid"),
-                    Core.identifier("block/liquid_flow")).tint(0xBFff13d6));
+                    Core.identifier("block/liquid_flow")).tint(0xBFff13d6).moveLikeWater());
 
     public static final FluidRegistryObject<FluidDeferredRegister.CoreFluidTypes, BaseFlowingFluid.Source, BaseFlowingFluid.Flowing, LiquidBlock, BucketItem> SALTY_WATER = FLUIDS.register("salty_water",
             renderProperties -> renderProperties.texture(Core.identifier("block/liquid"),
-                    Core.identifier("block/liquid_flow")).tint(0xBF7E92E8));
+                    Core.identifier("block/liquid_flow")).tint(0xBF7E92E8).moveLikeWater());
 
 }
