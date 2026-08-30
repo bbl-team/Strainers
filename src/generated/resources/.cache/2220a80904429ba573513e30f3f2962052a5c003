@@ -1,4 +1,4 @@
-// 26.1.2	2026-07-31T11:41:12.2833534	strainers Recipes
+// 26.1.2	2026-08-30T08:46:56.2522853	strainers Recipes
 a795a6df2c932dbc3497eb278c856daaffb5c277 data/strainers/advancement/recipes/misc/cobblestone_from_pebbles.json
 03fb6c119ee9c9efd15e635c80de8be9bc327104 data/strainers/advancement/recipes/misc/dirt_from_dirt_pile.json
 8fbef28f590bd7423a63f28448b779245f372d0a data/strainers/advancement/recipes/misc/dust_block_from_dust.json
@@ -89,17 +89,17 @@ c405f0cf99894b847d08cccee458d9bf922986d4 data/strainers/advancement/recipe/ore_p
 406f314ef552b66cb2b946fecaf604c69972bfcb data/strainers/advancement/recipe/ore_piece/zinc.json
 c7b1a63ffd718aceeddcff80af652b383f3bf417 data/strainers/advancement/recipe/wooden_mesh.json
 0349a1553781761a847fddc5810d8c8ca24bb26d data/strainers/recipe/cobblestone_from_pebbles.json
-ff9688346e9a6088c6556fd202e5f400f1838ac1 data/strainers/recipe/copper_mesh.json
-2dd2193be8719c1ed906f51bac439a29f99e592f data/strainers/recipe/diamond_mesh.json
+fa912126870a1139bf44d6c507682058184941ef data/strainers/recipe/copper_mesh.json
+eae08e95559265521487d786a78b953e0cc31ff7 data/strainers/recipe/diamond_mesh.json
 c820bba968db8d73aa7106ce13a2538628c18363 data/strainers/recipe/dirt_from_dirt_pile.json
 c1884595ac7cb255ba3c85afdec190eec8b5ae45 data/strainers/recipe/dust_block_from_dust.json
-3f43a7673c4a41cc2f18da4ef52ac92d5a6e7bb2 data/strainers/recipe/emerald_mesh.json
+31317657c81b339f200fa9eeb94a4b29f95e5b88 data/strainers/recipe/emerald_mesh.json
 dfde8c7602682e74bea7578c1b7571cdf5e3bfd3 data/strainers/recipe/flint_mesh.json
-03a3a114d8522a7436e68a72613b5ccf7ccab956 data/strainers/recipe/gold_mesh.json
+02eebcfe67c025a657e716c499f675c07e12768c data/strainers/recipe/gold_mesh.json
 802dd0b85038af3003e181086f388b780b1f3194 data/strainers/recipe/gravel_from_pebbles.json
-8c6545da9810cf0f108b386265f59ac8b4f80115 data/strainers/recipe/iron_mesh.json
+929ec70cc6fda3539792b28fbe64eedfa0a7fdf2 data/strainers/recipe/iron_mesh.json
 9ddcdcec3f5bc33a082a2d49adcd5b08ac4255c6 data/strainers/recipe/mulch_from_leaf_pile.json
-299a4cec81c96ba319b14cf2a45d70f7631f626b data/strainers/recipe/netherite_mesh.json
+2b40aaef111f6e282f242982f5561722958215cb data/strainers/recipe/netherite_mesh.json
 e861153c2dc446650f7d3ac7e537e262494e09e0 data/strainers/recipe/ore_piece/alexandrite.json
 218b198531e34a9699fead220316744b4983f912 data/strainers/recipe/ore_piece/allthemodium.json
 ef777b8dbdc26636ec8647364e7809873861028e data/strainers/recipe/ore_piece/aluminum.json
@@ -176,4 +176,4 @@ ff3f74cd7333626a8d8abba720a3cf363c8fb6c7 data/strainers/recipe/sand_from_dust.js
 56d4c8daf058cd5869314031ccc8c9dd1247fafd data/strainers/recipe/sculk_from_sculk_dust.json
 611b9df3d223c0e7c08b8420df952bf0bf302e45 data/strainers/recipe/sculk_shrieker.json
 65e99d89e6bbbe5128c0fa8253ca0007391ad332 data/strainers/recipe/strainer.json
-27e0c85fd8ab20f393e2c91f36919f2664030473 data/strainers/recipe/wooden_mesh.json
+f5fee68bbfdbdab77d35386657df42395e333033 data/strainers/recipe/wooden_mesh.json

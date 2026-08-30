@@ -1,5 +1,6 @@
 package com.benbenlaw.strainers.data;
 
+import com.benbenlaw.castingtools.item.CTDataComponent;
 import com.benbenlaw.core.data.recipe.RecipeProviderHelper;
 import com.benbenlaw.core.data.recipe.ShapedComponentCopyRecipeProvider;
 import com.benbenlaw.core.data.recipe.ShapedTagOutputRecipeProvider;
@@ -139,6 +140,8 @@ public class StrainersRecipeProvider extends RecipeProvider {
         );
         List<DataComponentType<?>> components = new ArrayList<>();
         components.add(DataComponents.ENCHANTMENTS);
+        components.add(DataComponents.DAMAGE);
+        components.add(CTDataComponent.MODIFIER_COMPONENT.get());
 
         ShapedComponentCopyRecipeProvider.componentCopyRecipe(
                 RecipeProviderHelper.simpleCommonInfo(),

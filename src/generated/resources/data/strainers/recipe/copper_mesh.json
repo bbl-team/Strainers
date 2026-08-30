@@ -2,7 +2,9 @@
   "type": "bblcore:shaped_component_copy",
   "category": "misc",
   "copy_components": [
-    "minecraft:enchantments"
+    "minecraft:enchantments",
+    "minecraft:damage",
+    "castingtools:modifier_component"
   ],
   "key": {
     "A": "#c:ingots/copper",

@@ -82,6 +82,10 @@ dependencies {
     implementation("curse.maven:ato-405593:7960942")
     implementation("curse.maven:allthemodium-364466:7972894")
     implementation("curse.maven:geckolib-388172:7913641")
+    //Casting
+    implementation("curse.maven:bbl-casting-1052163:8760182")
+    implementation("curse.maven:bbl-casting-tools-1501619:8760004")
+
 }
 
 tasks.withType(ProcessResources).configureEach {
