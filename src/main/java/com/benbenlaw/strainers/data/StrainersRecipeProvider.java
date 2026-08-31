@@ -1,5 +1,6 @@
 package com.benbenlaw.strainers.data;
 
+import com.benbenlaw.casting.block.CastingBlocks;
 import com.benbenlaw.castingtools.item.CTDataComponent;
 import com.benbenlaw.core.data.recipe.RecipeProviderHelper;
 import com.benbenlaw.core.data.recipe.ShapedComponentCopyRecipeProvider;
@@ -106,6 +107,10 @@ public class StrainersRecipeProvider extends RecipeProvider {
                 .define('B', StrainersItems.WOODEN_MESH.get())
                 .unlockedBy("has_mesh", has(StrainersItems.WOODEN_MESH.get()))
                 .save(output);
+
+        //Strainer Reset
+        shapeless(RecipeCategory.MISC, StrainersBlocks.STRAINER).requires(StrainersBlocks.STRAINER).unlockedBy("has_strainer", has(StrainersBlocks.STRAINER)).save(output, Strainers.identifier("strainer_reset").toString());
+
 
         //Meshes
         meshBuilder(StrainersItems.WOODEN_MESH.get(), Tags.Items.RODS_WOODEN, Items.STICK);

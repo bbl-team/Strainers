@@ -1,4 +1,4 @@
-// 26.1.2	2026-08-30T08:46:56.2522853	strainers Recipes
+// 26.1.2	2026-08-31T16:48:12.3080334	strainers Recipes
 a795a6df2c932dbc3497eb278c856daaffb5c277 data/strainers/advancement/recipes/misc/cobblestone_from_pebbles.json
 03fb6c119ee9c9efd15e635c80de8be9bc327104 data/strainers/advancement/recipes/misc/dirt_from_dirt_pile.json
 8fbef28f590bd7423a63f28448b779245f372d0a data/strainers/advancement/recipes/misc/dust_block_from_dust.json
@@ -10,6 +10,7 @@ eb9127ecc52584cb4797df915fdf54d85d931105 data/strainers/advancement/recipes/misc
 97b07a0fe3b6ae2447b9f8e55de0229ad5989f1e data/strainers/advancement/recipes/misc/sculk_from_sculk_dust.json
 f4b3361cd8e6f9a82f73b1e02a105a9a455eabbe data/strainers/advancement/recipes/misc/sculk_shrieker.json
 8c2e32e67394353273c71315b95d78aafc32c011 data/strainers/advancement/recipes/misc/strainer.json
+23f38dcf96817a843bf9b6910e36e282142ba6c7 data/strainers/advancement/recipes/misc/strainer_reset.json
 b2d79561042b1b5872d0e4388fce5422f9c493c3 data/strainers/advancement/recipe/copper_mesh.json
 c199c7f6ca3c9363b595b8b96da833a75b06bab1 data/strainers/advancement/recipe/diamond_mesh.json
 c4d9a323efbb44e1b7ab22865b10c6e9d0b4a4fb data/strainers/advancement/recipe/emerald_mesh.json
@@ -176,4 +177,5 @@ ff3f74cd7333626a8d8abba720a3cf363c8fb6c7 data/strainers/recipe/sand_from_dust.js
 56d4c8daf058cd5869314031ccc8c9dd1247fafd data/strainers/recipe/sculk_from_sculk_dust.json
 611b9df3d223c0e7c08b8420df952bf0bf302e45 data/strainers/recipe/sculk_shrieker.json
 65e99d89e6bbbe5128c0fa8253ca0007391ad332 data/strainers/recipe/strainer.json
+f7fcfa5c30c8acdaefbedf2baa093a41d650046a data/strainers/recipe/strainer_reset.json
 f5fee68bbfdbdab77d35386657df42395e333033 data/strainers/recipe/wooden_mesh.json
