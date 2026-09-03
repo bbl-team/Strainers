@@ -7,8 +7,11 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 public class StrainersDataComponents {
 
@@ -27,6 +30,14 @@ public class StrainersDataComponents {
                     DataComponentType.<String>builder()
                             .persistent(Codec.STRING)
                             .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                            .cacheEncoding()
+                            .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> REMOVED_DROPS =
+            COMPONENTS.register("removed_drops", () ->
+                    DataComponentType.<List<ItemStack>>builder()
+                            .persistent(ItemStack.CODEC.listOf())
+                            .networkSynchronized(ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()))
                             .cacheEncoding()
                             .build());
 

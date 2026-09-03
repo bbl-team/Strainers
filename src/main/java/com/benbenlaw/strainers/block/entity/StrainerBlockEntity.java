@@ -16,6 +16,7 @@ import com.benbenlaw.strainers.util.StrainersTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -201,7 +202,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
 
         for (RecipeHolder<StrainerRecipe> holder : recipes) {
             ItemStack rolled = holder.value().rollWithTier(random, meshTier, fortune);
-            if (!rolled.isEmpty()) {
+            if (!rolled.isEmpty() && !isRemovedRecipeOutput(rolled)) {
                 outputs.add(rolled);
             }
         }
@@ -381,6 +382,47 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         return 0;
     }
 
+    public boolean isRemovedRecipeOutput(ItemStack output) {
+        return getRemovedRecipeOutputs().stream()
+                .anyMatch(stack -> ItemStack.isSameItemSameComponents(stack, output));
+    }
+
+    public void setRemovedRecipeOutput(ItemStack output, boolean removed) {
+        ItemStack mesh = inventory.getResource(MESH_SLOT).toStack();
+        if (mesh.isEmpty()) return;
+
+        List<ItemStack> updated = new ArrayList<>(getRemovedRecipeOutputs());
+        updated.removeIf(stack -> ItemStack.isSameItemSameComponents(stack, output));
+        if (removed) {
+            updated.add(output.copyWithCount(1));
+        }
+
+        if (updated.isEmpty()) {
+            mesh.remove(StrainersDataComponents.REMOVED_DROPS.get());
+        } else {
+            mesh.set(StrainersDataComponents.REMOVED_DROPS.get(), updated);
+        }
+
+        inventory.set(MESH_SLOT, ItemResource.of(mesh), mesh.getCount());
+    }
+
+    public List<ItemStack> getRemovedRecipeOutputs() {
+        ItemStack mesh = inventory.getResource(MESH_SLOT).toStack();
+        return mesh.getOrDefault(StrainersDataComponents.REMOVED_DROPS.get(), List.of());
+    }
+
+    public List<ItemStack> getPossibleRecipeOutputs() {
+        List<ItemStack> outputs = new ArrayList<>();
+
+        for (RecipeHolder<StrainerRecipe> holder : cachedRecipes) {
+            ItemStack template = holder.value().result().template().create();
+            if (!template.isEmpty() && outputs.stream().noneMatch(s -> ItemStack.isSameItemSameComponents(s, template))) {
+                outputs.add(template);
+            }
+        }
+        return outputs;
+    }
+
     public boolean onPlayerUse(Player player, InteractionHand hand) {
         return FluidUtil.interactWithFluidHandler(player, hand, this.worldPosition, fluidInventory);
     }
@@ -392,6 +434,7 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         output.putInt("progress", progress);
         output.putInt("maxProgress", maxProgress);
         output.putInt("requiredFluidAmount", requiredFluidAmount);
+
         super.saveAdditional(output);
     }
 
@@ -402,9 +445,12 @@ public class StrainerBlockEntity extends SyncableBlockEntity implements MenuProv
         progress = input.getIntOr("progress", 0);
         maxProgress = input.getIntOr("maxProgress", 200);
         requiredFluidAmount = input.getIntOr("requiredFluidAmount", 0);
-        super.loadAdditional(input);
+
         updateCachedRecipes();
         recheckFluidRequirement();
+
+        super.loadAdditional(input);
+
     }
 
     @Override

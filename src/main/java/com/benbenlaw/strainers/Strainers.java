@@ -3,7 +3,6 @@ package com.benbenlaw.strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.block.StrainersBlockEntities;
 import com.benbenlaw.strainers.block.StrainersCapabilities;
-import com.benbenlaw.strainers.block.entity.StrainerBlockEntity;
 import com.benbenlaw.strainers.block.entity.renderer.StrainerBlockEntityRenderer;
 import com.benbenlaw.strainers.config.StrainersConfig;
 import com.benbenlaw.strainers.fluid.StrainersFluids;
@@ -15,6 +14,7 @@ import com.benbenlaw.strainers.loot.StrainersLootModifiers;
 import com.benbenlaw.strainers.network.StrainersMessages;
 import com.benbenlaw.strainers.recipe.StrainersRecipes;
 import com.benbenlaw.strainers.screen.StrainersMenuTypes;
+import com.benbenlaw.strainers.screen.custom.StrainerDropConfigScreen;
 import com.benbenlaw.strainers.screen.custom.StrainerScreen;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
@@ -80,6 +80,7 @@ public class Strainers {
         @SubscribeEvent
         public static void registerScreens(RegisterMenuScreensEvent event) {
             event.register(StrainersMenuTypes.WOODEN_STRAINER_MENU.get(), StrainerScreen::new);
+            event.register(StrainersMenuTypes.STRAINER_DROP_CONFIG_MENU.get(), StrainerDropConfigScreen::new);
         }
     }
 

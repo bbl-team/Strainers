@@ -108,6 +108,10 @@ public class StrainersLangProvider extends LanguageProvider {
         add("tooltip.strainers.seed_bag", "Right Click to place a random seed, on Farmland");
         add("tooltip.strainers.depleted_drop", "Yes its useless just throw me away !");
         add("tooltip.strainers.empty", "Empty");
+        add("tooltip.strainers.configure_drops", "Configure Drops");
+
+        //Screen
+        add("screen.strainers.configure_drops", "Enable / Disable Drops");
 
         //JEI
         add("jei.strainers.strainer", "Strainer");

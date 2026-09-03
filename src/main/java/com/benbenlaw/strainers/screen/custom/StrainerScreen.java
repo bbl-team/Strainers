@@ -8,6 +8,8 @@ import com.benbenlaw.core.util.MouseUtil;
 import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.config.StrainersConfig;
 import com.benbenlaw.strainers.network.packet.ChangeScrollOffsetPacket;
+import com.benbenlaw.strainers.network.packet.RequestDropConfigPacket;
+import com.benbenlaw.strainers.util.MousePositionManagerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -23,6 +25,7 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
     private static final Identifier TEXTURE = Strainers.identifier("textures/gui/strainer_gui.png");
     private static final Identifier PROGRESS_ARROW = Core.identifier("progress_arrow");
     private static final Identifier BUCKET_ICON = Strainers.identifier("bucket_icon");
+    private static final Identifier CONFIG_ICON = Strainers.identifier("config_icon");
     private static final Identifier SCROLL_ICON = Strainers.identifier("scroll");
 
     private boolean isDraggingScrollbar = false;
@@ -30,6 +33,16 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
     public StrainerScreen(StrainerMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
     }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        if (MousePositionManagerUtil.lastMouseX != -1) {
+            MousePositionManagerUtil.setLastKnownPosition();
+        }
+    }
+
 
     @Override
     public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -50,6 +63,8 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
         int barY = y + 17 + (int)(scroll * 37);
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, SCROLL_ICON, 12, 15, 0, 0, x + 154, barY, 12, 15);
+
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, CONFIG_ICON, 10, 10, 0, 0, x + 139, y + 5, 10, 10);
     }
 
     @Override
@@ -65,6 +80,11 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
         FluidRenderingUtils.renderFluid(guiGraphics, menu.blockEntity.getFluidHandler(), 0, x, y, 8, 17, 16, 16,
                 mouseX, mouseY, Component.translatable("tooltip.strainers.empty")
         );
+
+        if (MouseUtil.isMouseAboveArea(mouseX, mouseY, x, y, 139, 5, 10, 10)) {
+            guiGraphics.setTooltipForNextFrame(Minecraft.getInstance().font,
+                    Component.translatable("tooltip.strainers.configure_drops"), mouseX, mouseY);
+        }
     }
 
     @Override
@@ -84,6 +104,9 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
 
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+
+        MousePositionManagerUtil.getLastKnownPosition();
+
         int x = leftPos + 154;
         int y = topPos + 17;
 
@@ -92,6 +115,16 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
                 event.y() >= y && event.y() < y + 52) {
             isDraggingScrollbar = true;
             updateScrollFromMouse((int) event.y());
+            return true;
+        }
+
+        int configX = leftPos + 139;
+        int configY = topPos + 5;
+
+        if (event.button() == 0 &&
+                event.x() >= configX && event.x() < configX + 10 &&
+                event.y() >= configY && event.y() < configY + 10) {
+            ClientPacketDistributor.sendToServer(new RequestDropConfigPacket(menu.blockPos));
             return true;
         }
 
@@ -111,6 +144,12 @@ public class StrainerScreen extends AbstractContainerScreen<StrainerMenu> {
             return true;
         }
         return super.mouseDragged(event, dx, dy);
+    }
+
+    @Override
+    public void onClose() {
+        MousePositionManagerUtil.clear();
+        super.onClose();
     }
 
     private void updateScrollFromMouse(int mouseY) {

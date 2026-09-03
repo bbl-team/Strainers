@@ -69,6 +69,8 @@
   "jei.strainers.fluid_amount_no_consume": "Requires %smb of fluid",
   "jei.strainers.leaf_pile": "Leaf Piles can be obtained when breaking leaves with a Stick",
   "jei.strainers.strainer": "Strainer",
+  "screen.strainers.configure_drops": "Enable / Disable Drops",
+  "tooltip.strainers.configure_drops": "Configure Drops",
   "tooltip.strainers.depleted_drop": "Yes its useless just throw me away !",
   "tooltip.strainers.empty": "Empty",
   "tooltip.strainers.fluid_drop_item": "Holding 4 and right clicking will create a source block of %s. Can also be used to fill tanks like a bucket would!",

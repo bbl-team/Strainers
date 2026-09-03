@@ -9,6 +9,7 @@ import com.benbenlaw.strainers.Strainers;
 import com.benbenlaw.strainers.block.StrainersBlocks;
 import com.benbenlaw.strainers.client.OreDefaults;
 import com.benbenlaw.strainers.item.OrePieceItem;
+import com.benbenlaw.strainers.item.StrainersDataComponents;
 import com.benbenlaw.strainers.item.StrainersItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentType;
@@ -147,6 +148,7 @@ public class StrainersRecipeProvider extends RecipeProvider {
         components.add(DataComponents.ENCHANTMENTS);
         components.add(DataComponents.DAMAGE);
         components.add(CTDataComponent.MODIFIER_COMPONENT.get());
+        components.add(StrainersDataComponents.REMOVED_DROPS.get());
 
         ShapedComponentCopyRecipeProvider.componentCopyRecipe(
                 RecipeProviderHelper.simpleCommonInfo(),
