@@ -85,6 +85,8 @@ dependencies {
     //Casting
     implementation("curse.maven:bbl-casting-1052163:8760182")
     implementation("curse.maven:bbl-casting-tools-1501619:8760004")
+    //Observable
+    runtimeOnly("curse.maven:observable-remake-1639360:8589511")
 
 }
 
