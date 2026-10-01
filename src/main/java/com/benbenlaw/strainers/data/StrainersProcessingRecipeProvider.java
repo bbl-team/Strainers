@@ -75,7 +75,13 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .input(StrainersBlocks.MULCH)
                 .output(StrainersItems.SAPLING_BAG.get(), 1, 0.2f)
                 .tier(2, 0.05f)
-                .save(output, "mulch/gravel_pebble");
+                .save(output, "mulch/sapling_bag");
+
+        StrainerRecipeBuilder.create().water()
+                .input(StrainersBlocks.MULCH)
+                .output(StrainersItems.FLOWER_BAG.get(), 1, 0.2f)
+                .tier(2, 0.05f)
+                .save(output, "mulch/flower_bag");
 
         //Leaves
         StrainerRecipeBuilder.create()
@@ -100,7 +106,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .input(ItemTags.LEAVES, this.registries)
                 .output(StrainersItems.SAPLING_BAG.get(), 1, 0.1f)
                 .tier(1, 0.05f)
-                .save(output, "leaves/sapling_seed");
+                .save(output, "leaves/sapling_bag");
 
         //Dirt
         StrainerRecipeBuilder.create()
@@ -127,6 +133,11 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .tier(6, 0.0f)
                 .save(output, "dirt/soul_soil");
 
+        StrainerRecipeBuilder.create().water()
+                .input(ItemTags.LEAVES, this.registries)
+                .output(StrainersItems.FLOWER_BAG.get(), 1, 0.1f)
+                .tier(1, 0.05f)
+                .save(output, "leaves/flower_bag");
 
         //Gravel
         StrainerRecipeBuilder.create().water()
@@ -226,7 +237,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .input(Blocks.DEEPSLATE)
                 .output(StrainersBlocks.PURIFIED_DEEPSLATE.get().asItem(), 1, 1.0f)
                 .tier(4, 0.0f)
-                .save(output, "stone/purified_deepslate");
+                .save(output, "deepslate/purified_deepslate");
 
         StrainerRecipeBuilder.create().purifying()
                 .input(Blocks.END_STONE)
@@ -239,7 +250,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .input(StrainersBlocks.PURIFIED_DIRT)
                 .output(Blocks.GRASS_BLOCK.asItem(), 1, 1.0f)
                 .tier(7, 0.0f)
-                .save(output, "purified_dirt/dirt");
+                .save(output, "purified_dirt/grass_block");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_DIRT)
@@ -438,7 +449,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .input(StrainersBlocks.PURIFIED_SAND)
                 .output("salt", 0.3f)
                 .tier(3, 0.05f)
-                .save(output, "purified_sand/salt");
+                .save(output, "salt", "purified_sand/salt");
 
         StrainerRecipeBuilder.create().water()
                 .input(StrainersBlocks.PURIFIED_SAND)
@@ -574,7 +585,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .tier(5, 0.25f)
                 .save(output, "purified_gravel/diamond");
 
-        StrainerRecipeBuilder.create().water()
+        StrainerRecipeBuilder.create().water(5)
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("sulfur", 0.65f)
                 .tier(5, 0.25f)
@@ -645,7 +656,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         StrainerRecipeBuilder.create().water(5)
                 .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                 .output(Items.AMETHYST_SHARD, 1, 0.15f)
-                .tier(3, 0.105f)
+                .tier(3, 0.1f)
                 .save(output, "purified_dust_block/amethyst_shard");
 
         StrainerRecipeBuilder.create().water(5)
@@ -704,7 +715,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                     .output(ore, 0.35f)
                     .tier(6, 0.25f)
-                    .save(output, ore, "silent/purified_dust_block/" + ore);
+                    .save(output, ore, "compat/silent/purified_dust_block/" + ore);
         }
 
         List<String> netherOres = new ArrayList<>();
@@ -716,7 +727,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .input(StrainersBlocks.PURIFIED_NETHERRACK)
                     .output(ore, 0.35f)
                     .tier(6, 0.25f)
-                    .save(output, ore, "silent/purified_netherrack/" + ore);
+                    .save(output, ore, "compat/silent/purified_netherrack/" + ore);
         }
     }
 
@@ -732,7 +743,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .input(StrainersBlocks.PURIFIED_GRAVEL)
                     .output(ore, 0.35f)
                     .tier(6, 0.25f)
-                    .save(output, ore, "forbiddenarcanus/purified_gravel/" + ore);
+                    .save(output, ore, "compat/forbiddenarcanus/purified_gravel/" + ore);
         }
     }
 
@@ -749,7 +760,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .input(StrainersBlocks.PURIFIED_GRAVEL)
                     .output(ore, 0.15f)
                     .tier(7, 0.1f)
-                    .save(output, ore, "powah/purified_gravel/" + ore);
+                    .save(output, ore, "compat/powah/purified_gravel/" + ore);
         }
     }
     public void addMysticalAgriculture() {
@@ -763,14 +774,14 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                     .output(ore, 0.2f)
                     .tier(7, 0.05f)
-                    .save(output, ore, "purified_dust_block/" + ore);
+                    .save(output, ore, "compat/mysticalagriculture/purified_dust_block/" + ore);
         }
 
         StrainerRecipeBuilder.create().water(15)
                 .input(StrainersBlocks.PURIFIED_SOUL_SAND)
                 .output("soulium", 0.2f)
                 .tier(5, 0.15f)
-                .save(output, "soulium", "mysticalagriculture/purified_soul_sand/soulium");
+                .save(output, "soulium", "compat/mysticalagriculture/purified_soul_sand/soulium");
     }
 
     public void addTheurgy() {
@@ -782,35 +793,29 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
             StrainerRecipeBuilder.create().water(15)
                     .input(StrainersBlocks.PURIFIED_DUST_BLOCK)
                     .output(ore, 0.15f)
-                    .tier(73, 0.05f)
-                    .save(output, ore, "theurgy/purified_dust_block/" + ore);
+                    .tier(7, 0.05f)
+                    .save(output, ore, "compat/theurgy/purified_dust_block/" + ore);
         }
     }
 
     public void addAllTheModium() {
-
-        List<String> ores = new ArrayList<>();
-        ores.add("allthemodium");
-        ores.add("vibranium");
-        ores.add("unobtainium");
-
         StrainerRecipeBuilder.create().water(1000)
                 .input(StrainersBlocks.PURIFIED_DEEPSLATE)
                 .output("allthemodium", 0.01f)
                 .tier(8, 0.01f)
-                .save(output, "allthemodium", "allthemodium/purified_dust_block/allthemodium");
+                .save(output, "allthemodium", "compat/allthemodium/purified_deepslate/allthemodium");
 
         StrainerRecipeBuilder.create().water(1000)
                 .input(StrainersBlocks.PURIFIED_NETHERRACK)
                 .output("vibranium", 0.01f)
                 .tier(8, 0.01f)
-                .save(output, "vibranium", "allthemodium/purified_netherrack/vibranium");
+                .save(output, "vibranium", "compat/allthemodium/purified_netherrack/vibranium");
 
         StrainerRecipeBuilder.create().water(1000)
                 .input(StrainersBlocks.PURIFIED_END_STONE)
                 .output("unobtainium", 0.01f)
                 .tier(8, 0.01f)
-                .save(output, "unobtainium", "allthemodium/purified_end_stone/unobtainium");
+                .save(output, "unobtainium", "compat/allthemodium/purified_end_stone/unobtainium");
     }
 
     public void addEvilCraft() {
@@ -823,7 +828,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .input(StrainersBlocks.PURIFIED_GRAVEL)
                     .output(ore, 0.15f)
                     .tier(7, 0.05f)
-                    .save(output, ore, "evilcraft/purified_gravel/" + ore);
+                    .save(output, ore, "compat/evilcraft/purified_gravel/" + ore);
         }
     }
 
@@ -836,7 +841,7 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .input(StrainersBlocks.PURIFIED_GRAVEL)
                     .output(ore, 0.15f)
                     .tier(8, 0.05f)
-                    .save(output, ore, "dimensionalresources/purified_gravel/" + ore);
+                    .save(output, ore, "compat/dimensionalresources/purified_gravel/" + ore);
         }
     }
 }

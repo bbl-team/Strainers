@@ -51,5 +51,6 @@ public class StrainersItems {
     //Misc
     public static final DeferredItem<Item> SAPLING_BAG = ITEMS.registerItem("sapling_bag", SaplingBagItem::new);
     public static final DeferredItem<Item> SEED_BAG = ITEMS.registerItem("seed_bag", SeedBagItem::new);
+    public static final DeferredItem<Item> FLOWER_BAG = ITEMS.registerItem("flower_bag", FlowerBagItem::new);
 
 }

@@ -1,5 +1,8 @@
 {
   "values": {
+    "strainers:flower_bag": {
+      "chance": 0.75
+    },
     "strainers:leaf_pile": {
       "chance": 0.25
     },
@@ -7,10 +10,10 @@
       "chance": 1.0
     },
     "strainers:sapling_bag": {
-      "chance": 0.45
+      "chance": 0.75
     },
     "strainers:seed_bag": {
-      "chance": 0.45
+      "chance": 0.75
     }
   }
 }

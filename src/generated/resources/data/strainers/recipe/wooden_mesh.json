@@ -4,7 +4,8 @@
   "copy_components": [
     "minecraft:enchantments",
     "minecraft:damage",
-    "castingtools:modifier_component"
+    "castingtools:modifier_component",
+    "strainers:removed_drops"
   ],
   "key": {
     "A": "#c:rods/wooden",

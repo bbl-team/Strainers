@@ -1,4 +1,4 @@
-// 26.1.2	2026-07-07T13:41:40.6506855	strainers Models
+// 26.1.2	2026-10-01T08:47:27.7811799	strainers Models
 234aeaefc0554e1b9f1bd9c7e489b055f3e98f75 assets/strainers/blockstates/dust_block.json
 e5a33b4a2db42195222fa1709b3d9533ac41e453 assets/strainers/blockstates/eroding_water.json
 e10d9344218da33ff4b507e211b266c6bdb831b6 assets/strainers/blockstates/mulch.json
@@ -24,6 +24,7 @@ c10c9b1d1d3d33e580128727dcd6ab445e64f82c assets/strainers/items/copper_mesh.json
 2157c2beafef4ccbc054e87c3584dcfc06624b07 assets/strainers/items/eroding_drop.json
 0e8a81942f6454a635cf511e3733177a93299218 assets/strainers/items/eroding_water_bucket.json
 8594da45d5de9a753a24ed3d84efb4e3e6d7b453 assets/strainers/items/flint_mesh.json
+6130879c3bb6f6b583fabf8058f16e82053bd9bd assets/strainers/items/flower_bag.json
 fc5b06b61a0a5154b33e1dee7b85b15c5c69fcc9 assets/strainers/items/gold_mesh.json
 9807f40f0894985b510860f8f59fde723e08ca9d assets/strainers/items/gravel_pebble.json
 0300bd0cc16990e4fa9aa06359cb602ece67b0ab assets/strainers/items/iron_mesh.json
@@ -73,6 +74,7 @@ c1f834b5903b7b7834600d60f031182e2f1b6d5e assets/strainers/models/item/dust.json
 2c797b4d257572b9224b9173bef0d919b2f15fe6 assets/strainers/models/item/emerald_mesh.json
 7ad2ab8e42cfb9381776c812dd65bbd9438ef672 assets/strainers/models/item/eroding_drop.json
 a72e6fcb43da35dd75c8aa400393f685748481ac assets/strainers/models/item/flint_mesh.json
+839d0ad05b86500f56c7927680c2131f855da906 assets/strainers/models/item/flower_bag.json
 cdf99470f9ec1c56bd79b35599d85e66418dae61 assets/strainers/models/item/gold_mesh.json
 85d2eefb4b0d03cc33f72c14c3830832d86950dc assets/strainers/models/item/gravel_pebble.json
 570678e0f83fd394e1139528457965c67666264c assets/strainers/models/item/iron_mesh.json

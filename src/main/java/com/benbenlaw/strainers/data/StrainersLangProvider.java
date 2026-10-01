@@ -78,6 +78,7 @@ public class StrainersLangProvider extends LanguageProvider {
 
         add("item.strainers.sapling_bag", "Sapling Bag (What's inside!)");
         add("item.strainers.seed_bag", "Seed Bag (What's inside!)");
+        add("item.strainers.flower_bag", "Flower Bag (What's inside!)");
         add("item.strainers.leaf_pile", "Leaf Pile");
         add("item.strainers.water_drop", "Water Drop");
         add("item.strainers.lava_drop", "Lava Drop");
@@ -115,6 +116,7 @@ public class StrainersLangProvider extends LanguageProvider {
 
         //JEI
         add("jei.strainers.strainer", "Strainer");
+        add("jei.strainers.bag_outputs", "Bag Outputs");
         add("jei.strainers.chance", "Chance: %s%%");
         add("jei.strainers.additional", "Additional %s%% per level above minimum mesh tier");
         add("jei.strainers.leaf_pile", "Leaf Piles can be obtained when breaking leaves with a Stick");

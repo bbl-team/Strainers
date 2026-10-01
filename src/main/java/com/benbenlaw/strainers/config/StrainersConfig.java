@@ -13,6 +13,8 @@ public class StrainersConfig {
     public static final ModConfigSpec.ConfigValue<List<? extends String>> REMOVE_SEED_BAG_OUTPUTS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ADD_SAPLING_BAG_OUTPUTS;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> REMOVE_SAPLING_BAG_OUTPUTS;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> ADD_FLOWER_BAG_OUTPUTS;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> REMOVE_FLOWER_BAG_OUTPUTS;
     public static final ModConfigSpec.ConfigValue<Boolean> STRAINERS_CONSUME_FLUID;
 
     static {
@@ -55,6 +57,23 @@ public class StrainersConfig {
                         List.of("productivetrees:*", "allthemodium:*"),
                         () -> "",
                         StrainersConfig::isValidEntry);
+
+        ADD_FLOWER_BAG_OUTPUTS = BUILDER
+                .comment("Add flowers to the flower bag. Supports: 'minecraft:dandelion' (block), '#minecraft:flowers' (tag), 'minecraft:*' (all blocks from a mod)")
+                .defineListAllowEmpty(
+                        "add_to_flower_bag",
+                        List.of(""),
+                        () -> "",
+                        StrainersConfig::isValidEntry);
+
+        REMOVE_FLOWER_BAG_OUTPUTS = BUILDER
+                .comment("Remove flowers from the flower bag. Supports: 'minecraft:dandelion' (block), '#minecraft:flowers' (tag), 'minecraft:*' (all blocks from a mod)")
+                .defineListAllowEmpty(
+                        "remove_from_flower_bag",
+                        List.of("minecraft:pitcher_plant", "minecraft:wither_rose", "minecraft:torchflower", "minecraft:golden_dandelion", "minecraft:chorus_flower", "minecraft:flowering_azalea_leaves", "minecraft:flowering_azalea", "minecraft:cherry_leaves", "minecraft:mangrove_propagule"),
+                        () -> "",
+                        StrainersConfig::isValidEntry);
+
         BUILDER.pop();
         SPEC = BUILDER.build();
     }
