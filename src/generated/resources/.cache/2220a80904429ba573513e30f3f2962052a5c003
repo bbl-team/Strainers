@@ -1,4 +1,4 @@
-// 26.1.2	2026-10-01T08:47:27.7868323	strainers Recipes
+// 26.1.2	2026-10-19T12:49:34.3250784	strainers Recipes
 a795a6df2c932dbc3497eb278c856daaffb5c277 data/strainers/advancement/recipes/misc/cobblestone_from_pebbles.json
 03fb6c119ee9c9efd15e635c80de8be9bc327104 data/strainers/advancement/recipes/misc/dirt_from_dirt_pile.json
 8fbef28f590bd7423a63f28448b779245f372d0a data/strainers/advancement/recipes/misc/dust_block_from_dust.json
@@ -38,6 +38,7 @@ cfbe1cf6a640fa3cd6c7abd333ac52d64496f1a3 data/strainers/advancement/recipe/ore_p
 08dc1c960bd8305092a9282774bf96ced29c1242 data/strainers/advancement/recipe/ore_piece/diamond.json
 f0c1460a582ed3b03de781ea4f93186c37463b01 data/strainers/advancement/recipe/ore_piece/dimensional.json
 a5d55a738954470bc0f7065e4c59128e1ceb6746 data/strainers/advancement/recipe/ore_piece/emerald.json
+50b968f95312caf7b211fbb8a297a5276e992458 data/strainers/advancement/recipe/ore_piece/ender_pearl.json
 5fd9fdb5ed6b2f00bd28566d4ce5434962925f4b data/strainers/advancement/recipe/ore_piece/fluorite.json
 997958cd35e841e43c7b92ccc48de5fa6488b5b7 data/strainers/advancement/recipe/ore_piece/garnet.json
 96facdcdfb88a89f474fe1698ca4fca828e36242 data/strainers/advancement/recipe/ore_piece/gold.json
@@ -121,6 +122,7 @@ ffb2020b3823f76696143ee8edd1e92cd002b7cb data/strainers/recipe/ore_piece/carneli
 1b0c9cbcaf55c2c19fa39d03a58d566654356c59 data/strainers/recipe/ore_piece/diamond.json
 fd92300575c59a5af795ba52d597f6730874fc90 data/strainers/recipe/ore_piece/dimensional.json
 7ccdd09dd479495c62a8e7f4f7e92fb2247e21b1 data/strainers/recipe/ore_piece/emerald.json
+7ac85de957b741fd9bcb91a10ef3b91eee1b2221 data/strainers/recipe/ore_piece/ender_pearl.json
 8d880fa8880888ad3ecc893dbe7992a7e71b871b data/strainers/recipe/ore_piece/fluorite.json
 f46fdc16262665de7803817ec80b325247832135 data/strainers/recipe/ore_piece/garnet.json
 ce01752517c256f8e4e11adbc2b768cb7c824ce3 data/strainers/recipe/ore_piece/gold.json
