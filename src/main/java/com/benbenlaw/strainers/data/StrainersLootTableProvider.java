@@ -37,6 +37,10 @@ public class StrainersLootTableProvider extends VanillaBlockLoot {
         this.dropSelf(StrainersBlocks.MULCH.get());
         this.dropSelf(StrainersBlocks.PURIFIED_DEEPSLATE.get());
         this.dropSelf(StrainersBlocks.PURIFIED_END_STONE.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_MOON_STONE.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_DEPTHROCK.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_DREADROCK.get());
+        this.dropSelf(StrainersBlocks.PURIFIED_SHIVERSTONE.get());
 
 
 

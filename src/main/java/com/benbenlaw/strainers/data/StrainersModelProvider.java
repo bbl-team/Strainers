@@ -78,6 +78,10 @@ public class StrainersModelProvider extends ModelProvider {
         blockModels.createTrivialCube(StrainersBlocks.MULCH.get());
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DEEPSLATE.get());
         blockModels.createTrivialCube(StrainersBlocks.PURIFIED_END_STONE.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_MOON_STONE.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DEPTHROCK.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_DREADROCK.get());
+        blockModels.createTrivialCube(StrainersBlocks.PURIFIED_SHIVERSTONE.get());
 
         //Fluids
         blockModels.createNonTemplateModelBlock(StrainersFluids.ERODING_WATER.getBlock(), Blocks.WATER);

@@ -87,6 +87,15 @@ dependencies {
     implementation("curse.maven:bbl-casting-tools-1501619:8760004")
     //Observable
     runtimeOnly("curse.maven:observable-remake-1639360:8589511")
+    //Undergarden
+    implementation("curse.maven:the-undergarden-379849:8725682")
+    //Stellaris
+    implementation("curse.maven:stellaris-1036270:9207697")
+    implementation("curse.maven:architectury-api-419699:9111154")
+    implementation("curse.maven:sky-aesthetics-1096636:8513310")
+    implementation("curse.maven:potentials-1165185:9127430")
+    implementation("curse.maven:exoconfig-1294777:9221341")
+
 
 }
 

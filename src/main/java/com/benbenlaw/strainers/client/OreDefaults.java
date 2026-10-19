@@ -42,6 +42,7 @@ public final class OreDefaults {
             Map.entry("sulfur", 0xFFEEC62E),
             Map.entry("fluorite", 0xFFF0A6DE),
             Map.entry("salt", 0xFFEBECEA),
+            Map.entry("saltpeter", 0xFF969696),
 
             //All The Modium
             Map.entry("allthemodium", 0xFFFFFF4A),
@@ -52,13 +53,13 @@ public final class OreDefaults {
             Map.entry("opal", 0xFFCAEBD1),
             Map.entry("garnet", 0xFFD1211F),
             Map.entry("tanzanite", 0xFF3D00B9),
-            Map.entry("kyanite", 0xFFC7BEAD),
+            Map.entry("kyanite", 0xFF21627A),
             Map.entry("chaos", 0xFFEBD8D1),
             Map.entry("heliodor", 0xFFDDCF17),
             Map.entry("iesnium", 0xFF64949D),
             Map.entry("rose_quartz", 0xFFFF6BBD),
             Map.entry("iolite", 0xFF0F110E),
-            Map.entry("citrin", 0xFFC78B03),
+            Map.entry("citrin", 0xFF996A00),
             Map.entry("carnelian", 0xFFB33825),
             Map.entry("alexandrite", 0xFF9016CC),
             Map.entry("crimson_iron", 0xFFFF6189),
@@ -98,8 +99,27 @@ public final class OreDefaults {
             Map.entry("dimensional", 0xFF7A4E8E),
 
             //BBL Utilities
-            Map.entry("ender_pearl", 0xFF063931)
+            Map.entry("ender_pearl", 0xFF063931),
 
+            //Ars Magica
+            Map.entry("vinteum", 0xFF2F42C9),
+            Map.entry("moonstone", 0xFFDEFDFF),
+            Map.entry("sunstone", 0xFFEA634A),
+            Map.entry("chimerite", 0xFFC0C5EE),
+
+            //Thaumaturge
+            Map.entry("amber", 0xFFE27500),
+
+            //The Undergarden
+            Map.entry("rogdorium", 0xFFE27500),
+            Map.entry("froststeel", 0xFF90B9E0),
+            Map.entry("regalium", 0xFFEBBE76),
+            Map.entry("cloggrum", 0xFF968168),
+            Map.entry("utherium", 0xFFB23333),
+
+            //Stellaris
+            Map.entry("desh", 0xFFE9BA5D),
+            Map.entry("novite", 0xFF7B689F)
 
     );
 

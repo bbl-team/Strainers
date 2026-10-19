@@ -83,6 +83,26 @@ public class StrainersBlocks {
                     .strength(3.0F)
                     .sound(SoundType.STONE)));
 
+    //Integration
+    public static final DeferredBlock<Block> PURIFIED_MOON_STONE = registerBlock("purified_moon_stone",
+            properties -> new Block(properties
+                    .strength(3.0F)
+                    .sound(SoundType.STONE)));
+
+    public static final DeferredBlock<Block> PURIFIED_DREADROCK = registerBlock("purified_dreadrock",
+            properties -> new Block(properties
+                    .strength(3.0F)
+                    .sound(SoundType.STONE)));
+
+    public static final DeferredBlock<Block> PURIFIED_SHIVERSTONE = registerBlock("purified_shiverstone",
+            properties -> new Block(properties
+                    .strength(3.0F)
+                    .sound(SoundType.STONE)));
+
+    public static final DeferredBlock<Block> PURIFIED_DEPTHROCK = registerBlock("purified_depthrock",
+            properties -> new Block(properties
+                    .strength(3.0F)
+                    .sound(SoundType.STONE)));
 
 
 

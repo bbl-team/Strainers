@@ -10,16 +10,21 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import org.exodusstudio.stellaris.common.registries.BlocksRegistry;
 import org.jetbrains.annotations.NotNull;
+import quek.undergarden.registry.UGBlocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class StrainersProcessingRecipeProvider extends RecipeProvider {
@@ -597,6 +602,12 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .tier(5, 0.25f)
                 .save(output, "osmium", "purified_gravel/osmium");
 
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("saltpeter", 0.65f)
+                .tier(5, 0.25f)
+                .save(output, "saltpeter", "purified_gravel/saltpeter");
+
         StrainerRecipeBuilder.create().water(10)
                 .input(StrainersBlocks.PURIFIED_GRAVEL)
                 .output("emerald", 0.60f)
@@ -645,6 +656,24 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                 .tier(6, 0.3f)
                 .save(output, "uranium", "purified_gravel/uranium");
 
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("titanium", 0.60f)
+                .tier(6, 0.3f)
+                .save(output, "titanium", "purified_gravel/titanium");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("iesnium", 0.60f)
+                .tier(6, 0.3f)
+                .save(output, "iesnium", "purified_gravel/iesnium");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("iridium", 0.55f)
+                .tier(7, 0.3f)
+                .save(output, "iridium", "purified_gravel/iridium");
+
 
         //Purified Dust
         StrainerRecipeBuilder.create().water(5)
@@ -688,6 +717,11 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         addMysticalAgriculture();
         addEvilCraft();
         addDimensionalResources();
+        addBblUtility();
+        addThaumaturge();
+        addArsMagica();
+        addStellaris();
+        addUndergarden();
     }
 
     public void addSilentGems() {
@@ -709,6 +743,9 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
         ores.add("iolite");
         ores.add("kyanite");
         ores.add("pearl");
+        ores.add("moldavite");
+        ores.add("heliodor");
+        ores.add("chaos");
 
         for (String ore : ores) {
             StrainerRecipeBuilder.create().water(5)
@@ -844,4 +881,210 @@ public class StrainersProcessingRecipeProvider extends RecipeProvider {
                     .save(output, ore, "compat/dimensionalresources/purified_gravel/" + ore);
         }
     }
+
+    public void addBblUtility() {
+        List<String> ores = new ArrayList<>();
+        ores.add("ender_pearl");
+
+        for (String ore : ores) {
+            StrainerRecipeBuilder.create().water(25)
+                    .input(StrainersBlocks.PURIFIED_GRAVEL)
+                    .output(ore, 0.15f)
+                    .tier(8, 0.05f)
+                    .save(output, ore, "compat/utility/purified_gravel/" + ore);
+        }
+    }
+
+
+    public void addArsMagica() {
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("vinteum", 0.15f)
+                .tier(5, 0.05f)
+                .save(output, "vinteum", "compat/arsmagica/purified_gravel/vinteum");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("chimerite", 0.15f)
+                .tier(5, 0.05f)
+                .save(output, "chimerite", "compat/arsmagica/purified_gravel/chimerite");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("moonstone", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "moonstone", "compat/arsmagica/purified_gravel/moonstone");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(Blocks.OBSIDIAN)
+                .output("sunstone", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "sunstone", "compat/arsmagica/purified_gravel/sunstone");
+
+    }
+
+    public void addThaumaturge() {
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_GRAVEL)
+                .output("amber", 0.15f)
+                .tier(5, 0.05f)
+                .save(output, "amber", "compat/thaumcraft/purified_gravel/amber");
+    }
+
+    public void addStellaris() {
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_MOON_STONE)
+                .output("iron", 0.75f)
+                .tier(3, 0.15f)
+                .save(output, "iron", "compat/stellaris/purified_moon_stone/iron");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_MOON_STONE)
+                .output("titanium", 0.65f)
+                .tier(5, 0.15f)
+                .save(output, "titanium", "compat/stellaris/purified_moon_stone/titanium");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_MOON_STONE)
+                .output("desh", 0.75f)
+                .tier(3, 0.15f)
+                .save(output, "desh", "compat/stellaris/purified_moon_stone/desh");
+
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_MOON_STONE)
+                .output("novite", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "novite", "compat/stellaris/purified_moon_stone/novite");
+
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(BlocksRegistry.MOON_STONE.getAsItem().get())
+                .output(StrainersBlocks.PURIFIED_MOON_STONE.get().asItem(), 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output.withConditions(new ModLoadedCondition("stellaris")), "compat/stellaris/moon_stone/purified_moon_stone");
+    }
+
+    public void addUndergarden() {
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_DREADROCK)
+                .output("rogdorium", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "rogdorium", "compat/undergarden/purified_dreadrock/rogdorium");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_DREADROCK)
+                .output("utherium", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "utherium", "compat/undergarden/purified_dreadrock/mithril");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_SHIVERSTONE)
+                .output("froststeel", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "froststeel", "compat/undergarden/purified_shiverstone/froststeel");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_SHIVERSTONE)
+                .output("regalium", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "regalium", "compat/undergarden/purified_shiverstone/regalium");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_SHIVERSTONE)
+                .output("cloggrum", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "cloggrum", "compat/undergarden/purified_shiverstone/cloggrum");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_SHIVERSTONE)
+                .output("utherium", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "utherium", "compat/undergarden/purified_shiverstone/utherium");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_DEPTHROCK)
+                .output("regalium", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "regalium", "compat/undergarden/purified_depthrock/regalium");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_DEPTHROCK)
+                .output("cloggrum", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "cloggrum", "compat/undergarden/purified_depthrock/cloggrum");
+
+        StrainerRecipeBuilder.create().water(25)
+                .input(StrainersBlocks.PURIFIED_DEPTHROCK)
+                .output("utherium", 0.05f)
+                .tier(7, 0.05f)
+                .save(output, "utherium", "compat/undergarden/purified_depthrock/utherium");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_DEPTHROCK)
+                .output("coal", 0.75f)
+                .tier(2, 0.15f)
+                .save(output, "coal", "compat/undergarden/purified_depthrock/coal");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_SHIVERSTONE)
+                .output("coal", 0.75f)
+                .tier(2, 0.15f)
+                .save(output, "coal", "compat/undergarden/purified_shiverstone/coal");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_DEPTHROCK)
+                .output("iron", 0.75f)
+                .tier(3, 0.15f)
+                .save(output, "iron", "compat/undergarden/purified_depthrock/iron");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_SHIVERSTONE)
+                .output("iron", 0.75f)
+                .tier(3, 0.15f)
+                .save(output, "iron", "compat/undergarden/purified_shiverstone/iron");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_DEPTHROCK)
+                .output("gold", 0.70f)
+                .tier(4, 0.05f)
+                .save(output, "gold", "compat/undergarden/purified_depthrock/gold");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_DEPTHROCK)
+                .output("diamond", 0.65f)
+                .tier(5, 0.25f)
+                .save(output, "diamond", "compat/undergarden/purified_depthrock/diamond");
+
+        StrainerRecipeBuilder.create().water(5)
+                .input(StrainersBlocks.PURIFIED_SHIVERSTONE)
+                .output("diamond", 0.65f)
+                .tier(5, 0.25f)
+                .save(output, "diamond", "compat/undergarden/purified_shiverstone/diamond");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(UGBlocks.DEPTHROCK)
+                .output(StrainersBlocks.PURIFIED_DEPTHROCK.get().asItem(), 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output.withConditions(new ModLoadedCondition("undergarden")), "compat/undergarden/depthrock/purified_depthrock");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(UGBlocks.SHIVERSTONE)
+                .output(StrainersBlocks.PURIFIED_SHIVERSTONE.get().asItem(), 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output.withConditions(new ModLoadedCondition("undergarden")), "compat/undergarden/shiverstone/purified_shiverstone");
+
+        StrainerRecipeBuilder.create().purifying()
+                .input(UGBlocks.DREADROCK)
+                .output(StrainersBlocks.PURIFIED_DREADROCK.get().asItem(), 1, 1.0f)
+                .tier(2, 0.0f)
+                .save(output.withConditions(new ModLoadedCondition("undergarden")), "compat/undergarden/dreadrock/purified_dreadrock");
+
+
+
+    }
+
 }

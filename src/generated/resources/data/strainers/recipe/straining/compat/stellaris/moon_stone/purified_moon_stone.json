@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "stellaris"
+    }
+  ],
+  "type": "strainers:strainer",
+  "additional_chance_per_tier": 0.0,
+  "fluid": {
+    "amount": 1,
+    "ingredient": "strainers:purifying_water"
+  },
+  "input": {
+    "count": 1,
+    "ingredient": "stellaris:moon_stone"
+  },
+  "min_mesh_tier": 2,
+  "result": {
+    "item": {
+      "id": "strainers:purified_moon_stone"
+    }
+  }
+}

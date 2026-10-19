@@ -25,6 +25,10 @@ public class StrainersBlockTags extends BlockTagsProvider {
                 .add(StrainersBlocks.PURIFIED_NETHERRACK.get())
                 .add(StrainersBlocks.PURIFIED_DEEPSLATE.get())
                 .add(StrainersBlocks.PURIFIED_END_STONE.get())
+                .add(StrainersBlocks.PURIFIED_MOON_STONE.get())
+                .add(StrainersBlocks.PURIFIED_DEPTHROCK.get())
+                .add(StrainersBlocks.PURIFIED_DREADROCK.get())
+                .add(StrainersBlocks.PURIFIED_SHIVERSTONE.get())
         ;
 
         //Shovel

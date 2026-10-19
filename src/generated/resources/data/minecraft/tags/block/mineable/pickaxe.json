@@ -4,6 +4,10 @@
     "strainers:purified_stone",
     "strainers:purified_netherrack",
     "strainers:purified_deepslate",
-    "strainers:purified_end_stone"
+    "strainers:purified_end_stone",
+    "strainers:purified_moon_stone",
+    "strainers:purified_depthrock",
+    "strainers:purified_dreadrock",
+    "strainers:purified_shiverstone"
   ]
 }
