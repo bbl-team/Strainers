@@ -8,7 +8,7 @@ public final class OreDefaults {
 
     public static final Map<String, Integer> COLORS = Map.<String, Integer>ofEntries(
 
-            Map.entry("iron", 0xFFd5d5d5),
+            Map.entry("iron", 0xFFD8AF93),
             Map.entry("gold", 0xFFfaf25e),
             Map.entry("copper", 0xFFbf5935),
             Map.entry("netherite", 0xFF4c484c),
@@ -95,7 +95,10 @@ public final class OreDefaults {
             Map.entry("dark_gem", 0xFF1A1A1A),
 
             //Dimensional Resources
-            Map.entry("dimensional", 0xFF7A4E8E)
+            Map.entry("dimensional", 0xFF7A4E8E),
+
+            //BBL Utilities
+            Map.entry("ender_pearl", 0xFF063931)
 
 
     );
